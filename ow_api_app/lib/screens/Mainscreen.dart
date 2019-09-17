@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:ow_api_app/services/api_provider.dart';
 import 'package:ow_api_app/data/UserProfile.dart';

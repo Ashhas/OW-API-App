@@ -1,11 +1,31 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'CompetitiveStats.g.dart';
+
+@JsonSerializable(explicitToJson: true)
 class CompetitiveStats {
+  @JsonKey(name: 'eliminationsAvg')
   final double eliminationsAvg;
+
+  @JsonKey(name: 'damageDoneAvg')
   final double damageDoneAvg;
+
+  @JsonKey(name: 'deathsAvg')
   final double deathsAvg;
+
+  @JsonKey(name: 'healingDoneAvg')
   final double healingDoneAvg;
+
+  @JsonKey(name: 'objectiveKillsAvg')
   final double objectiveKillsAvg;
-  final double objectiveTimeAvg;
+
+  @JsonKey(name: 'objectiveTimeAvg')
+  final String objectiveTimeAvg;
+
+  @JsonKey(name: 'soloKillsAvg')
   final double soloKillsAvg;
+
+  @JsonKey(name: 'games')
   final CompetitiveGames competitiveGames;
 
   CompetitiveStats(
@@ -18,29 +38,24 @@ class CompetitiveStats {
       this.soloKillsAvg,
       this.competitiveGames});
 
-  factory CompetitiveStats.fromJson(Map<String, dynamic> parsedJson) {
-    return CompetitiveStats(
-      eliminationsAvg: parsedJson['eliminationsAvg'],
-      damageDoneAvg: parsedJson['damageDoneAvg'],
-      deathsAvg: parsedJson['deathsAvg'],
-      healingDoneAvg: parsedJson['healingDoneAvg'],
-      objectiveKillsAvg: parsedJson['objectiveKillsAvg'],
-      objectiveTimeAvg: parsedJson['objectiveTimeAvg'],
-      soloKillsAvg: parsedJson['soloKillsAvg'],
-      competitiveGames: CompetitiveGames.fromJson(parsedJson['games']),
-    );
-  }
+  factory CompetitiveStats.fromJson(Map<String, dynamic> json) =>
+      _$CompetitiveStatsFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CompetitiveStatsToJson(this);
 }
 
+@JsonSerializable(explicitToJson: true)
 class CompetitiveGames {
+  @JsonKey(name: 'played')
   final int competitiveGamesPlayed;
+
+  @JsonKey(name: 'won')
   final int competitiveGamesWon;
 
   CompetitiveGames({this.competitiveGamesPlayed, this.competitiveGamesWon});
 
-  factory CompetitiveGames.fromJson(Map<String, dynamic> json) {
-    return CompetitiveGames(
-        competitiveGamesPlayed: json['played'],
-        competitiveGamesWon: json['won']);
-  }
+  factory CompetitiveGames.fromJson(Map<String, dynamic> json) =>
+      _$CompetitiveGamesFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CompetitiveGamesToJson(this);
 }

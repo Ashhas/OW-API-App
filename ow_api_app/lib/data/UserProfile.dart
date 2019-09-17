@@ -1,17 +1,26 @@
-import 'dart:convert';
+import 'package:json_annotation/json_annotation.dart';
 import 'CompetitiveStats.dart';
 
-UserProfile profileFromJson(Map<String, dynamic> profile) {
-  var jsonData = profile;
-  return UserProfile.fromJson(jsonData);
-}
+part 'UserProfile.g.dart';
 
+@JsonSerializable(explicitToJson: true)
 class UserProfile {
+  @JsonKey(name: 'icon')
   final String profileIcon;
+
+  @JsonKey(name: 'name')
   final String profileName;
+
+  @JsonKey(name: 'level')
   final int profileLevel;
+
+  @JsonKey(name: 'rating')
   final int skillRating;
+
+  @JsonKey(name: 'gamesWon')
   final int allGamesWon;
+
+  @JsonKey(name: 'competitiveStats')
   final CompetitiveStats competitiveStats;
 
   UserProfile(
@@ -22,13 +31,8 @@ class UserProfile {
       this.allGamesWon,
       this.competitiveStats});
 
-  factory UserProfile.fromJson(Map<String, dynamic> json) {
-    return UserProfile(
-        profileIcon: json['icon'],
-        profileName: json['name'],
-        profileLevel: json['level'],
-        skillRating: json['rating'],
-        allGamesWon: json['gamesWon'],
-        competitiveStats: CompetitiveStats.fromJson(json['competitiveStats']));
-  }
+  factory UserProfile.fromJson(Map<String, dynamic> json) =>
+      _$UserProfileFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UserProfileToJson(this);
 }
