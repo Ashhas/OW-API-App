@@ -12,32 +12,53 @@ class Mainscreen extends StatefulWidget {
 class _MainscreenState extends State<Mainscreen> {
   UserApiProvider apiProvider = new UserApiProvider();
   UserProfile currentUser = new UserProfile();
-  String _skillrating = "nothing";
-
+  
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
         appBar: new AppBar(
           title: new Text("Mainscreen"),
         ),
-        body: new Container(
-            child: new Center(
-                child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            new Text(_skillrating),
-            RaisedButton(
-              onPressed: getSkillRating,
-            )
-          ],
-        ))));
+        body: FutureBuilder(
+          future: getSkillRating(),
+          builder: (context, snapshot) {
+            currentUser = snapshot.data;
+
+            if (!snapshot.hasData) {
+              print("has No Data");
+              return SizedBox();
+            } else {
+              print("has Data");
+              return Container(
+                child: Column(
+                  children: <Widget>[
+                    Text(currentUser.profileName),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          height: 48,
+                          width: 2,
+                          decoration: BoxDecoration(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(4.0)),
+                          ),
+                        ),
+                        Text(currentUser.profileLevel.toString()),
+                        Text(currentUser.skillRating.toString()),
+                        Text(currentUser.allGamesWon.toString())
+                      ],
+                    )
+                  ],
+                ),
+              );
+            }
+          },
+        ));
   }
 
-  Future getSkillRating() async {
-    currentUser = await apiProvider.getUserProfile();
-    setState(() {
-      _skillrating = currentUser.profileName;
-    });
-    print(currentUser.profileName);
+  Future<UserProfile> getSkillRating() async {
+    return await apiProvider.getUserProfile();
   }
 }
