@@ -7,16 +7,14 @@ import 'package:ow_api_app/data/UserProfile.dart';
 
 class HomeScreenViewModel extends ChangeNotifier {
   HomeScreenViewModel() {
-    /// As soon as VM initializes
-    /// We want to get the latest data
-    getDataFromAPI();
+    getUserProfileData();
   }
 
   UserProfile currentUser;
   String messageToShow = "";
   bool isLoading = false;
 
-  void getDataFromAPI() async {
+  void getUserProfileData() async {
     /// Start showing the loader
     isLoading = true;
     notifyListeners();

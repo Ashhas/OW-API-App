@@ -3,59 +3,73 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import 'package:ow_api_app/data/UserProfile.dart';
+import 'package:provider_architecture/_viewmodel_provider.dart';
 
-class Mainscreen extends StatefulWidget {
+import 'HomeScreenViewModel.dart';
+
+class HomeScreen extends StatefulWidget {
   @override
-  _MainscreenState createState() {
-    return new _MainscreenState();
+  _HomeScreenState createState() {
+    return new _HomeScreenState();
   }
 }
 
-class _MainscreenState extends State<Mainscreen> {
+class _HomeScreenState extends State<HomeScreen> {
   UserProfile currentUser;
   bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Mainscreen"),
-      ),
-      body: Container(child: Center(child: buildDataWidget())),
-      floatingActionButton: FloatingActionButton(
-        child: isLoading
-            ? CircularProgressIndicator(
-                backgroundColor: Colors.white,
-              )
-            : Icon(Icons.cloud_download),
-        tooltip: "Get Data from API",
-        onPressed: () => getUserProfileData(),
-      ),
+    return ViewModelProvider<HomeScreenViewModel>.withConsumer(
+        viewModelBuilder: () => HomeScreenViewModel(),
+        builder: (context, viewModel, child) {
+          return Container(
+              color: Colors.white,
+              child: SafeArea(
+                  child: Scaffold(
+                appBar: buildAppBar(),
+                body: buildBody(viewModel),
+                floatingActionButton: buildFloatingActionButton(viewModel),
+              )));
+        });
+  }
+
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text("Networking Like a Pro"),
     );
   }
 
-  Future<UserProfile> getUserProfileData() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    const String API_URL = "https://ow-api.com/v3/stats/pc/Ashhas-2396/profile";
-    var response = await http.get(Uri.parse(API_URL));
-    var parsedJson = await json.decode(response.body);
-
-    setState(() {
-      currentUser = UserProfile.fromJson(parsedJson);
-      isLoading = false;
-    });
+  Widget buildBody(viewModel) {
+    /// building our UI
+    /// notice we are observing viewModel.apiResponseModel
+    /// Hence buildDataWidget will rebuild when apiResponse changes in ViewModel
+    return Container(child: Center(child: buildDataWidget(viewModel)));
   }
 
-  buildDataWidget() {
+  FloatingActionButton buildFloatingActionButton(viewModel) {
+    return FloatingActionButton(
+      child: viewModel.isLoading
+          ? CircularProgressIndicator(
+              backgroundColor: Colors.white,
+            )
+          : Icon(Icons.cloud_download),
+      tooltip: "Get Data from API",
+
+      /// Calling our viewModel function
+      onPressed: () => viewModel.getUserProfileData(),
+    );
+  }
+
+  buildDataWidget(viewModel) {
+    UserProfile currentUser = viewModel.currentUser;
+
     if (currentUser == null)
       return Container(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Text(
-            "Press the floating action button to get data",
+            "${viewModel.messageToShow}",
             style: TextStyle(fontSize: 24),
             textAlign: TextAlign.center,
           ),
