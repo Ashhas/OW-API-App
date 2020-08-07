@@ -1,5 +1,7 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/network/api_provider.dart';
+import 'package:http/http.dart' as http;
+
 import 'package:ow_api_app/data/UserProfile.dart';
 
 class Mainscreen extends StatefulWidget {
@@ -10,55 +12,62 @@ class Mainscreen extends StatefulWidget {
 }
 
 class _MainscreenState extends State<Mainscreen> {
-  UserApiProvider apiProvider = new UserApiProvider();
-  UserProfile currentUser = new UserProfile();
-  
+  UserProfile currentUser;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-        appBar: new AppBar(
-          title: new Text("Mainscreen"),
-        ),
-        body: FutureBuilder(
-          future: getSkillRating(),
-          builder: (context, snapshot) {
-            currentUser = snapshot.data;
-
-            if (!snapshot.hasData) {
-              print("has No Data");
-              return SizedBox();
-            } else {
-              print("has Data");
-              return Container(
-                child: Column(
-                  children: <Widget>[
-                    Text(currentUser.profileName),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          height: 48,
-                          width: 2,
-                          decoration: BoxDecoration(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(4.0)),
-                          ),
-                        ),
-                        Text(currentUser.profileLevel.toString()),
-                        Text(currentUser.skillRating.toString()),
-                        Text(currentUser.allGamesWon.toString())
-                      ],
-                    )
-                  ],
-                ),
-              );
-            }
-          },
-        ));
+      appBar: new AppBar(
+        title: new Text("Mainscreen"),
+      ),
+      body: Container(child: Center(child: buildDataWidget())),
+      floatingActionButton: FloatingActionButton(
+        child: isLoading
+            ? CircularProgressIndicator(
+                backgroundColor: Colors.white,
+              )
+            : Icon(Icons.cloud_download),
+        tooltip: "Get Data from API",
+        onPressed: () => getUserProfileData(),
+      ),
+    );
   }
 
-  Future<UserProfile> getSkillRating() async {
-    return await apiProvider.getUserProfile();
+  Future<UserProfile> getUserProfileData() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    const String API_URL = "https://ow-api.com/v3/stats/pc/Ashhas-2396/profile";
+    var response = await http.get(Uri.parse(API_URL));
+    var parsedJson = await json.decode(response.body);
+
+    setState(() {
+      currentUser = UserProfile.fromJson(parsedJson);
+      isLoading = false;
+    });
+  }
+
+  buildDataWidget() {
+    if (currentUser == null)
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "Press the floating action button to get data",
+            style: TextStyle(fontSize: 24),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    else {
+      return Text(
+        "Username : ${currentUser.name}\n"
+        "Support Ranking : ${currentUser.ratings.support.level}\n"
+        "Damage Ranking : ${currentUser.ratings.damage.level}\n",
+        style: TextStyle(fontSize: 18),
+      );
+    }
   }
 }
