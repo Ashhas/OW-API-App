@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: Scaffold(
                 appBar: buildAppBar(),
                 body: buildBody(viewModel),
-                floatingActionButton: buildFloatingActionButton(viewModel),
               )));
         });
   }
@@ -45,20 +44,6 @@ class _HomeScreenState extends State<HomeScreen> {
     /// notice we are observing viewModel.apiResponseModel
     /// Hence buildDataWidget will rebuild when apiResponse changes in ViewModel
     return Container(child: Center(child: buildDataWidget(viewModel)));
-  }
-
-  FloatingActionButton buildFloatingActionButton(viewModel) {
-    return FloatingActionButton(
-      child: viewModel.isLoading
-          ? CircularProgressIndicator(
-              backgroundColor: Colors.white,
-            )
-          : Icon(Icons.cloud_download),
-      tooltip: "Get Data from API",
-
-      /// Calling our viewModel function
-      onPressed: () => viewModel.getUserProfileData(),
-    );
   }
 
   buildDataWidget(viewModel) {
