@@ -7,8 +7,7 @@ class RankRatingWidget extends StatelessWidget {
   final String rankRating;
   final String rankRatingIcon;
 
-  const RankRatingWidget(
-      {this.rankRole, this.rankRoleIcon, this.rankRating, this.rankRatingIcon});
+  const RankRatingWidget({Key key, this.rankRole, this.rankRoleIcon, this.rankRating, this.rankRatingIcon}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
