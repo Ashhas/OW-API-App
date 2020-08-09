@@ -1,4 +1,4 @@
-import '../data/UserProfile.dart';
+import '../data/models/UserProfile.dart';
 
 class NetworkingResponse {}
 

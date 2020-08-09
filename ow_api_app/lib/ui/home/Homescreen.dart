@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-import 'package:ow_api_app/data/UserProfile.dart';
+import 'package:ow_api_app/data/models/UserProfile.dart';
 import 'package:provider_architecture/_viewmodel_provider.dart';
 
 import 'HomeScreenViewModel.dart';
@@ -35,15 +35,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar buildAppBar() {
     return AppBar(
-      title: Text("Networking Like a Pro"),
+      title: Text("OW API"),
     );
   }
 
   Widget buildBody(viewModel) {
-    /// building our UI
-    /// notice we are observing viewModel.apiResponseModel
-    /// Hence buildDataWidget will rebuild when apiResponse changes in ViewModel
-    return Container(child: Center(child: buildDataWidget(viewModel)));
+
+    return Container(child: Center(child: profileDataWidget(viewModel)));
   }
 
   buildDataWidget(viewModel) {
@@ -68,5 +66,32 @@ class _HomeScreenState extends State<HomeScreen> {
         style: TextStyle(fontSize: 18),
       );
     }
+  }
+
+  profileDataWidget(viewModel) {
+    UserProfile currentUser = viewModel.currentUser;
+
+    return new Stack(
+      children: <Widget>[
+        Positioned(
+          width: 400.0,
+          top: MediaQuery.of(context).size.height / 5,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 150.0,
+                height: 150,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    image: DecorationImage(
+                        image: NetworkImage(currentUser.icon),
+                        fit: BoxFit.cover),
+                    borderRadius: BorderRadius.all(Radius.circular(75.0))),
+              )
+            ],
+          ),
+        )
+      ],
+    );
   }
 }

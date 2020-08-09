@@ -1,9 +1,9 @@
+import 'package:flutter/cupertino.dart';
+
 import 'package:ow_api_app/network/NetworkignResponse.dart';
 import 'package:ow_api_app/network/NetworkRepo.dart';
+import '../../data/models/UserProfile.dart';
 import 'HomeScreenRepository.dart';
-
-import 'package:flutter/cupertino.dart';
-import 'package:ow_api_app/data/UserProfile.dart';
 
 class HomeScreenViewModel extends ChangeNotifier {
   HomeScreenViewModel() {
