@@ -44,20 +44,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return new Stack(
       children: <Widget>[
-        Positioned(
-          width: 400.0,
-          top: MediaQuery.of(context).size.height / 8,
+        Padding(
+          padding: EdgeInsets.only(top: 120.0),
           child: Column(
             children: <Widget>[
               Container(
-                width: 150.0,
-                height: 150,
+                width: 140,
+                height: 140,
                 decoration: BoxDecoration(
-                    color: Colors.red,
-                    image: DecorationImage(
-                        image: NetworkImage(currentUser.icon),
-                        fit: BoxFit.cover),
-                    borderRadius: BorderRadius.all(Radius.circular(75.0))),
+                  shape: BoxShape.circle,
+                  image: DecorationImage(
+                      image: NetworkImage(currentUser.icon), fit: BoxFit.cover),
+                ),
               ),
               SizedBox(
                 height: 15.0,
@@ -70,31 +68,38 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               SizedBox(
-                height: 40.0,
+                height: 15.0,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: <Widget>[
-                  RankRatingWidget(
-                    rankRating: currentUser.rating.toString(),
-                    rankRole: "Tank",
-                    rankRatingIcon: currentUser.ratingIcon,
-                    rankRoleIcon: currentUser.ratingIcon,
-                  ),
-                  RankRatingWidget(
-                    rankRating: currentUser.ratings.damage.level.toString(),
-                    rankRole: "Damage",
-                    rankRatingIcon: currentUser.ratings.damage.rankIcon,
-                    rankRoleIcon: currentUser.ratings.damage.roleIcon,
-                  ),
-                  RankRatingWidget(
-                    rankRating: currentUser.ratings.support.level.toString(),
-                    rankRole: "Support",
-                    rankRatingIcon: currentUser.ratings.support.rankIcon,
-                    rankRoleIcon: currentUser.ratings.support.roleIcon,
-                  ),
-                ],
-              )
+              Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Card(
+                    color: Color.fromRGBO(48, 51, 66, 1),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        RankRatingWidget(
+                          rankRating: currentUser.rating.toString(),
+                          rankRole: "Tank",
+                          rankRatingIcon: currentUser.ratingIcon,
+                          rankRoleIcon: currentUser.ratingIcon,
+                        ),
+                        RankRatingWidget(
+                          rankRating: currentUser.ratings.damage.level.toString(),
+                          rankRole: "Damage",
+                          rankRatingIcon: currentUser.ratings.damage.rankIcon,
+                          rankRoleIcon: currentUser.ratings.damage.roleIcon,
+                        ),
+                        RankRatingWidget(
+                          rankRating: currentUser.ratings.support.level.toString(),
+                          rankRole: "Support",
+                          rankRatingIcon: currentUser.ratings.support.rankIcon,
+                          rankRoleIcon: currentUser.ratings.support.roleIcon,
+                        ),
+                      ],
+                    ),
+                  ))
             ],
           ),
         )
