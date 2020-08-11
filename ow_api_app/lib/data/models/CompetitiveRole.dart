@@ -1,17 +1,17 @@
 class CompetitiveRole {
-  int _level;
+  String _level;
   String _rankIcon;
   String _roleIcon;
 
   CompetitiveRole({int level, String rankIcon, String roleIcon}) {
-    this._level = level;
+    this._level = level as String;
     this._rankIcon = rankIcon;
     this._roleIcon = roleIcon;
   }
 
-  int get level => _level;
+  String get level => _level;
 
-  set level(int level) => _level = level;
+  set level(String level) => _level = level;
 
   String get rankIcon => _rankIcon;
 
