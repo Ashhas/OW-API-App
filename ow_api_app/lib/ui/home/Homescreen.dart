@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget buildBody(viewModel) {
     UserProfile currentUser = viewModel.currentUser;
+
     return Container(
         child: Center(
             child: ProfileDisplayWidget(

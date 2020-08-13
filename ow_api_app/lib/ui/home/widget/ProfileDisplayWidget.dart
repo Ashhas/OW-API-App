@@ -55,10 +55,13 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         RankRatingWidget(
-                          rankRating: widget.currentUser.rating.toString(),
+                          rankRating:
+                              widget.currentUser.ratings.tank.level.toString(),
                           rankRole: "Tank",
-                          rankRatingIcon: widget.currentUser.ratingIcon,
-                          rankRoleIcon: widget.currentUser.ratingIcon,
+                          rankRatingIcon:
+                              widget.currentUser.ratings.tank.rankIcon,
+                          rankRoleIcon:
+                              widget.currentUser.ratings.tank.roleIcon,
                         ),
                         RankRatingWidget(
                           rankRating: widget.currentUser.ratings.damage.level
