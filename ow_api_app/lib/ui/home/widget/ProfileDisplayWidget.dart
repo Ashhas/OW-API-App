@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ow_api_app/data/models/UserProfile.dart';
+import 'package:ow_api_app/ui/home/HomeScreenViewModel.dart';
 
 import 'RankRatingWidget.dart';
 
 class ProfileDisplayWidget extends StatefulWidget {
-  final UserProfile currentUser;
+  final HomeScreenViewModel viewModel;
 
-  const ProfileDisplayWidget({Key key, @required this.currentUser})
+  const ProfileDisplayWidget({Key key, @required this.viewModel})
       : super(key: key);
 
   @override
@@ -28,7 +29,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   image: DecorationImage(
-                      image: NetworkImage(widget.currentUser.icon),
+                      image: NetworkImage(widget.viewModel.currentUser.icon),
                       fit: BoxFit.cover),
                 ),
               ),
@@ -36,7 +37,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                 height: 15.0,
               ),
               Text(
-                widget.currentUser.name,
+                widget.viewModel.currentUser.name,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
@@ -55,31 +56,34 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
                         RankRatingWidget(
-                          rankRating:
-                              widget.currentUser.ratings.tank.level.toString(),
+                          rankRating: widget
+                              .viewModel.currentUser.ratings.tank.level
+                              .toString(),
                           rankRole: "Tank",
-                          rankRatingIcon:
-                              widget.currentUser.ratings.tank.rankIcon,
-                          rankRoleIcon:
-                              widget.currentUser.ratings.tank.roleIcon,
+                          rankRatingIcon: widget
+                              .viewModel.currentUser.ratings.tank.rankIcon,
+                          rankRoleIcon: widget
+                              .viewModel.currentUser.ratings.tank.roleIcon,
                         ),
                         RankRatingWidget(
-                          rankRating: widget.currentUser.ratings.damage.level
+                          rankRating: widget
+                              .viewModel.currentUser.ratings.damage.level
                               .toString(),
                           rankRole: "Damage",
-                          rankRatingIcon:
-                              widget.currentUser.ratings.damage.rankIcon,
-                          rankRoleIcon:
-                              widget.currentUser.ratings.damage.roleIcon,
+                          rankRatingIcon: widget
+                              .viewModel.currentUser.ratings.damage.rankIcon,
+                          rankRoleIcon: widget
+                              .viewModel.currentUser.ratings.damage.roleIcon,
                         ),
                         RankRatingWidget(
-                          rankRating: widget.currentUser.ratings.support.level
+                          rankRating: widget
+                              .viewModel.currentUser.ratings.support.level
                               .toString(),
                           rankRole: "Support",
-                          rankRatingIcon:
-                              widget.currentUser.ratings.support.rankIcon,
-                          rankRoleIcon:
-                              widget.currentUser.ratings.support.roleIcon,
+                          rankRatingIcon: widget
+                              .viewModel.currentUser.ratings.support.rankIcon,
+                          rankRoleIcon: widget
+                              .viewModel.currentUser.ratings.support.roleIcon,
                         ),
                       ],
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:ow_api_app/data/models/UserProfile.dart';
 import 'package:ow_api_app/ui/home/widget/ProfileDisplayWidget.dart';
+import 'package:ow_api_app/ui/home/widget/ProfileViewWidget.dart';
 import 'package:provider_architecture/_viewmodel_provider.dart';
 
 import 'HomeScreenViewModel.dart';
@@ -16,8 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  UserProfile currentUser;
-
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<HomeScreenViewModel>.withConsumer(
@@ -34,12 +33,16 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget buildBody(viewModel) {
-    UserProfile currentUser = viewModel.currentUser;
-
     return Container(
         child: Center(
             child: ProfileDisplayWidget(
-      currentUser: currentUser,
+      viewModel: viewModel,
     )));
+
+//    return Container(
+//        child: Center(
+//            child: ProfileViewWidget(
+//      viewModel: viewModel,
+//    )));
   }
 }
