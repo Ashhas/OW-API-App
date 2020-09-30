@@ -1,13 +1,11 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:http/http.dart' as http;
 
 import 'package:ow_api_app/data/models/UserProfile.dart';
-import 'package:ow_api_app/ui/home/widget/ProfileDisplayWidget.dart';
-import 'package:ow_api_app/ui/home/widget/ProfileViewWidget.dart';
 import 'package:provider_architecture/_viewmodel_provider.dart';
 
 import 'HomeScreenViewModel.dart';
-import 'widget/RankRatingWidget.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -17,6 +15,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  UserProfile currentUser;
+  bool isLoading = false;
+
   @override
   Widget build(BuildContext context) {
     return ViewModelProvider<HomeScreenViewModel>.withConsumer(
@@ -26,23 +27,71 @@ class _HomeScreenState extends State<HomeScreen> {
               color: Colors.white,
               child: SafeArea(
                   child: Scaffold(
+                appBar: buildAppBar(),
                 body: buildBody(viewModel),
-                backgroundColor: Color.fromRGBO(45, 49, 74, 1),
               )));
         });
   }
 
-  Widget buildBody(viewModel) {
-    return Container(
-        child: Center(
-            child: ProfileDisplayWidget(
-      viewModel: viewModel,
-    )));
+  AppBar buildAppBar() {
+    return AppBar(
+      title: Text("OW API"),
+    );
+  }
 
-//    return Container(
-//        child: Center(
-//            child: ProfileViewWidget(
-//      viewModel: viewModel,
-//    )));
+  Widget buildBody(viewModel) {
+
+    return Container(child: Center(child: profileDataWidget(viewModel)));
+  }
+
+  buildDataWidget(viewModel) {
+    UserProfile currentUser = viewModel.currentUser;
+
+    if (currentUser == null)
+      return Container(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Text(
+            "${viewModel.messageToShow}",
+            style: TextStyle(fontSize: 24),
+            textAlign: TextAlign.center,
+          ),
+        ),
+      );
+    else {
+      return Text(
+        "Username : ${currentUser.name}\n"
+        "Support Ranking : ${currentUser.ratings.support.level}\n"
+        "Damage Ranking : ${currentUser.ratings.damage.level}\n",
+        style: TextStyle(fontSize: 18),
+      );
+    }
+  }
+
+  profileDataWidget(viewModel) {
+    UserProfile currentUser = viewModel.currentUser;
+
+    return new Stack(
+      children: <Widget>[
+        Positioned(
+          width: 400.0,
+          top: MediaQuery.of(context).size.height / 5,
+          child: Column(
+            children: <Widget>[
+              Container(
+                width: 150.0,
+                height: 150,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    image: DecorationImage(
+                        image: NetworkImage(currentUser.icon),
+                        fit: BoxFit.cover),
+                    borderRadius: BorderRadius.all(Radius.circular(75.0))),
+              )
+            ],
+          ),
+        )
+      ],
+    );
   }
 }

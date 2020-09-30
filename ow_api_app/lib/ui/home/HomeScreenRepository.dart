@@ -1,4 +1,4 @@
-import 'package:ow_api_app/network/NetworkingResponses.dart';
+import 'package:ow_api_app/network/NetworkignResponse.dart';
 import 'package:ow_api_app/network/NetworkRepo.dart';
 
 class HomeScreenRepository {
