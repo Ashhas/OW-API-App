@@ -27,7 +27,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: SafeArea(
                   child: Scaffold(
                 body: buildBody(viewModel),
-                backgroundColor: Color.fromRGBO(45, 49, 74, 1),
               )));
         });
   }
@@ -35,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget buildBody(viewModel) {
     return Container(
         child: Center(
-            child: ProfileDisplayWidget(
+            child: ProfileViewWidget(
       viewModel: viewModel,
     )));
 

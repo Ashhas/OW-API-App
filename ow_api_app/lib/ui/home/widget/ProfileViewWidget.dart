@@ -18,72 +18,74 @@ class ProfileViewWidget extends StatefulWidget {
 class _ProfileViewWidgetState extends State<ProfileViewWidget> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-        children: [
-          Container(
-              child: Padding(
-            padding: EdgeInsets.only(top: 55, bottom: 40, left: 15, right: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(
-                    child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(
-                          "https://d15f34w2p8l1cc.cloudfront.net/overwatch/dd8894f291790e7a5be99672c470b05b8e70057772a24734d1c9aaee87d06f08.png"),
-                      radius: 40,
-                    ),
-                  ],
-                )),
-                SizedBox(
-                  width: 15,
-                ),
-                Container(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        widget.viewModel.currentUser.name,
-                        style: TextStyle(
-                            fontSize: 15,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      Text(
-                        "Times",
-                        style: TextStyle(
-                          fontSize: 11,
-                          color: Colors.white,
-                        ),
-                      ),
-                      SizedBox(
-                        height: 5,
-                      ),
-                      RaisedButton(
-                          onPressed: () {},
-                          child: Text("Nope"),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18.0)))
-                    ],
-                  ),
-                )
-              ],
-            ),
-          )),
-          Padding(
-              padding: EdgeInsets.only(left: 10.0, right: 10.0),
-              child: Card(
-                color: Color.fromRGBO(48, 51, 66, 1),
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15)),
+    return widget.viewModel.isLoading
+        ? Container(
+            child: CircularProgressIndicator(),
+          )
+        : Column(
+            children: [
+              Container(
+                  child: Padding(
+                padding:
+                    EdgeInsets.only(top: 57, bottom: 12, left: 15, right: 20),
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                        child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                              "https://d15f34w2p8l1cc.cloudfront.net/overwatch/dd8894f291790e7a5be99672c470b05b8e70057772a24734d1c9aaee87d06f08.png"),
+                          radius: 35,
+                        ),
+                      ],
+                    )),
+                    SizedBox(
+                      width: 15,
+                    ),
+                    Container(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            widget.viewModel.currentUser.name,
+                            style: TextStyle(
+                                fontSize: 15,
+                                color: Colors.black,
+                                fontWeight: FontWeight.bold),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          Text(
+                            "Times",
+                            style: TextStyle(
+                              fontSize: 11,
+                              color: Colors.black,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 5,
+                          ),
+                          RaisedButton(
+                              onPressed: () {},
+                              child: Text("Reload"),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0)))
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+              )),
+              Padding(
+                padding: EdgeInsets.only(left: 3.0, right: 3.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
                     RankRatingWidget(
                       rankRating: widget
@@ -117,8 +119,8 @@ class _ProfileViewWidgetState extends State<ProfileViewWidget> {
                     ),
                   ],
                 ),
-              ))
-        ],
-    );
+              )
+            ],
+          );
   }
 }
