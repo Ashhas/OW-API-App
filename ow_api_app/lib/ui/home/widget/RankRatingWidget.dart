@@ -1,97 +1,81 @@
-//import 'package:flutter/cupertino.dart';
-//import 'package:flutter/material.dart';
-//import 'package:flutter/widgets.dart';
-//import 'package:ow_api_app/data/models/UserProfile.dart';
-//
-//class RankRatingWidget extends StatelessWidget {
-//  final String rankRole;
-//  final String rankRoleIcon;
-//  final String rankRating;
-//  final String rankRatingIcon;
-//
-//  const RankRatingWidget(
-//      {Key key,
-//      this.rankRole,
-//      this.rankRoleIcon,
-//      this.rankRating,
-//      this.rankRatingIcon})
-//      : super(key: key);
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return SizedBox(
-//      height: 110,
-//      width: 130,
-//      child: Card(
-//        shape: RoundedRectangleBorder(
-//            borderRadius: BorderRadius.only(
-//                topLeft: Radius.circular(3),
-//                bottomLeft: Radius.circular(3),
-//                bottomRight: Radius.circular(3),
-//                topRight: Radius.circular(3)),
-//            side: BorderSide(width: 1, color: Colors.grey)),
-//        child: Padding(
-//          padding: EdgeInsets.only(top: 15, bottom: 2),
-//          child: Row(
-//            mainAxisAlignment: MainAxisAlignment.start,
-//            crossAxisAlignment: CrossAxisAlignment.start,
-//            children: <Widget>[
-//              Padding(
-//                padding: EdgeInsets.only(top: 6, left: 3),
-//                child: Container(
-//                  width: 60,
-//                  height: 60,
-//                  decoration: BoxDecoration(
-//                    image: DecorationImage(
-//                        image: NetworkImage(rankRatingIcon),
-//                        fit: BoxFit.cover),
-//                  ),
-//                ),
-//              ),
-//              Column(
-//                mainAxisAlignment: MainAxisAlignment.start,
-//                crossAxisAlignment: CrossAxisAlignment.start,
-//                children: [
-//                  Padding(
-//                    padding: EdgeInsets.only(top: 3, bottom: 3),
-//                    child: Text(
-//                      "Support",
-//                      style: TextStyle(
-//                        fontSize: 11,
-//                        color: Colors.black,
-//                      ),
-//                    ),
-//                  ),
-//                  Text(
-//                    rankRating,
-//                    style: TextStyle(
-//                        fontSize: 17,
-//                        color: Colors.black,
-//                        fontWeight: FontWeight.bold),
-//                  ),
-//                  Padding(
-//                    padding: EdgeInsets.only(bottom: 3),
-//                    child: Text(
-//                      "Diamond",
-//                      style: TextStyle(
-//                        fontSize: 12,
-//                        color: Colors.black,
-//                      ),
-//                    ),
-//                  ),
-//                  Text(
-//                    "24W 20L",
-//                    style: TextStyle(
-//                      fontSize: 10,
-//                      color: Colors.grey,
-//                    ),
-//                  ),
-//                ],
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-//}
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:ow_api_app/data/model/profile_model.dart';
+
+class RankRatingWidget extends StatelessWidget {
+  final Profile profileStats;
+
+  const RankRatingWidget({
+    Key key,
+    this.profileStats,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
+      child: Row(
+        children: <Widget>[
+          Expanded(
+            child: _StatTile(
+                title: "Tank",
+                rating: profileStats
+                    .eu.stats.competitive.overallStats.tankComprank
+                    .toString()),
+          ),
+          const _Divider(),
+          Expanded(
+            child: _StatTile(
+                title: "Damage",
+                rating: profileStats
+                    .eu.stats.competitive.overallStats.damageComprank
+                    .toString()),
+          ),
+          const _Divider(),
+          Expanded(
+            child: _StatTile(
+                title: "Support",
+                rating: profileStats
+                    .eu.stats.competitive.overallStats.supportComprank
+                    .toString()),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _Divider extends StatelessWidget {
+  const _Divider({Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(color: Colors.grey, width: 1.0, height: 40.0);
+  }
+}
+
+class _StatTile extends StatelessWidget {
+  const _StatTile({Key key, @required this.rating, @required this.title})
+      : super(key: key);
+
+  final String rating;
+  final String title;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Text(
+          rating,
+          style: TextStyle(color: Colors.black),
+        ),
+        const SizedBox(height: 2.0),
+        Text(
+          title,
+          style: TextStyle(color: Colors.black),
+        ),
+      ],
+    );
+  }
+}
