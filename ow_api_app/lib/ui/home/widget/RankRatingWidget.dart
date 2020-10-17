@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+
 import 'package:ow_api_app/data/model/profile_model.dart';
 
 class RankRatingWidget extends StatelessWidget {
@@ -21,24 +22,36 @@ class RankRatingWidget extends StatelessWidget {
             child: _StatTile(
                 title: "Tank",
                 rating: profileStats
-                    .eu.stats.competitive.overallStats.tankComprank
-                    .toString()),
+                            .eu.stats.competitive.overallStats.tankComprank !=
+                        null
+                    ? profileStats
+                        .eu.stats.competitive.overallStats.tankComprank
+                        .toString()
+                    : "-"),
           ),
           const _Divider(),
           Expanded(
             child: _StatTile(
                 title: "Damage",
                 rating: profileStats
-                    .eu.stats.competitive.overallStats.damageComprank
-                    .toString()),
+                            .eu.stats.competitive.overallStats.damageComprank !=
+                        null
+                    ? profileStats
+                        .eu.stats.competitive.overallStats.damageComprank
+                        .toString()
+                    : "-"),
           ),
           const _Divider(),
           Expanded(
             child: _StatTile(
                 title: "Support",
-                rating: profileStats
-                    .eu.stats.competitive.overallStats.supportComprank
-                    .toString()),
+                rating: profileStats.eu.stats.competitive.overallStats
+                            .supportComprank !=
+                        null
+                    ? profileStats
+                        .eu.stats.competitive.overallStats.supportComprank
+                        .toString()
+                    : "-"),
           ),
         ],
       ),
