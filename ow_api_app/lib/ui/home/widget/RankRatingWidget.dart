@@ -14,48 +14,48 @@ class RankRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
-      child: Row(
-        children: <Widget>[
-          Expanded(
-            child: _StatTile(
-                title: "Tank",
-                rating: profileStats
-                            .eu.stats.competitive.overallStats.tankComprank !=
-                        null
-                    ? profileStats
+    return Card(
+        color: Color.fromRGBO(255, 255, 255, 1),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: _StatTile(
+                    ratingImageUrl: profileStats
+                        .eu.stats.competitive.overallStats.tankTierImage
+                        .toString(),
+                    title: "Tank",
+                    rating: profileStats
                         .eu.stats.competitive.overallStats.tankComprank
-                        .toString()
-                    : "-"),
-          ),
-          const _Divider(),
-          Expanded(
-            child: _StatTile(
-                title: "Damage",
-                rating: profileStats
-                            .eu.stats.competitive.overallStats.damageComprank !=
-                        null
-                    ? profileStats
+                        .toString()),
+              ),
+              const _Divider(),
+              Expanded(
+                child: _StatTile(
+                    ratingImageUrl: profileStats
+                        .eu.stats.competitive.overallStats.damageTierImage
+                        .toString(),
+                    title: "Damage",
+                    rating: profileStats
                         .eu.stats.competitive.overallStats.damageComprank
-                        .toString()
-                    : "-"),
-          ),
-          const _Divider(),
-          Expanded(
-            child: _StatTile(
-                title: "Support",
-                rating: profileStats.eu.stats.competitive.overallStats
-                            .supportComprank !=
-                        null
-                    ? profileStats
+                        .toString()),
+              ),
+              const _Divider(),
+              Expanded(
+                child: _StatTile(
+                    ratingImageUrl: profileStats
+                        .eu.stats.competitive.overallStats.supportTierImage
+                        .toString(),
+                    title: "Support",
+                    rating: profileStats
                         .eu.stats.competitive.overallStats.supportComprank
-                        .toString()
-                    : "-"),
+                        .toString()),
+              ),
+            ],
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 
@@ -69,26 +69,65 @@ class _Divider extends StatelessWidget {
 }
 
 class _StatTile extends StatelessWidget {
-  const _StatTile({Key key, @required this.rating, @required this.title})
+  const _StatTile(
+      {Key key,
+      @required this.rating,
+      @required this.title,
+      @required this.ratingImageUrl})
       : super(key: key);
 
   final String rating;
   final String title;
+  final String ratingImageUrl;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: <Widget>[
-        Text(
-          rating,
-          style: TextStyle(color: Colors.black),
-        ),
-        const SizedBox(height: 2.0),
-        Text(
-          title,
-          style: TextStyle(color: Colors.black),
-        ),
-      ],
-    );
+    return rating == "null"
+        ? Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Column(
+                children: <Widget>[
+                  Text(
+                    "--",
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  const SizedBox(height: 2.0),
+                  Text(
+                    title,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              )
+            ],
+          )
+        : Row(
+            children: [
+              Padding(
+                padding: EdgeInsets.only(right: 5),
+                child: Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(ratingImageUrl), fit: BoxFit.cover),
+                  ),
+                ),
+              ),
+              Column(
+                children: <Widget>[
+                  Text(
+                    rating,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  const SizedBox(height: 2.0),
+                  Text(
+                    title,
+                    style: TextStyle(color: Colors.black),
+                  ),
+                ],
+              )
+            ],
+          );
   }
 }

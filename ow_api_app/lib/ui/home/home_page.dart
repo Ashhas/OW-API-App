@@ -26,19 +26,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Overwatch SR"),
-        centerTitle: true,
-        backgroundColor: Color.fromRGBO(53, 56, 61, 1.0),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.refresh),
-            onPressed: () {
-              profileBloc.add(FetchProfileEvent());
-            },
-          ),
-        ],
-      ),
       backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
       body: Container(
         child: BlocListener<ProfileBloc, ProfileState>(
@@ -61,6 +48,7 @@ class _HomePageState extends State<HomePage> {
               } else if (state is ProfileLoadedState) {
                 return ProfileDisplayWidget(
                   currentProfile: state.profileStats,
+                  profileBloc: profileBloc,
                 );
               } else if (state is ProfileErrorState) {
                 return ErrorUiWidget(state.exception);
