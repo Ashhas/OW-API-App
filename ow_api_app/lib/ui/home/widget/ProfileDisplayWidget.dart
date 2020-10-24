@@ -26,7 +26,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 45, bottom: 5, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 45, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,12 +34,16 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                   Stack(
                     children: [
                       CircleAvatar(
-                        radius: 39,
-                        backgroundImage: NetworkImage(widget.currentProfile.eu
-                            .stats.competitive.overallStats.avatar),
+                        radius: 42,
+                        backgroundColor: Color.fromRGBO(223, 143, 38, 1.0),
+                        child: CircleAvatar(
+                          radius: 39,
+                          backgroundImage: NetworkImage(widget.currentProfile.eu
+                              .stats.competitive.overallStats.avatar),
+                        ),
                       ),
                       Positioned(
-                        top: 63,
+                        top: 68,
                         right: 0,
                         left: 0,
                         bottom: 0,
@@ -58,7 +62,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                               side: BorderSide(color: Colors.white)),
                           labelPadding: EdgeInsets.only(
                             top: -9,
-                            left: 3,
+                            left: 5,
                             right: 4,
                             bottom: 5,
                           ),
@@ -75,7 +79,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 5,
+                          height: 10,
                         ),
                         Text(
                           "Ashhas",
