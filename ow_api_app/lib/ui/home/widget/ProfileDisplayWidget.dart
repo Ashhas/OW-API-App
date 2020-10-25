@@ -5,13 +5,18 @@ import 'package:ow_api_app/bloc/profile/profile_event.dart';
 import 'RankRatingWidget.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
+import 'package:ow_api_app/data/model/account.model.dart';
 
 class ProfileDisplayWidget extends StatefulWidget {
   final Profile currentProfile;
   final ProfileBloc profileBloc;
+  final AccountModel currentAccount;
 
   const ProfileDisplayWidget(
-      {Key key, @required this.currentProfile, @required this.profileBloc})
+      {Key key,
+      @required this.currentProfile,
+      @required this.profileBloc,
+      @required this.currentAccount})
       : super(key: key);
 
   @override
@@ -82,7 +87,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                           height: 10,
                         ),
                         Text(
-                          "Ashhas",
+                          widget.currentAccount.battleNetId,
                           style: TextStyle(
                               fontFamily: "TitilliumWeb",
                               fontSize: 25,
@@ -90,8 +95,10 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                               fontWeight: FontWeight.w700),
                         ),
                         RaisedButton(
-                            onPressed: () =>
-                                widget.profileBloc.add(FetchProfileEvent()),
+                            onPressed: () => widget.profileBloc.add(
+                                FetchProfileEvent(
+                                    profileId:
+                                        widget.currentAccount.battleNetId)),
                             child: Text(
                               "Reload",
                               style: TextStyle(color: Colors.white),

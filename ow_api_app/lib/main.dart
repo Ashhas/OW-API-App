@@ -1,10 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/ui/home/home_page.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  //   hive initialization
+  await Hive.initFlutter();
+
+  //Start app
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

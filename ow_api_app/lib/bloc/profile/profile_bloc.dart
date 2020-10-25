@@ -20,7 +20,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     if (event is FetchProfileEvent) {
       yield ProfileLoadingState();
       try {
-        Profile profile = await repository.getProfileStats();
+        Profile profile = await repository
+            .getProfileStats(event.profileId.replaceAll("#", "-"));
         yield ProfileLoadedState(profileStats: profile);
       } on EmptyResultException catch (e) {
         yield ProfileErrorState(exception: e);
