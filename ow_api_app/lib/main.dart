@@ -10,10 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'OW-API',
-        home: BlocProvider<ProfileBloc>(
-            create: (context) =>
-                ProfileBloc(repository: ProfileRepositoryImpl()),
-            child: HomePage()));
+      title: 'OW-API',
+      home: BlocProvider<ProfileBloc>(
+          create: (context) => ProfileBloc(repository: ProfileRepositoryImpl()),
+          child: HomePage()),
+    );
   }
 }

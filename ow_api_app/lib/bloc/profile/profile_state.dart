@@ -27,11 +27,11 @@ class ProfileLoadedState extends ProfileState {
 }
 
 class ProfileErrorState extends ProfileState {
-  String message;
+  Exception exception;
 
-  ProfileErrorState({@required this.message});
+  ProfileErrorState({@required this.exception});
 
   @override
   // TODO: implement props
-  List<Object> get props => [message];
+  List<Object> get props => [exception];
 }

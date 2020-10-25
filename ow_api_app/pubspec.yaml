@@ -12,13 +12,25 @@ dependencies:
   flutter_bloc: ^6.0.6
   equatable: ^1.2.5
 
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^3.5.0
 
-
-
 flutter:
+  fonts:
+    - family: TitilliumWeb
+      fonts:
+        - asset: fonts/TitilliumWeb-Black.ttf
+        - asset: fonts/TitilliumWeb-Bold.ttf
+        - asset: fonts/TitilliumWeb-BoldItalic.ttf
+        - asset: fonts/TitilliumWeb-ExtraLight.ttf
+        - asset: fonts/TitilliumWeb-ExtraLightItalic.ttf
+        - asset: fonts/TitilliumWeb-Italic.ttf
+        - asset: fonts/TitilliumWeb-Light.ttf
+        - asset: fonts/TitilliumWeb-LightItalic.ttf
+        - asset: fonts/TitilliumWeb-Regular.ttf
   uses-material-design: true
+
+
+
