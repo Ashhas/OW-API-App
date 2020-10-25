@@ -118,7 +118,11 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(
+                        fontFamily: "TitilliumWeb",
+                        fontSize: 19,
+                        color: Colors.black,
+                        fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 2.0),
                   Text(

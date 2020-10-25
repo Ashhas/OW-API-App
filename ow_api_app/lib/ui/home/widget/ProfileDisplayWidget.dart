@@ -26,7 +26,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
         child: Column(
           children: <Widget>[
             Padding(
-              padding: EdgeInsets.only(top: 45, left: 20, right: 20),
+              padding: EdgeInsets.only(top: 60, left: 20, right: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,7 +84,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         Text(
                           "Ashhas",
                           style: TextStyle(
-                              fontFamily: "TitilliumWeb-Bold",
+                              fontFamily: "TitilliumWeb",
                               fontSize: 25,
                               color: Colors.white,
                               fontWeight: FontWeight.w700),
@@ -105,6 +105,13 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                 ],
               ),
             ),
+            SizedBox(height: 25),
+            Text("- Competitive Season 23 - ",
+                style: TextStyle(
+                    fontFamily: "TitilliumWeb",
+                    fontSize: 15,
+                    color: Colors.white,
+                    fontWeight: FontWeight.w700)),
             Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RankRatingWidget(
@@ -114,10 +121,6 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
               child: Container(
                 decoration: BoxDecoration(
                   color: Color.fromRGBO(241, 241, 241, 1.0),
-//                    borderRadius: BorderRadius.only(
-//                      topRight: Radius.circular(30.0),
-//                      topLeft: Radius.circular(30.0),
-//                    )
                 ),
                 child: SingleChildScrollView(
                   child: Column(
