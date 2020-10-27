@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
 //    _accountInfoBox.add(account2);
 
     //Start FetchDataEvent with mainAccountId
-    mainAccount = _accountInfoBox.getAt(1);
+    mainAccount = _accountInfoBox.getAt(0);
     profileBloc.add(FetchProfileEvent(profileId: mainAccount.battleNetId));
     return;
   }

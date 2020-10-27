@@ -16,8 +16,8 @@ class ProfileRepositoryImpl implements ProfileRepository {
 
   @override
   Future<Profile> getProfileStats(String profileId) async {
-    var response =
-        await http.get("https://owapi.net/api/v3/u/" + profileId + "/stats");
+    var response = await http
+        .get("https://ow-api.com/v3/stats/pc/" + profileId + "/profile");
 
     if (response.statusCode >= 200 && response.statusCode < 299) {
       var responseData = json.decode(response.body);

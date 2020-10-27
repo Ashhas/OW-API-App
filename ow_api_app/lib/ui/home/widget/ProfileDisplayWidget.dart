@@ -43,8 +43,8 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         backgroundColor: Color.fromRGBO(223, 143, 38, 1.0),
                         child: CircleAvatar(
                           radius: 39,
-                          backgroundImage: NetworkImage(widget.currentProfile.eu
-                              .stats.competitive.overallStats.avatar),
+                          backgroundImage:
+                              NetworkImage(widget.currentProfile.icon),
                         ),
                       ),
                       Positioned(
@@ -54,12 +54,9 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         bottom: 0,
                         child: Chip(
                           label: Text(
-                            widget.currentProfile.eu.stats.competitive
-                                    .overallStats.prestige
-                                    .toString() +
-                                widget.currentProfile.eu.stats.competitive
-                                    .overallStats.level
-                                    .toString(),
+                            ((widget.currentProfile.prestige * 100) +
+                                    widget.currentProfile.level)
+                                .toString(),
                             style: TextStyle(color: Colors.white),
                           ),
                           backgroundColor: Colors.blueGrey,
@@ -87,7 +84,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                           height: 10,
                         ),
                         Text(
-                          widget.currentAccount.battleNetId,
+                          widget.currentProfile.name,
                           style: TextStyle(
                               fontFamily: "TitilliumWeb",
                               fontSize: 25,
@@ -97,8 +94,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         RaisedButton(
                             onPressed: () => widget.profileBloc.add(
                                 FetchProfileEvent(
-                                    profileId:
-                                        widget.currentAccount.battleNetId)),
+                                    profileId: widget.currentProfile.name)),
                             child: Text(
                               "Reload",
                               style: TextStyle(color: Colors.white),
