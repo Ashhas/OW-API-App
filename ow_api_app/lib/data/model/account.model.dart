@@ -11,8 +11,10 @@ class AccountModel {
   @HiveField(2)
   String battleNetName;
   @HiveField(3)
+  String platformId;
+  @HiveField(4)
   DateTime latestRefresh;
 
-  AccountModel(
-      this.id, this.battleNetId, this.battleNetName, this.latestRefresh);
+  AccountModel(this.id, this.battleNetId, this.battleNetName, this.platformId,
+      this.latestRefresh);
 }

@@ -5,7 +5,7 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/util/ApiException.dart';
 
 abstract class ProfileRepository {
-  Future<Profile> getProfileStats(String profileId);
+  Future<Profile> getProfileStats(String profileId, String platformId);
 }
 
 class ProfileRepositoryImpl implements ProfileRepository {
@@ -15,7 +15,7 @@ class ProfileRepositoryImpl implements ProfileRepository {
   //"https://owapi.net/api/v3/u/mL8-2884/stats"
 
   @override
-  Future<Profile> getProfileStats(String profileId) async {
+  Future<Profile> getProfileStats(String profileId, String platformId) async {
     var response = await http
         .get("https://ow-api.com/v3/stats/pc/" + profileId + "/profile");
 

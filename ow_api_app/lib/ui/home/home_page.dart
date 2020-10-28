@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'widget/ProfileDisplayWidget.dart';
@@ -38,10 +37,14 @@ class _HomePageState extends State<HomePage> {
     _accountInfoBox = await Hive.openBox('accountBox');
 
 //    //Create Fake Data
-//    var account1 = AccountModel(1, "Ashhas#2396", "Ashhas", DateTime.now());
+//    var account1 =
+//        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
 //    _accountInfoBox.add(account1);
-//    var account2 = AccountModel(2, "Axyos#21653", "Axyos", DateTime.now());
+//    var account2 =
+//        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
 //    _accountInfoBox.add(account2);
+
+//    _accountInfoBox.deleteFromDisk();
 
     //Start FetchDataEvent with mainAccountId
     mainAccount = _accountInfoBox.getAt(0);
@@ -73,9 +76,9 @@ class _HomePageState extends State<HomePage> {
                 return buildLoading();
               } else if (state is ProfileLoadedState) {
                 return ProfileDisplayWidget(
-                  currentProfile: state.profileStats,
+                  profile: state.profileStats,
                   profileBloc: profileBloc,
-                  currentAccount: mainAccount,
+                  accountInformation: _accountInfoBox,
                 );
               } else if (state is ProfileErrorState) {
                 return ErrorUiWidget(state.exception);

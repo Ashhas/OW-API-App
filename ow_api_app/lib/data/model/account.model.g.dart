@@ -8,7 +8,7 @@ part of 'account.model.dart';
 
 class AccountModelAdapter extends TypeAdapter<AccountModel> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
   AccountModel read(BinaryReader reader) {
@@ -19,15 +19,16 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
     return AccountModel(
       fields[0] as int,
       fields[1] as String,
-      fields[1] as dynamic,
-      fields[3] as DateTime,
-    )..battleNetName = fields[2] as String;
+      fields[2] as String,
+      fields[3] as String,
+      fields[4] as DateTime,
+    );
   }
 
   @override
   void write(BinaryWriter writer, AccountModel obj) {
     writer
-      ..writeByte(4)
+      ..writeByte(5)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -35,6 +36,8 @@ class AccountModelAdapter extends TypeAdapter<AccountModel> {
       ..writeByte(2)
       ..write(obj.battleNetName)
       ..writeByte(3)
+      ..write(obj.platformId)
+      ..writeByte(4)
       ..write(obj.latestRefresh);
   }
 
