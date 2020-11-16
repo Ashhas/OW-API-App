@@ -1,521 +1,370 @@
 class Profile {
-  Region eu;
-  Region us;
-  Region kr;
-  Request rRequest;
+  CompetitiveStats _competitiveStats;
+  int _endorsement;
+  String _endorsementIcon;
+  int _gamesWon;
+  String _icon;
+  int _level;
+  String _levelIcon;
+  String _name;
+  int _prestige;
+  String _prestigeIcon;
+  bool _private;
+  CompetitiveStats _quickPlayStats;
+  int _rating;
+  String _ratingIcon;
+  Ratings _ratings;
 
-  Profile({this.eu, this.us, this.kr, this.rRequest});
+  Profile(
+      {CompetitiveStats competitiveStats,
+      int endorsement,
+      String endorsementIcon,
+      int gamesWon,
+      String icon,
+      int level,
+      String levelIcon,
+      String name,
+      int prestige,
+      String prestigeIcon,
+      bool private,
+      CompetitiveStats quickPlayStats,
+      int rating,
+      String ratingIcon,
+      Ratings ratings}) {
+    this._competitiveStats = competitiveStats;
+    this._endorsement = endorsement;
+    this._endorsementIcon = endorsementIcon;
+    this._gamesWon = gamesWon;
+    this._icon = icon;
+    this._level = level;
+    this._levelIcon = levelIcon;
+    this._name = name;
+    this._prestige = prestige;
+    this._prestigeIcon = prestigeIcon;
+    this._private = private;
+    this._quickPlayStats = quickPlayStats;
+    this._rating = rating;
+    this._ratingIcon = ratingIcon;
+    this._ratings = ratings;
+  }
+
+  CompetitiveStats get competitiveStats => _competitiveStats;
+
+  set competitiveStats(CompetitiveStats competitiveStats) =>
+      _competitiveStats = competitiveStats;
+
+  int get endorsement => _endorsement;
+
+  set endorsement(int endorsement) => _endorsement = endorsement;
+
+  String get endorsementIcon => _endorsementIcon;
+
+  set endorsementIcon(String endorsementIcon) =>
+      _endorsementIcon = endorsementIcon;
+
+  int get gamesWon => _gamesWon;
+
+  set gamesWon(int gamesWon) => _gamesWon = gamesWon;
+
+  String get icon => _icon;
+
+  set icon(String icon) => _icon = icon;
+
+  int get level => _level;
+
+  set level(int level) => _level = level;
+
+  String get levelIcon => _levelIcon;
+
+  set levelIcon(String levelIcon) => _levelIcon = levelIcon;
+
+  String get name => _name;
+
+  set name(String name) => _name = name;
+
+  int get prestige => _prestige;
+
+  set prestige(int prestige) => _prestige = prestige;
+
+  String get prestigeIcon => _prestigeIcon;
+
+  set prestigeIcon(String prestigeIcon) => _prestigeIcon = prestigeIcon;
+
+  bool get private => _private;
+
+  set private(bool private) => _private = private;
+
+  CompetitiveStats get quickPlayStats => _quickPlayStats;
+
+  set quickPlayStats(CompetitiveStats quickPlayStats) =>
+      _quickPlayStats = quickPlayStats;
+
+  int get rating => _rating;
+
+  set rating(int rating) => _rating = rating;
+
+  String get ratingIcon => _ratingIcon;
+
+  set ratingIcon(String ratingIcon) => _ratingIcon = ratingIcon;
+
+  Ratings get ratings => _ratings;
+
+  set ratings(Ratings ratings) => _ratings = ratings;
 
   Profile.fromJson(Map<String, dynamic> json) {
-    eu = json['eu'] != null ? new Region.fromJson(json['eu']) : null;
-    us = json['us'] != null ? new Region.fromJson(json['us']) : null;
-    kr = json['kr'] != null ? new Region.fromJson(json['kr']) : null;
-    rRequest = json['_request'] != null
-        ? new Request.fromJson(json['_request'])
+    _competitiveStats = json['competitiveStats'] != null
+        ? new CompetitiveStats.fromJson(json['competitiveStats'])
         : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.eu != null) {
-      data['eu'] = this.eu.toJson();
-    }
-    if (this.us != null) {
-      data['us'] = this.us.toJson();
-    }
-    if (this.kr != null) {
-      data['kr'] = this.kr.toJson();
-    }
-    if (this.rRequest != null) {
-      data['_request'] = this.rRequest.toJson();
-    }
-    return data;
-  }
-}
-
-class Region {
-  Stats stats;
-
-  Region({this.stats});
-
-  Region.fromJson(Map<String, dynamic> json) {
-    stats = json['stats'] != null ? new Stats.fromJson(json['stats']) : null;
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.stats != null) {
-      data['stats'] = this.stats.toJson();
-    }
-    return data;
-  }
-}
-
-class Stats {
-  GameMode quickplay;
-  GameMode competitive;
-
-  Stats({this.quickplay, this.competitive});
-
-  Stats.fromJson(Map<String, dynamic> json) {
-    quickplay = json['quickplay'] != null
-        ? new GameMode.fromJson(json['quickplay'])
+    _endorsement = json['endorsement'];
+    _endorsementIcon = json['endorsementIcon'];
+    _gamesWon = json['gamesWon'];
+    _icon = json['icon'];
+    _level = json['level'];
+    _levelIcon = json['levelIcon'];
+    _name = json['name'];
+    _prestige = json['prestige'];
+    _prestigeIcon = json['prestigeIcon'];
+    _private = json['private'];
+    _quickPlayStats = json['quickPlayStats'] != null
+        ? new CompetitiveStats.fromJson(json['quickPlayStats'])
         : null;
-    competitive = json['competitive'] != null
-        ? new GameMode.fromJson(json['competitive'])
-        : null;
+    _rating = json['rating'];
+    _ratingIcon = json['ratingIcon'];
+    _ratings =
+        json['ratings'] != null ? new Ratings.fromJson(json['ratings']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.quickplay != null) {
-      data['quickplay'] = this.quickplay.toJson();
+    if (this._competitiveStats != null) {
+      data['competitiveStats'] = this._competitiveStats.toJson();
     }
-    if (this.competitive != null) {
-      data['competitive'] = this.competitive.toJson();
+    data['endorsement'] = this._endorsement;
+    data['endorsementIcon'] = this._endorsementIcon;
+    data['gamesWon'] = this._gamesWon;
+    data['icon'] = this._icon;
+    data['level'] = this._level;
+    data['levelIcon'] = this._levelIcon;
+    data['name'] = this._name;
+    data['prestige'] = this._prestige;
+    data['prestigeIcon'] = this._prestigeIcon;
+    data['private'] = this._private;
+    if (this._quickPlayStats != null) {
+      data['quickPlayStats'] = this._quickPlayStats.toJson();
+    }
+    data['rating'] = this._rating;
+    data['ratingIcon'] = this._ratingIcon;
+    if (this._ratings != null) {
+      data['ratings'] = this._ratings.toJson();
     }
     return data;
   }
 }
 
-class GameMode {
-  GameStats gameStats;
-  OverallStats overallStats;
-  RollingAverageStats rollingAverageStats;
-  bool competitive;
+class CompetitiveStats {
+  Awards _awards;
+  Games _games;
 
-  GameMode(
-      {this.gameStats,
-      this.overallStats,
-      this.rollingAverageStats,
-      this.competitive});
+  CompetitiveStats({Awards awards, Games games}) {
+    this._awards = awards;
+    this._games = games;
+  }
 
-  GameMode.fromJson(Map<String, dynamic> json) {
-    gameStats = json['game_stats'] != null
-        ? new GameStats.fromJson(json['game_stats'])
-        : null;
-    overallStats = json['overall_stats'] != null
-        ? new OverallStats.fromJson(json['overall_stats'])
-        : null;
-    rollingAverageStats = json['rolling_average_stats'] != null
-        ? new RollingAverageStats.fromJson(json['rolling_average_stats'])
-        : null;
-    competitive = json['competitive'];
+  Awards get awards => _awards;
+
+  set awards(Awards awards) => _awards = awards;
+
+  Games get games => _games;
+
+  set games(Games games) => _games = games;
+
+  CompetitiveStats.fromJson(Map<String, dynamic> json) {
+    _awards =
+        json['awards'] != null ? new Awards.fromJson(json['awards']) : null;
+    _games = json['games'] != null ? new Games.fromJson(json['games']) : null;
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this.gameStats != null) {
-      data['game_stats'] = this.gameStats.toJson();
+    if (this._awards != null) {
+      data['awards'] = this._awards.toJson();
     }
-    if (this.overallStats != null) {
-      data['overall_stats'] = this.overallStats.toJson();
+    if (this._games != null) {
+      data['games'] = this._games.toJson();
     }
-    if (this.rollingAverageStats != null) {
-      data['rolling_average_stats'] = this.rollingAverageStats.toJson();
+    return data;
+  }
+}
+
+class Awards {
+  int _cards;
+  int _medals;
+  int _medalsBronze;
+  int _medalsSilver;
+  int _medalsGold;
+
+  Awards(
+      {int cards,
+      int medals,
+      int medalsBronze,
+      int medalsSilver,
+      int medalsGold}) {
+    this._cards = cards;
+    this._medals = medals;
+    this._medalsBronze = medalsBronze;
+    this._medalsSilver = medalsSilver;
+    this._medalsGold = medalsGold;
+  }
+
+  int get cards => _cards;
+
+  set cards(int cards) => _cards = cards;
+
+  int get medals => _medals;
+
+  set medals(int medals) => _medals = medals;
+
+  int get medalsBronze => _medalsBronze;
+
+  set medalsBronze(int medalsBronze) => _medalsBronze = medalsBronze;
+
+  int get medalsSilver => _medalsSilver;
+
+  set medalsSilver(int medalsSilver) => _medalsSilver = medalsSilver;
+
+  int get medalsGold => _medalsGold;
+
+  set medalsGold(int medalsGold) => _medalsGold = medalsGold;
+
+  Awards.fromJson(Map<String, dynamic> json) {
+    _cards = json['cards'];
+    _medals = json['medals'];
+    _medalsBronze = json['medalsBronze'];
+    _medalsSilver = json['medalsSilver'];
+    _medalsGold = json['medalsGold'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['cards'] = this._cards;
+    data['medals'] = this._medals;
+    data['medalsBronze'] = this._medalsBronze;
+    data['medalsSilver'] = this._medalsSilver;
+    data['medalsGold'] = this._medalsGold;
+    return data;
+  }
+}
+
+class Games {
+  int _played;
+  int _won;
+
+  Games({int played, int won}) {
+    this._played = played;
+    this._won = won;
+  }
+
+  int get played => _played;
+
+  set played(int played) => _played = played;
+
+  int get won => _won;
+
+  set won(int won) => _won = won;
+
+  Games.fromJson(Map<String, dynamic> json) {
+    _played = json['played'];
+    _won = json['won'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['played'] = this._played;
+    data['won'] = this._won;
+    return data;
+  }
+}
+
+class Ratings {
+  GameRole _support;
+  GameRole _tank;
+  GameRole _damage;
+
+  Ratings({GameRole support, GameRole tank, GameRole damage}) {
+    this._support = support;
+    this._tank = tank;
+    this._damage = damage;
+  }
+
+  GameRole get support => _support;
+
+  set support(GameRole support) => _support = support;
+
+  GameRole get tank => _tank;
+
+  set tank(GameRole tank) => _tank = tank;
+
+  GameRole get damage => _damage;
+
+  set damage(GameRole damage) => _damage = damage;
+
+  Ratings.fromJson(Map<String, dynamic> json) {
+    _support =
+        json['support'] != null ? new GameRole.fromJson(json['support']) : null;
+    _tank = json['tank'] != null ? new GameRole.fromJson(json['tank']) : null;
+    _damage =
+        json['damage'] != null ? new GameRole.fromJson(json['damage']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this._support != null) {
+      data['support'] = this._support.toJson();
     }
-    data['competitive'] = this.competitive;
+    if (this._tank != null) {
+      data['tank'] = this._tank.toJson();
+    }
+    if (this._damage != null) {
+      data['damage'] = this._damage.toJson();
+    }
     return data;
   }
 }
 
-class GameStats {
-  double allDamageDoneMostInGame;
-  double barrierDamageDoneMostInGame;
-  double defensiveAssistsMostInGame;
-  double eliminationsMostInGame;
-  double environmentalKillsMostInGame;
-  double finalBlowsMostInGame;
-  double healingDoneMostInGame;
-  double heroDamageDoneMostInGame;
-  double killStreakBest;
-  double meleeFinalBlowsMostInGame;
-  double multikillBest;
-  double objectiveKillsMostInGame;
-  double objectiveTimeMostInGame;
-  double offensiveAssistsMostInGame;
-  double reconAssistsMostInGame;
-  double soloKillsMostInGame;
-  double teleporterPadsDestroyedMostInGame;
-  double timeSpentOnFireMostInGame;
-  double turretsDestroyedMostInGame;
-  double defensiveAssists;
-  double healingDone;
-  double offensiveAssists;
-  double reconAssists;
-  double allDamageDone;
-  double barrierDamageDone;
-  double damageDone;
-  double deaths;
-  double eliminations;
-  double environmentalKills;
-  double finalBlows;
-  double heroDamageDone;
-  double meleeFinalBlows;
-  double multikills;
-  double objectiveKills;
-  double objectiveTime;
-  double soloKills;
-  double timeSpentOnFire;
-  double gamesLost;
-  double gamesPlayed;
-  double gamesWon;
-  double timePlayed;
-  double medalsGold;
-  double cards;
-  double medals;
-  double medalsBronze;
-  double medalsSilver;
-  double teleporterPadsDestroyed;
-  double turretsDestroyed;
-  double kpd;
+class GameRole {
+  int _level;
+  String _rankIcon;
+  String _roleIcon;
 
-  GameStats(
-      {this.allDamageDoneMostInGame,
-      this.barrierDamageDoneMostInGame,
-      this.defensiveAssistsMostInGame,
-      this.eliminationsMostInGame,
-      this.environmentalKillsMostInGame,
-      this.finalBlowsMostInGame,
-      this.healingDoneMostInGame,
-      this.heroDamageDoneMostInGame,
-      this.killStreakBest,
-      this.meleeFinalBlowsMostInGame,
-      this.multikillBest,
-      this.objectiveKillsMostInGame,
-      this.objectiveTimeMostInGame,
-      this.offensiveAssistsMostInGame,
-      this.reconAssistsMostInGame,
-      this.soloKillsMostInGame,
-      this.teleporterPadsDestroyedMostInGame,
-      this.timeSpentOnFireMostInGame,
-      this.turretsDestroyedMostInGame,
-      this.defensiveAssists,
-      this.healingDone,
-      this.offensiveAssists,
-      this.reconAssists,
-      this.allDamageDone,
-      this.barrierDamageDone,
-      this.damageDone,
-      this.deaths,
-      this.eliminations,
-      this.environmentalKills,
-      this.finalBlows,
-      this.heroDamageDone,
-      this.meleeFinalBlows,
-      this.multikills,
-      this.objectiveKills,
-      this.objectiveTime,
-      this.soloKills,
-      this.timeSpentOnFire,
-      this.gamesLost,
-      this.gamesPlayed,
-      this.gamesWon,
-      this.timePlayed,
-      this.medalsGold,
-      this.cards,
-      this.medals,
-      this.medalsBronze,
-      this.medalsSilver,
-      this.teleporterPadsDestroyed,
-      this.turretsDestroyed,
-      this.kpd});
+  GameRole({int level, String rankIcon, String roleIcon}) {
+    this._level = level;
+    this._rankIcon = rankIcon;
+    this._roleIcon = roleIcon;
+  }
 
-  GameStats.fromJson(Map<String, dynamic> json) {
-    allDamageDoneMostInGame = json['all_damage_done_most_in_game'];
-    barrierDamageDoneMostInGame = json['barrier_damage_done_most_in_game'];
-    defensiveAssistsMostInGame = json['defensive_assists_most_in_game'];
-    eliminationsMostInGame = json['eliminations_most_in_game'];
-    environmentalKillsMostInGame = json['environmental_kills_most_in_game'];
-    finalBlowsMostInGame = json['final_blows_most_in_game'];
-    healingDoneMostInGame = json['healing_done_most_in_game'];
-    heroDamageDoneMostInGame = json['hero_damage_done_most_in_game'];
-    killStreakBest = json['kill_streak_best'];
-    meleeFinalBlowsMostInGame = json['melee_final_blows_most_in_game'];
-    multikillBest = json['multikill_best'];
-    objectiveKillsMostInGame = json['objective_kills_most_in_game'];
-    objectiveTimeMostInGame = json['objective_time_most_in_game'];
-    offensiveAssistsMostInGame = json['offensive_assists_most_in_game'];
-    reconAssistsMostInGame = json['recon_assists_most_in_game'];
-    soloKillsMostInGame = json['solo_kills_most_in_game'];
-    teleporterPadsDestroyedMostInGame =
-        json['teleporter_pads_destroyed_most_in_game'];
-    timeSpentOnFireMostInGame = json['time_spent_on_fire_most_in_game'];
-    turretsDestroyedMostInGame = json['turrets_destroyed_most_in_game'];
-    defensiveAssists = json['defensive_assists'];
-    healingDone = json['healing_done'];
-    offensiveAssists = json['offensive_assists'];
-    reconAssists = json['recon_assists'];
-    allDamageDone = json['all_damage_done'];
-    barrierDamageDone = json['barrier_damage_done'];
-    damageDone = json['damage_done'];
-    deaths = json['deaths'];
-    eliminations = json['eliminations'];
-    environmentalKills = json['environmental_kills'];
-    finalBlows = json['final_blows'];
-    heroDamageDone = json['hero_damage_done'];
-    meleeFinalBlows = json['melee_final_blows'];
-    multikills = json['multikills'];
-    objectiveKills = json['objective_kills'];
-    objectiveTime = json['objective_time'];
-    soloKills = json['solo_kills'];
-    timeSpentOnFire = json['time_spent_on_fire'];
-    gamesLost = json['games_lost'];
-    gamesPlayed = json['games_played'];
-    gamesWon = json['games_won'];
-    timePlayed = json['time_played'];
-    medalsGold = json['medals_gold'];
-    cards = json['cards'];
-    medals = json['medals'];
-    medalsBronze = json['medals_bronze'];
-    medalsSilver = json['medals_silver'];
-    teleporterPadsDestroyed = json['teleporter_pads_destroyed'];
-    turretsDestroyed = json['turrets_destroyed'];
-    kpd = json['kpd'];
+  int get level => _level;
+
+  set level(int level) => _level = level;
+
+  String get rankIcon => _rankIcon;
+
+  set rankIcon(String rankIcon) => _rankIcon = rankIcon;
+
+  String get roleIcon => _roleIcon;
+
+  set roleIcon(String roleIcon) => _roleIcon = roleIcon;
+
+  GameRole.fromJson(Map<String, dynamic> json) {
+    _level = json['level'];
+    _rankIcon = json['rankIcon'];
+    _roleIcon = json['roleIcon'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['all_damage_done_most_in_game'] = this.allDamageDoneMostInGame;
-    data['barrier_damage_done_most_in_game'] = this.barrierDamageDoneMostInGame;
-    data['defensive_assists_most_in_game'] = this.defensiveAssistsMostInGame;
-    data['eliminations_most_in_game'] = this.eliminationsMostInGame;
-    data['environmental_kills_most_in_game'] =
-        this.environmentalKillsMostInGame;
-    data['final_blows_most_in_game'] = this.finalBlowsMostInGame;
-    data['healing_done_most_in_game'] = this.healingDoneMostInGame;
-    data['hero_damage_done_most_in_game'] = this.heroDamageDoneMostInGame;
-    data['kill_streak_best'] = this.killStreakBest;
-    data['melee_final_blows_most_in_game'] = this.meleeFinalBlowsMostInGame;
-    data['multikill_best'] = this.multikillBest;
-    data['objective_kills_most_in_game'] = this.objectiveKillsMostInGame;
-    data['objective_time_most_in_game'] = this.objectiveTimeMostInGame;
-    data['offensive_assists_most_in_game'] = this.offensiveAssistsMostInGame;
-    data['recon_assists_most_in_game'] = this.reconAssistsMostInGame;
-    data['solo_kills_most_in_game'] = this.soloKillsMostInGame;
-    data['teleporter_pads_destroyed_most_in_game'] =
-        this.teleporterPadsDestroyedMostInGame;
-    data['time_spent_on_fire_most_in_game'] = this.timeSpentOnFireMostInGame;
-    data['turrets_destroyed_most_in_game'] = this.turretsDestroyedMostInGame;
-    data['defensive_assists'] = this.defensiveAssists;
-    data['healing_done'] = this.healingDone;
-    data['offensive_assists'] = this.offensiveAssists;
-    data['recon_assists'] = this.reconAssists;
-    data['all_damage_done'] = this.allDamageDone;
-    data['barrier_damage_done'] = this.barrierDamageDone;
-    data['damage_done'] = this.damageDone;
-    data['deaths'] = this.deaths;
-    data['eliminations'] = this.eliminations;
-    data['environmental_kills'] = this.environmentalKills;
-    data['final_blows'] = this.finalBlows;
-    data['hero_damage_done'] = this.heroDamageDone;
-    data['melee_final_blows'] = this.meleeFinalBlows;
-    data['multikills'] = this.multikills;
-    data['objective_kills'] = this.objectiveKills;
-    data['objective_time'] = this.objectiveTime;
-    data['solo_kills'] = this.soloKills;
-    data['time_spent_on_fire'] = this.timeSpentOnFire;
-    data['games_lost'] = this.gamesLost;
-    data['games_played'] = this.gamesPlayed;
-    data['games_won'] = this.gamesWon;
-    data['time_played'] = this.timePlayed;
-    data['medals_gold'] = this.medalsGold;
-    data['cards'] = this.cards;
-    data['medals'] = this.medals;
-    data['medals_bronze'] = this.medalsBronze;
-    data['medals_silver'] = this.medalsSilver;
-    data['teleporter_pads_destroyed'] = this.teleporterPadsDestroyed;
-    data['turrets_destroyed'] = this.turretsDestroyed;
-    data['kpd'] = this.kpd;
-    return data;
-  }
-}
-
-class OverallStats {
-  String prestigeImage;
-  String rankImage;
-  int prestige;
-  int level;
-  int endorsementLevel;
-  double endorsementShotcaller;
-  double endorsementTeammate;
-  double endorsementSportsmanship;
-  String supportRoleImage;
-  String supportTierImage;
-  String supportTier;
-  int supportComprank;
-  String tankRoleImage;
-  String tankTierImage;
-  String tankTier;
-  int tankComprank;
-  String damageRoleImage;
-  String damageTierImage;
-  String damageTier;
-  int damageComprank;
-  String avatar;
-  int wins;
-  int games;
-  int losses;
-  int winRate;
-
-  OverallStats(
-      {this.prestigeImage,
-      this.rankImage,
-      this.prestige,
-      this.level,
-      this.endorsementLevel,
-      this.endorsementShotcaller,
-      this.endorsementTeammate,
-      this.endorsementSportsmanship,
-      this.supportRoleImage,
-      this.supportTierImage,
-      this.supportTier,
-      this.supportComprank,
-      this.tankRoleImage,
-      this.tankTierImage,
-      this.tankTier,
-      this.tankComprank,
-      this.damageRoleImage,
-      this.damageTierImage,
-      this.damageTier,
-      this.damageComprank,
-      this.avatar,
-      this.wins,
-      this.games,
-      this.losses,
-      this.winRate});
-
-  OverallStats.fromJson(Map<String, dynamic> json) {
-    prestigeImage = json['prestige_image'];
-    rankImage = json['rank_image'];
-    prestige = json['prestige'];
-    level = json['level'];
-    endorsementLevel = json['endorsement_level'];
-    endorsementShotcaller = json['endorsement_shotcaller'];
-    endorsementTeammate = json['endorsement_teammate'];
-    endorsementSportsmanship = json['endorsement_sportsmanship'];
-    supportRoleImage = json['support_role_image'];
-    supportTierImage = json['support_tier_image'];
-    supportTier = json['support_tier'];
-    supportComprank = json['support_comprank'];
-    tankRoleImage = json['tank_role_image'];
-    tankTierImage = json['tank_tier_image'];
-    tankTier = json['tank_tier'];
-    tankComprank = json['tank_comprank'];
-    damageRoleImage = json['damage_role_image'];
-    damageTierImage = json['damage_tier_image'];
-    damageTier = json['damage_tier'];
-    damageComprank = json['damage_comprank'];
-    avatar = json['avatar'];
-    wins = json['wins'];
-    games = json['games'];
-    losses = json['losses'];
-    winRate = json['win_rate'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['prestige_image'] = this.prestigeImage;
-    data['rank_image'] = this.rankImage;
-    data['prestige'] = this.prestige;
-    data['level'] = this.level;
-    data['endorsement_level'] = this.endorsementLevel;
-    data['endorsement_shotcaller'] = this.endorsementShotcaller;
-    data['endorsement_teammate'] = this.endorsementTeammate;
-    data['endorsement_sportsmanship'] = this.endorsementSportsmanship;
-    data['support_role_image'] = this.supportRoleImage;
-    data['support_tier_image'] = this.supportTierImage;
-    data['support_tier'] = this.supportTier;
-    data['support_comprank'] = this.supportComprank;
-    data['tank_role_image'] = this.tankRoleImage;
-    data['tank_tier_image'] = this.tankTierImage;
-    data['tank_tier'] = this.tankTier;
-    data['tank_comprank'] = this.tankComprank;
-    data['damage_role_image'] = this.damageRoleImage;
-    data['damage_tier_image'] = this.damageTierImage;
-    data['damage_tier'] = this.damageTier;
-    data['damage_comprank'] = this.damageComprank;
-    data['avatar'] = this.avatar;
-    data['wins'] = this.wins;
-    data['games'] = this.games;
-    data['losses'] = this.losses;
-    data['win_rate'] = this.winRate;
-    return data;
-  }
-}
-
-class RollingAverageStats {
-  double allDamageDone;
-  double barrierDamageDone;
-  double deaths;
-  double eliminations;
-  double finalBlows;
-  double healingDone;
-  double heroDamageDone;
-  double objectiveKills;
-  double objectiveTime;
-  double soloKills;
-  double timeSpentOnFire;
-
-  RollingAverageStats(
-      {this.allDamageDone,
-      this.barrierDamageDone,
-      this.deaths,
-      this.eliminations,
-      this.finalBlows,
-      this.healingDone,
-      this.heroDamageDone,
-      this.objectiveKills,
-      this.objectiveTime,
-      this.soloKills,
-      this.timeSpentOnFire});
-
-  RollingAverageStats.fromJson(Map<String, dynamic> json) {
-    allDamageDone = json['all_damage_done'];
-    barrierDamageDone = json['barrier_damage_done'];
-    deaths = json['deaths'];
-    eliminations = json['eliminations'];
-    finalBlows = json['final_blows'];
-    healingDone = json['healing_done'];
-    heroDamageDone = json['hero_damage_done'];
-    objectiveKills = json['objective_kills'];
-    objectiveTime = json['objective_time'];
-    soloKills = json['solo_kills'];
-    timeSpentOnFire = json['time_spent_on_fire'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['all_damage_done'] = this.allDamageDone;
-    data['barrier_damage_done'] = this.barrierDamageDone;
-    data['deaths'] = this.deaths;
-    data['eliminations'] = this.eliminations;
-    data['final_blows'] = this.finalBlows;
-    data['healing_done'] = this.healingDone;
-    data['hero_damage_done'] = this.heroDamageDone;
-    data['objective_kills'] = this.objectiveKills;
-    data['objective_time'] = this.objectiveTime;
-    data['solo_kills'] = this.soloKills;
-    data['time_spent_on_fire'] = this.timeSpentOnFire;
-    return data;
-  }
-}
-
-class Request {
-  int apiVer;
-  String route;
-
-  Request({this.apiVer, this.route});
-
-  Request.fromJson(Map<String, dynamic> json) {
-    apiVer = json['api_ver'];
-    route = json['route'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['api_ver'] = this.apiVer;
-    data['route'] = this.route;
+    data['level'] = this._level;
+    data['rankIcon'] = this._rankIcon;
+    data['roleIcon'] = this._roleIcon;
     return data;
   }
 }

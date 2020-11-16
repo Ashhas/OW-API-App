@@ -3,19 +3,25 @@ description: A new Flutter project.
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.6.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
   http: ^0.12.2
-  flutter_bloc: ^6.0.6
   equatable: ^1.2.5
+  flutter_bloc: ^6.0.6
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
+  path_provider: ^1.6.5
+  custom_pop_up_menu: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   json_serializable: ^3.5.0
+  hive_generator: ^0.7.3
+  build_runner: ^1.10.1
 
 flutter:
   fonts:

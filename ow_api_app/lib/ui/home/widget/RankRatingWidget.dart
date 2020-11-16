@@ -22,36 +22,33 @@ class RankRatingWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: _StatTile(
-                    ratingImageUrl: profileStats
-                        .eu.stats.competitive.overallStats.tankTierImage
-                        .toString(),
-                    title: "Tank",
-                    rating: profileStats
-                        .eu.stats.competitive.overallStats.tankComprank
-                        .toString()),
+                child: profileStats.ratings.tank != null
+                    ? _StatTile(
+                        ratingImageUrl: profileStats.ratings.tank.rankIcon,
+                        title: "Tank",
+                        rating: profileStats.ratings.tank.level.toString())
+                    : _StatTile(
+                        ratingImageUrl: "--", title: "Tank", rating: "--"),
               ),
               const _Divider(),
               Expanded(
-                child: _StatTile(
-                    ratingImageUrl: profileStats
-                        .eu.stats.competitive.overallStats.damageTierImage
-                        .toString(),
-                    title: "Damage",
-                    rating: profileStats
-                        .eu.stats.competitive.overallStats.damageComprank
-                        .toString()),
+                child: profileStats.ratings.damage != null
+                    ? _StatTile(
+                        ratingImageUrl: profileStats.ratings.damage.rankIcon,
+                        title: "Damage",
+                        rating: profileStats.ratings.damage.level.toString())
+                    : _StatTile(
+                        ratingImageUrl: "--", title: "Damage", rating: "--"),
               ),
               const _Divider(),
               Expanded(
-                child: _StatTile(
-                    ratingImageUrl: profileStats
-                        .eu.stats.competitive.overallStats.supportTierImage
-                        .toString(),
-                    title: "Support",
-                    rating: profileStats
-                        .eu.stats.competitive.overallStats.supportComprank
-                        .toString()),
+                child: profileStats.ratings.support != null
+                    ? _StatTile(
+                        ratingImageUrl: profileStats.ratings.support.rankIcon,
+                        title: "Support",
+                        rating: profileStats.ratings.support.level.toString())
+                    : _StatTile(
+                        ratingImageUrl: "--", title: "Samage", rating: "--"),
               ),
             ],
           ),
@@ -82,14 +79,14 @@ class _StatTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return rating == "null"
+    return rating == "--"
         ? Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Column(
                 children: <Widget>[
                   Text(
-                    "--",
+                    rating,
                     style: TextStyle(color: Colors.black),
                   ),
                   const SizedBox(height: 2.0),
