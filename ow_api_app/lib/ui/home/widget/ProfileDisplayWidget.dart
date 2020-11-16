@@ -11,13 +11,13 @@ import 'package:ow_api_app/bloc/profile/profile_event.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
 class ProfileDisplayWidget extends StatefulWidget {
-  final Profile profile;
+  final Profile currentProfile;
   final ProfileBloc profileBloc;
   final Box accountInformation;
 
   const ProfileDisplayWidget(
       {Key key,
-      @required this.profile,
+      @required this.currentProfile,
       @required this.profileBloc,
       @required this.accountInformation})
       : super(key: key);
@@ -33,7 +33,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
 
   @override
   Widget build(BuildContext context) {
-    currentProfile = widget.profile;
+    currentProfile = widget.currentProfile;
     screenBloc = widget.profileBloc;
     accountInformationDb = widget.accountInformation;
     return Container(
@@ -179,7 +179,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
               ),
             ),
             SizedBox(height: 25),
-            Text("- Competitive Season 23 - ",
+            Text("- Competitive Season 23 - " + "",
                 style: TextStyle(
                     fontFamily: "TitilliumWeb",
                     fontSize: 15,

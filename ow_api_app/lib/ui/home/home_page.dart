@@ -41,7 +41,7 @@ class _HomePageState extends State<HomePage> {
 //        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
 //    _accountInfoBox.add(account1);
 //    var account2 =
-//        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
+//        AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
 //    _accountInfoBox.add(account2);
 
 //    _accountInfoBox.deleteFromDisk();
