@@ -15,6 +15,7 @@ dependencies:
   hive_flutter: ^0.3.1
   path_provider: ^1.6.5
   custom_pop_up_menu: ^1.1.0
+  bottom_navy_bar: ^5.6.0
 
 dev_dependencies:
   flutter_test:
