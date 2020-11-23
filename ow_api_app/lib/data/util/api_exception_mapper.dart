@@ -1,4 +1,4 @@
-import 'package:ow_api_app/data/util/ApiException.dart';
+import 'package:ow_api_app/data/util/api_exception.dart';
 
 abstract class ApiExceptionMapper {
   static String toErrorMessage(Object error) {

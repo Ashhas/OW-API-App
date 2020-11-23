@@ -9,10 +9,10 @@ import 'package:ow_api_app/data/repository/profile_repository.dart';
 
 
 void main() async {
-  //   Hive initialization
+  // Hive initialization
   await Hive.initFlutter();
 
-  //Start app
+  // Start the applications
   runApp(MyApp());
 }
 

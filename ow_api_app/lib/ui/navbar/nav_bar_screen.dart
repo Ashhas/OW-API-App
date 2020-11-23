@@ -3,10 +3,6 @@ import 'package:ow_api_app/ui/home/home_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class NavBarScreen extends StatefulWidget {
-  final BuildContext menuScreenContext;
-
-  NavBarScreen({Key key, this.menuScreenContext}) : super(key: key);
-
   @override
   State<StatefulWidget> createState() => NavBarScreenState();
 }
@@ -26,12 +22,16 @@ class NavBarScreenState extends State<NavBarScreen> {
     return [
       Container(
         color: Color.fromRGBO(241, 241, 241, 1.0),
-        child: Text("Hallo"),
+        child: Center(
+          child: Text("Updates"),
+        ),
       ),
       HomePage(),
       Container(
         color: Color.fromRGBO(241, 241, 241, 1.0),
-        child: Text("Pago"),
+        child: Center(
+          child: Text("Settings"),
+        ),
       ),
     ];
   }
@@ -62,7 +62,7 @@ class NavBarScreenState extends State<NavBarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF285993),
+      backgroundColor: Colors.white,
       body: PersistentTabView(
         controller: _controller,
         screens: _buildScreens(),

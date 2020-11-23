@@ -22,34 +22,52 @@ class RankRatingWidget extends StatelessWidget {
           child: Row(
             children: <Widget>[
               Expanded(
-                child: profileStats.ratings.tank != null
-                    ? _StatTile(
-                        ratingImageUrl: profileStats.ratings.tank.rankIcon,
-                        title: "Tank",
-                        rating: profileStats.ratings.tank.level.toString())
-                    : _StatTile(
-                        ratingImageUrl: "--", title: "Tank", rating: "--"),
-              ),
+                  child: profileStats.ratings != null
+                      ? profileStats.ratings.tank != null
+                          ? _StatTile(
+                              ratingImageUrl:
+                                  profileStats.ratings.tank.rankIcon,
+                              title: "Tank",
+                              rating:
+                                  profileStats.ratings.tank.level.toString())
+                          : _StatTile(
+                              ratingImageUrl: "--", title: "Tank", rating: "--")
+                      : _StatTile(
+                          ratingImageUrl: "--", title: "Tank", rating: "--")),
               const _Divider(),
               Expanded(
-                child: profileStats.ratings.damage != null
-                    ? _StatTile(
-                        ratingImageUrl: profileStats.ratings.damage.rankIcon,
-                        title: "Damage",
-                        rating: profileStats.ratings.damage.level.toString())
-                    : _StatTile(
-                        ratingImageUrl: "--", title: "Damage", rating: "--"),
-              ),
+                  child: profileStats.ratings != null
+                      ? profileStats.ratings.damage != null
+                          ? _StatTile(
+                              ratingImageUrl:
+                                  profileStats.ratings.damage.rankIcon,
+                              title: "Tank",
+                              rating:
+                                  profileStats.ratings.damage.level.toString())
+                          : _StatTile(
+                              ratingImageUrl: "--",
+                              title: "Damage",
+                              rating: "--")
+                      : _StatTile(
+                          ratingImageUrl: "--", title: "Damage", rating: "--")),
               const _Divider(),
               Expanded(
-                child: profileStats.ratings.support != null
-                    ? _StatTile(
-                        ratingImageUrl: profileStats.ratings.support.rankIcon,
-                        title: "Support",
-                        rating: profileStats.ratings.support.level.toString())
-                    : _StatTile(
-                        ratingImageUrl: "--", title: "Samage", rating: "--"),
-              ),
+                  child: profileStats.ratings != null
+                      ? profileStats.ratings.support != null
+                          ? _StatTile(
+                              ratingImageUrl:
+                                  profileStats.ratings.support.rankIcon,
+                              title: "Support",
+                              rating:
+                                  profileStats.ratings.support.level.toString())
+                          : _StatTile(
+                              ratingImageUrl: "--",
+                              title: "Support",
+                              rating: "--")
+                      : _StatTile(
+                          ratingImageUrl: "--",
+                          title: "Support",
+                          rating: "--")),
             ],
           ),
         ));

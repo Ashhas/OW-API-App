@@ -1,41 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
-import 'RankRatingWidget.dart';
+import 'rank_rating_widget.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
 import 'package:ow_api_app/bloc/profile/profile_event.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
 class ProfileDisplayWidget extends StatefulWidget {
-  final Profile currentProfile;
+  final int profileDbIndex;
+  final Profile profileStats;
   final ProfileBloc profileBloc;
-  final Box accountInformation;
+  final Box accountInfoDb;
 
-  const ProfileDisplayWidget(
-      {Key key,
-      @required this.currentProfile,
-      @required this.profileBloc,
-      @required this.accountInformation})
-      : super(key: key);
+  const ProfileDisplayWidget({
+    Key key,
+    @required this.profileDbIndex,
+    @required this.profileStats,
+    @required this.profileBloc,
+    @required this.accountInfoDb,
+  }) : super(key: key);
 
   @override
   _ProfileDisplayWidgetState createState() => _ProfileDisplayWidgetState();
 }
 
 class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
-  Profile currentProfile;
+  AccountModel currentAccount;
+  int profileDbIndex;
+  Profile profileStats;
   ProfileBloc screenBloc;
-  Box accountInformationDb;
+  Box accountInfoDb;
 
   @override
   Widget build(BuildContext context) {
-    currentProfile = widget.currentProfile;
+    profileDbIndex = widget.profileDbIndex;
+    profileStats = widget.profileStats;
     screenBloc = widget.profileBloc;
-    accountInformationDb = widget.accountInformation;
+    accountInfoDb = widget.accountInfoDb;
+    currentAccount = accountInfoDb.getAt(profileDbIndex);
+
     return Container(
         color: Color.fromRGBO(53, 57, 60, 1.0),
         child: Column(
@@ -53,7 +60,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         backgroundColor: Color.fromRGBO(223, 143, 38, 1.0),
                         child: CircleAvatar(
                           radius: 39,
-                          backgroundImage: NetworkImage(currentProfile.icon),
+                          backgroundImage: NetworkImage(profileStats.icon),
                         ),
                       ),
                       Positioned(
@@ -63,8 +70,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                         bottom: 0,
                         child: Chip(
                           label: Text(
-                            ((currentProfile.prestige * 100) +
-                                    currentProfile.level)
+                            ((profileStats.prestige * 100) + profileStats.level)
                                 .toString(),
                             style: TextStyle(color: Colors.white),
                           ),
@@ -93,7 +99,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                           height: 10,
                         ),
                         Text(
-                          currentProfile.name,
+                          profileStats.name,
                           style: TextStyle(
                               fontFamily: "TitilliumWeb",
                               fontSize: 25,
@@ -105,16 +111,19 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             RaisedButton(
-                                onPressed: () => screenBloc.add(
-                                    FetchProfileEvent(
-                                        profileId: currentProfile.name)),
-                                child: Text(
-                                  "Reload",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                color: Color.fromRGBO(101, 105, 108, 1.0),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(18.0))),
+                              child: Text(
+                                "Reload",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              color: Color.fromRGBO(101, 105, 108, 1.0),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0)),
+                              onPressed: null,
+                              // onPressed: () => screenBloc.add(
+                              //     FetchProfileEvent(
+                              //         profileId: currentAccount.battleNetId,
+                              //         platformId: currentAccount.platformId)),
+                            ),
                             CustomPopupMenu(
                               child: Container(
                                 child: Icon(
@@ -149,14 +158,15 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                                               trailing: IconButton(
                                                 icon: Icon(Icons.close),
                                                 iconSize: 25,
-                                                onPressed: () =>
-                                                    accountInformationDb
-                                                        .deleteAt(index),
+                                                onPressed: () => accountInfoDb
+                                                    .deleteAt(index),
                                               ),
                                               onTap: () => screenBloc.add(
                                                   FetchProfileEvent(
                                                       profileId:
-                                                          account.battleNetId)),
+                                                          account.battleNetId,
+                                                      platformId:
+                                                          account.platformId)),
                                             ),
                                           );
                                         },
@@ -188,7 +198,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
             Padding(
                 padding: EdgeInsets.all(10.0),
                 child: RankRatingWidget(
-                  profileStats: currentProfile,
+                  profileStats: profileStats,
                 )),
             Expanded(
               child: Container(

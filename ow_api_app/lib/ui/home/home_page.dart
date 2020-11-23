@@ -3,13 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'widget/ProfileDisplayWidget.dart';
+import 'widget/profile_display_widget.dart';
 import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
 import 'package:ow_api_app/bloc/profile/profile_event.dart';
 import 'package:ow_api_app/bloc/profile/profile_state.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/data/util/ApiExceptionMapper.dart';
-import 'package:ow_api_app/ui/home/widget/ErrorUiWidget.dart';
+import 'package:ow_api_app/data/util/api_exception_mapper.dart';
+import 'package:ow_api_app/ui/home/widget/error_ui_widget.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,8 +19,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Box _accountInfoBox;
   ProfileBloc profileBloc;
-  AccountModel mainAccount;
-  var initialized = false;
+  AccountModel fetchedAccount;
+  int profileIndex;
+  bool initialized = false;
 
   @override
   void initState() {
@@ -34,25 +35,30 @@ class _HomePageState extends State<HomePage> {
   }
 
   Future _init() async {
-    //Create DB
+    // Initialize the current ProfileIndex
+    profileIndex = 0;
+
+    // Create DB
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     Hive.registerAdapter(AccountModelAdapter());
 
-    //Open DB
+    // Open DB
     _accountInfoBox = await Hive.openBox('accountBox');
 
-    // //Create Fake Data
-    // var account1 =
-    //     AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
-    // _accountInfoBox.add(account1);
-    // var account2 =
-    //     AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
-    // _accountInfoBox.add(account2);
+    //Create Fake Data
+    var account1 =
+        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
+    _accountInfoBox.add(account1);
+    var account2 =
+        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
+    _accountInfoBox.add(account2);
 
-    //Start FetchDataEvent with mainAccountId
-    mainAccount = _accountInfoBox.getAt(0);
-    profileBloc.add(FetchProfileEvent(profileId: mainAccount.battleNetId));
+    // Start FetchDataEvent with mainAccountId
+    fetchedAccount = _accountInfoBox.getAt(0);
+    profileBloc.add(FetchProfileEvent(
+        profileId: fetchedAccount.battleNetId,
+        platformId: fetchedAccount.platformId));
   }
 
   @override
@@ -79,9 +85,10 @@ class _HomePageState extends State<HomePage> {
                 return buildLoading();
               } else if (state is ProfileLoadedState) {
                 return ProfileDisplayWidget(
-                  currentProfile: state.profileStats,
+                  profileDbIndex: profileIndex,
+                  profileStats: state.profileStats,
                   profileBloc: profileBloc,
-                  accountInformation: _accountInfoBox,
+                  accountInfoDb: _accountInfoBox,
                 );
               } else if (state is ProfileErrorState) {
                 return ErrorUiWidget(state.exception);
