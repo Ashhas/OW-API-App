@@ -21,16 +21,16 @@ class NavBarScreenState extends State<NavBarScreen> {
   List<Widget> _buildScreens() {
     return [
       Container(
-        color: Color.fromRGBO(241, 241, 241, 1.0),
+        color: Color.fromRGBO(48, 68, 78, 1.0),
         child: Center(
-          child: Text("Updates"),
+          child: Text("Updates", style: TextStyle(color: Colors.white)),
         ),
       ),
       HomePage(),
       Container(
-        color: Color.fromRGBO(241, 241, 241, 1.0),
+        color: Color.fromRGBO(48, 68, 78, 1.0),
         child: Center(
-          child: Text("Settings"),
+          child: Text("Settings", style: TextStyle(color: Colors.white)),
         ),
       ),
     ];
@@ -40,20 +40,20 @@ class NavBarScreenState extends State<NavBarScreen> {
     return [
       PersistentBottomNavBarItem(
         icon: Icon(Icons.rss_feed),
-        title: ("Search"),
-        activeColor: Colors.teal,
+        title: ("Updates"),
+        activeColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.person),
         title: "Home",
-        activeColor: Colors.blue,
+        activeColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.settings),
-        title: ("Add"),
-        activeColor: Colors.orange,
+        title: ("Settings"),
+        activeColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
     ];
@@ -68,15 +68,15 @@ class NavBarScreenState extends State<NavBarScreen> {
         screens: _buildScreens(),
         items: _navBarsItems(),
         confineInSafeArea: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Color.fromRGBO(48, 68, 78, 1.0),
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,
         hideNavigationBar: _hideNavBar,
-        margin: EdgeInsets.all(10.0),
         popActionScreens: PopActionScreensType.once,
         bottomScreenMargin: 0.0,
+        navBarHeight: 65,
         onWillPop: () async {
           await showDialog(
             context: context,
@@ -95,9 +95,15 @@ class NavBarScreenState extends State<NavBarScreen> {
           );
           return false;
         },
-        decoration: NavBarDecoration(
-            colorBehindNavBar: Colors.indigo,
-            borderRadius: BorderRadius.circular(20.0)),
+        decoration:
+            NavBarDecoration(colorBehindNavBar: Colors.white, boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            spreadRadius: 5,
+            blurRadius: 7,
+            offset: Offset(0, 3), // changes position of shadow
+          ),
+        ]),
         popAllScreensOnTapOfSelectedTab: true,
         itemAnimationProperties: ItemAnimationProperties(
           duration: Duration(milliseconds: 400),
@@ -109,7 +115,7 @@ class NavBarScreenState extends State<NavBarScreen> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-            NavBarStyle.style13, // Choose the nav bar style with this property
+            NavBarStyle.style3, // Choose the nav bar style with this property
       ),
     );
   }

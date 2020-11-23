@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
 
-import 'widget/profile_display_widget.dart';
+import 'profile_display_widget.dart';
 import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
 import 'package:ow_api_app/bloc/profile/profile_event.dart';
 import 'package:ow_api_app/bloc/profile/profile_state.dart';
@@ -46,16 +46,16 @@ class _HomePageState extends State<HomePage> {
     // Open DB
     _accountInfoBox = await Hive.openBox('accountBox');
 
-    //Create Fake Data
-    var account1 =
-        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
-    _accountInfoBox.add(account1);
-    var account2 =
-        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
-    _accountInfoBox.add(account2);
-    var account3 =
-    AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
-    _accountInfoBox.add(account3);
+    // //Create Fake Data
+    // var account1 =
+    //     AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
+    // _accountInfoBox.add(account1);
+    // var account2 =
+    //     AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
+    // _accountInfoBox.add(account2);
+    // var account3 =
+    // AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+    // _accountInfoBox.add(account3);
 
     // Start FetchDataEvent with mainAccountId
     fetchedAccount = _accountInfoBox.getAt(0);
@@ -105,8 +105,11 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
+    return Container(
+      color: Color.fromRGBO(48, 68, 78, 1.0),
+      child: Center(
+        child: CircularProgressIndicator(),
+      ),
     );
   }
 }

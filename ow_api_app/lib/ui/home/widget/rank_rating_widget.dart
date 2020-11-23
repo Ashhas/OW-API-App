@@ -15,6 +15,7 @@ class RankRatingWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+        elevation: 10,
         color: Color.fromRGBO(255, 255, 255, 1),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         child: Container(
