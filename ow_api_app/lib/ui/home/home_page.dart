@@ -53,6 +53,9 @@ class _HomePageState extends State<HomePage> {
     var account2 =
         AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
     _accountInfoBox.add(account2);
+    var account3 =
+    AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+    _accountInfoBox.add(account3);
 
     // Start FetchDataEvent with mainAccountId
     fetchedAccount = _accountInfoBox.getAt(0);
