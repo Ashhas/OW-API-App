@@ -20,36 +20,39 @@ class _HomePageState extends State<HomePage> {
   Box _accountInfoBox;
   ProfileBloc profileBloc;
   AccountModel mainAccount;
+  var initialized = false;
 
   @override
   void initState() {
     super.initState();
-    Hive.registerAdapter(AccountModelAdapter());
     profileBloc = BlocProvider.of<ProfileBloc>(context);
 
-    _init();
+    if (!initialized) {
+      _init();
+      initialized = true;
+    }
   }
 
   Future _init() async {
     //Create DB
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
+    Hive.registerAdapter(AccountModelAdapter());
+
+    //Open DB
     _accountInfoBox = await Hive.openBox('accountBox');
 
-//    //Create Fake Data
-//    var account1 =
-//        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
-//    _accountInfoBox.add(account1);
-//    var account2 =
-//        AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
-//    _accountInfoBox.add(account2);
-
-//    _accountInfoBox.deleteFromDisk();
+    // //Create Fake Data
+    // var account1 =
+    //     AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
+    // _accountInfoBox.add(account1);
+    // var account2 =
+    //     AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
+    // _accountInfoBox.add(account2);
 
     //Start FetchDataEvent with mainAccountId
     mainAccount = _accountInfoBox.getAt(0);
     profileBloc.add(FetchProfileEvent(profileId: mainAccount.battleNetId));
-    return;
   }
 
   @override
@@ -76,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                 return buildLoading();
               } else if (state is ProfileLoadedState) {
                 return ProfileDisplayWidget(
-                  profile: state.profileStats,
+                  currentProfile: state.profileStats,
                   profileBloc: profileBloc,
                   accountInformation: _accountInfoBox,
                 );
