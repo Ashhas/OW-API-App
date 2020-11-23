@@ -42,13 +42,13 @@ class _HomePageState extends State<HomePage> {
     //Open DB
     _accountInfoBox = await Hive.openBox('accountBox');
 
-    //Create Fake Data
-    var account1 =
-        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
-    _accountInfoBox.add(account1);
-    var account2 =
-        AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
-    _accountInfoBox.add(account2);
+    // //Create Fake Data
+    // var account1 =
+    //     AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
+    // _accountInfoBox.add(account1);
+    // var account2 =
+    //     AccountModel(2, "Axyos#21653", "Axyos", "ps4", DateTime.now());
+    // _accountInfoBox.add(account2);
 
     //Start FetchDataEvent with mainAccountId
     mainAccount = _accountInfoBox.getAt(0);
