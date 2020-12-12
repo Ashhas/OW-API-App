@@ -5,15 +5,15 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 
-import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
-import 'package:ow_api_app/bloc/profile/profile_event.dart';
+import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
+import 'package:ow_api_app/ui/home/widget/rank_rating_widget.dart';
 
 class ProfileInfoCard extends StatefulWidget {
   final int profileDbIndex;
   final Profile profileStats;
-  final ProfileBloc profileBloc;
+  final HomeBloc profileBloc;
   final Box accountInfoDb;
 
   const ProfileInfoCard({
@@ -32,7 +32,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
   AccountModel currentAccount;
   int profileDbIndex;
   Profile profileStats;
-  ProfileBloc screenBloc;
+  HomeBloc screenBloc;
   Box accountInfoDb;
 
   @override
@@ -110,87 +110,16 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                           color: Color.fromRGBO(246, 246, 133, 1.0),
                           onPressed: () {},
                         ),
-                        CustomPopupMenu(
-                          child: Container(
-                            child: Icon(
-                              Icons.contacts,
-                              color: Colors.white,
-                            ),
-                            padding: EdgeInsets.all(20),
-                          ),
-                          menuBuilder: () => ClipRRect(
-                            borderRadius: BorderRadius.circular(5),
-                            child: Container(
-                              color: const Color(0xFF4C4C4C),
-                              child: ValueListenableBuilder(
-                                valueListenable:
-                                    Hive.box('accountBox').listenable(),
-                                builder: (context, box, widget) {
-                                  if (box.values.isEmpty)
-                                    return Center(
-                                      child: Text("No Accounts"),
-                                    );
-                                  return ListView.builder(
-                                    shrinkWrap: true,
-                                    itemCount: box.values.length,
-                                    itemBuilder: (context, index) {
-                                      AccountModel account = box.getAt(index);
-                                      return Container(
-                                        color: Colors.white,
-                                        child: ListTile(
-                                          title: Text(account.battleNetId),
-                                          dense: true,
-                                          trailing: IconButton(
-                                            icon: Icon(Icons.close),
-                                            iconSize: 25,
-                                            onPressed: () =>
-                                                accountInfoDb.deleteAt(index),
-                                          ),
-                                          onTap: () => screenBloc.add(
-                                              FetchProfileEvent(
-                                                  profileId:
-                                                      account.battleNetId,
-                                                  platformId:
-                                                      account.platformId)),
-                                        ),
-                                      );
-                                    },
-                                  );
-                                },
-                              ),
-                            ),
-                          ),
-                          pressType: PressType.singleClick,
-                          verticalMargin: -20,
-                          horizontalMargin: 110,
-//              controller: _controller,
-                        ),
                       ],
-                    ),
-                    SizedBox(
-                      height: 10,
                     ),
                   ],
                 ))
               ],
             ),
-            SizedBox(
-              height: 10,
+            RankRatingWidget(
+              profileStats: profileStats,
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Text(
-                  "Competitive Time Played ",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                ),
-                Text(
-                  "250 HRS",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
-                )
-              ],
-            ),
-            SizedBox(height: 17),
+            SizedBox(height: 10),
           ],
         ));
   }

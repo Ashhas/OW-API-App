@@ -14,63 +14,73 @@ class RankRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 10,
-        color: Color.fromRGBO(255, 255, 255, 1),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-          child: Row(
-            children: <Widget>[
-              Expanded(
-                  child: profileStats.ratings != null
-                      ? profileStats.ratings.tank != null
-                          ? _StatTile(
-                              ratingImageUrl:
-                                  profileStats.ratings.tank.rankIcon,
-                              title: "Tank",
-                              rating:
-                                  profileStats.ratings.tank.level.toString())
-                          : _StatTile(
-                              ratingImageUrl: "--", title: "Tank", rating: "--")
-                      : _StatTile(
-                          ratingImageUrl: "--", title: "Tank", rating: "--")),
-              const _Divider(),
-              Expanded(
-                  child: profileStats.ratings != null
-                      ? profileStats.ratings.damage != null
-                          ? _StatTile(
-                              ratingImageUrl:
-                                  profileStats.ratings.damage.rankIcon,
-                              title: "Tank",
-                              rating:
-                                  profileStats.ratings.damage.level.toString())
-                          : _StatTile(
-                              ratingImageUrl: "--",
-                              title: "Damage",
-                              rating: "--")
-                      : _StatTile(
-                          ratingImageUrl: "--", title: "Damage", rating: "--")),
-              const _Divider(),
-              Expanded(
-                  child: profileStats.ratings != null
-                      ? profileStats.ratings.support != null
-                          ? _StatTile(
-                              ratingImageUrl:
-                                  profileStats.ratings.support.rankIcon,
-                              title: "Support",
-                              rating:
-                                  profileStats.ratings.support.level.toString())
-                          : _StatTile(
-                              ratingImageUrl: "--",
-                              title: "Support",
-                              rating: "--")
-                      : _StatTile(
-                          ratingImageUrl: "--",
-                          title: "Support",
-                          rating: "--")),
-            ],
-          ),
+    return Container(
+        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(bottom: 10),
+              child: Text(
+                "- Competitive Season 23 -",
+                style: TextStyle(fontSize: 13, color: Colors.white),
+              ),
+            ),
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: profileStats.ratings != null
+                        ? profileStats.ratings.tank != null
+                            ? _StatTile(
+                                ratingImageUrl:
+                                    profileStats.ratings.tank.rankIcon,
+                                title: "Tank",
+                                rating:
+                                    profileStats.ratings.tank.level.toString())
+                            : _StatTile(
+                                ratingImageUrl: "--",
+                                title: "Tank",
+                                rating: "--")
+                        : _StatTile(
+                            ratingImageUrl: "--", title: "Tank", rating: "--")),
+                const _Divider(),
+                Expanded(
+                    child: profileStats.ratings != null
+                        ? profileStats.ratings.damage != null
+                            ? _StatTile(
+                                ratingImageUrl:
+                                    profileStats.ratings.damage.rankIcon,
+                                title: "Tank",
+                                rating: profileStats.ratings.damage.level
+                                    .toString())
+                            : _StatTile(
+                                ratingImageUrl: "--",
+                                title: "Damage",
+                                rating: "--")
+                        : _StatTile(
+                            ratingImageUrl: "--",
+                            title: "Damage",
+                            rating: "--")),
+                const _Divider(),
+                Expanded(
+                    child: profileStats.ratings != null
+                        ? profileStats.ratings.support != null
+                            ? _StatTile(
+                                ratingImageUrl:
+                                    profileStats.ratings.support.rankIcon,
+                                title: "Support",
+                                rating: profileStats.ratings.support.level
+                                    .toString())
+                            : _StatTile(
+                                ratingImageUrl: "--",
+                                title: "Support",
+                                rating: "--")
+                        : _StatTile(
+                            ratingImageUrl: "--",
+                            title: "Support",
+                            rating: "--")),
+              ],
+            ),
+          ],
         ));
   }
 }
@@ -106,12 +116,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               )
@@ -137,13 +147,13 @@ class _StatTile extends StatelessWidget {
                     style: TextStyle(
                         fontFamily: "TitilliumWeb",
                         fontSize: 19,
-                        color: Colors.black,
+                        color: Colors.white,
                         fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: TextStyle(color: Colors.black),
+                    style: TextStyle(color: Colors.white),
                   ),
                 ],
               )
