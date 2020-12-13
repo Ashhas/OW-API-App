@@ -54,11 +54,25 @@ class _HomePageState extends State<HomePage> {
         AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
     _accountInfoBox.add(account1);
     var account2 =
-        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
+        AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
     _accountInfoBox.add(account2);
     var account3 =
-        AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+        AccountModel(3, "Mjolnir#21534", "Mjolnir", "pc", DateTime.now());
     _accountInfoBox.add(account3);
+    var account4 =
+        AccountModel(4, "N0rki#1422", "Ashhas", "pc", DateTime.now());
+    _accountInfoBox.add(account4);
+    var account5 =
+        AccountModel(5, "Tafboy#21481", "Tafboy", "pc", DateTime.now());
+    _accountInfoBox.add(account5);
+    var account6 =
+        AccountModel(6, "JetLiTe#2341", "JetLiTe", "pc", DateTime.now());
+    _accountInfoBox.add(account6);
+    var account7 =
+        AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
+    _accountInfoBox.add(account7);
+    var account8 = AccountModel(8, "Hop#21748", "Hop", "pc", DateTime.now());
+    _accountInfoBox.add(account8);
 
     // Start FetchDataEvent with mainAccountId
     fetchedAccount = _accountInfoBox.getAt(0);
