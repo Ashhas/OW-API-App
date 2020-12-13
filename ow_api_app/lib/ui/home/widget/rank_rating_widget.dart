@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:ow_api_app/data/model/profile_model.dart';
+import 'package:ow_api_app/data/util/global_variables.dart';
 
 class RankRatingWidget extends StatelessWidget {
   final Profile profileStats;
@@ -21,7 +22,7 @@ class RankRatingWidget extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(bottom: 10),
               child: Text(
-                "- Competitive Season 23 -",
+                GlobalVariables.currentRankSeason,
                 style: TextStyle(fontSize: 13, color: Colors.white),
               ),
             ),
@@ -33,15 +34,17 @@ class RankRatingWidget extends StatelessWidget {
                             ? _StatTile(
                                 ratingImageUrl:
                                     profileStats.ratings.tank.rankIcon,
-                                title: "Tank",
+                                title: GlobalVariables.tankRoleTitle,
                                 rating:
                                     profileStats.ratings.tank.level.toString())
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: "Tank",
-                                rating: "--")
+                                title: GlobalVariables.tankRoleTitle,
+                                rating: GlobalVariables.noRankText)
                         : _StatTile(
-                            ratingImageUrl: "--", title: "Tank", rating: "--")),
+                            ratingImageUrl: "--",
+                            title: GlobalVariables.tankRoleTitle,
+                            rating: GlobalVariables.noRankText)),
                 const _Divider(),
                 Expanded(
                     child: profileStats.ratings != null
@@ -49,17 +52,17 @@ class RankRatingWidget extends StatelessWidget {
                             ? _StatTile(
                                 ratingImageUrl:
                                     profileStats.ratings.damage.rankIcon,
-                                title: "Tank",
+                                title: GlobalVariables.damageRoleTitle,
                                 rating: profileStats.ratings.damage.level
                                     .toString())
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: "Damage",
-                                rating: "--")
+                                title: GlobalVariables.damageRoleTitle,
+                                rating: GlobalVariables.noRankText)
                         : _StatTile(
                             ratingImageUrl: "--",
-                            title: "Damage",
-                            rating: "--")),
+                            title: GlobalVariables.damageRoleTitle,
+                            rating: GlobalVariables.noRankText)),
                 const _Divider(),
                 Expanded(
                     child: profileStats.ratings != null
@@ -67,17 +70,17 @@ class RankRatingWidget extends StatelessWidget {
                             ? _StatTile(
                                 ratingImageUrl:
                                     profileStats.ratings.support.rankIcon,
-                                title: "Support",
+                                title: GlobalVariables.supportRoleTitle,
                                 rating: profileStats.ratings.support.level
                                     .toString())
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: "Support",
-                                rating: "--")
+                                title: GlobalVariables.supportRoleTitle,
+                                rating: GlobalVariables.noRankText)
                         : _StatTile(
                             ratingImageUrl: "--",
-                            title: "Support",
-                            rating: "--")),
+                            title: GlobalVariables.supportRoleTitle,
+                            rating: GlobalVariables.noRankText)),
               ],
             ),
           ],
