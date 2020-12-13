@@ -50,142 +50,174 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Padding(
-                padding: EdgeInsets.only(top: 60),
-                child: Text(
-                  "Settings",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: "TitilliumWeb",
-                      fontWeight: FontWeight.w500,
-                      fontSize: 30),
-                ),
+              _buildTopTitle(),
+              _buildAvailableAccountsWidget(
+                  screenBloc, _accountInfoBox, widget.navBarController),
+              SizedBox(
+                height: 30,
               ),
-              Padding(
-                padding: EdgeInsets.only(top: 10),
-                child: BlocListener<SettingsBloc, SettingsState>(
-                  listener: (BuildContext context, SettingsState state) {
-                    if (state is ProfileSwitchedState) {
-                      print(state.props);
-                      widget.navBarController.jumpToTab(0);
-                    }
-                  },
-                  child: ValueListenableBuilder(
-                    valueListenable: Hive.box('accountBox').listenable(),
-                    builder: (context, box, widget) {
-                      if (box.values.isEmpty)
-                        return Center(
-                          child: Text("No Accounts"),
-                        );
-                      return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: box.values.length,
-                        itemBuilder: (context, index) {
-                          AccountModel account = box.getAt(index);
-                          return Padding(
-                            padding: EdgeInsets.only(left: 5, right: 5),
-                            child: ListTile(
-                              title: Text(account.battleNetId,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "TitilliumWeb",
-                                    fontWeight: FontWeight.w500,
-                                  )),
-                              dense: true,
-                              tileColor: Color.fromRGBO(28, 42, 53, 1.0),
-                              trailing: IconButton(
-                                icon: Icon(Icons.close),
-                                iconSize: 25,
-                                color: Colors.white,
-                                onPressed: () {
-                                  setState(() {
-                                    _accountInfoBox.deleteAt(index);
-                                  });
-                                },
-                              ),
-                              onTap: () => screenBloc.add(ChangeProfileEvent(
-                                  profileId: account.battleNetId,
-                                  platformId: account.platformId)),
-                            ),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ),
-              ),
+              _buildReportAndSuggestTile(),
+              _buildReviewTile(),
               SizedBox(
                 height: 15,
               ),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                      title: Text("Report & Suggest",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      ),
-                      enabled: true,
-                      tileColor: Color.fromRGBO(28, 42, 53, 1.0))),
-              Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                      title: Text("Review",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      ),
-                      enabled: true,
-                      tileColor: Color.fromRGBO(28, 42, 53, 1.0))),
-              SizedBox(
-                height: 15,
-              ),
-              Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                      title: Text("Open Source-Libraries",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      trailing: Icon(
-                        Icons.arrow_forward_ios,
-                        color: Colors.white,
-                      ),
-                      enabled: true,
-                      tileColor: Color.fromRGBO(28, 42, 53, 1.0))),
-              Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                      title: Text("Version",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      trailing: Text(
-                        "0.6.0",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                      enabled: true,
-                      tileColor: Color.fromRGBO(28, 42, 53, 1.0))),
+              _buildLibrariesTile(),
+              _buildVersionTile(),
             ],
           ),
         ));
+  }
+
+  Widget _buildTopTitle() {
+    return Padding(
+      padding: EdgeInsets.only(top: 60),
+      child: Text(
+        "Settings",
+        style: TextStyle(
+            color: Colors.white,
+            fontFamily: "TitilliumWeb",
+            fontWeight: FontWeight.w500,
+            fontSize: 30),
+      ),
+    );
+  }
+
+  Widget _buildAvailableAccountsWidget(SettingsBloc screenBloc,
+      Box accountInfoBox, PersistentTabController navBarController) {
+    return Padding(
+      padding: EdgeInsets.only(top: 10),
+      child: BlocListener<SettingsBloc, SettingsState>(
+        listener: (BuildContext context, SettingsState state) {
+          if (state is ProfileSwitchedState) {
+            print(state.props);
+            widget.navBarController.jumpToTab(0);
+          }
+        },
+        child: ValueListenableBuilder(
+          valueListenable: Hive.box('accountBox').listenable(),
+          builder: (context, box, widget) {
+            if (box.values.isEmpty)
+              return Padding(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  child: ListTile(
+                      title: Text("No Accounts",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontFamily: "TitilliumWeb",
+                            fontWeight: FontWeight.w500,
+                          )),
+                      enabled: true,
+                      tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+
+            return ListView.builder(
+              physics: NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: box.values.length,
+              itemBuilder: (context, index) {
+                AccountModel account = box.getAt(index);
+                return Padding(
+                  padding: EdgeInsets.only(left: 5, right: 5),
+                  child: ListTile(
+                    title: Text(account.battleNetId,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontFamily: "TitilliumWeb",
+                          fontWeight: FontWeight.w500,
+                        )),
+                    dense: true,
+                    tileColor: Color.fromRGBO(28, 42, 53, 1.0),
+                    trailing: IconButton(
+                      icon: Icon(Icons.close),
+                      iconSize: 25,
+                      color: Colors.white,
+                      onPressed: () {
+                        setState(() {
+                          _accountInfoBox.deleteAt(index);
+                        });
+                      },
+                    ),
+                    onTap: () => screenBloc.add(ChangeProfileEvent(
+                        profileId: account.battleNetId,
+                        platformId: account.platformId)),
+                  ),
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+
+  Widget _buildReportAndSuggestTile() {
+    return Padding(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        child: ListTile(
+            title: Text("Report & Suggest",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "TitilliumWeb",
+                  fontWeight: FontWeight.w500,
+                )),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            enabled: true,
+            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+  }
+
+  Widget _buildReviewTile() {
+    return Padding(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        child: ListTile(
+            title: Text("Review",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "TitilliumWeb",
+                  fontWeight: FontWeight.w500,
+                )),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            enabled: true,
+            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+  }
+
+  Widget _buildLibrariesTile() {
+    return Padding(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        child: ListTile(
+            title: Text("Open Source-Libraries",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "TitilliumWeb",
+                  fontWeight: FontWeight.w500,
+                )),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
+            ),
+            enabled: true,
+            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+  }
+
+  Widget _buildVersionTile() {
+    return Padding(
+        padding: EdgeInsets.only(left: 5, right: 5),
+        child: ListTile(
+            title: Text("Version",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "TitilliumWeb",
+                  fontWeight: FontWeight.w500,
+                )),
+            trailing: Text(
+              "0.0.7",
+              style: TextStyle(color: Colors.white),
+            ),
+            enabled: true,
+            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
   }
 }

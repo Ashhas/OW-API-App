@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:hive/hive.dart';
-import 'package:ow_api_app/ui/home/recolor_profile_display_widget.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
+import 'package:ow_api_app/ui/home/recolor_profile_display_widget.dart';
 import 'package:ow_api_app/ui/home/widget/error_ui_widget.dart';
 
 class HomePage extends StatefulWidget {
@@ -20,9 +21,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int profileIndex;
   Box _accountInfoBox;
   AccountModel fetchedAccount;
-  int profileIndex;
 
   @override
   void initState() {
@@ -76,9 +77,9 @@ class _HomePageState extends State<HomePage> {
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
               if (state is HomeInitialState) {
-                return buildLoading();
+                return buildLoadingWidget();
               } else if (state is ProfileLoadingState) {
-                return buildLoading();
+                return buildLoadingWidget();
               } else if (state is ProfileLoadedState) {
                 return RecolorProfileDisplayWidget(
                   profileDbIndex: profileIndex,
@@ -97,7 +98,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildLoading() {
+  Widget buildLoadingWidget() {
     return Container(
       color: Color.fromRGBO(28, 42, 53, 1.0),
       child: Center(
