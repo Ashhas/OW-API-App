@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 
 import 'package:ow_api_app/ui/home/widget/title_view.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MostPlayedHeroesCard extends StatefulWidget {
+  final PersistentTabController navBarController;
   final Profile profileStatistics;
 
-  const MostPlayedHeroesCard({@required this.profileStatistics}) : super();
+  const MostPlayedHeroesCard(
+      {@required this.profileStatistics, @required this.navBarController})
+      : super();
 
   @override
   _MostPlayedHeroesCardState createState() => _MostPlayedHeroesCardState();
@@ -47,6 +51,7 @@ class _MostPlayedHeroesCardState extends State<MostPlayedHeroesCard> {
                             TitleView(
                               titleTxt: "Most Played Heroes",
                               subTxt: "See All",
+                              navBarController: widget.navBarController,
                             ),
                             Padding(
                               padding: EdgeInsets.only(

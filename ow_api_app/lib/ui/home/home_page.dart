@@ -86,6 +86,7 @@ class _HomePageState extends State<HomePage> {
                   profileStats: state.profileStats,
                   profileBloc: widget.profileBloc,
                   accountInfoDb: _accountInfoBox,
+                  navBarController: widget.navBarController,
                 );
               } else if (state is HomeErrorState) {
                 return ErrorUiWidget(state.exception);

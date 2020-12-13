@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
+import 'package:ow_api_app/data/util/global_variables.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
@@ -26,7 +27,6 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   void initState() {
     super.initState();
-
     _init();
   }
 
@@ -72,7 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
       padding: EdgeInsets.only(top: 60),
       child: Text(
-        "Settings",
+        GlobalVariables.settingsPageTitle,
         style: TextStyle(
             color: Colors.white,
             fontFamily: "TitilliumWeb",
@@ -100,7 +100,7 @@ class _SettingsPageState extends State<SettingsPage> {
               return Padding(
                   padding: EdgeInsets.only(left: 5, right: 5),
                   child: ListTile(
-                      title: Text("No Accounts",
+                      title: Text(GlobalVariables.settingsNoAccountTitle,
                           style: TextStyle(
                             color: Colors.white,
                             fontFamily: "TitilliumWeb",
@@ -153,7 +153,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
         padding: EdgeInsets.only(left: 5, right: 5),
         child: ListTile(
-            title: Text("Report & Suggest",
+            title: Text(GlobalVariables.settingsFeedbackTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "TitilliumWeb",
@@ -171,7 +171,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
         padding: EdgeInsets.only(left: 5, right: 5),
         child: ListTile(
-            title: Text("Review",
+            title: Text(GlobalVariables.settingsReviewTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "TitilliumWeb",
@@ -189,7 +189,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
         padding: EdgeInsets.only(left: 5, right: 5),
         child: ListTile(
-            title: Text("Open Source-Libraries",
+            title: Text(GlobalVariables.settingsOpenSourceTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "TitilliumWeb",
@@ -207,14 +207,14 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
         padding: EdgeInsets.only(left: 5, right: 5),
         child: ListTile(
-            title: Text("Version",
+            title: Text(GlobalVariables.settingsVersionTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "TitilliumWeb",
                   fontWeight: FontWeight.w500,
                 )),
             trailing: Text(
-              "0.0.7",
+              GlobalVariables.settingsVersionNumber,
               style: TextStyle(color: Colors.white),
             ),
             enabled: true,

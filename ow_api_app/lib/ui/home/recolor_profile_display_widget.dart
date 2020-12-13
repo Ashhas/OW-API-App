@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 
 import 'package:hive/hive.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
@@ -13,6 +14,7 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
 class RecolorProfileDisplayWidget extends StatefulWidget {
+  final PersistentTabController navBarController;
   final int profileDbIndex;
   final Profile profileStats;
   final HomeBloc profileBloc;
@@ -20,6 +22,7 @@ class RecolorProfileDisplayWidget extends StatefulWidget {
 
   const RecolorProfileDisplayWidget({
     Key key,
+    @required this.navBarController,
     @required this.profileDbIndex,
     @required this.profileStats,
     @required this.profileBloc,
@@ -65,6 +68,7 @@ class _ProfileDisplayWidgetState extends State<RecolorProfileDisplayWidget> {
                   accountInfoDb: accountInfoDb,
                 ),
                 MostPlayedHeroesCard(
+                  navBarController: widget.navBarController,
                   profileStatistics: profileStats,
                 ),
               ],
