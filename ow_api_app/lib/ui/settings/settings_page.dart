@@ -1,14 +1,18 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/data/util/global_variables.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
+
+import 'add_profile_page.dart';
 
 class SettingsPage extends StatefulWidget {
   final PersistentTabController navBarController;
@@ -53,6 +57,7 @@ class _SettingsPageState extends State<SettingsPage> {
               _buildTopTitle(),
               _buildAvailableAccountsWidget(
                   screenBloc, _accountInfoBox, widget.navBarController),
+              _buildAddAccountButton(),
               SizedBox(
                 height: 30,
               ),
@@ -63,6 +68,9 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
               _buildLibrariesTile(),
               _buildVersionTile(),
+              SizedBox(
+                height: 100,
+              ),
             ],
           ),
         ));
@@ -146,6 +154,33 @@ class _SettingsPageState extends State<SettingsPage> {
           },
         ),
       ),
+    );
+  }
+
+  Widget _buildAddAccountButton() {
+    return FlatButton(
+      onPressed: () {
+        pushNewScreen(
+          context,
+          screen: AddProfilePage(),
+          withNavBar: false, // OPTIONAL VALUE. True by default.
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+      },
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.add,
+            color: Colors.white,
+          ),
+          Text(
+            "Add Account",
+            style: TextStyle(color: Colors.white),
+          )
+        ],
+      ),
+      color: Colors.orange,
     );
   }
 

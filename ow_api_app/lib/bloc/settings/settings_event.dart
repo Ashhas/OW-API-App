@@ -18,3 +18,13 @@ class ChangeProfileEvent extends SettingsEvent {
   @override
   List<Object> get props => null;
 }
+
+class AddProfileEvent extends SettingsEvent {
+  final String profileId;
+  final String platformId;
+
+  AddProfileEvent({@required this.profileId, @required this.platformId});
+
+  @override
+  List<Object> get props => throw UnimplementedError();
+}

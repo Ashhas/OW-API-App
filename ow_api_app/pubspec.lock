@@ -169,13 +169,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.16.2"
-  custom_pop_up_menu:
-    dependency: "direct main"
-    description:
-      name: custom_pop_up_menu
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.1.0"
   dart_style:
     dependency: transitive
     description:
@@ -396,6 +389,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.9.3"
+  page_transition:
+    dependency: "direct main"
+    description:
+      name: page_transition
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.1.7+3"
   path:
     dependency: transitive
     description:
