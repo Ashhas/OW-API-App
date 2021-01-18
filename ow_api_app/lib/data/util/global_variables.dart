@@ -19,6 +19,13 @@ class GlobalVariables {
   static const String settingsVersionTitle = "Version";
   static const String settingsVersionNumber = "0.0.7";
 
+  static const List<String> availablePlatforms = [
+    "pc",
+    "psn",
+    "xbl",
+    "nintendo-switch"
+  ];
+
   static const List<String> heroNames = [
     'Orisa',
     'Reinhardt',

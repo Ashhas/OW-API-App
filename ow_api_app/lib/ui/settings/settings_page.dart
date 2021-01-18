@@ -162,7 +162,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: () {
         pushNewScreen(
           context,
-          screen: AddProfilePage(),
+          screen: AddProfilePage(_accountInfoBox, screenBloc),
           withNavBar: false, // OPTIONAL VALUE. True by default.
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );

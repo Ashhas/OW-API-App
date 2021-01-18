@@ -15,6 +15,7 @@ dependencies:
   hive_flutter: ^0.3.1
   path_provider: ^1.6.5
   page_transition: ^1.1.7+3
+  flutter_dropdown: ^0.0.8
   persistent_bottom_nav_bar: ^2.1.0
 
 dev_dependencies:

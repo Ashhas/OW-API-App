@@ -22,9 +22,13 @@ class ChangeProfileEvent extends SettingsEvent {
 class AddProfileEvent extends SettingsEvent {
   final String profileId;
   final String platformId;
+  final Box accountBox;
 
-  AddProfileEvent({@required this.profileId, @required this.platformId});
+  AddProfileEvent(
+      {@required this.profileId,
+      @required this.platformId,
+      @required this.accountBox});
 
   @override
-  List<Object> get props => throw UnimplementedError();
+  List<Object> get props => [profileId, platformId];
 }

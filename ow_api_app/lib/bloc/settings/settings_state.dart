@@ -17,6 +17,20 @@ class ProfileSwitchedState extends SettingsState {
   List<Object> get props => [profileId, platformId];
 }
 
+class ProfileValidatingState extends SettingsState {
+  @override
+  List<Object> get props => [];
+}
+
+class ProfileValidatedState extends SettingsState {
+  final bool isValidated;
+
+  ProfileValidatedState({@required this.isValidated});
+
+  @override
+  List<Object> get props => [isValidated];
+}
+
 class SettingsErrorState extends SettingsState {
   final Exception exception;
 

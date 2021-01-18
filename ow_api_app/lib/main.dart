@@ -25,7 +25,8 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
         providers: [
           BlocProvider<SettingsBloc>(
-            create: (_) => SettingsBloc()..add(SettingsOpenedEvent()),
+            create: (_) => SettingsBloc(repository: ProfileRepositoryImpl())
+              ..add(SettingsOpenedEvent()),
           ),
           BlocProvider(
             create: (_) => HomeBloc(repository: ProfileRepositoryImpl())
