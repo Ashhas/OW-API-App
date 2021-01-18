@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:connectivity/connectivity.dart';
 import 'package:meta/meta.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,7 +16,7 @@ part 'package:ow_api_app/bloc/home/home_event.dart';
 part 'package:ow_api_app/bloc/home/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  ProfileRepository repository;
+  final ProfileRepository repository;
 
   HomeBloc({@required this.repository}) : super(null) {
     Hive.registerAdapter(AccountModelAdapter());
@@ -23,12 +24,29 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is HomeStartedEvent) {
-
+    if (event is OnlineConnectionEvent) {
+      yield* _mapOnlineConnectionToState(event, state);
+    }
+    if (event is OfflineConnectionEvent) {
+      yield* _mapOfflineConnectionToState(event, state);
     }
     if (event is FetchProfileEvent) {
       yield* _mapFetchProfileEventToState(event, state);
     }
+  }
+
+  Stream<HomeState> _mapOnlineConnectionToState(
+    OnlineConnectionEvent event,
+    HomeState state,
+  ) async* {
+    yield OnlineConnectionState();
+  }
+
+  Stream<HomeState> _mapOfflineConnectionToState(
+    OfflineConnectionEvent event,
+    HomeState state,
+  ) async* {
+    yield OfflineConnectionState();
   }
 
   Stream<HomeState> _mapFetchProfileEventToState(

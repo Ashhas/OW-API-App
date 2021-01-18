@@ -9,6 +9,16 @@ class HomeStartedEvent extends HomeEvent {
   List<Object> get props => [];
 }
 
+class OnlineConnectionEvent extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
+class OfflineConnectionEvent extends HomeEvent {
+  @override
+  List<Object> get props => [];
+}
+
 class FetchProfileEvent extends HomeEvent {
   final String profileId;
   final String platformId;

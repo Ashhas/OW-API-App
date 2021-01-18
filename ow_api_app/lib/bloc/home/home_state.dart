@@ -7,6 +7,16 @@ class HomeInitialState extends HomeState {
   List<Object> get props => [];
 }
 
+class OnlineConnectionState extends HomeState {
+  @override
+  List<Object> get props => [];
+}
+
+class OfflineConnectionState extends HomeState {
+  @override
+  List<Object> get props => [];
+}
+
 class ProfileLoadingState extends HomeState {
   @override
   List<Object> get props => [];

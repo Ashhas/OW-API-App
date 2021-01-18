@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive/hive.dart';
@@ -12,15 +15,17 @@ import 'package:ow_api_app/ui/home/widget/error_ui_widget.dart';
 
 class HomePage extends StatefulWidget {
   final PersistentTabController navBarController;
-  final HomeBloc profileBloc;
+  final HomeBloc homeBloc;
 
-  const HomePage({this.navBarController, this.profileBloc}) : super();
+  const HomePage({this.navBarController, this.homeBloc}) : super();
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  final Connectivity _connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult> _connectivitySubscription;
   int profileIndex;
   Box _accountInfoBox;
   AccountModel fetchedAccount;
@@ -29,7 +34,22 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
 
-    _init();
+    _checkInternetConnection();
+  }
+
+  Future _checkInternetConnection() async {
+    //Internet Connection Stream
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    if (result == ConnectivityResult.none) {
+      widget.homeBloc.add(OfflineConnectionEvent());
+    } else {
+      _init();
+      widget.homeBloc.add(OnlineConnectionEvent());
+    }
   }
 
   @override
@@ -68,7 +88,7 @@ class _HomePageState extends State<HomePage> {
 
     // Start FetchDataEvent with mainAccountId
     fetchedAccount = _accountInfoBox.getAt(0);
-    widget.profileBloc.add(FetchProfileEvent(
+    widget.homeBloc.add(FetchProfileEvent(
         profileId: fetchedAccount.battleNetId,
         platformId: fetchedAccount.platformId));
   }
@@ -79,25 +99,29 @@ class _HomePageState extends State<HomePage> {
       backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
       body: Container(
         child: BlocListener<HomeBloc, HomeState>(
-          listener: (context, state) {},
+          listener: (context, state) {
+            if (state is OnlineConnectionState) {
+              _init();
+            }
+          },
           child: BlocBuilder<HomeBloc, HomeState>(
             builder: (context, state) {
-              if (state is HomeInitialState) {
-                return buildLoadingWidget();
+              if (state is OfflineConnectionState) {
+                return buildOfflineWidget();
               } else if (state is ProfileLoadingState) {
                 return buildLoadingWidget();
               } else if (state is ProfileLoadedState) {
                 return RecolorProfileDisplayWidget(
                   profileDbIndex: profileIndex,
                   profileStats: state.profileStats,
-                  profileBloc: widget.profileBloc,
+                  profileBloc: widget.homeBloc,
                   accountInfoDb: _accountInfoBox,
                   navBarController: widget.navBarController,
                 );
               } else if (state is HomeErrorState) {
                 return ErrorUiWidget(state.exception);
               } else
-                return Container();
+                return buildOfflineWidget();
             },
           ),
         ),
@@ -113,6 +137,23 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Colors.white,
         ),
       ),
+    );
+  }
+
+  Widget buildOfflineWidget() {
+    return Container(
+      color: Color.fromRGBO(28, 42, 53, 1.0),
+      child: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.signal_wifi_off, color: Colors.white),
+          Text(
+            "No Internet Connection",
+            style: TextStyle(color: Colors.white),
+          )
+        ],
+      )),
     );
   }
 }

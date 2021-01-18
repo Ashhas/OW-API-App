@@ -14,7 +14,7 @@ class NavBarScreen extends StatefulWidget {
 }
 
 class NavBarScreenState extends State<NavBarScreen> {
-  HomeBloc _profileBloc;
+  HomeBloc _homeBloc;
   SettingsBloc _settingsBloc;
   PersistentTabController _controller;
   bool _hideNavBar;
@@ -22,7 +22,7 @@ class NavBarScreenState extends State<NavBarScreen> {
   @override
   void initState() {
     super.initState();
-    _profileBloc = BlocProvider.of<HomeBloc>(context);
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
     _settingsBloc = BlocProvider.of<SettingsBloc>(context);
 
     _controller = PersistentTabController(initialIndex: 0);
@@ -31,7 +31,7 @@ class NavBarScreenState extends State<NavBarScreen> {
 
   List<Widget> _buildScreens() {
     return [
-      HomePage(navBarController: _controller, profileBloc: _profileBloc),
+      HomePage(navBarController: _controller, homeBloc: _homeBloc),
       Container(
         color: Color.fromRGBO(28, 42, 53, 1.0),
         child: Center(
