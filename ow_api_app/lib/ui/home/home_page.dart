@@ -131,6 +131,8 @@ class _HomePageState extends State<HomePage> {
       color: Theme.of(context).backgroundColor,
       child: Center(
         child: CircularProgressIndicator(
+          valueColor:
+              new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
           backgroundColor: Colors.white,
         ),
       ),

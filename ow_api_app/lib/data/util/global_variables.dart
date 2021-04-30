@@ -11,7 +11,7 @@ class GlobalVariables {
   static const String mostPlayedHeroesTitle = "Most Played Heroes";
   static const String mostPlayedHeroesRedirectTitle = "See All";
 
-  static const String settingsPageTitle = "Settings";
+  static const String settingsPageTitle = "Options";
   static const String settingsNoAccountTitle = "No Accounts";
   static const String settingsFeedbackTitle = "Report & Suggest";
   static const String settingsReviewTitle = "Review";

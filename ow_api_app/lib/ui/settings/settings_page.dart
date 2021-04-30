@@ -47,26 +47,24 @@ class _SettingsPageState extends State<SettingsPage> {
     //Creating the BloC for this screen
     screenBloc = widget.settingsBloc;
 
-    return Container(
-        color: Theme.of(context).backgroundColor,
-        child: SingleChildScrollView(
+    return Scaffold(
+        appBar: _buildAppBar(),
+        backgroundColor: Theme.of(context).backgroundColor,
+        body: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _buildTopTitle(),
               _buildAvailableAccountsWidget(
                   screenBloc, _accountInfoBox, widget.navBarController),
-              _buildAddAccountButton(),
               SizedBox(
-                height: 30,
+                height: 20,
               ),
-              _buildReportAndSuggestTile(),
-              _buildReviewTile(),
+              _buildMainAccountTile(),
               SizedBox(
                 height: 15,
               ),
-              _buildLibrariesTile(),
               _buildVersionTile(),
+              _buildLibrariesTile(),
               SizedBox(
                 height: 100,
               ),
@@ -75,117 +73,122 @@ class _SettingsPageState extends State<SettingsPage> {
         ));
   }
 
-  Widget _buildTopTitle() {
-    return Padding(
-      padding: EdgeInsets.only(top: 60),
-      child: Text(
+  Widget _buildAppBar() {
+    return AppBar(
+      elevation: 0.0,
+      backgroundColor: Theme.of(context).backgroundColor,
+      title: Text(
         GlobalVariables.settingsPageTitle,
         style: TextStyle(
             color: Colors.white,
             fontFamily: "TitilliumWeb",
             fontWeight: FontWeight.w500,
-            fontSize: 30),
+            fontSize: 25),
       ),
     );
   }
 
   Widget _buildAvailableAccountsWidget(SettingsBloc screenBloc,
       Box accountInfoBox, PersistentTabController navBarController) {
-    return Padding(
-      padding: EdgeInsets.only(top: 10),
-      child: BlocListener<SettingsBloc, SettingsState>(
+    return BlocListener<SettingsBloc, SettingsState>(
         listener: (BuildContext context, SettingsState state) {
           if (state is ProfileSwitchedState) {
             print(state.props);
             widget.navBarController.jumpToTab(0);
           }
         },
-        child: ValueListenableBuilder(
-          valueListenable: Hive.box('accountBox').listenable(),
-          builder: (context, box, widget) {
-            if (box.values.isEmpty)
-              return Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                      title: Text(GlobalVariables.settingsNoAccountTitle,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w500,
-                          )),
-                      enabled: true,
-                      tileColor: Theme.of(context).buttonColor));
+        child: Padding(
+            padding: EdgeInsets.only(left: 10, right: 10),
+            child: Card(
+              color: Theme.of(context).buttonColor,
+              child: Column(
+                children: [
+                  ValueListenableBuilder(
+                    valueListenable: Hive.box('accountBox').listenable(),
+                    builder: (context, box, widget) {
+                      if (box.values.isEmpty)
+                        return ListTile(
+                            title: Text(GlobalVariables.settingsNoAccountTitle,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "TitilliumWeb",
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            enabled: true,
+                            tileColor: Theme.of(context).buttonColor);
 
-            return ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemCount: box.values.length,
-              itemBuilder: (context, index) {
-                AccountModel account = box.getAt(index);
-                return Padding(
-                  padding: EdgeInsets.only(left: 5, right: 5),
-                  child: ListTile(
-                    title: Text(account.battleNetId,
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: "TitilliumWeb",
-                          fontWeight: FontWeight.w500,
-                        )),
-                    dense: true,
-                    tileColor: Theme.of(context).buttonColor,
-                    trailing: IconButton(
-                      icon: Icon(Icons.close),
-                      iconSize: 25,
-                      color: Colors.white,
-                      onPressed: () {
-                        setState(() {
-                          _accountInfoBox.deleteAt(index);
-                        });
-                      },
-                    ),
-                    onTap: () => screenBloc.add(ChangeProfileEvent(
-                        profileId: account.battleNetId,
-                        platformId: account.platformId)),
+                      return ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemCount: box.values.length,
+                        itemBuilder: (context, index) {
+                          AccountModel account = box.getAt(index);
+                          return ListTile(
+                            title: Text(account.battleNetId,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: "TitilliumWeb",
+                                  fontWeight: FontWeight.w500,
+                                )),
+                            dense: true,
+                            tileColor: Theme.of(context).buttonColor,
+                            trailing: IconButton(
+                              icon: Icon(Icons.close),
+                              iconSize: 25,
+                              color: Colors.white,
+                              onPressed: () {
+                                setState(() {
+                                  _accountInfoBox.deleteAt(index);
+                                });
+                              },
+                            ),
+                            onTap: () => screenBloc.add(ChangeProfileEvent(
+                                profileId: account.battleNetId,
+                                platformId: account.platformId)),
+                          );
+                        },
+                      );
+                    },
                   ),
-                );
-              },
-            );
-          },
-        ),
-      ),
-    );
+                  SizedBox(
+                    width: 200,
+                    child: TextButton(
+                      onPressed: () {
+                        pushNewScreen(
+                          context,
+                          screen: AddProfilePage(_accountInfoBox, screenBloc),
+                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          pageTransitionAnimation:
+                              PageTransitionAnimation.cupertino,
+                        );
+                      },
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            "Add Account",
+                            style: TextStyle(color: Colors.white),
+                          )
+                        ],
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Theme.of(context).primaryColor),
+                      ),
+                    ),
+                  )
+                ],
+              ),
+            )));
   }
 
-  Widget _buildAddAccountButton() {
-    return FlatButton(
-      onPressed: () {
-        pushNewScreen(
-          context,
-          screen: AddProfilePage(_accountInfoBox, screenBloc),
-          withNavBar: false, // OPTIONAL VALUE. True by default.
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
-      },
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.add,
-            color: Colors.white,
-          ),
-          Text(
-            "Add Account",
-            style: TextStyle(color: Colors.white),
-          )
-        ],
-      ),
-      color: Colors.orange,
-    );
-  }
-
-  Widget _buildReportAndSuggestTile() {
+  Widget _buildMainAccountTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 5, right: 5),
+        padding: EdgeInsets.only(left: 15, right: 15),
         child: ListTile(
             title: Text(GlobalVariables.settingsFeedbackTitle,
                 style: TextStyle(
@@ -201,45 +204,9 @@ class _SettingsPageState extends State<SettingsPage> {
             tileColor: Theme.of(context).buttonColor));
   }
 
-  Widget _buildReviewTile() {
-    return Padding(
-        padding: EdgeInsets.only(left: 5, right: 5),
-        child: ListTile(
-            title: Text(GlobalVariables.settingsReviewTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
-  }
-
-  Widget _buildLibrariesTile() {
-    return Padding(
-        padding: EdgeInsets.only(left: 5, right: 5),
-        child: ListTile(
-            title: Text(GlobalVariables.settingsOpenSourceTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
-  }
-
   Widget _buildVersionTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 5, right: 5),
+        padding: EdgeInsets.only(left: 15, right: 15),
         child: ListTile(
             title: Text(GlobalVariables.settingsVersionTitle,
                 style: TextStyle(
@@ -250,6 +217,24 @@ class _SettingsPageState extends State<SettingsPage> {
             trailing: Text(
               GlobalVariables.settingsVersionNumber,
               style: TextStyle(color: Colors.white),
+            ),
+            enabled: true,
+            tileColor: Theme.of(context).buttonColor));
+  }
+
+  Widget _buildLibrariesTile() {
+    return Padding(
+        padding: EdgeInsets.only(left: 15, right: 15),
+        child: ListTile(
+            title: Text(GlobalVariables.settingsOpenSourceTitle,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontFamily: "TitilliumWeb",
+                  fontWeight: FontWeight.w500,
+                )),
+            trailing: Icon(
+              Icons.arrow_forward_ios,
+              color: Colors.white,
             ),
             enabled: true,
             tileColor: Theme.of(context).buttonColor));
