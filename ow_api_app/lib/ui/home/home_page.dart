@@ -95,35 +95,32 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
-      body: Container(
-        child: BlocListener<HomeBloc, HomeState>(
-          listener: (context, state) {
-            if (state is OnlineConnectionState) {
-              _init();
-            }
+    return Container(
+      child: BlocListener<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state is OnlineConnectionState) {
+            _init();
+          }
+        },
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is OfflineConnectionState) {
+              return buildOfflineWidget();
+            } else if (state is ProfileLoadingState) {
+              return buildLoadingWidget();
+            } else if (state is ProfileLoadedState) {
+              return RecolorProfileDisplayWidget(
+                profileDbIndex: profileIndex,
+                profileStats: state.profileStats,
+                profileBloc: widget.homeBloc,
+                accountInfoDb: _accountInfoBox,
+                navBarController: widget.navBarController,
+              );
+            } else if (state is HomeErrorState) {
+              return ErrorUiWidget(state.exception);
+            } else
+              return buildOfflineWidget();
           },
-          child: BlocBuilder<HomeBloc, HomeState>(
-            builder: (context, state) {
-              if (state is OfflineConnectionState) {
-                return buildOfflineWidget();
-              } else if (state is ProfileLoadingState) {
-                return buildLoadingWidget();
-              } else if (state is ProfileLoadedState) {
-                return RecolorProfileDisplayWidget(
-                  profileDbIndex: profileIndex,
-                  profileStats: state.profileStats,
-                  profileBloc: widget.homeBloc,
-                  accountInfoDb: _accountInfoBox,
-                  navBarController: widget.navBarController,
-                );
-              } else if (state is HomeErrorState) {
-                return ErrorUiWidget(state.exception);
-              } else
-                return buildOfflineWidget();
-            },
-          ),
         ),
       ),
     );
@@ -131,7 +128,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildLoadingWidget() {
     return Container(
-      color: Color.fromRGBO(28, 42, 53, 1.0),
+      color: Theme.of(context).backgroundColor,
       child: Center(
         child: CircularProgressIndicator(
           backgroundColor: Colors.white,
@@ -142,7 +139,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildOfflineWidget() {
     return Container(
-      color: Color.fromRGBO(28, 42, 53, 1.0),
+      color: Theme.of(context).backgroundColor,
       child: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,

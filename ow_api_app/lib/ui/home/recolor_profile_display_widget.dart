@@ -55,9 +55,9 @@ class _ProfileDisplayWidgetState extends State<RecolorProfileDisplayWidget> {
                 profileId: state.profileId, platformId: state.platformId));
           }
         },
-        child: Container(
-            color: Color.fromRGBO(28, 42, 53, 1.0),
-            child: Column(
+        child: Scaffold(
+            backgroundColor: Theme.of(context).canvasColor,
+            body: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[

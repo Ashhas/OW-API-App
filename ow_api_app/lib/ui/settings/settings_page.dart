@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:page_transition/page_transition.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -49,7 +48,7 @@ class _SettingsPageState extends State<SettingsPage> {
     screenBloc = widget.settingsBloc;
 
     return Container(
-        color: Color.fromRGBO(24, 30, 36, 1.0),
+        color: Theme.of(context).backgroundColor,
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -115,7 +114,7 @@ class _SettingsPageState extends State<SettingsPage> {
                             fontWeight: FontWeight.w500,
                           )),
                       enabled: true,
-                      tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+                      tileColor: Theme.of(context).buttonColor));
 
             return ListView.builder(
               physics: NeverScrollableScrollPhysics(),
@@ -133,7 +132,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           fontWeight: FontWeight.w500,
                         )),
                     dense: true,
-                    tileColor: Color.fromRGBO(28, 42, 53, 1.0),
+                    tileColor: Theme.of(context).buttonColor,
                     trailing: IconButton(
                       icon: Icon(Icons.close),
                       iconSize: 25,
@@ -199,7 +198,7 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.white,
             ),
             enabled: true,
-            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+            tileColor: Theme.of(context).buttonColor));
   }
 
   Widget _buildReviewTile() {
@@ -217,7 +216,7 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.white,
             ),
             enabled: true,
-            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+            tileColor: Theme.of(context).buttonColor));
   }
 
   Widget _buildLibrariesTile() {
@@ -235,7 +234,7 @@ class _SettingsPageState extends State<SettingsPage> {
               color: Colors.white,
             ),
             enabled: true,
-            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+            tileColor: Theme.of(context).buttonColor));
   }
 
   Widget _buildVersionTile() {
@@ -253,6 +252,6 @@ class _SettingsPageState extends State<SettingsPage> {
               style: TextStyle(color: Colors.white),
             ),
             enabled: true,
-            tileColor: Color.fromRGBO(28, 42, 53, 1.0)));
+            tileColor: Theme.of(context).buttonColor));
   }
 }
