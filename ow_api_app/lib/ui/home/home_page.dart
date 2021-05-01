@@ -1,37 +1,61 @@
+import 'dart:async';
+
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'widget/profile_display_widget.dart';
-import 'package:ow_api_app/bloc/profile/profile_bloc.dart';
-import 'package:ow_api_app/bloc/profile/profile_event.dart';
-import 'package:ow_api_app/bloc/profile/profile_state.dart';
+import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/data/util/api_exception_mapper.dart';
+import 'package:ow_api_app/ui/home/recolor_profile_display_widget.dart';
 import 'package:ow_api_app/ui/home/widget/error_ui_widget.dart';
 
 class HomePage extends StatefulWidget {
+  final PersistentTabController navBarController;
+  final HomeBloc homeBloc;
+
+  const HomePage({this.navBarController, this.homeBloc}) : super();
+
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  Box _accountInfoBox;
-  ProfileBloc profileBloc;
-  AccountModel fetchedAccount;
+  final Connectivity _connectivity = Connectivity();
+  StreamSubscription<ConnectivityResult> _connectivitySubscription;
   int profileIndex;
-  bool initialized = false;
+  Box _accountInfoBox;
+  AccountModel fetchedAccount;
 
   @override
   void initState() {
     super.initState();
-    profileBloc = BlocProvider.of<ProfileBloc>(context);
 
-    if (!initialized) {
+    _checkInternetConnection();
+  }
+
+  Future _checkInternetConnection() async {
+    //Internet Connection Stream
+    _connectivitySubscription =
+        _connectivity.onConnectivityChanged.listen(_updateConnectionStatus);
+  }
+
+  Future<void> _updateConnectionStatus(ConnectivityResult result) async {
+    if (result == ConnectivityResult.none) {
+      widget.homeBloc.add(OfflineConnectionEvent());
+    } else {
       _init();
-      initialized = true;
+      widget.homeBloc.add(OnlineConnectionEvent());
     }
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    Hive.close();
   }
 
   Future _init() async {
@@ -41,7 +65,6 @@ class _HomePageState extends State<HomePage> {
     // Create DB
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-    Hive.registerAdapter(AccountModelAdapter());
 
     // Open DB
     _accountInfoBox = await Hive.openBox('accountBox');
@@ -51,62 +74,85 @@ class _HomePageState extends State<HomePage> {
         AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
     _accountInfoBox.add(account1);
     var account2 =
-        AccountModel(2, "Axyos#21653", "Axyos", "pc", DateTime.now());
+        AccountModel(6, "JetLiTe#2341", "JetLiTe", "pc", DateTime.now());
     _accountInfoBox.add(account2);
     var account3 =
-    AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+        AccountModel(3, "Mjolnir#21534", "Mjolnir", "pc", DateTime.now());
     _accountInfoBox.add(account3);
+    var account4 =
+        AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+    _accountInfoBox.add(account4);
+    var account5 =
+        AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
+    _accountInfoBox.add(account5);
 
     // Start FetchDataEvent with mainAccountId
     fetchedAccount = _accountInfoBox.getAt(0);
-    profileBloc.add(FetchProfileEvent(
+    widget.homeBloc.add(FetchProfileEvent(
         profileId: fetchedAccount.battleNetId,
         platformId: fetchedAccount.platformId));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Color.fromRGBO(250, 250, 250, 1.0),
-      body: Container(
-        child: BlocListener<ProfileBloc, ProfileState>(
-          listener: (context, state) {
-            if (state is ProfileErrorState) {
-              Scaffold.of(context).showSnackBar(
-                SnackBar(
-                  content:
-                      Text(ApiExceptionMapper.toErrorMessage(state.exception)),
-                ),
+    return Container(
+      child: BlocListener<HomeBloc, HomeState>(
+        listener: (context, state) {
+          if (state is OnlineConnectionState) {
+            _init();
+          }
+        },
+        child: BlocBuilder<HomeBloc, HomeState>(
+          builder: (context, state) {
+            if (state is OfflineConnectionState) {
+              return buildOfflineWidget();
+            } else if (state is ProfileLoadingState) {
+              return buildLoadingWidget();
+            } else if (state is ProfileLoadedState) {
+              return RecolorProfileDisplayWidget(
+                profileDbIndex: profileIndex,
+                profileStats: state.profileStats,
+                profileBloc: widget.homeBloc,
+                accountInfoDb: _accountInfoBox,
+                navBarController: widget.navBarController,
               );
-            }
+            } else if (state is HomeErrorState) {
+              return ErrorUiWidget(state.exception);
+            } else
+              return buildOfflineWidget();
           },
-          child: BlocBuilder<ProfileBloc, ProfileState>(
-            builder: (context, state) {
-              if (state is ProfileInitialState) {
-                return buildLoading();
-              } else if (state is ProfileLoadingState) {
-                return buildLoading();
-              } else if (state is ProfileLoadedState) {
-                return ProfileDisplayWidget(
-                  profileDbIndex: profileIndex,
-                  profileStats: state.profileStats,
-                  profileBloc: profileBloc,
-                  accountInfoDb: _accountInfoBox,
-                );
-              } else if (state is ProfileErrorState) {
-                return ErrorUiWidget(state.exception);
-              } else
-                return Container();
-            },
-          ),
         ),
       ),
     );
   }
 
-  Widget buildLoading() {
-    return Center(
-      child: CircularProgressIndicator(),
+  Widget buildLoadingWidget() {
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Center(
+        child: CircularProgressIndicator(
+          valueColor:
+              new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+          backgroundColor: Colors.white,
+        ),
+      ),
+    );
+  }
+
+  Widget buildOfflineWidget() {
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.signal_wifi_off, color: Colors.white),
+          Text(
+            "No Internet Connection",
+            style: TextStyle(color: Colors.white),
+          )
+        ],
+      )),
     );
   }
 }

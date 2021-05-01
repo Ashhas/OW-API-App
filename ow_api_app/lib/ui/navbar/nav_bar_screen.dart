@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/ui/home/home_page.dart';
+
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
+import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
+import 'package:ow_api_app/ui/home/home_page.dart';
+import 'package:ow_api_app/ui/settings/settings_page.dart';
 
 class NavBarScreen extends StatefulWidget {
   @override
@@ -8,52 +14,42 @@ class NavBarScreen extends StatefulWidget {
 }
 
 class NavBarScreenState extends State<NavBarScreen> {
+  HomeBloc _homeBloc;
+  SettingsBloc _settingsBloc;
   PersistentTabController _controller;
   bool _hideNavBar;
 
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 1);
+    _homeBloc = BlocProvider.of<HomeBloc>(context);
+    _settingsBloc = BlocProvider.of<SettingsBloc>(context);
+
+    _controller = PersistentTabController(initialIndex: 0);
     _hideNavBar = false;
   }
 
   List<Widget> _buildScreens() {
     return [
-      Container(
-        color: Color.fromRGBO(241, 241, 241, 1.0),
-        child: Center(
-          child: Text("Updates"),
-        ),
-      ),
-      HomePage(),
-      Container(
-        color: Color.fromRGBO(241, 241, 241, 1.0),
-        child: Center(
-          child: Text("Settings"),
-        ),
-      ),
+      HomePage(navBarController: _controller, homeBloc: _homeBloc),
+      SettingsPage(navBarController: _controller, settingsBloc: _settingsBloc)
     ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
     return [
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.rss_feed),
-        title: ("Search"),
-        activeColor: Colors.teal,
-        inactiveColor: Colors.grey,
-      ),
-      PersistentBottomNavBarItem(
-        icon: Icon(Icons.person),
+        icon: Icon(Icons.home),
         title: "Home",
-        activeColor: Colors.blue,
+        activeColor: Theme.of(context).primaryColor,
+        activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
-        icon: Icon(Icons.settings),
-        title: ("Add"),
-        activeColor: Colors.orange,
+        icon: Icon(Icons.menu),
+        title: ("Settings"),
+        activeColor: Theme.of(context).primaryColor,
+        activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
     ];
@@ -68,15 +64,14 @@ class NavBarScreenState extends State<NavBarScreen> {
         screens: _buildScreens(),
         items: _navBarsItems(),
         confineInSafeArea: true,
-        backgroundColor: Colors.white,
+        backgroundColor: Theme.of(context).backgroundColor,
         handleAndroidBackButtonPress: true,
         resizeToAvoidBottomInset: true,
         stateManagement: true,
         hideNavigationBarWhenKeyboardShows: true,
         hideNavigationBar: _hideNavBar,
-        margin: EdgeInsets.all(10.0),
         popActionScreens: PopActionScreensType.once,
-        bottomScreenMargin: 0.0,
+        navBarHeight: 55,
         onWillPop: () async {
           await showDialog(
             context: context,
@@ -95,9 +90,6 @@ class NavBarScreenState extends State<NavBarScreen> {
           );
           return false;
         },
-        decoration: NavBarDecoration(
-            colorBehindNavBar: Colors.indigo,
-            borderRadius: BorderRadius.circular(20.0)),
         popAllScreensOnTapOfSelectedTab: true,
         itemAnimationProperties: ItemAnimationProperties(
           duration: Duration(milliseconds: 400),
@@ -109,7 +101,7 @@ class NavBarScreenState extends State<NavBarScreen> {
           duration: Duration(milliseconds: 200),
         ),
         navBarStyle:
-            NavBarStyle.style13, // Choose the nav bar style with this property
+            NavBarStyle.style10, // Choose the nav bar style with this property
       ),
     );
   }
