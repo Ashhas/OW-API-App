@@ -4,14 +4,9 @@ import 'package:http/http.dart' as http;
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/util/api_exception.dart';
 
-abstract class ProfileRepository {
-  Future<Profile> getProfileStats(String profileId, String platformId);
+class ProfileRepository {
+  ProfileRepository();
 
-  Future<bool> validateProfileId(String profileId, String platformId);
-}
-
-class ProfileRepositoryImpl implements ProfileRepository {
-  @override
   Future<Profile> getProfileStats(String profileId, String platformId) async {
     var response = await http.get("https://ow-api.com/v3/stats/" +
         platformId +
@@ -31,7 +26,6 @@ class ProfileRepositoryImpl implements ProfileRepository {
       throw UnknownException();
   }
 
-  @override
   Future<bool> validateProfileId(String profileId, String platformId) async {
     var response = await http.get("https://ow-api.com/v3/stats/" +
         platformId +
