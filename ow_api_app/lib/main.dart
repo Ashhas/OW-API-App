@@ -23,8 +23,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileRepository profileRepository = ProfileRepository();
-    PersistentTabController navBarController =
-        PersistentTabController(initialIndex: 0);
 
     return MultiRepositoryProvider(
         providers: [
@@ -35,9 +33,7 @@ class MyApp extends StatelessWidget {
         child: MultiBlocProvider(
             providers: [
               BlocProvider<InitializationBloc>(
-                create: (_) =>
-                    InitializationBloc(navBarController: navBarController)
-                      ..add(AppStarted()),
+                create: (_) => InitializationBloc()..add(AppStarted()),
               ),
               BlocProvider<SettingsBloc>(
                 create: (_) => SettingsBloc(repository: profileRepository),

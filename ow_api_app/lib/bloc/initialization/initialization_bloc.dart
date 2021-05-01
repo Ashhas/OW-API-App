@@ -14,10 +14,7 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  PersistentTabController navBarController;
-
-  InitializationBloc({@required this.navBarController})
-      : super(Uninitialized());
+  InitializationBloc() : super(Uninitialized());
 
   @override
   Stream<InitializationState> mapEventToState(
@@ -28,6 +25,8 @@ class InitializationBloc
   }
 
   Stream<InitializationState> _mapAppStartedEventToState() async* {
+    PersistentTabController navBarController =
+        PersistentTabController(initialIndex: 0);
     //Initializing Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
