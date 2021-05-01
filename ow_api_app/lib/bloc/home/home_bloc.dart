@@ -10,6 +10,7 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/data/util/api_exception.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'package:ow_api_app/bloc/home/home_event.dart';
 

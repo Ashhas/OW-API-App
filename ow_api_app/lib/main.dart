@@ -8,6 +8,7 @@ import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,6 +23,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final ProfileRepository profileRepository = ProfileRepository();
+    PersistentTabController navBarController =
+        PersistentTabController(initialIndex: 0);
 
     return MultiRepositoryProvider(
         providers: [
@@ -32,13 +35,17 @@ class MyApp extends StatelessWidget {
         child: MultiBlocProvider(
             providers: [
               BlocProvider<InitializationBloc>(
-                create: (_) => InitializationBloc()..add(AppStarted()),
+                create: (_) =>
+                    InitializationBloc(navBarController: navBarController)
+                      ..add(AppStarted()),
               ),
               BlocProvider<SettingsBloc>(
                 create: (_) => SettingsBloc(repository: profileRepository),
               ),
               BlocProvider<HomeBloc>(
-                create: (_) => HomeBloc(repository: profileRepository),
+                create: (_) => HomeBloc(
+                  repository: profileRepository,
+                ),
               ),
             ],
             child: MaterialApp(

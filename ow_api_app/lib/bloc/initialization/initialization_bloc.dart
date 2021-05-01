@@ -6,6 +6,7 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'initialization_event.dart';
 
@@ -13,7 +14,10 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  InitializationBloc() : super(Uninitialized());
+  PersistentTabController navBarController;
+
+  InitializationBloc({@required this.navBarController})
+      : super(Uninitialized());
 
   @override
   Stream<InitializationState> mapEventToState(
@@ -54,6 +58,6 @@ class InitializationBloc
         AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
     _profileBox.add(account5);
 
-    yield Initialized();
+    yield Initialized(navBarController: navBarController);
   }
 }

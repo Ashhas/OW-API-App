@@ -12,21 +12,12 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class BottomNavBarState extends State<BottomNavBar> {
-  PersistentTabController _controller;
   bool _hideNavBar;
 
   @override
   void initState() {
     super.initState();
-    _controller = PersistentTabController(initialIndex: 0);
     _hideNavBar = false;
-  }
-
-  List<Widget> _buildScreens() {
-    return [
-      HomePage(navBarController: _controller),
-      SettingsPage(navBarController: _controller)
-    ];
   }
 
   List<PersistentBottomNavBarItem> _navBarsItems() {
@@ -57,8 +48,11 @@ class BottomNavBarState extends State<BottomNavBar> {
           if (state is Initialized) {
             return Center(
               child: PersistentTabView(
-                controller: _controller,
-                screens: _buildScreens(),
+                controller: state.navBarController,
+                screens: [
+                  HomePage(state.navBarController),
+                  SettingsPage(navBarController: state.navBarController)
+                ],
                 items: _navBarsItems(),
                 confineInSafeArea: true,
                 backgroundColor: Theme.of(context).backgroundColor,

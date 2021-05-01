@@ -7,6 +7,15 @@ class SettingsInitialState extends SettingsState {
   List<Object> get props => [];
 }
 
+class SettingsLoadedState extends SettingsState {
+  final Box allAccounts;
+
+  SettingsLoadedState({@required this.allAccounts});
+
+  @override
+  List<Object> get props => [];
+}
+
 class ProfileSwitchedState extends SettingsState {
   final String profileId;
   final String platformId;

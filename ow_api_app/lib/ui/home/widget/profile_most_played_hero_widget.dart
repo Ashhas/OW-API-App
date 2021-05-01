@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class MostPlayedHeroesCard extends StatefulWidget {
-  final PersistentTabController navBarController;
-
-  const MostPlayedHeroesCard({@required @required this.navBarController})
-      : super();
+  const MostPlayedHeroesCard() : super();
 
   @override
   _MostPlayedHeroesCardState createState() => _MostPlayedHeroesCardState();
