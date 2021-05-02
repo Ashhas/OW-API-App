@@ -5,10 +5,6 @@ abstract class HomeEvent extends Equatable {
 }
 
 class HomeStarted extends HomeEvent {
-  final PersistentTabController navBarController;
-
-  HomeStarted({this.navBarController});
-
   @override
   List<Object> get props => [];
 }

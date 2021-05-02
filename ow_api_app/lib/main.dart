@@ -8,7 +8,6 @@ import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

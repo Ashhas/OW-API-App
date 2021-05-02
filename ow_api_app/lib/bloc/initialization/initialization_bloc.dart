@@ -25,36 +25,37 @@ class InitializationBloc
   }
 
   Stream<InitializationState> _mapAppStartedEventToState() async* {
+    //Creating NavBar Controller
     PersistentTabController navBarController =
-        PersistentTabController(initialIndex: 0);
-    //Initializing Hive DB
+    PersistentTabController(initialIndex: 0);
+
+    //Delay for Splash Screen
+    await Future.delayed(Duration(seconds: 1));
+
+    //Initializing and open Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
 
-    //for display splash screen
-    await Future.delayed(Duration(seconds: 1));
-
+    //Create Fake Data
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
 
-    // Open DB
     Box _profileBox = await Hive.openBox('accountBox');
 
-    //Create Fake Data
     var account1 =
-        AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
+    AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
     _profileBox.add(account1);
     var account2 =
-        AccountModel(6, "JetLiTe#2341", "JetLiTe", "pc", DateTime.now());
+    AccountModel(6, "JetLiTe#2341", "JetLiTe", "pc", DateTime.now());
     _profileBox.add(account2);
     var account3 =
-        AccountModel(3, "Mjolnir#21534", "Mjolnir", "pc", DateTime.now());
+    AccountModel(3, "Mjolnir#21534", "Mjolnir", "pc", DateTime.now());
     _profileBox.add(account3);
     var account4 =
-        AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
+    AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
     _profileBox.add(account4);
     var account5 =
-        AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
+    AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
     _profileBox.add(account5);
 
     yield Initialized(navBarController: navBarController);

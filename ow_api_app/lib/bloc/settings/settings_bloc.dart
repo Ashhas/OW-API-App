@@ -1,14 +1,13 @@
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
-
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/data/util/api_exception.dart';
-import 'package:path_provider/path_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'settings_event.dart';
 
@@ -16,7 +15,6 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final ProfileRepository repository;
-  HomeBloc homeBloc;
   PersistentTabController _navBarController;
 
   SettingsBloc({@required this.repository}) : super(SettingsInitialState());
@@ -34,13 +32,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapSettingsStartedToState(
       SettingsStarted event, SettingsState state) async* {
-    // NavBar
+    //Set NavBar Controller
     _navBarController = event.navBarController;
 
+    //Open DB
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-
-    // Open DB
     Box _profileBox = await Hive.openBox('accountBox');
 
     yield SettingsLoadedState(allAccounts: _profileBox);
@@ -48,11 +45,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapChangeProfileEventToState(
       ChangeProfileEvent event, SettingsState state) async* {
-    // Open DB
+    //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
 
+    //Navigate back to Home w/ Data
     _navBarController.jumpToTab(0);
     yield ProfileSwitchedState(
         profileId: event.profileId, platformId: event.platformId);
@@ -63,12 +61,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       AddProfileEvent event, SettingsState state) async* {
     yield ProfileValidatingState();
 
+    //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-
-    // Open DB
     Box _profileBox = await Hive.openBox('accountBox');
 
+    //Verify Account
     try {
       // Add profile ID and Platform ID to the request
       bool profileValidated = await repository.validateProfileId(

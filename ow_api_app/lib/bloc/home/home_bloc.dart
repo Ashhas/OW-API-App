@@ -10,7 +10,6 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/data/util/api_exception.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'package:ow_api_app/bloc/home/home_event.dart';
 
@@ -35,15 +34,13 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       HomeStarted event, HomeState state) async* {
     yield ProfileLoadingState();
 
+    //Get first account to Fetch
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
-
-    // Open DB
     Box _profileBox = await Hive.openBox('accountBox');
-
-    // Start FetchDataEvent with mainAccountId
     AccountModel fetchedAccount = _profileBox.getAt(0);
 
+    //Fetch Data from repo
     try {
       // Add profile ID and Platform ID to the request
       Profile profile = await repository.getProfileStats(
