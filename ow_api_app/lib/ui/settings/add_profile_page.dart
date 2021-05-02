@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
-import 'package:hive/hive.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/util/api_exception_mapper.dart';
-import 'package:ow_api_app/data/util/global_variables.dart';
+import 'package:ow_api_app/data/util/strings.dart';
 
 class AddProfilePage extends StatefulWidget {
-  final SettingsBloc screenBloc;
-  final Box accountDb;
-
-  AddProfilePage(this.accountDb, this.screenBloc) : super();
+  AddProfilePage() : super();
 
   @override
   _AddProfilePageState createState() => _AddProfilePageState();
@@ -134,11 +130,11 @@ class _AddProfilePageState extends State<AddProfilePage> {
                                           isLoading = true;
 
                                           //Add New Event
-                                          widget.screenBloc.add(
+                                          BlocProvider.of<SettingsBloc>(context)
+                                              .add(
                                             AddProfileEvent(
                                                 profileId: textController.text,
-                                                platformId: selectedPlatform,
-                                                accountBox: widget.accountDb),
+                                                platformId: selectedPlatform),
                                           );
                                         }
                                       });

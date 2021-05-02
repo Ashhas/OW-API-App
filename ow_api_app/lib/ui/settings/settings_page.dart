@@ -1,13 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'package:ow_api_app/data/util/global_variables.dart';
+import 'package:ow_api_app/data/util/strings.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
@@ -15,38 +13,23 @@ import 'add_profile_page.dart';
 
 class SettingsPage extends StatefulWidget {
   final PersistentTabController navBarController;
-  final SettingsBloc settingsBloc;
 
-  const SettingsPage({this.navBarController, this.settingsBloc}) : super();
+  const SettingsPage({this.navBarController}) : super();
 
   @override
   _SettingsPageState createState() => _SettingsPageState();
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  Box _accountInfoBox;
-  SettingsBloc screenBloc;
-
   @override
   void initState() {
     super.initState();
-    _init();
-  }
-
-  Future<void> _init() async {
-    // Create DB
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-
-    // Open DB
-    _accountInfoBox = await Hive.openBox('accountBox');
+    BlocProvider.of<SettingsBloc>(context)
+        .add(SettingsStarted(navBarController: widget.navBarController));
   }
 
   @override
   Widget build(BuildContext context) {
-    //Creating the BloC for this screen
-    screenBloc = widget.settingsBloc;
-
     return Scaffold(
         appBar: _buildAppBar(),
         backgroundColor: Theme.of(context).backgroundColor,
@@ -54,8 +37,7 @@ class _SettingsPageState extends State<SettingsPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              _buildAvailableAccountsWidget(
-                  screenBloc, _accountInfoBox, widget.navBarController),
+              _buildAvailableAccountsWidget(),
               SizedBox(
                 height: 20,
               ),
@@ -88,23 +70,17 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildAvailableAccountsWidget(SettingsBloc screenBloc,
-      Box accountInfoBox, PersistentTabController navBarController) {
-    return BlocListener<SettingsBloc, SettingsState>(
-        listener: (BuildContext context, SettingsState state) {
-          if (state is ProfileSwitchedState) {
-            print(state.props);
-            widget.navBarController.jumpToTab(0);
-          }
-        },
-        child: Padding(
-            padding: EdgeInsets.only(left: 10, right: 10),
+  Widget _buildAvailableAccountsWidget() {
+    return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
+      if (state is SettingsLoadedState) {
+        return Padding(
+            padding: EdgeInsets.only(left: 10, right: 15),
             child: Card(
               color: Theme.of(context).buttonColor,
               child: Column(
                 children: [
                   ValueListenableBuilder(
-                    valueListenable: Hive.box('accountBox').listenable(),
+                    valueListenable: state.allAccounts.listenable(),
                     builder: (context, box, widget) {
                       if (box.values.isEmpty)
                         return ListTile(
@@ -124,28 +100,30 @@ class _SettingsPageState extends State<SettingsPage> {
                         itemBuilder: (context, index) {
                           AccountModel account = box.getAt(index);
                           return ListTile(
-                            title: Text(account.battleNetId,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "TitilliumWeb",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                            dense: true,
-                            tileColor: Theme.of(context).buttonColor,
-                            trailing: IconButton(
-                              icon: Icon(Icons.close),
-                              iconSize: 25,
-                              color: Colors.white,
-                              onPressed: () {
-                                setState(() {
-                                  _accountInfoBox.deleteAt(index);
-                                });
-                              },
-                            ),
-                            onTap: () => screenBloc.add(ChangeProfileEvent(
-                                profileId: account.battleNetId,
-                                platformId: account.platformId)),
-                          );
+                              title: Text(account.battleNetId,
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontFamily: "TitilliumWeb",
+                                    fontWeight: FontWeight.w500,
+                                  )),
+                              dense: true,
+                              tileColor: Theme.of(context).buttonColor,
+                              trailing: IconButton(
+                                icon: Icon(Icons.close),
+                                iconSize: 25,
+                                color: Colors.white,
+                                onPressed: () {
+                                  setState(() {
+                                    state.allAccounts.deleteAt(index);
+                                  });
+                                },
+                              ),
+                              onTap: () {
+                                BlocProvider.of<SettingsBloc>(context).add(
+                                    ChangeProfileEvent(
+                                        profileId: account.battleNetId,
+                                        platformId: account.platformId));
+                              });
                         },
                       );
                     },
@@ -156,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       onPressed: () {
                         pushNewScreen(
                           context,
-                          screen: AddProfilePage(_accountInfoBox, screenBloc),
+                          screen: AddProfilePage(),
                           withNavBar: false, // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
@@ -183,14 +161,18 @@ class _SettingsPageState extends State<SettingsPage> {
                   )
                 ],
               ),
-            )));
+            ));
+      } else {
+        return Container();
+      }
+    });
   }
 
   Widget _buildMainAccountTile() {
     return Padding(
         padding: EdgeInsets.only(left: 15, right: 15),
         child: ListTile(
-            title: Text(GlobalVariables.settingsFeedbackTitle,
+            title: Text(GlobalVariables.settingsMainAccountTitle,
                 style: TextStyle(
                   color: Colors.white,
                   fontFamily: "TitilliumWeb",

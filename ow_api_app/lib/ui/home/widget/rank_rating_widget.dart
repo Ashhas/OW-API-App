@@ -1,90 +1,96 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/bloc/home/home_bloc.dart';
 
-import 'package:ow_api_app/data/model/profile_model.dart';
-import 'package:ow_api_app/data/util/global_variables.dart';
+import 'package:ow_api_app/data/util/strings.dart';
 
 class RankRatingWidget extends StatelessWidget {
-  final Profile profileStats;
-
-  const RankRatingWidget({
-    Key key,
-    this.profileStats,
-  }) : super(key: key);
+  const RankRatingWidget() : super();
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-        child: Column(
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: 10),
-              child: Text(
-                GlobalVariables.currentRankSeason,
-                style: TextStyle(fontSize: 13, color: Colors.white),
-              ),
-            ),
-            Row(
-              children: <Widget>[
-                Expanded(
-                    child: profileStats.ratings != null
-                        ? profileStats.ratings.tank != null
-                            ? _StatTile(
-                                ratingImageUrl:
-                                    profileStats.ratings.tank.rankIcon,
-                                title: GlobalVariables.tankRoleTitle,
-                                rating:
-                                    profileStats.ratings.tank.level.toString())
+    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      if (state is ProfileLoadedState) {
+        return Container(
+            padding:
+                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(bottom: 10),
+                  child: Text(
+                    GlobalVariables.currentRankSeason,
+                    style: TextStyle(fontSize: 13, color: Colors.white),
+                  ),
+                ),
+                Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: state.profileStats.ratings != null
+                            ? state.profileStats.ratings.tank != null
+                                ? _StatTile(
+                                    ratingImageUrl: state
+                                        .profileStats.ratings.tank.rankIcon,
+                                    title: GlobalVariables.tankRoleTitle,
+                                    rating: state
+                                        .profileStats.ratings.tank.level
+                                        .toString())
+                                : _StatTile(
+                                    ratingImageUrl: "--",
+                                    title: GlobalVariables.tankRoleTitle,
+                                    rating: GlobalVariables.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
                                 title: GlobalVariables.tankRoleTitle,
-                                rating: GlobalVariables.noRankText)
-                        : _StatTile(
-                            ratingImageUrl: "--",
-                            title: GlobalVariables.tankRoleTitle,
-                            rating: GlobalVariables.noRankText)),
-                const _Divider(),
-                Expanded(
-                    child: profileStats.ratings != null
-                        ? profileStats.ratings.damage != null
-                            ? _StatTile(
-                                ratingImageUrl:
-                                    profileStats.ratings.damage.rankIcon,
-                                title: GlobalVariables.damageRoleTitle,
-                                rating: profileStats.ratings.damage.level
-                                    .toString())
+                                rating: GlobalVariables.noRankText)),
+                    const _Divider(),
+                    Expanded(
+                        child: state.profileStats.ratings != null
+                            ? state.profileStats.ratings.damage != null
+                                ? _StatTile(
+                                    ratingImageUrl: state
+                                        .profileStats.ratings.damage.rankIcon,
+                                    title: GlobalVariables.damageRoleTitle,
+                                    rating: state
+                                        .profileStats.ratings.damage.level
+                                        .toString())
+                                : _StatTile(
+                                    ratingImageUrl: "--",
+                                    title: GlobalVariables.damageRoleTitle,
+                                    rating: GlobalVariables.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
                                 title: GlobalVariables.damageRoleTitle,
-                                rating: GlobalVariables.noRankText)
-                        : _StatTile(
-                            ratingImageUrl: "--",
-                            title: GlobalVariables.damageRoleTitle,
-                            rating: GlobalVariables.noRankText)),
-                const _Divider(),
-                Expanded(
-                    child: profileStats.ratings != null
-                        ? profileStats.ratings.support != null
-                            ? _StatTile(
-                                ratingImageUrl:
-                                    profileStats.ratings.support.rankIcon,
-                                title: GlobalVariables.supportRoleTitle,
-                                rating: profileStats.ratings.support.level
-                                    .toString())
+                                rating: GlobalVariables.noRankText)),
+                    const _Divider(),
+                    Expanded(
+                        child: state.profileStats.ratings != null
+                            ? state.profileStats.ratings.support != null
+                                ? _StatTile(
+                                    ratingImageUrl: state
+                                        .profileStats.ratings.support.rankIcon,
+                                    title: GlobalVariables.supportRoleTitle,
+                                    rating: state
+                                        .profileStats.ratings.support.level
+                                        .toString())
+                                : _StatTile(
+                                    ratingImageUrl: "--",
+                                    title: GlobalVariables.supportRoleTitle,
+                                    rating: GlobalVariables.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
                                 title: GlobalVariables.supportRoleTitle,
-                                rating: GlobalVariables.noRankText)
-                        : _StatTile(
-                            ratingImageUrl: "--",
-                            title: GlobalVariables.supportRoleTitle,
-                            rating: GlobalVariables.noRankText)),
+                                rating: GlobalVariables.noRankText)),
+                  ],
+                ),
               ],
-            ),
-          ],
-        ));
+            ));
+      } else {
+        return Container();
+      }
+    });
   }
 }
 

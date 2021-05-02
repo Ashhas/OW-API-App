@@ -1,6 +1,5 @@
 import 'dart:async';
 
-import 'package:connectivity/connectivity.dart';
 import 'package:meta/meta.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -10,6 +9,7 @@ import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/data/util/api_exception.dart';
+import 'package:path_provider/path_provider.dart';
 
 part 'package:ow_api_app/bloc/home/home_event.dart';
 
@@ -18,41 +18,50 @@ part 'package:ow_api_app/bloc/home/home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final ProfileRepository repository;
 
-  HomeBloc({@required this.repository}) : super(null) {
-    Hive.registerAdapter(AccountModelAdapter());
-  }
+  HomeBloc({@required this.repository}) : super(HomeInitialState());
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is OnlineConnectionEvent) {
-      yield* _mapOnlineConnectionToState(event, state);
+    if (event is HomeStarted) {
+      yield* _mapHomeStartedToState(event, state);
     }
-    if (event is OfflineConnectionEvent) {
-      yield* _mapOfflineConnectionToState(event, state);
-    }
-    if (event is FetchProfileEvent) {
+    if (event is FetchProfile) {
       yield* _mapFetchProfileEventToState(event, state);
     }
   }
 
-  Stream<HomeState> _mapOnlineConnectionToState(
-    OnlineConnectionEvent event,
-    HomeState state,
-  ) async* {
-    yield OnlineConnectionState();
-  }
+  Stream<HomeState> _mapHomeStartedToState(
+      HomeStarted event, HomeState state) async* {
+    yield ProfileLoadingState();
 
-  Stream<HomeState> _mapOfflineConnectionToState(
-    OfflineConnectionEvent event,
-    HomeState state,
-  ) async* {
-    yield OfflineConnectionState();
+    //Get first account to Fetch
+    var dir = await getApplicationDocumentsDirectory();
+    Hive.init(dir.path);
+    Box _profileBox = await Hive.openBox('accountBox');
+    AccountModel fetchedAccount = _profileBox.getAt(0);
+
+    //Fetch Data from repo
+    try {
+      // Add profile ID and Platform ID to the request
+      Profile profile = await repository.getProfileStats(
+          fetchedAccount.battleNetId.replaceAll("#", "-"),
+          fetchedAccount.platformId);
+      yield ProfileLoadedState(profileStats: profile);
+    } on EmptyResultException catch (e) {
+      yield HomeErrorState(exception: e);
+    } on ClientErrorException catch (e) {
+      yield HomeErrorState(exception: e);
+    } on ServerErrorException catch (e) {
+      yield HomeErrorState(exception: e);
+    } on ConnectionException catch (e) {
+      yield HomeErrorState(exception: e);
+    } on UnknownException catch (e) {
+      yield HomeErrorState(exception: e);
+    }
   }
 
   Stream<HomeState> _mapFetchProfileEventToState(
-    FetchProfileEvent event,
-    HomeState state,
-  ) async* {
+      FetchProfile event, HomeState state) async* {
     yield ProfileLoadingState();
     try {
       // Add profile ID and Platform ID to the request

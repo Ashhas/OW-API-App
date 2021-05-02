@@ -13,6 +13,7 @@ class GlobalVariables {
 
   static const String settingsPageTitle = "Options";
   static const String settingsNoAccountTitle = "No Accounts";
+  static const String settingsMainAccountTitle = "Main Account";
   static const String settingsFeedbackTitle = "Report & Suggest";
   static const String settingsReviewTitle = "Review";
   static const String settingsOpenSourceTitle = "Open Source-Libraries";
