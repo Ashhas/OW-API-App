@@ -83,6 +83,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       }
 
       yield ProfileValidatedState(isValidated: profileValidated);
+      yield SettingsLoadedState(allAccounts: _profileBox);
     } on EmptyResultException catch (e) {
       yield SettingsErrorState(exception: e);
     } on ClientErrorException catch (e) {

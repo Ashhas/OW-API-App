@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
+import 'package:ow_api_app/data/util/shared_pref_service.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -14,20 +15,22 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  InitializationBloc() : super(Uninitialized());
+  InitializationBloc() : super(StartInitialization());
 
   @override
   Stream<InitializationState> mapEventToState(
       InitializationEvent event) async* {
     if (event is AppStarted) {
       yield* _mapAppStartedEventToState();
+    } else if (event is OnBoardingFinished) {
+      yield* _mapOnBoardingFinishedEventToState();
     }
   }
 
   Stream<InitializationState> _mapAppStartedEventToState() async* {
     //Creating NavBar Controller
     PersistentTabController navBarController =
-    PersistentTabController(initialIndex: 0);
+        PersistentTabController(initialIndex: 0);
 
     //Delay for Splash Screen
     await Future.delayed(Duration(seconds: 1));
@@ -36,28 +39,34 @@ class InitializationBloc
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
 
-    //Create Fake Data
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
+    //Check if firstTime
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final isFirstTime = sharedPrefService.getOnBoardingSeenBefore;
 
-    Box _profileBox = await Hive.openBox('accountBox');
+    if (isFirstTime == null) {
+      yield Uninitialized();
+    } else if (isFirstTime == true) {
+      yield Uninitialized();
+    } else if (isFirstTime == false) {
+      yield Initialized(navBarController: navBarController);
+    }
+  }
 
-    var account1 =
-    AccountModel(1, "Ashhas#2396", "Ashhas", "pc", DateTime.now());
-    _profileBox.add(account1);
-    var account2 =
-    AccountModel(6, "JetLiTe#2341", "JetLiTe", "pc", DateTime.now());
-    _profileBox.add(account2);
-    var account3 =
-    AccountModel(3, "Mjolnir#21534", "Mjolnir", "pc", DateTime.now());
-    _profileBox.add(account3);
-    var account4 =
-    AccountModel(2, "Venomflash#2745", "Venomflash", "pc", DateTime.now());
-    _profileBox.add(account4);
-    var account5 =
-    AccountModel(7, "JMPJNS#2306", "JMPJNS", "pc", DateTime.now());
-    _profileBox.add(account5);
+  Stream<InitializationState> _mapOnBoardingFinishedEventToState() async* {
+    //Creating NavBar Controller
+    PersistentTabController navBarController =
+        PersistentTabController(initialIndex: 0);
 
-    yield Initialized(navBarController: navBarController);
+    //Check if OnBoarding has been finished
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
+
+    if (onBoardingSeenBefore == null) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == true) {
+      yield Uninitialized();
+    } else if (onBoardingSeenBefore == false) {
+      yield Initialized(navBarController: navBarController);
+    }
   }
 }
