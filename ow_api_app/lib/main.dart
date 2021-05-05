@@ -25,32 +25,31 @@ class MyApp extends StatelessWidget {
     final ProfileRepository profileRepository = ProfileRepository();
 
     return MultiRepositoryProvider(
+      providers: [
+        RepositoryProvider<ProfileRepository>(
+            create: (context) => profileRepository),
+      ],
+      child: MultiBlocProvider(
         providers: [
-          RepositoryProvider<ProfileRepository>(
-            create: (context) => profileRepository,
+          BlocProvider<InitializationBloc>(
+            create: (_) => InitializationBloc()..add(AppStarted()),
+          ),
+          BlocProvider<OnBoardingBloc>(
+            create: (_) => OnBoardingBloc(repository: profileRepository),
+          ),
+          BlocProvider<HomeBloc>(
+            create: (_) => HomeBloc(repository: profileRepository),
+          ),
+          BlocProvider<SettingsBloc>(
+            create: (_) => SettingsBloc(repository: profileRepository),
           ),
         ],
-        child: MultiBlocProvider(
-            providers: [
-              BlocProvider<InitializationBloc>(
-                create: (_) => InitializationBloc()..add(AppStarted()),
-              ),
-              BlocProvider<OnBoardingBloc>(
-                create: (_) => OnBoardingBloc(repository: profileRepository),
-              ),
-              BlocProvider<SettingsBloc>(
-                create: (_) => SettingsBloc(repository: profileRepository),
-              ),
-              BlocProvider<HomeBloc>(
-                create: (_) => HomeBloc(
-                  repository: profileRepository,
-                ),
-              ),
-            ],
-            child: MaterialApp(
-              title: 'OW-API',
-              theme: AppThemes.getDarkTheme(),
-              home: SplashScreen(),
-            )));
+        child: MaterialApp(
+          title: 'OW-API',
+          theme: AppThemes.getDarkTheme(),
+          home: SplashScreen(),
+        ),
+      ),
+    );
   }
 }

@@ -158,7 +158,10 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                     platformId: selectedPlatform),
                               );
                             },
-                            child: Text("Send"),
+                            child: Text(
+                              "Send",
+                              style: Theme.of(context).primaryTextTheme.button,
+                            ),
                           ),
                         ),
                         SizedBox(height: 30),

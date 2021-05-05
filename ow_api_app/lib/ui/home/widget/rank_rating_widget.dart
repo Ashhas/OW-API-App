@@ -22,7 +22,7 @@ class RankRatingWidget extends StatelessWidget {
                   padding: EdgeInsets.only(bottom: 10),
                   child: Text(
                     GlobalVariables.currentRankSeason,
-                    style: TextStyle(fontSize: 13, color: Colors.white),
+                    style: Theme.of(context).primaryTextTheme.headline5,
                   ),
                 ),
                 Row(
@@ -125,12 +125,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: TextStyle(color: Colors.white),
+                    style: Theme.of(context).primaryTextTheme.headline5,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: TextStyle(color: Colors.white),
+                    style: Theme.of(context).primaryTextTheme.headline5,
                   ),
                 ],
               )
@@ -153,16 +153,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: TextStyle(
-                        fontFamily: "TitilliumWeb",
-                        fontSize: 19,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700),
+                    style: Theme.of(context).primaryTextTheme.headline4,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: TextStyle(color: Colors.white),
+                    style: Theme.of(context).primaryTextTheme.headline5,
                   ),
                 ],
               )

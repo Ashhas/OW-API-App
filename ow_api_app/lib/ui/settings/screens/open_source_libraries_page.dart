@@ -26,11 +26,7 @@ class _OpenSourceLibrariesPageState extends State<OpenSourceLibrariesPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         GlobalVariables.settingsOpenSourceTitle,
-        style: TextStyle(
-            color: Colors.white,
-            fontFamily: "TitilliumWeb",
-            fontWeight: FontWeight.w500,
-            fontSize: 25),
+        style: Theme.of(context).primaryTextTheme.headline2,
       ),
     );
   }

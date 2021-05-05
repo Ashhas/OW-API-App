@@ -46,7 +46,9 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                             return RadioListTile(
                               title: Text(
                                 account.battleNetId,
-                                style: TextStyle(color: Colors.white),
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .headline5,
                               ),
                               value: account.battleNetId,
                               groupValue: selectedMainAccount,
@@ -83,11 +85,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         GlobalVariables.settingsMainAccountTitle,
-        style: TextStyle(
-            color: Colors.white,
-            fontFamily: "TitilliumWeb",
-            fontWeight: FontWeight.w500,
-            fontSize: 25),
+        style: Theme.of(context).primaryTextTheme.headline2,
       ),
     );
   }

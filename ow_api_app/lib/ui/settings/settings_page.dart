@@ -72,11 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         GlobalVariables.settingsPageTitle,
-        style: TextStyle(
-            color: Colors.white,
-            fontFamily: "TitilliumWeb",
-            fontWeight: FontWeight.w500,
-            fontSize: 25),
+        style: Theme.of(context).primaryTextTheme.headline2,
       ),
     );
   }
@@ -95,12 +91,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     builder: (context, box, widget) {
                       if (box.values.isEmpty)
                         return ListTile(
-                          title: Text(GlobalVariables.settingsNoAccountTitle,
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "TitilliumWeb",
-                                fontWeight: FontWeight.w500,
-                              )),
+                          title: Text(
+                            GlobalVariables.settingsNoAccountTitle,
+                            style: Theme.of(context).primaryTextTheme.subtitle2,
+                          ),
                           enabled: true,
                         );
 
@@ -112,11 +106,9 @@ class _SettingsPageState extends State<SettingsPage> {
                           AccountModel account = box.getAt(index);
                           return ListTile(
                               title: Text(account.battleNetId,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "TitilliumWeb",
-                                    fontWeight: FontWeight.w500,
-                                  )),
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle1),
                               dense: true,
                               trailing: IconButton(
                                 icon: Icon(Icons.close),
@@ -146,7 +138,6 @@ class _SettingsPageState extends State<SettingsPage> {
                           context,
                           screen: AddProfilePage(),
                           withNavBar: false,
-                          // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
                         );
@@ -160,7 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           Text(
                             "Add Account",
-                            style: TextStyle(color: Colors.white),
+                            style: Theme.of(context).primaryTextTheme.button,
                           )
                         ],
                       ),
@@ -193,15 +184,13 @@ class _SettingsPageState extends State<SettingsPage> {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             ).then((value) => setState(() {}));
           },
-          title: Text(GlobalVariables.settingsMainAccountTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "TitilliumWeb",
-                fontWeight: FontWeight.w500,
-              )),
+          title: Text(
+            GlobalVariables.settingsMainAccountTitle,
+            style: Theme.of(context).primaryTextTheme.subtitle2,
+          ),
           trailing: Text(
             mainAccount,
-            style: TextStyle(color: Colors.white),
+            style: Theme.of(context).primaryTextTheme.caption,
           ),
           enabled: true,
         ),
@@ -217,15 +206,11 @@ class _SettingsPageState extends State<SettingsPage> {
         child: ListTile(
           title: Text(
             GlobalVariables.settingsVersionTitle,
-            style: TextStyle(
-              color: Colors.white,
-              fontFamily: "TitilliumWeb",
-              fontWeight: FontWeight.w500,
-            ),
+            style: Theme.of(context).primaryTextTheme.subtitle2,
           ),
           trailing: Text(
             appVersion,
-            style: TextStyle(color: Colors.white),
+            style: Theme.of(context).primaryTextTheme.caption,
           ),
           enabled: true,
         ),
@@ -247,12 +232,10 @@ class _SettingsPageState extends State<SettingsPage> {
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
             );
           },
-          title: Text(GlobalVariables.settingsOpenSourceTitle,
-              style: TextStyle(
-                color: Colors.white,
-                fontFamily: "TitilliumWeb",
-                fontWeight: FontWeight.w500,
-              )),
+          title: Text(
+            GlobalVariables.settingsOpenSourceTitle,
+            style: Theme.of(context).primaryTextTheme.subtitle2,
+          ),
           trailing: Icon(
             Icons.arrow_forward_ios,
             color: Colors.white,

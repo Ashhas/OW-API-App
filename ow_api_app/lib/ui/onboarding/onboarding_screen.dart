@@ -62,7 +62,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     },
                     child: Text(
                       "Next",
-                      style: TextStyle(color: Colors.white),
+                      style: Theme.of(context).primaryTextTheme.button,
                     ),
                   ),
                 ),

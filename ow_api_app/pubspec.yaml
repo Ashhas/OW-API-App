@@ -40,17 +40,21 @@ dev_dependencies:
 
 flutter:
   fonts:
-    - family: TitilliumWeb
+    - family: Roboto
       fonts:
-        - asset: fonts/TitilliumWeb-Black.ttf
-        - asset: fonts/TitilliumWeb-Bold.ttf
-        - asset: fonts/TitilliumWeb-BoldItalic.ttf
-        - asset: fonts/TitilliumWeb-ExtraLight.ttf
-        - asset: fonts/TitilliumWeb-ExtraLightItalic.ttf
-        - asset: fonts/TitilliumWeb-Italic.ttf
-        - asset: fonts/TitilliumWeb-Light.ttf
-        - asset: fonts/TitilliumWeb-LightItalic.ttf
-        - asset: fonts/TitilliumWeb-Regular.ttf
+        - asset: fonts/Roboto-Black.ttf
+        - asset: fonts/Roboto-BlackItalic.ttf
+        - asset: fonts/Roboto-Bold.ttf
+        - asset: fonts/Roboto-BoldItalic.ttf
+        - asset: fonts/Roboto-Italic.ttf
+        - asset: fonts/Roboto-Light.ttf
+        - asset: fonts/Roboto-LightItalic.ttf
+        - asset: fonts/Roboto-Medium.ttf
+        - asset: fonts/Roboto-MediumItalic.ttf
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Thin.ttf
+        - asset: fonts/Roboto-ThinItalic.ttf
+
   uses-material-design: true
 
 
