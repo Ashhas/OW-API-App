@@ -33,28 +33,37 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _buildAppBar(),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _buildAvailableAccountsWidget(),
-              SizedBox(
-                height: 20,
+      appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          if (state is SettingsLoadedState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _buildAvailableAccountsWidget(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _buildMainAccountTile(state.mainAccount),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  _buildVersionTile(),
+                  _buildLibrariesTile(),
+                  SizedBox(
+                    height: 100,
+                  ),
+                ],
               ),
-              _buildMainAccountTile(),
-              SizedBox(
-                height: 15,
-              ),
-              _buildVersionTile(),
-              _buildLibrariesTile(),
-              SizedBox(
-                height: 100,
-              ),
-            ],
-          ),
-        ));
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 
   Widget _buildAppBar() {
@@ -136,7 +145,8 @@ class _SettingsPageState extends State<SettingsPage> {
                         pushNewScreen(
                           context,
                           screen: AddProfilePage(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          withNavBar: false,
+                          // OPTIONAL VALUE. True by default.
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
                         );
@@ -169,7 +179,7 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  Widget _buildMainAccountTile() {
+  Widget _buildMainAccountTile(String mainAccount) {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: Card(
@@ -178,10 +188,10 @@ class _SettingsPageState extends State<SettingsPage> {
           onTap: () {
             pushNewScreen(
               context,
-              screen: SelectMainAccountPage(),
+              screen: SelectMainAccountPage(mainAccount: mainAccount),
               withNavBar: false,
               pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
+            ).then((value) => setState(() {}));
           },
           title: Text(GlobalVariables.settingsMainAccountTitle,
               style: TextStyle(
@@ -189,9 +199,9 @@ class _SettingsPageState extends State<SettingsPage> {
                 fontFamily: "TitilliumWeb",
                 fontWeight: FontWeight.w500,
               )),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
+          trailing: Text(
+            mainAccount,
+            style: TextStyle(color: Colors.white),
           ),
           enabled: true,
         ),

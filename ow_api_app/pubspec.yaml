@@ -1,5 +1,6 @@
 name: ow_api_app
 description: A new Flutter project.
+
 version: 1.0.0+1
 
 environment:
@@ -8,16 +9,26 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  http: ^0.12.2
-  equatable: ^1.2.5
-  flutter_bloc: ^6.0.6
+
+  # Data
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
-  path_provider: ^1.6.5
-  flutter_dropdown: ^0.0.8
-  connectivity: ^2.0.2
-  persistent_bottom_nav_bar: ^2.1.0
   shared_preferences: ^0.5.12
+
+  # Utils
+  equatable: ^1.2.5
+  path_provider: ^1.6.5
+  connectivity: ^2.0.2
+
+  # Networking
+  http: ^0.12.2
+
+  #BLoC
+  flutter_bloc: ^6.0.6
+
+  # UI
+  flutter_dropdown: ^0.0.8
+  persistent_bottom_nav_bar: ^2.1.0
 
 dev_dependencies:
   flutter_test:

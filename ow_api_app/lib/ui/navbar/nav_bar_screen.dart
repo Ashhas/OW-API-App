@@ -56,7 +56,7 @@ class BottomNavBarState extends State<BottomNavBar> {
                 items: _navBarsItems(),
                 confineInSafeArea: true,
                 backgroundColor: Theme.of(context).backgroundColor,
-                handleAndroidBackButtonPress: true,
+                handleAndroidBackButtonPress: false,
                 resizeToAvoidBottomInset: true,
                 stateManagement: true,
                 hideNavigationBarWhenKeyboardShows: true,

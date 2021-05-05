@@ -9,8 +9,9 @@ class SettingsInitialState extends SettingsState {
 
 class SettingsLoadedState extends SettingsState {
   final Box allAccounts;
+  final String mainAccount;
 
-  SettingsLoadedState({@required this.allAccounts});
+  SettingsLoadedState({@required this.allAccounts, @required this.mainAccount});
 
   @override
   List<Object> get props => [];

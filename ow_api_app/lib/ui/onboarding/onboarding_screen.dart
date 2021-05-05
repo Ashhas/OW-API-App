@@ -51,7 +51,6 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                         context,
                         screen: AddFirstProfilePage(),
                         withNavBar: false,
-                        // OPTIONAL VALUE. True by default.
                         pageTransitionAnimation:
                             PageTransitionAnimation.cupertino,
                       );
