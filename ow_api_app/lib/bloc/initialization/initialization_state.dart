@@ -3,20 +3,20 @@ part of 'initialization_bloc.dart';
 @immutable
 abstract class InitializationState extends Equatable {}
 
-class StartInitialization extends InitializationState {
+class InitializationStartedState extends InitializationState {
   @override
   List<Object> get props => [];
 }
 
-class Uninitialized extends InitializationState {
+class UninitializedState extends InitializationState {
   @override
   List<Object> get props => [];
 }
 
-class Initialized extends InitializationState {
+class InitializedState extends InitializationState {
   final PersistentTabController navBarController;
 
-  Initialized({@required this.navBarController});
+  InitializedState({@required this.navBarController});
 
   @override
   List<Object> get props => [];

@@ -19,15 +19,15 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final ProfileRepository repository;
   PersistentTabController _navBarController;
 
-  SettingsBloc({@required this.repository}) : super(SettingsInitialState());
+  SettingsBloc({@required this.repository}) : super(SettingsOpenedState());
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
-    if (event is SettingsStarted) {
+    if (event is SettingsOpened) {
       yield* _mapSettingsStartedToState(event, state);
-    } else if (event is ChangeProfileEvent) {
+    } else if (event is ChangeLoadedProfile) {
       yield* _mapChangeProfileEventToState(event, state);
-    } else if (event is AddProfileEvent) {
+    } else if (event is AddProfile) {
       yield* _mapAddProfileEventToState(event, state);
     } else if (event is SaveMainAccount) {
       yield* _mapSaveMainAccountToState(event, state);
@@ -35,7 +35,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   Stream<SettingsState> _mapSettingsStartedToState(
-      SettingsStarted event, SettingsState state) async* {
+      SettingsOpened event, SettingsState state) async* {
     //Set NavBar Controller
     _navBarController = event.navBarController;
 
@@ -60,7 +60,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   Stream<SettingsState> _mapChangeProfileEventToState(
-      ChangeProfileEvent event, SettingsState state) async* {
+      ChangeLoadedProfile event, SettingsState state) async* {
     //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
@@ -70,14 +70,14 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final sharedPrefService = await SharedPreferencesService.instance;
     final mainAccount = sharedPrefService.getMainAccount;
 
-    //Navigate back to Home w/ Data
-    _navBarController.jumpToTab(0);
-    yield ProfileSwitchedState(
-        profileId: event.profileId, platformId: event.platformId);
-
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
     String version = packageInfo.version;
+
+    //Navigate back to Home w/ Data
+    _navBarController.jumpToTab(0);
+    yield ProfileChangedState(
+        profileId: event.profileId, platformId: event.platformId);
 
     yield SettingsLoadedState(
       allAccounts: _profileBox,
@@ -87,8 +87,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   }
 
   Stream<SettingsState> _mapAddProfileEventToState(
-      AddProfileEvent event, SettingsState state) async* {
-    yield ProfileValidatingState();
+      AddProfile event, SettingsState state) async* {
+    yield ValidatingProfileState();
 
     //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
@@ -98,6 +98,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
     final mainAccount = sharedPrefService.getMainAccount;
+
+    //Fetch App Version
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
 
     //Verify Account
     try {
@@ -115,11 +119,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _profileBox.add(newAccount);
       }
 
-      //Fetch App Version
-      PackageInfo packageInfo = await PackageInfo.fromPlatform();
-      String version = packageInfo.version;
-
-      yield ProfileValidatedState(isValidated: profileValidated);
+      yield ProfileValidatedState();
 
       yield SettingsLoadedState(
         allAccounts: _profileBox,

@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<HomeBloc>(context).add(HomeStarted());
+    BlocProvider.of<HomeBloc>(context).add(HomeOpened());
   }
 
   @override
@@ -32,14 +32,14 @@ class _HomePageState extends State<HomePage> {
     return Container(
       child: BlocListener<SettingsBloc, SettingsState>(
         listener: (context, state) {
-          if (state is ProfileSwitchedState) {
-            BlocProvider.of<HomeBloc>(context).add(FetchProfile(
+          if (state is ProfileChangedState) {
+            BlocProvider.of<HomeBloc>(context).add(LoadProfile(
                 profileId: state.profileId, platformId: state.platformId));
           }
         },
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
-            if (state is ProfileLoadingState) {
+            if (state is LoadingProfileState) {
               return buildLoadingWidget();
             } else if (state is ProfileLoadedState) {
               return ProfileDisplayWidget();

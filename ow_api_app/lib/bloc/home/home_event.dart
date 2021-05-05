@@ -4,16 +4,16 @@ abstract class HomeEvent extends Equatable {
   const HomeEvent();
 }
 
-class HomeStarted extends HomeEvent {
+class HomeOpened extends HomeEvent {
   @override
   List<Object> get props => [];
 }
 
-class FetchProfile extends HomeEvent {
+class LoadProfile extends HomeEvent {
   final String profileId;
   final String platformId;
 
-  FetchProfile({@required this.profileId, @required this.platformId});
+  LoadProfile({@required this.profileId, @required this.platformId});
 
   @override
   List<Object> get props => [];

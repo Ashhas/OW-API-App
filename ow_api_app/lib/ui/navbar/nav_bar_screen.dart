@@ -45,7 +45,7 @@ class BottomNavBarState extends State<BottomNavBar> {
       backgroundColor: Colors.white,
       body: BlocBuilder<InitializationBloc, InitializationState>(
         builder: (context, state) {
-          if (state is Initialized) {
+          if (state is InitializedState) {
             return Center(
               child: PersistentTabView(
                 controller: state.navBarController,

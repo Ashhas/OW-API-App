@@ -16,17 +16,17 @@ part 'on_boarding_state.dart';
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final ProfileRepository repository;
 
-  OnBoardingBloc({@required this.repository}) : super(InitialOnBoardingState());
+  OnBoardingBloc({@required this.repository}) : super(OnBoardingOpenedState());
 
   @override
   Stream<OnBoardingState> mapEventToState(OnBoardingEvent event) async* {
-    if (event is FirstProfileAdded) {
+    if (event is AddFirstProfile) {
       yield* _mapFirstProfileAddedToState(event, state);
     }
   }
 
   Stream<OnBoardingState> _mapFirstProfileAddedToState(
-      FirstProfileAdded event, OnBoardingState state) async* {
+      AddFirstProfile event, OnBoardingState state) async* {
     //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
@@ -52,9 +52,9 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
         sharedPrefService.setOnBoardingSeenBefore(false);
         sharedPrefService.setMainAccount(event.profileId);
 
-        yield FirstProfileValidated(isVerified: profileValidated);
+        yield FirstProfileValidatedState();
       } else {
-        yield FirstNotProfileValidated();
+        yield FirstProfileNotValidatedState();
       }
     } on EmptyResultException catch (e) {
       yield OnBoardingErrorState(exception: e);

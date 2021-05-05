@@ -27,7 +27,7 @@ class _SettingsPageState extends State<SettingsPage> {
   void initState() {
     super.initState();
     BlocProvider.of<SettingsBloc>(context)
-        .add(SettingsStarted(navBarController: widget.navBarController));
+        .add(SettingsOpened(navBarController: widget.navBarController));
   }
 
   @override
@@ -122,7 +122,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               ),
                               onTap: () {
                                 BlocProvider.of<SettingsBloc>(context).add(
-                                    ChangeProfileEvent(
+                                    ChangeLoadedProfile(
                                         profileId: account.battleNetId,
                                         platformId: account.platformId));
                               });
