@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/ui/settings/screens/open_source_libraries_page.dart';
+import 'package:ow_api_app/ui/settings/screens/select_main_account_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/data/util/strings.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
-import 'add_profile_page.dart';
+import 'screens/add_profile_page.dart';
 
 class SettingsPage extends StatefulWidget {
   final PersistentTabController navBarController;
@@ -84,14 +86,14 @@ class _SettingsPageState extends State<SettingsPage> {
                     builder: (context, box, widget) {
                       if (box.values.isEmpty)
                         return ListTile(
-                            title: Text(GlobalVariables.settingsNoAccountTitle,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "TitilliumWeb",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                            enabled: true,
-                            tileColor: Theme.of(context).buttonColor);
+                          title: Text(GlobalVariables.settingsNoAccountTitle,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: "TitilliumWeb",
+                                fontWeight: FontWeight.w500,
+                              )),
+                          enabled: true,
+                        );
 
                       return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -107,7 +109,6 @@ class _SettingsPageState extends State<SettingsPage> {
                                     fontWeight: FontWeight.w500,
                                   )),
                               dense: true,
-                              tileColor: Theme.of(context).buttonColor,
                               trailing: IconButton(
                                 icon: Icon(Icons.close),
                                 iconSize: 25,
@@ -170,55 +171,85 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildMainAccountTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsMainAccountTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          onTap: () {
+            pushNewScreen(
+              context,
+              screen: SelectMainAccountPage(),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+          },
+          title: Text(GlobalVariables.settingsMainAccountTitle,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "TitilliumWeb",
+                fontWeight: FontWeight.w500,
+              )),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 
   Widget _buildVersionTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsVersionTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Text(
-              GlobalVariables.settingsVersionNumber,
-              style: TextStyle(color: Colors.white),
+          title: Text(
+            GlobalVariables.settingsVersionTitle,
+            style: TextStyle(
+              color: Colors.white,
+              fontFamily: "TitilliumWeb",
+              fontWeight: FontWeight.w500,
             ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          ),
+          trailing: Text(
+            GlobalVariables.settingsVersionNumber,
+            style: TextStyle(color: Colors.white),
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 
   Widget _buildLibrariesTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsOpenSourceTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          onTap: () {
+            pushNewScreen(
+              context,
+              screen: OpenSourceLibrariesPage(),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+          },
+          title: Text(GlobalVariables.settingsOpenSourceTitle,
+              style: TextStyle(
+                color: Colors.white,
+                fontFamily: "TitilliumWeb",
+                fontWeight: FontWeight.w500,
+              )),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 }

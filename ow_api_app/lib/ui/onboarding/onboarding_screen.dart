@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
-import 'package:ow_api_app/ui/onboarding/add_first_profile_page.dart';
+import 'package:ow_api_app/ui/onboarding/screens/add_first_profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class OnBoardingScreen extends StatefulWidget {
