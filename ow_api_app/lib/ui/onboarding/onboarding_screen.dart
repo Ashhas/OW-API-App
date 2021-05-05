@@ -15,18 +15,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocListener<OnBoardingBloc, OnBoardingState>(
-      listener: (context, state) {
-        if (state is FirstProfileValidated) {
-          BlocProvider.of<InitializationBloc>(context)
-              .add(OnBoardingFinished());
-          Navigator.pushReplacement(
-            context,
-            new MaterialPageRoute(
-              builder: (BuildContext context) => new BottomNavBar(),
-            ),
-          );
-        }
-      },
+      listener: (context, state) {},
       child: Scaffold(
         backgroundColor: Theme.of(context).backgroundColor,
         resizeToAvoidBottomInset: false,

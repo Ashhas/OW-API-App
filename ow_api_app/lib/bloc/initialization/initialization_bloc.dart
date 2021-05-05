@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/util/shared_pref_service.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'initialization_event.dart';
@@ -39,15 +38,15 @@ class InitializationBloc
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
 
-    //Check if firstTime
+    //Check if OnBoarding has been finished
     final sharedPrefService = await SharedPreferencesService.instance;
-    final isFirstTime = sharedPrefService.getOnBoardingSeenBefore;
+    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
-    if (isFirstTime == null) {
+    if (onBoardingSeenBefore == null) {
       yield Uninitialized();
-    } else if (isFirstTime == true) {
+    } else if (onBoardingSeenBefore == true) {
       yield Uninitialized();
-    } else if (isFirstTime == false) {
+    } else if (onBoardingSeenBefore == false) {
       yield Initialized(navBarController: navBarController);
     }
   }

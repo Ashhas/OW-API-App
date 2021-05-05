@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
+import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/data/util/api_exception_mapper.dart';
 import 'package:ow_api_app/data/util/strings.dart';
@@ -33,6 +34,8 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
         body: BlocListener<OnBoardingBloc, OnBoardingState>(
             listener: (context, state) {
               if (state is FirstProfileValidated) {
+                BlocProvider.of<InitializationBloc>(context)
+                    .add(OnBoardingFinished());
                 Navigator.pushReplacement(
                   context,
                   new MaterialPageRoute(

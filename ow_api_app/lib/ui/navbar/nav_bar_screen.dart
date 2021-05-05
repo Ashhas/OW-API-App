@@ -63,24 +63,6 @@ class BottomNavBarState extends State<BottomNavBar> {
                 hideNavigationBar: _hideNavBar,
                 popActionScreens: PopActionScreensType.once,
                 navBarHeight: 55,
-                onWillPop: () async {
-                  await showDialog(
-                    context: context,
-                    useSafeArea: true,
-                    builder: (context) => Container(
-                      height: 50.0,
-                      width: 50.0,
-                      color: Colors.white,
-                      child: RaisedButton(
-                        child: Text("Close"),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ),
-                  );
-                  return false;
-                },
                 popAllScreensOnTapOfSelectedTab: true,
                 itemAnimationProperties: ItemAnimationProperties(
                   duration: Duration(milliseconds: 400),

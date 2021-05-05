@@ -19,7 +19,8 @@ class SimpleBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     log(
         'onTransition',
-        '\tcurrentState=${transition.currentState}\n' +
+        '\tBloC - ${bloc.toString()}\n' +
+            '\tcurrentState=${transition.currentState}\n' +
             '\tnextState=${transition.nextState}');
   }
 
