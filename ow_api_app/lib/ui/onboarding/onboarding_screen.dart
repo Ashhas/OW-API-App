@@ -36,14 +36,14 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 padding: EdgeInsets.only(bottom: 15, right: 40, left: 40),
                 child: Text(
                   "This is an unofficial app for getting your Overwatch career profile on your phone!",
-                  style: TextStyle(color: Colors.white),
+                  style: Theme.of(context).primaryTextTheme.headline4,
                 ),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: 100, right: 40, left: 40),
                 child: Text(
                   "To get started you need to enter your Battle.net ID. ",
-                  style: TextStyle(color: Colors.white),
+                  style: Theme.of(context).primaryTextTheme.headline4,
                 ),
               ),
               Padding(
