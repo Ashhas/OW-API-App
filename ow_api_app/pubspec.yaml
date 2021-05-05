@@ -1,7 +1,7 @@
 name: ow_api_app
 description: A new Flutter project.
 
-version: 1.0.0+1
+version: 0.6.0
 
 environment:
   sdk: ">=2.6.0 <3.0.0"
@@ -16,6 +16,7 @@ dependencies:
   shared_preferences: ^0.5.12
 
   # Utils
+  package_info: ^2.0.0
   equatable: ^1.2.5
   path_provider: ^1.6.5
   connectivity: ^2.0.2

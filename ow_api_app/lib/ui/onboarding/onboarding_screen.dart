@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
-import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 import 'package:ow_api_app/ui/onboarding/screens/add_first_profile_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -35,9 +33,16 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(bottom: 100.0, right: 40, left: 40),
+                padding: EdgeInsets.only(bottom: 15, right: 40, left: 40),
                 child: Text(
-                  "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut commodo tempus nisi vel dictum.",
+                  "This is an unofficial app for getting your Overwatch career profile on your phone!",
+                  style: TextStyle(color: Colors.white),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(bottom: 100, right: 40, left: 40),
+                child: Text(
+                  "To get started you need to enter your Battle.net ID. ",
                   style: TextStyle(color: Colors.white),
                 ),
               ),

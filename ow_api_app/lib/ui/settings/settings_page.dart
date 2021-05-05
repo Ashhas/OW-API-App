@@ -50,7 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   SizedBox(
                     height: 15,
                   ),
-                  _buildVersionTile(),
+                  _buildVersionTile(state.appVersion),
                   _buildLibrariesTile(),
                   SizedBox(
                     height: 100,
@@ -209,7 +209,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  Widget _buildVersionTile() {
+  Widget _buildVersionTile(String appVersion) {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: Card(
@@ -224,7 +224,7 @@ class _SettingsPageState extends State<SettingsPage> {
             ),
           ),
           trailing: Text(
-            GlobalVariables.settingsVersionNumber,
+            appVersion,
             style: TextStyle(color: Colors.white),
           ),
           enabled: true,
