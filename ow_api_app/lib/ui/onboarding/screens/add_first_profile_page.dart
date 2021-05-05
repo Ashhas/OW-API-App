@@ -73,11 +73,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                       children: <Widget>[
                         Text(
                           "Enter BattleTag",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontFamily: "TitilliumWeb",
-                            fontWeight: FontWeight.w700,
-                          ),
+                          style: Theme.of(context).primaryTextTheme.bodyText2,
                         ),
                         SizedBox(
                           height: 10,
@@ -92,24 +88,16 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                               filled: true),
                         ),
                         Text("Please enter a valid BattleTag (Battletag#1234)",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "TitilliumWeb",
-                              fontWeight: FontWeight.w500,
-                            )),
+                            style:
+                                Theme.of(context).primaryTextTheme.bodyText1),
                         SizedBox(
                           height: 20,
                         ),
                         DropDown<String>(
                           items: GlobalVariables.availablePlatforms,
-                          hint: Text(
-                            "Platform",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontFamily: "TitilliumWeb",
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
+                          hint: Text("Platform",
+                              style:
+                                  Theme.of(context).primaryTextTheme.bodyText1),
                           onChanged: (String p) {
                             print("Chosen Platform: " + p);
                             setState(() {
@@ -128,7 +116,9 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 Center(
                                   child: Text(
                                     "Profile has not been found",
-                                    style: TextStyle(color: Colors.red),
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headline1,
                                   ),
                                 )
                               ],
@@ -141,7 +131,9 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 Center(
                                   child: Text(
                                     "Profile has not been found",
-                                    style: TextStyle(color: Colors.red),
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headline1,
                                   ),
                                 )
                               ],

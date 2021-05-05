@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 class AppThemes {
   static const Color _profileVisibilityColor =
       Color.fromRGBO(246, 246, 133, 1.0);
+  static const Color _errorColor = Colors.red;
+
   static const Color _darkPrimaryColor = Color(0xFFF26513);
   static const Color _darkCanvasColor = Color(0xFF2D2F34);
   static const Color _darkCardColor = Color(0xFF2B2B31);
@@ -22,6 +24,18 @@ class AppThemes {
       bottomAppBarColor: _darkBackgroundColor,
       hintColor: _profileVisibilityColor,
       primaryTextTheme: TextTheme(
+        bodyText2: TextStyle(
+          fontSize: 15,
+          color: _darkPrimaryTextColor,
+          fontFamily: "Roboto",
+          fontWeight: FontWeight.w700,
+        ),
+        bodyText1: TextStyle(
+          fontSize: 14,
+          color: _darkPrimaryTextColor,
+          fontFamily: "Roboto",
+          fontWeight: FontWeight.w400,
+        ),
         headline6: TextStyle(
           fontSize: 14,
           color: _lightPrimaryTextColor,
@@ -51,6 +65,12 @@ class AppThemes {
           color: _darkPrimaryTextColor,
           fontFamily: "Roboto",
           fontWeight: FontWeight.w800,
+        ),
+        headline1: TextStyle(
+          fontSize: 14,
+          color: _errorColor,
+          fontFamily: "Roboto",
+          fontWeight: FontWeight.w400,
         ),
         button: TextStyle(
           fontSize: 15,
