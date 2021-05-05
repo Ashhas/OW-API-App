@@ -14,14 +14,14 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  InitializationBloc() : super(StartInitialization());
+  InitializationBloc() : super(InitializationStartedState());
 
   @override
   Stream<InitializationState> mapEventToState(
       InitializationEvent event) async* {
-    if (event is AppStarted) {
+    if (event is InitializeApp) {
       yield* _mapAppStartedEventToState();
-    } else if (event is OnBoardingFinished) {
+    } else if (event is FinishOnBoarding) {
       yield* _mapOnBoardingFinishedEventToState();
     }
   }
@@ -43,11 +43,11 @@ class InitializationBloc
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
     if (onBoardingSeenBefore == null) {
-      yield Uninitialized();
+      yield UninitializedState();
     } else if (onBoardingSeenBefore == true) {
-      yield Uninitialized();
+      yield UninitializedState();
     } else if (onBoardingSeenBefore == false) {
-      yield Initialized(navBarController: navBarController);
+      yield InitializedState(navBarController: navBarController);
     }
   }
 
@@ -61,11 +61,11 @@ class InitializationBloc
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
     if (onBoardingSeenBefore == null) {
-      yield Uninitialized();
+      yield UninitializedState();
     } else if (onBoardingSeenBefore == true) {
-      yield Uninitialized();
+      yield UninitializedState();
     } else if (onBoardingSeenBefore == false) {
-      yield Initialized(navBarController: navBarController);
+      yield InitializedState(navBarController: navBarController);
     }
   }
 }

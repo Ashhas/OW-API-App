@@ -18,21 +18,21 @@ part 'package:ow_api_app/bloc/home/home_state.dart';
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final ProfileRepository repository;
 
-  HomeBloc({@required this.repository}) : super(HomeInitialState());
+  HomeBloc({@required this.repository}) : super(HomeOpenedState());
 
   @override
   Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is HomeStarted) {
+    if (event is HomeOpened) {
       yield* _mapHomeStartedToState(event, state);
     }
-    if (event is FetchProfile) {
+    if (event is LoadProfile) {
       yield* _mapFetchProfileEventToState(event, state);
     }
   }
 
   Stream<HomeState> _mapHomeStartedToState(
-      HomeStarted event, HomeState state) async* {
-    yield ProfileLoadingState();
+      HomeOpened event, HomeState state) async* {
+    yield LoadingProfileState();
 
     //Get first account to Fetch
     var dir = await getApplicationDocumentsDirectory();
@@ -61,8 +61,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   }
 
   Stream<HomeState> _mapFetchProfileEventToState(
-      FetchProfile event, HomeState state) async* {
-    yield ProfileLoadingState();
+      LoadProfile event, HomeState state) async* {
+    yield LoadingProfileState();
     try {
       // Add profile ID and Platform ID to the request
       Profile profile = await repository.getProfileStats(

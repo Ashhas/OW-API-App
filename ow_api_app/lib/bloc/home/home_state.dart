@@ -2,12 +2,12 @@ part of 'package:ow_api_app/bloc/home/home_bloc.dart';
 
 abstract class HomeState extends Equatable {}
 
-class HomeInitialState extends HomeState {
+class HomeOpenedState extends HomeState {
   @override
   List<Object> get props => [];
 }
 
-class ProfileLoadingState extends HomeState {
+class LoadingProfileState extends HomeState {
   @override
   List<Object> get props => [];
 }

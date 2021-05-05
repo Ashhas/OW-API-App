@@ -4,30 +4,30 @@ abstract class SettingsEvent extends Equatable {
   const SettingsEvent();
 }
 
-class SettingsStarted extends SettingsEvent {
+class SettingsOpened extends SettingsEvent {
   final PersistentTabController navBarController;
 
-  SettingsStarted({this.navBarController});
+  SettingsOpened({this.navBarController});
 
   @override
   List<Object> get props => [];
 }
 
-class ChangeProfileEvent extends SettingsEvent {
+class ChangeLoadedProfile extends SettingsEvent {
   final String profileId;
   final String platformId;
 
-  ChangeProfileEvent({@required this.profileId, @required this.platformId});
+  ChangeLoadedProfile({@required this.profileId, @required this.platformId});
 
   @override
   List<Object> get props => null;
 }
 
-class AddProfileEvent extends SettingsEvent {
+class AddProfile extends SettingsEvent {
   final String profileId;
   final String platformId;
 
-  AddProfileEvent({@required this.profileId, @required this.platformId});
+  AddProfile({@required this.profileId, @required this.platformId});
 
   @override
   List<Object> get props => [profileId, platformId];

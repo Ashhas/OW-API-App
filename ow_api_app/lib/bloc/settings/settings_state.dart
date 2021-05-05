@@ -2,7 +2,7 @@ part of 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 
 abstract class SettingsState extends Equatable {}
 
-class SettingsInitialState extends SettingsState {
+class SettingsOpenedState extends SettingsState {
   @override
   List<Object> get props => [];
 }
@@ -21,28 +21,29 @@ class SettingsLoadedState extends SettingsState {
   List<Object> get props => [];
 }
 
-class ProfileSwitchedState extends SettingsState {
-  final String profileId;
-  final String platformId;
-
-  ProfileSwitchedState({@required this.profileId, @required this.platformId});
-
-  @override
-  List<Object> get props => [profileId, platformId];
-}
-
-class ProfileValidatingState extends SettingsState {
+class ValidatingProfileState extends SettingsState {
   @override
   List<Object> get props => [];
 }
 
 class ProfileValidatedState extends SettingsState {
-  final bool isValidated;
+  @override
+  List<Object> get props => [];
+}
 
-  ProfileValidatedState({@required this.isValidated});
+class ProfileNotValidatedState extends SettingsState {
+  @override
+  List<Object> get props => [];
+}
+
+class ProfileChangedState extends SettingsState {
+  final String profileId;
+  final String platformId;
+
+  ProfileChangedState({@required this.profileId, @required this.platformId});
 
   @override
-  List<Object> get props => [isValidated];
+  List<Object> get props => [profileId, platformId];
 }
 
 class SettingsErrorState extends SettingsState {

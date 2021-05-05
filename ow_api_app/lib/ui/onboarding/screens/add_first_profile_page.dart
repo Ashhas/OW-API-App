@@ -33,9 +33,9 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
         appBar: _buildAppBar(),
         body: BlocListener<OnBoardingBloc, OnBoardingState>(
             listener: (context, state) {
-              if (state is FirstProfileValidated) {
+              if (state is FirstProfileValidatedState) {
                 BlocProvider.of<InitializationBloc>(context)
-                    .add(OnBoardingFinished());
+                    .add(FinishOnBoarding());
                 Navigator.pushReplacement(
                   context,
                   new MaterialPageRoute(
@@ -43,7 +43,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                   ),
                 );
               }
-              if (state is FirstNotProfileValidated) {
+              if (state is FirstProfileNotValidatedState) {
                 setState(() {
                   hasFeedback = true;
 
@@ -145,7 +145,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                               FocusScope.of(context).requestFocus(FocusNode());
                               //Add New Event
                               BlocProvider.of<OnBoardingBloc>(context).add(
-                                FirstProfileAdded(
+                                AddFirstProfile(
                                     profileId: textController.text,
                                     platformId: selectedPlatform),
                               );

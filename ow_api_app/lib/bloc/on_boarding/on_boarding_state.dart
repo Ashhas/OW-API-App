@@ -3,21 +3,17 @@ part of 'on_boarding_bloc.dart';
 @immutable
 abstract class OnBoardingState extends Equatable {}
 
-class InitialOnBoardingState extends OnBoardingState {
+class OnBoardingOpenedState extends OnBoardingState {
   @override
   List<Object> get props => [];
 }
 
-class FirstProfileValidated extends OnBoardingState {
-  final bool isVerified;
-
-  FirstProfileValidated({this.isVerified});
-
+class FirstProfileValidatedState extends OnBoardingState {
   @override
   List<Object> get props => [];
 }
 
-class FirstNotProfileValidated extends OnBoardingState {
+class FirstProfileNotValidatedState extends OnBoardingState {
   @override
   List<Object> get props => [];
 }

@@ -126,7 +126,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
 
                                     //Add New Event
                                     BlocProvider.of<SettingsBloc>(context).add(
-                                      AddProfileEvent(
+                                      AddProfile(
                                           profileId: textController.text,
                                           platformId: selectedPlatform),
                                     );
@@ -143,7 +143,9 @@ class _AddProfilePageState extends State<AddProfilePage> {
                                       children: [
                                         Text(
                                           "Send",
-                                          style: Theme.of(context).primaryTextTheme.button,
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .button,
                                         )
                                       ],
                                     ),

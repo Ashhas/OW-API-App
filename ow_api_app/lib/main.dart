@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
       child: MultiBlocProvider(
         providers: [
           BlocProvider<InitializationBloc>(
-            create: (_) => InitializationBloc()..add(AppStarted()),
+            create: (_) => InitializationBloc()..add(InitializeApp()),
           ),
           BlocProvider<OnBoardingBloc>(
             create: (_) => OnBoardingBloc(repository: profileRepository),
