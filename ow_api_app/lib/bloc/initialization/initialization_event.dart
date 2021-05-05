@@ -7,3 +7,8 @@ class AppStarted extends InitializationEvent {
   @override
   List<Object> get props => [];
 }
+
+class OnBoardingFinished extends InitializationEvent {
+  @override
+  List<Object> get props => [];
+}

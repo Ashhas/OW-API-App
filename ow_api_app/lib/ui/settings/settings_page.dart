@@ -3,13 +3,15 @@ import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/ui/settings/screens/open_source_libraries_page.dart';
+import 'package:ow_api_app/ui/settings/screens/select_main_account_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/data/util/strings.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
-import 'add_profile_page.dart';
+import 'screens/add_profile_page.dart';
 
 class SettingsPage extends StatefulWidget {
   final PersistentTabController navBarController;
@@ -31,28 +33,37 @@ class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: _buildAppBar(),
-        backgroundColor: Theme.of(context).backgroundColor,
-        body: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              _buildAvailableAccountsWidget(),
-              SizedBox(
-                height: 20,
+      appBar: _buildAppBar(),
+      backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocBuilder<SettingsBloc, SettingsState>(
+        builder: (context, state) {
+          if (state is SettingsLoadedState) {
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  _buildAvailableAccountsWidget(),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  _buildMainAccountTile(state.mainAccount),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  _buildVersionTile(state.appVersion),
+                  _buildLibrariesTile(),
+                  SizedBox(
+                    height: 100,
+                  ),
+                ],
               ),
-              _buildMainAccountTile(),
-              SizedBox(
-                height: 15,
-              ),
-              _buildVersionTile(),
-              _buildLibrariesTile(),
-              SizedBox(
-                height: 100,
-              ),
-            ],
-          ),
-        ));
+            );
+          } else {
+            return Container();
+          }
+        },
+      ),
+    );
   }
 
   Widget _buildAppBar() {
@@ -61,11 +72,7 @@ class _SettingsPageState extends State<SettingsPage> {
       backgroundColor: Theme.of(context).backgroundColor,
       title: Text(
         GlobalVariables.settingsPageTitle,
-        style: TextStyle(
-            color: Colors.white,
-            fontFamily: "TitilliumWeb",
-            fontWeight: FontWeight.w500,
-            fontSize: 25),
+        style: Theme.of(context).primaryTextTheme.headline2,
       ),
     );
   }
@@ -84,14 +91,12 @@ class _SettingsPageState extends State<SettingsPage> {
                     builder: (context, box, widget) {
                       if (box.values.isEmpty)
                         return ListTile(
-                            title: Text(GlobalVariables.settingsNoAccountTitle,
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "TitilliumWeb",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                            enabled: true,
-                            tileColor: Theme.of(context).buttonColor);
+                          title: Text(
+                            GlobalVariables.settingsNoAccountTitle,
+                            style: Theme.of(context).primaryTextTheme.subtitle2,
+                          ),
+                          enabled: true,
+                        );
 
                       return ListView.builder(
                         physics: NeverScrollableScrollPhysics(),
@@ -101,13 +106,10 @@ class _SettingsPageState extends State<SettingsPage> {
                           AccountModel account = box.getAt(index);
                           return ListTile(
                               title: Text(account.battleNetId,
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: "TitilliumWeb",
-                                    fontWeight: FontWeight.w500,
-                                  )),
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .subtitle1),
                               dense: true,
-                              tileColor: Theme.of(context).buttonColor,
                               trailing: IconButton(
                                 icon: Icon(Icons.close),
                                 iconSize: 25,
@@ -135,7 +137,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         pushNewScreen(
                           context,
                           screen: AddProfilePage(),
-                          withNavBar: false, // OPTIONAL VALUE. True by default.
+                          withNavBar: false,
                           pageTransitionAnimation:
                               PageTransitionAnimation.cupertino,
                         );
@@ -149,7 +151,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           ),
                           Text(
                             "Add Account",
-                            style: TextStyle(color: Colors.white),
+                            style: Theme.of(context).primaryTextTheme.button,
                           )
                         ],
                       ),
@@ -168,57 +170,79 @@ class _SettingsPageState extends State<SettingsPage> {
     });
   }
 
-  Widget _buildMainAccountTile() {
+  Widget _buildMainAccountTile(String mainAccount) {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsMainAccountTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          onTap: () {
+            pushNewScreen(
+              context,
+              screen: SelectMainAccountPage(mainAccount: mainAccount),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            ).then((value) => setState(() {}));
+          },
+          title: Text(
+            GlobalVariables.settingsMainAccountTitle,
+            style: Theme.of(context).primaryTextTheme.subtitle2,
+          ),
+          trailing: Text(
+            mainAccount,
+            style: Theme.of(context).primaryTextTheme.caption,
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 
-  Widget _buildVersionTile() {
+  Widget _buildVersionTile(String appVersion) {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsVersionTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Text(
-              GlobalVariables.settingsVersionNumber,
-              style: TextStyle(color: Colors.white),
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          title: Text(
+            GlobalVariables.settingsVersionTitle,
+            style: Theme.of(context).primaryTextTheme.subtitle2,
+          ),
+          trailing: Text(
+            appVersion,
+            style: Theme.of(context).primaryTextTheme.caption,
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 
   Widget _buildLibrariesTile() {
     return Padding(
-        padding: EdgeInsets.only(left: 15, right: 15),
+      padding: EdgeInsets.only(left: 15, right: 15),
+      child: Card(
+        color: Theme.of(context).buttonColor,
         child: ListTile(
-            title: Text(GlobalVariables.settingsOpenSourceTitle,
-                style: TextStyle(
-                  color: Colors.white,
-                  fontFamily: "TitilliumWeb",
-                  fontWeight: FontWeight.w500,
-                )),
-            trailing: Icon(
-              Icons.arrow_forward_ios,
-              color: Colors.white,
-            ),
-            enabled: true,
-            tileColor: Theme.of(context).buttonColor));
+          onTap: () {
+            pushNewScreen(
+              context,
+              screen: OpenSourceLibrariesPage(),
+              withNavBar: false,
+              pageTransitionAnimation: PageTransitionAnimation.cupertino,
+            );
+          },
+          title: Text(
+            GlobalVariables.settingsOpenSourceTitle,
+            style: Theme.of(context).primaryTextTheme.subtitle2,
+          ),
+          trailing: Icon(
+            Icons.arrow_forward_ios,
+            color: Colors.white,
+          ),
+          enabled: true,
+        ),
+      ),
+    );
   }
 }

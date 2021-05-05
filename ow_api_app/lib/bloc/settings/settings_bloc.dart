@@ -2,6 +2,8 @@ import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/data/util/shared_pref_service.dart';
+import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -27,6 +29,8 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield* _mapChangeProfileEventToState(event, state);
     } else if (event is AddProfileEvent) {
       yield* _mapAddProfileEventToState(event, state);
+    } else if (event is SaveMainAccount) {
+      yield* _mapSaveMainAccountToState(event, state);
     }
   }
 
@@ -40,7 +44,19 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
 
-    yield SettingsLoadedState(allAccounts: _profileBox);
+    //Fetch MainAccount
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final mainAccount = sharedPrefService.getMainAccount;
+
+    //Fetch App Version
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+
+    yield SettingsLoadedState(
+      allAccounts: _profileBox,
+      mainAccount: mainAccount,
+      appVersion: version,
+    );
   }
 
   Stream<SettingsState> _mapChangeProfileEventToState(
@@ -50,11 +66,24 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
 
+    //Fetch MainAccount
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final mainAccount = sharedPrefService.getMainAccount;
+
     //Navigate back to Home w/ Data
     _navBarController.jumpToTab(0);
     yield ProfileSwitchedState(
         profileId: event.profileId, platformId: event.platformId);
-    yield SettingsLoadedState(allAccounts: _profileBox);
+
+    //Fetch App Version
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    String version = packageInfo.version;
+
+    yield SettingsLoadedState(
+      allAccounts: _profileBox,
+      mainAccount: mainAccount,
+      appVersion: version,
+    );
   }
 
   Stream<SettingsState> _mapAddProfileEventToState(
@@ -65,6 +94,10 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
+
+    //Fetch MainAccount
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final mainAccount = sharedPrefService.getMainAccount;
 
     //Verify Account
     try {
@@ -82,7 +115,17 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
         _profileBox.add(newAccount);
       }
 
+      //Fetch App Version
+      PackageInfo packageInfo = await PackageInfo.fromPlatform();
+      String version = packageInfo.version;
+
       yield ProfileValidatedState(isValidated: profileValidated);
+
+      yield SettingsLoadedState(
+        allAccounts: _profileBox,
+        mainAccount: mainAccount,
+        appVersion: version,
+      );
     } on EmptyResultException catch (e) {
       yield SettingsErrorState(exception: e);
     } on ClientErrorException catch (e) {
@@ -94,5 +137,12 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } on UnknownException catch (e) {
       yield SettingsErrorState(exception: e);
     }
+  }
+
+  Stream<SettingsState> _mapSaveMainAccountToState(
+      SaveMainAccount event, SettingsState state) async* {
+    //Save MainAccount in SharedPref
+    final sharedPrefService = await SharedPreferencesService.instance;
+    sharedPrefService.setMainAccount(event.battleNetId);
   }
 }

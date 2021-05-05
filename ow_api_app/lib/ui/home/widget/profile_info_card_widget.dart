@@ -38,27 +38,28 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 10,
+                          height: 13,
                         ),
                         Text(
                           state.profileStats.name,
-                          style: TextStyle(
-                              fontFamily: "TitilliumWeb",
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w700),
+                          style: Theme.of(context).primaryTextTheme.headline3,
+                        ),
+                        SizedBox(
+                          height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            RaisedButton(
+                            ElevatedButton(
                               child: state.profileStats.private != true
                                   ? Row(
                                       children: [
                                         Text(
                                           "Public",
-                                          style: TextStyle(color: Colors.black),
+                                          style: Theme.of(context)
+                                              .primaryTextTheme
+                                              .headline6,
                                         ),
                                         Icon(
                                           Icons.check,
@@ -78,7 +79,9 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                                         ),
                                       ],
                                     ),
-                              color: Color.fromRGBO(246, 246, 133, 1.0),
+                              style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context).hintColor,
+                              ),
                               onPressed: () {},
                             ),
                           ],
