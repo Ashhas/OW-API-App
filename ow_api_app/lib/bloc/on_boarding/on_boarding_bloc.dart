@@ -20,16 +20,10 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
 
   @override
   Stream<OnBoardingState> mapEventToState(OnBoardingEvent event) async* {
-    if (event is OnBoardingStarted) {
-      yield* _mapOnBoardingStartedToState(event, state);
-    }
     if (event is FirstProfileAdded) {
       yield* _mapFirstProfileAddedToState(event, state);
     }
   }
-
-  Stream<OnBoardingState> _mapOnBoardingStartedToState(
-      OnBoardingStarted event, OnBoardingState state) async* {}
 
   Stream<OnBoardingState> _mapFirstProfileAddedToState(
       FirstProfileAdded event, OnBoardingState state) async* {
@@ -56,6 +50,7 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
         //Determines that setup is done
         final sharedPrefService = await SharedPreferencesService.instance;
         sharedPrefService.setOnBoardingSeenBefore(false);
+        sharedPrefService.setMainAccount(event.profileId);
 
         yield FirstProfileValidated(isVerified: profileValidated);
       } else {
