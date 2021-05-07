@@ -1,7 +1,9 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
+import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/data/util/api_exception_mapper.dart';
 import 'package:ow_api_app/data/util/strings.dart';
@@ -16,9 +18,11 @@ class AddFirstProfilePage extends StatefulWidget {
 
 class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
   final textController = TextEditingController();
+  ConnectivityResult netResult;
   bool hasError = false;
   bool hasFeedback = false;
   String selectedPlatform;
+  bool networkAvailable = true;
 
   @override
   void dispose() {
@@ -28,38 +32,54 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Theme.of(context).backgroundColor,
-        resizeToAvoidBottomInset: false,
-        appBar: _buildAppBar(),
-        body: BlocListener<OnBoardingBloc, OnBoardingState>(
-            listener: (context, state) {
-              if (state is FirstProfileValidatedState) {
-                BlocProvider.of<InitializationBloc>(context)
-                    .add(FinishOnBoarding());
-                Navigator.pushReplacement(
-                  context,
-                  new MaterialPageRoute(
-                    builder: (BuildContext context) => new BottomNavBar(),
-                  ),
-                );
-              }
-              if (state is FirstProfileNotValidatedState) {
-                setState(() {
-                  hasFeedback = true;
+      backgroundColor: Theme.of(context).backgroundColor,
+      resizeToAvoidBottomInset: false,
+      body: BlocListener<NetworkConnectionBloc, NetworkConnectionState>(
+        listener: (context, networkState) {
+          if (networkState is NetworkConnectionUpdatedState) {
+            setState(() {
+              netResult = networkState.connectivityResult;
+              networkAvailable = true;
+            });
+          } else if (networkState is NoNetworkConnectionState) {
+            setState(() {
+              netResult = networkState.connectivityResult;
+              networkAvailable = false;
+            });
+          }
+        },
+        child: BlocListener<OnBoardingBloc, OnBoardingState>(
+          listener: (context, onBoardingState) {
+            if (onBoardingState is FirstProfileValidatedState) {
+              BlocProvider.of<InitializationBloc>(context)
+                  .add(FinishOnBoarding());
+              Navigator.pushReplacement(
+                context,
+                new MaterialPageRoute(
+                  builder: (BuildContext context) => new BottomNavBar(),
+                ),
+              );
+            }
+            if (onBoardingState is FirstProfileNotValidatedState) {
+              setState(() {
+                hasFeedback = true;
 
-                  _showFeedbackMessage();
-                });
-              }
-              if (state is OnBoardingErrorState) {
-                setState(() {
-                  hasError = true;
+                _showFeedbackMessage();
+              });
+            }
+            if (onBoardingState is OnBoardingErrorState) {
+              setState(() {
+                hasError = true;
 
-                  _showErrorMessage(state.exception);
-                });
-              }
-            },
-            child: SingleChildScrollView(
-              child: Padding(
+                _showErrorMessage(onBoardingState.exception);
+              });
+            }
+          },
+          child: Column(
+            children: [
+              _networkNotification(netResult),
+              _buildAppBar(),
+              Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -124,31 +144,51 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                               ],
                             )),
                         Visibility(
-                            visible: hasFeedback,
-                            child: Column(
-                              children: [
-                                SizedBox(height: 20),
-                                Center(
-                                  child: Text(
-                                    "Profile has not been found",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .headline1,
-                                  ),
-                                )
-                              ],
-                            )),
+                          visible: hasFeedback,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: Text(
+                                  "Profile has not been found",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline1,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Visibility(
+                          visible: !networkAvailable,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: Text(
+                                  "No internet connection",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline1,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
                         AspectRatio(
                           aspectRatio: 20 / 3,
                           child: ElevatedButton(
                             onPressed: () {
-                              FocusScope.of(context).requestFocus(FocusNode());
-                              //Add New Event
-                              BlocProvider.of<OnBoardingBloc>(context).add(
-                                AddFirstProfile(
-                                    profileId: textController.text,
-                                    platformId: selectedPlatform),
-                              );
+                              if (networkAvailable) {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                                //Add New Event
+                                BlocProvider.of<OnBoardingBloc>(context).add(
+                                  AddFirstProfile(
+                                      profileId: textController.text,
+                                      platformId: selectedPlatform),
+                                );
+                              }
                             },
                             child: Text(
                               "Send",
@@ -162,7 +202,11 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                   ],
                 ),
               ),
-            )));
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   _buildAppBar() {
@@ -176,6 +220,23 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
     );
+  }
+
+  _networkNotification(ConnectivityResult result) {
+    if (result == ConnectivityResult.none) {
+      return Container(
+        width: double.infinity,
+        height: 40,
+        color: Colors.red,
+        alignment: Alignment.bottomCenter,
+        child: Text(
+          "No Connection",
+          style: Theme.of(context).primaryTextTheme.bodyText1,
+        ),
+      );
+    } else {
+      return Container();
+    }
   }
 
   _showFeedbackMessage() {

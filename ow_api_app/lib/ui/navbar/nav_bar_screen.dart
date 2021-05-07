@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
-
 import 'package:ow_api_app/ui/home/home_page.dart';
 import 'package:ow_api_app/ui/settings/settings_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -47,34 +46,38 @@ class BottomNavBarState extends State<BottomNavBar> {
         builder: (context, state) {
           if (state is InitializedState) {
             return Center(
-              child: PersistentTabView(
-                controller: state.navBarController,
-                screens: [
-                  HomePage(state.navBarController),
-                  SettingsPage(navBarController: state.navBarController)
+              child: Stack(
+                children: [
+                  PersistentTabView(
+                    controller: state.navBarController,
+                    screens: [
+                      HomePage(state.navBarController),
+                      SettingsPage(navBarController: state.navBarController)
+                    ],
+                    items: _navBarsItems(),
+                    confineInSafeArea: true,
+                    backgroundColor: Theme.of(context).backgroundColor,
+                    handleAndroidBackButtonPress: false,
+                    resizeToAvoidBottomInset: true,
+                    stateManagement: true,
+                    hideNavigationBarWhenKeyboardShows: true,
+                    hideNavigationBar: _hideNavBar,
+                    popActionScreens: PopActionScreensType.once,
+                    navBarHeight: 55,
+                    popAllScreensOnTapOfSelectedTab: true,
+                    itemAnimationProperties: ItemAnimationProperties(
+                      duration: Duration(milliseconds: 400),
+                      curve: Curves.ease,
+                    ),
+                    screenTransitionAnimation: ScreenTransitionAnimation(
+                      animateTabTransition: true,
+                      curve: Curves.ease,
+                      duration: Duration(milliseconds: 200),
+                    ),
+                    navBarStyle: NavBarStyle
+                        .style10, // Choose the nav bar style with this property
+                  ),
                 ],
-                items: _navBarsItems(),
-                confineInSafeArea: true,
-                backgroundColor: Theme.of(context).backgroundColor,
-                handleAndroidBackButtonPress: false,
-                resizeToAvoidBottomInset: true,
-                stateManagement: true,
-                hideNavigationBarWhenKeyboardShows: true,
-                hideNavigationBar: _hideNavBar,
-                popActionScreens: PopActionScreensType.once,
-                navBarHeight: 55,
-                popAllScreensOnTapOfSelectedTab: true,
-                itemAnimationProperties: ItemAnimationProperties(
-                  duration: Duration(milliseconds: 400),
-                  curve: Curves.ease,
-                ),
-                screenTransitionAnimation: ScreenTransitionAnimation(
-                  animateTabTransition: true,
-                  curve: Curves.ease,
-                  duration: Duration(milliseconds: 200),
-                ),
-                navBarStyle: NavBarStyle
-                    .style10, // Choose the nav bar style with this property
               ),
             );
           } else {

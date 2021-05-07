@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/ui/settings/screens/open_source_libraries_page.dart';
 import 'package:ow_api_app/ui/settings/screens/select_main_account_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -23,6 +24,8 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
+  bool networkAvailable = true;
+
   @override
   void initState() {
     super.initState();
@@ -35,33 +38,46 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       appBar: _buildAppBar(),
       backgroundColor: Theme.of(context).backgroundColor,
-      body: BlocBuilder<SettingsBloc, SettingsState>(
-        builder: (context, state) {
-          if (state is SettingsLoadedState) {
-            return SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  _buildAvailableAccountsWidget(),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  _buildMainAccountTile(state.mainAccount),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  _buildVersionTile(state.appVersion),
-                  _buildLibrariesTile(),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ],
-              ),
-            );
-          } else {
-            return Container();
+      body: BlocListener<NetworkConnectionBloc, NetworkConnectionState>(
+        listener: (context, networkState) {
+          if (networkState is NetworkConnectionUpdatedState) {
+            setState(() {
+              networkAvailable = true;
+            });
+          } else if (networkState is NoNetworkConnectionState) {
+            setState(() {
+              networkAvailable = false;
+            });
           }
         },
+        child: BlocBuilder<SettingsBloc, SettingsState>(
+          builder: (context, state) {
+            if (state is SettingsLoadedState) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    _buildAvailableAccountsWidget(),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    _buildMainAccountTile(state.mainAccount),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    _buildVersionTile(state.appVersion),
+                    _buildLibrariesTile(),
+                    SizedBox(
+                      height: 100,
+                    ),
+                  ],
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        ),
       ),
     );
   }
@@ -121,10 +137,12 @@ class _SettingsPageState extends State<SettingsPage> {
                                 },
                               ),
                               onTap: () {
-                                BlocProvider.of<SettingsBloc>(context).add(
-                                    ChangeLoadedProfile(
-                                        profileId: account.battleNetId,
-                                        platformId: account.platformId));
+                                if (networkAvailable) {
+                                  BlocProvider.of<SettingsBloc>(context).add(
+                                      ChangeLoadedProfile(
+                                          profileId: account.battleNetId,
+                                          platformId: account.platformId));
+                                }
                               });
                         },
                       );

@@ -1,4 +1,5 @@
 class GlobalVariables {
+
   static const String profilePublicTitle = "Public";
   static const String profilePrivateTitle = "Private";
 

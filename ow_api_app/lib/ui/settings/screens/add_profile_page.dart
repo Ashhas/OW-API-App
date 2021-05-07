@@ -1,6 +1,8 @@
+import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
+import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/util/api_exception_mapper.dart';
 import 'package:ow_api_app/data/util/strings.dart';
@@ -14,10 +16,11 @@ class AddProfilePage extends StatefulWidget {
 
 class _AddProfilePageState extends State<AddProfilePage> {
   final textController = TextEditingController();
-  String selectedPlatform;
-  bool isLoading = false;
   bool hasError = false;
   bool hasFeedback = false;
+  String selectedPlatform;
+  ConnectivityResult netResult;
+  bool networkAvailable = true;
 
   @override
   void dispose() {
@@ -28,159 +31,207 @@ class _AddProfilePageState extends State<AddProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: new AppBar(
-        leading: InkWell(
-            onTap: () {
+      resizeToAvoidBottomInset: false,
+      body: BlocListener<NetworkConnectionBloc, NetworkConnectionState>(
+        listener: (context, networkState) {
+          if (networkState is NetworkConnectionUpdatedState) {
+            setState(() {
+              netResult = networkState.connectivityResult;
+              networkAvailable = true;
+            });
+          } else if (networkState is NoNetworkConnectionState) {
+            setState(() {
+              netResult = networkState.connectivityResult;
+              networkAvailable = false;
+            });
+          }
+        },
+        child: BlocListener<SettingsBloc, SettingsState>(
+          listener: (context, state) {
+            if (state is ProfileValidatedState) {
               Navigator.pop(context);
-            },
-            child: Icon(Icons.close, color: Colors.white)),
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-      ),
-      body: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: BlocListener<SettingsBloc, SettingsState>(
-            listener: (context, state) {
-              if (state is ProfileValidatedState) {
-                Navigator.pop(context);
-              }
-              if (state is SettingsErrorState) {
-                setState(() {
-                  isLoading = false;
-                  hasError = true;
+            }
+            if (state is ProfileNotValidatedState) {
+              setState(() {
+                hasFeedback = true;
 
-                  showErrorMessage(state.exception);
-                });
-              }
-            },
-            child: Center(
-              child: SingleChildScrollView(
+                _showFeedbackMessage();
+              });
+            }
+            if (state is SettingsErrorState) {
+              setState(() {
+                hasError = true;
+
+                _showErrorMessage(state.exception);
+              });
+            }
+          },
+          child: Column(
+            children: [
+              _networkNotification(netResult),
+              _buildAppBar(),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     SizedBox(
-                      height: 20,
+                      height: 80,
                     ),
-                    Container(
-                      margin: EdgeInsets.symmetric(vertical: 10),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text("Enter BattleTag",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "TitilliumWeb",
-                                fontWeight: FontWeight.w700,
-                              )),
-                          SizedBox(
-                            height: 10,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Text(
+                          "Enter BattleTag",
+                          style: Theme.of(context).primaryTextTheme.bodyText2,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextField(
+                          controller: textController,
+                          autofocus: true,
+                          obscureText: false,
+                          decoration: InputDecoration(
+                              border: InputBorder.none,
+                              fillColor: Color(0xfff3f3f4),
+                              filled: true),
+                        ),
+                        Text("Please enter a valid BattleTag (Battletag#1234)",
+                            style:
+                                Theme.of(context).primaryTextTheme.bodyText1),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        DropDown<String>(
+                          items: GlobalVariables.availablePlatforms,
+                          hint: Text("Platform",
+                              style:
+                                  Theme.of(context).primaryTextTheme.bodyText1),
+                          onChanged: (String p) {
+                            print("Chosen Platform: " + p);
+                            setState(() {
+                              selectedPlatform = p;
+                            });
+                          },
+                        ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Visibility(
+                          visible: hasError,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: Text(
+                                  "Profile has not been found",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline1,
+                                ),
+                              )
+                            ],
                           ),
-                          TextField(
-                              controller: textController,
-                              autofocus: true,
-                              obscureText: false,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  fillColor: Color(0xfff3f3f4),
-                                  filled: true)),
-                          Text(
-                              "Please enter a valid BattleTag (Battletag#1234)",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: "TitilliumWeb",
-                                fontWeight: FontWeight.w500,
-                              )),
-                          SizedBox(
-                            height: 20,
+                        ),
+                        Visibility(
+                          visible: hasFeedback,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: Text(
+                                  "Profile has not been found",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline1,
+                                ),
+                              )
+                            ],
                           ),
-                          DropDown<String>(
-                            items: GlobalVariables.availablePlatforms,
-                            hint: Text("Platform",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: "TitilliumWeb",
-                                  fontWeight: FontWeight.w500,
-                                )),
-                            onChanged: (String p) {
-                              print("Chosen Platform: " + p);
-                              setState(() {
-                                selectedPlatform = p;
-                              });
+                        ),
+                        Visibility(
+                          visible: !networkAvailable,
+                          child: Column(
+                            children: [
+                              SizedBox(height: 20),
+                              Center(
+                                child: Text(
+                                  "No internet connection",
+                                  style: Theme.of(context)
+                                      .primaryTextTheme
+                                      .headline1,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        AspectRatio(
+                          aspectRatio: 20 / 3,
+                          child: ElevatedButton(
+                            onPressed: () {
+                              if (networkAvailable) {
+                                FocusScope.of(context)
+                                    .requestFocus(FocusNode());
+                                //Add New Event
+                                BlocProvider.of<SettingsBloc>(context).add(
+                                  AddProfile(
+                                      profileId: textController.text,
+                                      platformId: selectedPlatform),
+                                );
+                              }
                             },
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          AspectRatio(
-                            aspectRatio: 20 / 3,
-                            child: FlatButton(
-                              onPressed: () {
-                                setState(() {
-                                  if (selectedPlatform == null) {
-                                    hasFeedback = true;
-                                    showFeedbackMessage();
-                                  } else {
-                                    //Start Loading Widget
-                                    isLoading = true;
-
-                                    //Add New Event
-                                    BlocProvider.of<SettingsBloc>(context).add(
-                                      AddProfile(
-                                          profileId: textController.text,
-                                          platformId: selectedPlatform),
-                                    );
-                                  }
-                                });
-                              },
-                              child: isLoading
-                                  ? CircularProgressIndicator(
-                                      backgroundColor: Colors.white,
-                                    )
-                                  : Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          "Send",
-                                          style: Theme.of(context)
-                                              .primaryTextTheme
-                                              .button,
-                                        )
-                                      ],
-                                    ),
-                              color: Colors.lightBlue,
+                            child: Text(
+                              "Send",
+                              style: Theme.of(context).primaryTextTheme.button,
                             ),
                           ),
-                          hasError
-                              ? Center(
-                                  child: Text(
-                                    "Profile has not been found",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                )
-                              : Container(),
-                          hasFeedback
-                              ? Center(
-                                  child: Text(
-                                    "Fill in the form completely",
-                                    style: TextStyle(color: Colors.red),
-                                  ),
-                                )
-                              : Container(),
-                        ],
-                      ),
+                        ),
+                        SizedBox(height: 30),
+                      ],
                     ),
-                    SizedBox(height: 30),
                   ],
                 ),
               ),
-            ),
-          )),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
-  showFeedbackMessage() {
+  _buildAppBar() {
+    return AppBar(
+      leading: InkWell(
+          onTap: () {
+            FocusScope.of(context).requestFocus(FocusNode());
+            Navigator.pop(context);
+          },
+          child: Icon(Icons.close, color: Colors.white)),
+      elevation: 0.0,
+      backgroundColor: Theme.of(context).backgroundColor,
+    );
+  }
+
+  _networkNotification(ConnectivityResult result) {
+    if (result == ConnectivityResult.none) {
+      return Container(
+        width: double.infinity,
+        height: 40,
+        color: Colors.red,
+        alignment: Alignment.bottomCenter,
+        child: Text(
+          "No Connection",
+          style: Theme.of(context).primaryTextTheme.bodyText1,
+        ),
+      );
+    } else {
+      return Container();
+    }
+  }
+
+  _showFeedbackMessage() {
     Future.delayed(Duration(seconds: 6)).then((value) => {
           setState(() {
             hasFeedback = false;
@@ -188,7 +239,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
         });
   }
 
-  showErrorMessage(Exception e) {
+  _showErrorMessage(Exception e) {
     print(
       ApiExceptionMapper.toErrorMessage(e),
     );
