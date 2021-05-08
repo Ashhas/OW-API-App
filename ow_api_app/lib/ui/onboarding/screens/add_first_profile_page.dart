@@ -25,6 +25,13 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
   bool networkAvailable = true;
 
   @override
+  void initState() {
+    BlocProvider.of<NetworkConnectionBloc>(context)
+        .add(UpdateNetworkConnection());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
   }
