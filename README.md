@@ -13,10 +13,10 @@ The first version of the project (v1.0) is just about viewing your competitive r
 ## II. Showcase
 
 <p>
-  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175330.jpg" width="220">
-  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175556.jpg" width="220">
-  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175434.jpg" width="220">
-  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175352.jpg" width="220">
+  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175330.jpg" width="210">
+  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175556.jpg" width="210">
+  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175434.jpg" width="210">
+  <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175352.jpg" width="210">
 </p>
 
 ## III. API
