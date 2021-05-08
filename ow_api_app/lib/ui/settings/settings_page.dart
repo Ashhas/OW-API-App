@@ -31,6 +31,8 @@ class _SettingsPageState extends State<SettingsPage> {
     super.initState();
     BlocProvider.of<SettingsBloc>(context)
         .add(SettingsOpened(navBarController: widget.navBarController));
+    BlocProvider.of<NetworkConnectionBloc>(context)
+        .add(UpdateNetworkConnection());
   }
 
   @override

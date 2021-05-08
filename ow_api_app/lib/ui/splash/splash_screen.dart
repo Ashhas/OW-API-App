@@ -14,10 +14,10 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return BlocBuilder<InitializationBloc, InitializationState>(
       builder: (context, state) {
-        if (state is InitializationStartedState) {
-          return Container(
-            color: Colors.deepOrangeAccent,
-          );
+        if (state is NoNetworkOnStartup) {
+          return _buildOfflineWidget();
+        } else if (state is InitializationStartedState) {
+          return Container(color: Colors.deepOrangeAccent);
         } else if (state is UninitializedState) {
           return OnBoardingScreen();
         } else if (state is InitializedState) {
@@ -26,6 +26,37 @@ class _SplashScreenState extends State<SplashScreen> {
           return Container();
         }
       },
+    );
+  }
+
+  Widget _buildOfflineWidget() {
+    return Container(
+      color: Theme.of(context).backgroundColor,
+      child: Center(
+          child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(Icons.signal_wifi_off, color: Colors.white),
+          Text(
+            "No Internet Connection",
+            style: Theme.of(context).primaryTextTheme.bodyText2,
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(
+            onPressed: () {
+              FocusScope.of(context).requestFocus(FocusNode());
+              //Add New Reload w/ network
+              BlocProvider.of<InitializationBloc>(context).add(
+                ReloadWithNetwork(),
+              );
+            },
+            child: Text(
+              "Reload",
+              style: Theme.of(context).primaryTextTheme.button,
+            ),
+          ),
+        ],
+      )),
     );
   }
 }

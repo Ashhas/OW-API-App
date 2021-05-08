@@ -65,21 +65,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-
-  Widget buildOfflineWidget() {
-    return Container(
-      color: Theme.of(context).backgroundColor,
-      child: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(Icons.signal_wifi_off, color: Colors.white),
-          Text(
-            "No Internet Connection",
-            style: TextStyle(color: Colors.white),
-          )
-        ],
-      )),
-    );
-  }
 }

@@ -17,6 +17,11 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
   ConnectivityResult netResult;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Theme.of(context).canvasColor,

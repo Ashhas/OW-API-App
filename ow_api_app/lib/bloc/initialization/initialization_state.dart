@@ -13,6 +13,11 @@ class UninitializedState extends InitializationState {
   List<Object> get props => [];
 }
 
+class NoNetworkOnStartup extends InitializationState {
+  @override
+  List<Object> get props => [];
+}
+
 class InitializedState extends InitializationState {
   final PersistentTabController navBarController;
 

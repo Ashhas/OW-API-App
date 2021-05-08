@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:connectivity/connectivity.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:bloc/bloc.dart';
@@ -21,6 +22,8 @@ class InitializationBloc
       InitializationEvent event) async* {
     if (event is InitializeApp) {
       yield* _mapAppStartedEventToState();
+    } else if (event is ReloadWithNetwork) {
+      yield* _mapNoNetworkOnStartupEventToState();
     } else if (event is FinishOnBoarding) {
       yield* _mapOnBoardingFinishedEventToState();
     }
@@ -42,12 +45,44 @@ class InitializationBloc
     final sharedPrefService = await SharedPreferencesService.instance;
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
 
-    if (onBoardingSeenBefore == null) {
-      yield UninitializedState();
-    } else if (onBoardingSeenBefore == true) {
-      yield UninitializedState();
-    } else if (onBoardingSeenBefore == false) {
-      yield InitializedState(navBarController: navBarController);
+    //Network
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult != ConnectivityResult.none) {
+      if (onBoardingSeenBefore == null) {
+        yield UninitializedState();
+      } else if (onBoardingSeenBefore == true) {
+        yield UninitializedState();
+      } else if (onBoardingSeenBefore == false) {
+        yield InitializedState(navBarController: navBarController);
+      }
+    } else {
+      yield NoNetworkOnStartup();
+    }
+  }
+
+  Stream<InitializationState> _mapNoNetworkOnStartupEventToState() async* {
+    //Creating NavBar Controller
+    PersistentTabController navBarController =
+        PersistentTabController(initialIndex: 0);
+
+    //Check if OnBoarding has been finished
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
+
+    //Network
+    var connectivityResult = await (Connectivity().checkConnectivity());
+
+    if (connectivityResult != ConnectivityResult.none) {
+      if (onBoardingSeenBefore == null) {
+        yield UninitializedState();
+      } else if (onBoardingSeenBefore == true) {
+        yield UninitializedState();
+      } else if (onBoardingSeenBefore == false) {
+        yield InitializedState(navBarController: navBarController);
+      }
+    } else {
+      yield NoNetworkOnStartup();
     }
   }
 

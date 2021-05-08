@@ -7,7 +7,16 @@ abstract class NetworkConnectionEvent extends Equatable {
 class UpdateNetworkConnection extends NetworkConnectionEvent {
   final ConnectivityResult connectivityResult;
 
-  UpdateNetworkConnection({@required this.connectivityResult});
+  UpdateNetworkConnection({this.connectivityResult});
+
+  @override
+  List<Object> get props => [];
+}
+
+class UpdateNetworkConnectionFromStream extends NetworkConnectionEvent {
+  final ConnectivityResult connectivityResult;
+
+  UpdateNetworkConnectionFromStream({this.connectivityResult});
 
   @override
   List<Object> get props => [];

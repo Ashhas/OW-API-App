@@ -12,3 +12,8 @@ class FinishOnBoarding extends InitializationEvent {
   @override
   List<Object> get props => [];
 }
+
+class ReloadWithNetwork extends InitializationEvent {
+  @override
+  List<Object> get props => [];
+}

@@ -21,6 +21,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   SettingsBloc({@required this.repository}) : super(SettingsOpenedState());
 
+
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     if (event is SettingsOpened) {

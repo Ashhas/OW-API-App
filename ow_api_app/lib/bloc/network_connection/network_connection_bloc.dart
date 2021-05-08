@@ -15,7 +15,7 @@ class NetworkConnectionBloc
 
   NetworkConnectionBloc() : super(InitialNetworkConnectionState()) {
     Connectivity().onConnectivityChanged.listen((ConnectivityResult result) {
-      add(UpdateNetworkConnection(connectivityResult: result));
+      add(UpdateNetworkConnectionFromStream(connectivityResult: result));
     });
   }
 
@@ -24,11 +24,33 @@ class NetworkConnectionBloc
       NetworkConnectionEvent event) async* {
     if (event is UpdateNetworkConnection) {
       yield* _mapUpdateNetworkConnectionToState(event);
+    } else if (event is UpdateNetworkConnectionFromStream) {
+      yield* _mapUpdateNetworkConnectionFromStreamToState(event);
     }
   }
 
   Stream<NetworkConnectionState> _mapUpdateNetworkConnectionToState(
       UpdateNetworkConnection event) async* {
+    yield CheckingNetworkConnectionState();
+
+    //Network
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    print("Bloc Result: " + connectivityResult.toString());
+
+    if (connectivityResult == ConnectivityResult.none) {
+      yield NoNetworkConnectionState(
+        connectivityResult: connectivityResult,
+      );
+    } else if (connectivityResult == ConnectivityResult.mobile ||
+        connectivityResult == ConnectivityResult.wifi) {
+      yield NetworkConnectionUpdatedState(
+        connectivityResult: connectivityResult,
+      );
+    }
+  }
+
+  Stream<NetworkConnectionState> _mapUpdateNetworkConnectionFromStreamToState(
+      UpdateNetworkConnectionFromStream event) async* {
     if (event.connectivityResult == ConnectivityResult.none) {
       yield NoNetworkConnectionState(
         connectivityResult: event.connectivityResult,
