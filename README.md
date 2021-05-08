@@ -1,11 +1,14 @@
-# OW-API-APP
+<h1 align="center">OW-API-APP</h1>
+
+<p align="center">  
+OW-API-App is an application based on the BLoC pattern and Clean architecture. <br>
+This project is for focusing on how the BLoC pattern would perform in an complete application.
+</p>
 
 ## I. Introduction
-I’m an Software Engineering graduate aspiring to become an Android/Flutter Developer. I’m currently improving my skills in mobile development by making a lot of personal project and learning in the process.
-
 I always felt like Blizzard never did much with the Overwatch IP on mobile. To view your stats, progress and achievements you have to really go out of your way to view them. That's why I build this project and now share it with the community. I hope that in the future this project can provide an easy way for the community to get insight into their performance at home & on-the-go. 
 
-The first version of the project (v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using Flutter Bloc for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding user statistics to the application and improving the UI by working with an UI Designer (still looking for one).
+The first version of the project (v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using `flutter_bloc` for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding user statistics to the application and improving the UI by working with an UI Designer (still looking for one).
 
 ## II. Showcase
 
@@ -17,7 +20,8 @@ The first version of the project (v1.0) is just about viewing your competitive r
 </p>
 
 ## III. API
-API used: https://ow-api.com 
+This app is using the [OW-API](https://ow-api.com/) in the network layer. <br>
+OW-API provides a RESTful API interface to profile information of all Overwatch players. 
 
 (Example Request)
 https://ow-api.com/v3/stats/pc/Ashhas-2396/profile
