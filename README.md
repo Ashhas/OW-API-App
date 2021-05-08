@@ -1,7 +1,7 @@
 # OW-API-APP
 
 ## I. Introduction
-I’m an software engineering graduate aspiring to become an Android/Flutter Developer. I’m currently improving my skills in mobile development by making a lot of personal project and learning in the process.
+I’m an Software Engineering graduate aspiring to become an Android/Flutter Developer. I’m currently improving my skills in mobile development by making a lot of personal project and learning in the process.
 
 I always felt like Blizzard never did much with the Overwatch IP on mobile. To view your stats, progress and achievements you have to really go out of your way to view them. That's why I build this project and now share it with the community. I hope that in the future this project can provide an easy way for the community to get insight into their performance at home & on-the-go. 
 
