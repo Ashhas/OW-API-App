@@ -1,0 +1,61 @@
+name: ow_api_app
+description: A new Flutter project.
+
+version: 0.7.0
+
+environment:
+  sdk: ">=2.6.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Data
+  hive: ^1.4.4+1
+  hive_flutter: ^0.3.1
+  shared_preferences: ^0.5.12
+
+  # Utils
+  package_info: ^2.0.0
+  equatable: ^1.2.5
+  path_provider: ^1.6.5
+  connectivity: ^2.0.2
+
+  # Networking
+  http: ^0.12.2
+
+  #BLoC
+  flutter_bloc: ^6.0.6
+
+  # UI
+  flutter_dropdown: ^0.0.8
+  persistent_bottom_nav_bar: ^2.1.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  json_serializable: ^3.5.0
+  hive_generator: ^0.7.3
+  build_runner: ^1.10.1
+
+flutter:
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Black.ttf
+        - asset: fonts/Roboto-BlackItalic.ttf
+        - asset: fonts/Roboto-Bold.ttf
+        - asset: fonts/Roboto-BoldItalic.ttf
+        - asset: fonts/Roboto-Italic.ttf
+        - asset: fonts/Roboto-Light.ttf
+        - asset: fonts/Roboto-LightItalic.ttf
+        - asset: fonts/Roboto-Medium.ttf
+        - asset: fonts/Roboto-MediumItalic.ttf
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Thin.ttf
+        - asset: fonts/Roboto-ThinItalic.ttf
+
+  uses-material-design: true
+
+
+
