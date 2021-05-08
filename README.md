@@ -49,10 +49,6 @@ Plugin | Usage
 [json_serializable](https://pub.dev/packages/json_serializable) | Formatting JSON
 [build_runner](http://build_runner) | SAA
 
-## V. Design credit
-##### Author: -----
-##### Design link: -----
-
 ## Development Environment
 `flutter doctor -v`
 ```
