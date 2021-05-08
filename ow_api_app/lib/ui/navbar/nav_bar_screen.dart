@@ -45,40 +45,34 @@ class BottomNavBarState extends State<BottomNavBar> {
       body: BlocBuilder<InitializationBloc, InitializationState>(
         builder: (context, state) {
           if (state is InitializedState) {
-            return Center(
-              child: Stack(
-                children: [
-                  PersistentTabView(
-                    controller: state.navBarController,
-                    screens: [
-                      HomePage(state.navBarController),
-                      SettingsPage(navBarController: state.navBarController)
-                    ],
-                    items: _navBarsItems(),
-                    confineInSafeArea: true,
-                    backgroundColor: Theme.of(context).backgroundColor,
-                    handleAndroidBackButtonPress: false,
-                    resizeToAvoidBottomInset: true,
-                    stateManagement: true,
-                    hideNavigationBarWhenKeyboardShows: true,
-                    hideNavigationBar: _hideNavBar,
-                    popActionScreens: PopActionScreensType.once,
-                    navBarHeight: 55,
-                    popAllScreensOnTapOfSelectedTab: true,
-                    itemAnimationProperties: ItemAnimationProperties(
-                      duration: Duration(milliseconds: 400),
-                      curve: Curves.ease,
-                    ),
-                    screenTransitionAnimation: ScreenTransitionAnimation(
-                      animateTabTransition: true,
-                      curve: Curves.ease,
-                      duration: Duration(milliseconds: 200),
-                    ),
-                    navBarStyle: NavBarStyle
-                        .style10, // Choose the nav bar style with this property
-                  ),
-                ],
+            return PersistentTabView(
+              controller: state.navBarController,
+              screens: [
+                HomePage(state.navBarController),
+                SettingsPage(navBarController: state.navBarController)
+              ],
+              items: _navBarsItems(),
+              confineInSafeArea: true,
+              backgroundColor: Theme.of(context).backgroundColor,
+              handleAndroidBackButtonPress: false,
+              resizeToAvoidBottomInset: true,
+              stateManagement: true,
+              hideNavigationBarWhenKeyboardShows: true,
+              hideNavigationBar: _hideNavBar,
+              popActionScreens: PopActionScreensType.once,
+              navBarHeight: 55,
+              popAllScreensOnTapOfSelectedTab: true,
+              itemAnimationProperties: ItemAnimationProperties(
+                duration: Duration(milliseconds: 400),
+                curve: Curves.ease,
               ),
+              screenTransitionAnimation: ScreenTransitionAnimation(
+                animateTabTransition: true,
+                curve: Curves.ease,
+                duration: Duration(milliseconds: 200),
+              ),
+              navBarStyle: NavBarStyle
+                  .style10, // Choose the nav bar style with this property
             );
           } else {
             return Container();
