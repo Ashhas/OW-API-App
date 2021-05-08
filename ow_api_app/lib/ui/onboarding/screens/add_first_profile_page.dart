@@ -237,7 +237,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
         color: Colors.red,
         alignment: Alignment.bottomCenter,
         child: Text(
-          "No Connection",
+          GlobalVariables.networkUnavailableMessage,
           style: Theme.of(context).primaryTextTheme.bodyText1,
         ),
       );

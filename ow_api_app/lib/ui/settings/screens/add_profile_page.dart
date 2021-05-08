@@ -23,6 +23,13 @@ class _AddProfilePageState extends State<AddProfilePage> {
   bool networkAvailable = true;
 
   @override
+  void initState() {
+    BlocProvider.of<NetworkConnectionBloc>(context)
+        .add(UpdateNetworkConnection());
+    super.initState();
+  }
+
+  @override
   void dispose() {
     super.dispose();
   }
@@ -222,7 +229,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
         color: Colors.red,
         alignment: Alignment.bottomCenter,
         child: Text(
-          "No Connection",
+          GlobalVariables.networkUnavailableMessage,
           style: Theme.of(context).primaryTextTheme.bodyText1,
         ),
       );

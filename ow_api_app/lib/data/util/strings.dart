@@ -1,5 +1,4 @@
 class GlobalVariables {
-
   static const String profilePublicTitle = "Public";
   static const String profilePrivateTitle = "Private";
 
@@ -20,6 +19,9 @@ class GlobalVariables {
   static const String settingsOpenSourceTitle = "Open Source-Libraries";
   static const String settingsVersionTitle = "Version";
   static const String settingsVersionNumber = "0.0.7";
+
+  static const String networkUnavailableMessage =
+      "Network connectivity limited or unavailable";
 
   static const List<String> availablePlatforms = [
     "pc",
