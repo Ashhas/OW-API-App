@@ -6,12 +6,12 @@ This project is for focusing on how the BLoC pattern would perform in an complet
 </p>
 
 ## I. Introduction
-I always felt like Blizzard never did much with the Overwatch IP on mobile. To view your stats, progress and achievements you have to really go out of your way to view them. That's why I build this project and now share it with the community. I hope that in the future this project can provide an easy way for the community to get insight into their performance at home & on-the-go. 
+To get more comfortable with the BLoC pattern, I decided to develop an app for practice purposes. Eventually that app turned into this little project for Overwatch Statistics. 
+I always feel like it's hard to see your stats, progress and achievements through your phone. That's why I started working on this project and now share it with the community.
 
-The first version of the project (v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using `flutter_bloc` for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding user statistics to the application and improving the UI by working with an UI Designer (still looking for one).
+The first version of the project (~ v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using `flutter_bloc` for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding mroe user statistics to the application and improving the UI. 
 
 ## II. Showcase
-
 <p>
   <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175330.jpg" width="200">
   <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175556.jpg" width="200">
