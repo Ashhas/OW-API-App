@@ -20,6 +20,9 @@ class GlobalVariables {
   static const String settingsVersionTitle = "Version";
   static const String settingsVersionNumber = "0.0.7";
 
+  static const String standardConversionDate = "1970-01-01 ";
+  static const String standardConversionDateTime = "1970-01-01 00:00:00.000";
+
   static const String networkUnavailableMessage =
       "Network connectivity limited or unavailable";
 

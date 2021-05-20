@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/ui/home/widget/rank_rating_widget.dart';
 
 class ProfileInfoCard extends StatefulWidget {
   @override
@@ -14,8 +13,11 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
-        return Padding(
-            padding: EdgeInsets.only(top: 45, left: 20, right: 20),
+        return Container(
+          height: 150,
+          width: double.infinity,
+          child: Padding(
+            padding: EdgeInsets.only(top: 20, left: 20, right: 20),
             child: Column(
               children: [
                 Row(
@@ -25,8 +27,8 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image(
-                          height: 110,
-                          width: 110,
+                          height: 105,
+                          width: 105,
                           image: NetworkImage(state.profileStats.icon)),
                     ),
                     SizedBox(
@@ -90,10 +92,10 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                     ))
                   ],
                 ),
-                RankRatingWidget(),
-                SizedBox(height: 10),
               ],
-            ));
+            ),
+          ),
+        );
       } else {
         return Container();
       }

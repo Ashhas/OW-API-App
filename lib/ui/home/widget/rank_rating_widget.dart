@@ -14,8 +14,7 @@ class RankRatingWidget extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
         return Container(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+            padding: const EdgeInsets.symmetric(vertical: 20.0),
             child: Column(
               children: [
                 Padding(

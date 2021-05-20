@@ -24,14 +24,14 @@ class BottomNavBarState extends State<BottomNavBar> {
       PersistentBottomNavBarItem(
         icon: Icon(Icons.home),
         title: "Home",
-        activeColor: Theme.of(context).primaryColor,
+        activeColor: Theme.of(context).accentColor,
         activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
       PersistentBottomNavBarItem(
         icon: Icon(Icons.menu),
         title: ("Settings"),
-        activeColor: Theme.of(context).primaryColor,
+        activeColor: Theme.of(context).accentColor,
         activeContentColor: Colors.white,
         inactiveColor: Colors.grey,
       ),
@@ -46,14 +46,14 @@ class BottomNavBarState extends State<BottomNavBar> {
         builder: (context, state) {
           if (state is InitializedState) {
             return PersistentTabView(
-              controller: state.navBarController,
               screens: [
                 HomePage(state.navBarController),
                 SettingsPage(navBarController: state.navBarController)
               ],
+              controller: state.navBarController,
               items: _navBarsItems(),
               confineInSafeArea: true,
-              backgroundColor: Theme.of(context).backgroundColor,
+              backgroundColor: Colors.white,
               handleAndroidBackButtonPress: false,
               resizeToAvoidBottomInset: true,
               stateManagement: true,

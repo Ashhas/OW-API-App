@@ -1,3 +1,5 @@
+import 'package:ow_api_app/data/util/strings.dart';
+
 class Profile {
   CompetitiveStats _competitiveStats;
   int _endorsement;
@@ -164,10 +166,12 @@ class Profile {
 class CompetitiveStats {
   Awards _awards;
   Games _games;
+  TopHeroes _topHeroes;
 
-  CompetitiveStats({Awards awards, Games games}) {
+  CompetitiveStats({Awards awards, Games games, TopHeroes topHeroes}) {
     this._awards = awards;
     this._games = games;
+    this._topHeroes = topHeroes;
   }
 
   Awards get awards => _awards;
@@ -178,10 +182,17 @@ class CompetitiveStats {
 
   set games(Games games) => _games = games;
 
+  TopHeroes get topHeroes => _topHeroes;
+
+  set topHeroes(TopHeroes topHeroes) => _topHeroes = topHeroes;
+
   CompetitiveStats.fromJson(Map<String, dynamic> json) {
     _awards =
         json['awards'] != null ? new Awards.fromJson(json['awards']) : null;
     _games = json['games'] != null ? new Games.fromJson(json['games']) : null;
+    _topHeroes = json['topHeroes'] != null
+        ? new TopHeroes.fromJson(json['topHeroes'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -191,6 +202,9 @@ class CompetitiveStats {
     }
     if (this._games != null) {
       data['games'] = this._games.toJson();
+    }
+    if (this._topHeroes != null) {
+      data['topHeroes'] = this._topHeroes.toJson();
     }
     return data;
   }
@@ -281,6 +295,487 @@ class Games {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['played'] = this._played;
     data['won'] = this._won;
+    return data;
+  }
+}
+
+class TopHeroes {
+  TopHero _ana;
+  TopHero _ashe;
+  TopHero _baptiste;
+  TopHero _bastion;
+  TopHero _brigitte;
+  TopHero _dVa;
+  TopHero _doomfist;
+  TopHero _echo;
+  TopHero _genji;
+  TopHero _hanzo;
+  TopHero _junkrat;
+  TopHero _lucio;
+  TopHero _mccree;
+  TopHero _mei;
+  TopHero _mercy;
+  TopHero _moira;
+  TopHero _orisa;
+  TopHero _pharah;
+  TopHero _reaper;
+  TopHero _reinhardt;
+  TopHero _roadhog;
+  TopHero _sigma;
+  TopHero _soldier76;
+  TopHero _sombra;
+  TopHero _symmetra;
+  TopHero _torbjorn;
+  TopHero _tracer;
+  TopHero _widowmaker;
+  TopHero _winston;
+  TopHero _wreckingBall;
+  TopHero _zarya;
+  TopHero _zenyatta;
+
+  TopHeroes(
+      {TopHero ana,
+      TopHero ashe,
+      TopHero baptiste,
+      TopHero bastion,
+      TopHero brigitte,
+      TopHero dVa,
+      TopHero doomfist,
+      TopHero echo,
+      TopHero genji,
+      TopHero hanzo,
+      TopHero junkrat,
+      TopHero lucio,
+      TopHero mccree,
+      TopHero mei,
+      TopHero mercy,
+      TopHero moira,
+      TopHero orisa,
+      TopHero pharah,
+      TopHero reaper,
+      TopHero reinhardt,
+      TopHero roadhog,
+      TopHero sigma,
+      TopHero soldier76,
+      TopHero sombra,
+      TopHero symmetra,
+      TopHero torbjorn,
+      TopHero tracer,
+      TopHero widowmaker,
+      TopHero winston,
+      TopHero wreckingBall,
+      TopHero zarya,
+      TopHero zenyatta}) {
+    this._ana = ana;
+    this._ashe = ashe;
+    this._baptiste = baptiste;
+    this._bastion = bastion;
+    this._brigitte = brigitte;
+    this._dVa = dVa;
+    this._doomfist = doomfist;
+    this._echo = echo;
+    this._genji = genji;
+    this._hanzo = hanzo;
+    this._junkrat = junkrat;
+    this._lucio = lucio;
+    this._mccree = mccree;
+    this._mei = mei;
+    this._mercy = mercy;
+    this._moira = moira;
+    this._orisa = orisa;
+    this._pharah = pharah;
+    this._reaper = reaper;
+    this._reinhardt = reinhardt;
+    this._roadhog = roadhog;
+    this._sigma = sigma;
+    this._soldier76 = soldier76;
+    this._sombra = sombra;
+    this._symmetra = symmetra;
+    this._torbjorn = torbjorn;
+    this._tracer = tracer;
+    this._widowmaker = widowmaker;
+    this._winston = winston;
+    this._wreckingBall = wreckingBall;
+    this._zarya = zarya;
+    this._zenyatta = zenyatta;
+  }
+
+  TopHero get ana => _ana;
+
+  set ana(TopHero ana) => _ana = ana;
+
+  TopHero get ashe => _ashe;
+
+  set ashe(TopHero ashe) => _ashe = ashe;
+
+  TopHero get baptiste => _baptiste;
+
+  set baptiste(TopHero baptiste) => _baptiste = baptiste;
+
+  TopHero get bastion => _bastion;
+
+  set bastion(TopHero bastion) => _bastion = bastion;
+
+  TopHero get brigitte => _brigitte;
+
+  set brigitte(TopHero brigitte) => _brigitte = brigitte;
+
+  TopHero get dVa => _dVa;
+
+  set dVa(TopHero dVa) => _dVa = dVa;
+
+  TopHero get doomfist => _doomfist;
+
+  set doomfist(TopHero doomfist) => _doomfist = doomfist;
+
+  TopHero get echo => _echo;
+
+  set echo(TopHero echo) => _echo = echo;
+
+  TopHero get genji => _genji;
+
+  set genji(TopHero genji) => _genji = genji;
+
+  TopHero get hanzo => _hanzo;
+
+  set hanzo(TopHero hanzo) => _hanzo = hanzo;
+
+  TopHero get junkrat => _junkrat;
+
+  set junkrat(TopHero junkrat) => _junkrat = junkrat;
+
+  TopHero get lucio => _lucio;
+
+  set lucio(TopHero lucio) => _lucio = lucio;
+
+  TopHero get mccree => _mccree;
+
+  set mccree(TopHero mccree) => _mccree = mccree;
+
+  TopHero get mei => _mei;
+
+  set mei(TopHero mei) => _mei = mei;
+
+  TopHero get mercy => _mercy;
+
+  set mercy(TopHero mercy) => _mercy = mercy;
+
+  TopHero get moira => _moira;
+
+  set moira(TopHero moira) => _moira = moira;
+
+  TopHero get orisa => _orisa;
+
+  set orisa(TopHero orisa) => _orisa = orisa;
+
+  TopHero get pharah => _pharah;
+
+  set pharah(TopHero pharah) => _pharah = pharah;
+
+  TopHero get reaper => _reaper;
+
+  set reaper(TopHero reaper) => _reaper = reaper;
+
+  TopHero get reinhardt => _reinhardt;
+
+  set reinhardt(TopHero reinhardt) => _reinhardt = reinhardt;
+
+  TopHero get roadhog => _roadhog;
+
+  set roadhog(TopHero roadhog) => _roadhog = roadhog;
+
+  TopHero get sigma => _sigma;
+
+  set sigma(TopHero sigma) => _sigma = sigma;
+
+  TopHero get soldier76 => _soldier76;
+
+  set soldier76(TopHero soldier76) => _soldier76 = soldier76;
+
+  TopHero get sombra => _sombra;
+
+  set sombra(TopHero sombra) => _sombra = sombra;
+
+  TopHero get symmetra => _symmetra;
+
+  set symmetra(TopHero symmetra) => _symmetra = symmetra;
+
+  TopHero get torbjorn => _torbjorn;
+
+  set torbjorn(TopHero torbjorn) => _torbjorn = torbjorn;
+
+  TopHero get tracer => _tracer;
+
+  set tracer(TopHero tracer) => _tracer = tracer;
+
+  TopHero get widowmaker => _widowmaker;
+
+  set widowmaker(TopHero widowmaker) => _widowmaker = widowmaker;
+
+  TopHero get winston => _winston;
+
+  set winston(TopHero winston) => _winston = winston;
+
+  TopHero get wreckingBall => _wreckingBall;
+
+  set wreckingBall(TopHero wreckingBall) => _wreckingBall = wreckingBall;
+
+  TopHero get zarya => _zarya;
+
+  set zarya(TopHero zarya) => _zarya = zarya;
+
+  TopHero get zenyatta => _zenyatta;
+
+  set zenyatta(TopHero zenyatta) => _zenyatta = zenyatta;
+
+  TopHeroes.fromJson(Map<String, dynamic> json) {
+    _ana = json['ana'] != null ? new TopHero.fromJson(json['ana']) : null;
+    _ashe = json['ashe'] != null ? new TopHero.fromJson(json['ashe']) : null;
+    _baptiste = json['baptiste'] != null
+        ? new TopHero.fromJson(json['baptiste'])
+        : null;
+    _bastion =
+        json['bastion'] != null ? new TopHero.fromJson(json['bastion']) : null;
+    _brigitte = json['brigitte'] != null
+        ? new TopHero.fromJson(json['brigitte'])
+        : null;
+    _dVa = json['dVa'] != null ? new TopHero.fromJson(json['dVa']) : null;
+    _doomfist = json['doomfist'] != null
+        ? new TopHero.fromJson(json['doomfist'])
+        : null;
+    _echo = json['echo'] != null ? new TopHero.fromJson(json['echo']) : null;
+    _genji = json['genji'] != null ? new TopHero.fromJson(json['genji']) : null;
+    _hanzo = json['hanzo'] != null ? new TopHero.fromJson(json['hanzo']) : null;
+    _junkrat =
+        json['junkrat'] != null ? new TopHero.fromJson(json['junkrat']) : null;
+    _lucio = json['lucio'] != null ? new TopHero.fromJson(json['lucio']) : null;
+    _mccree =
+        json['mccree'] != null ? new TopHero.fromJson(json['mccree']) : null;
+    _mei = json['mei'] != null ? new TopHero.fromJson(json['mei']) : null;
+    _mercy = json['mercy'] != null ? new TopHero.fromJson(json['mercy']) : null;
+    _moira = json['moira'] != null ? new TopHero.fromJson(json['moira']) : null;
+    _orisa = json['orisa'] != null ? new TopHero.fromJson(json['orisa']) : null;
+    _pharah =
+        json['pharah'] != null ? new TopHero.fromJson(json['pharah']) : null;
+    _reaper =
+        json['reaper'] != null ? new TopHero.fromJson(json['reaper']) : null;
+    _reinhardt = json['reinhardt'] != null
+        ? new TopHero.fromJson(json['reinhardt'])
+        : null;
+    _roadhog =
+        json['roadhog'] != null ? new TopHero.fromJson(json['roadhog']) : null;
+    _sigma = json['sigma'] != null ? new TopHero.fromJson(json['sigma']) : null;
+    _soldier76 = json['soldier76'] != null
+        ? new TopHero.fromJson(json['soldier76'])
+        : null;
+    _sombra =
+        json['sombra'] != null ? new TopHero.fromJson(json['sombra']) : null;
+    _symmetra = json['symmetra'] != null
+        ? new TopHero.fromJson(json['symmetra'])
+        : null;
+    _torbjorn = json['torbjorn'] != null
+        ? new TopHero.fromJson(json['torbjorn'])
+        : null;
+    _tracer =
+        json['tracer'] != null ? new TopHero.fromJson(json['tracer']) : null;
+    _widowmaker = json['widowmaker'] != null
+        ? new TopHero.fromJson(json['widowmaker'])
+        : null;
+    _winston =
+        json['winston'] != null ? new TopHero.fromJson(json['winston']) : null;
+    _wreckingBall = json['wreckingBall'] != null
+        ? new TopHero.fromJson(json['wreckingBall'])
+        : null;
+    _zarya = json['zarya'] != null ? new TopHero.fromJson(json['zarya']) : null;
+    _zenyatta = json['zenyatta'] != null
+        ? new TopHero.fromJson(json['zenyatta'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    if (this._ana != null) {
+      data['ana'] = this._ana.toJson();
+    }
+    if (this._ashe != null) {
+      data['ashe'] = this._ashe.toJson();
+    }
+    if (this._baptiste != null) {
+      data['baptiste'] = this._baptiste.toJson();
+    }
+    if (this._bastion != null) {
+      data['bastion'] = this._bastion.toJson();
+    }
+    if (this._brigitte != null) {
+      data['brigitte'] = this._brigitte.toJson();
+    }
+    if (this._dVa != null) {
+      data['dVa'] = this._dVa.toJson();
+    }
+    if (this._doomfist != null) {
+      data['doomfist'] = this._doomfist.toJson();
+    }
+    if (this._echo != null) {
+      data['echo'] = this._echo.toJson();
+    }
+    if (this._genji != null) {
+      data['genji'] = this._genji.toJson();
+    }
+    if (this._hanzo != null) {
+      data['hanzo'] = this._hanzo.toJson();
+    }
+    if (this._junkrat != null) {
+      data['junkrat'] = this._junkrat.toJson();
+    }
+    if (this._lucio != null) {
+      data['lucio'] = this._lucio.toJson();
+    }
+    if (this._mccree != null) {
+      data['mccree'] = this._mccree.toJson();
+    }
+    if (this._mei != null) {
+      data['mei'] = this._mei.toJson();
+    }
+    if (this._mercy != null) {
+      data['mercy'] = this._mercy.toJson();
+    }
+    if (this._moira != null) {
+      data['moira'] = this._moira.toJson();
+    }
+    if (this._orisa != null) {
+      data['orisa'] = this._orisa.toJson();
+    }
+    if (this._pharah != null) {
+      data['pharah'] = this._pharah.toJson();
+    }
+    if (this._reaper != null) {
+      data['reaper'] = this._reaper.toJson();
+    }
+    if (this._reinhardt != null) {
+      data['reinhardt'] = this._reinhardt.toJson();
+    }
+    if (this._roadhog != null) {
+      data['roadhog'] = this._roadhog.toJson();
+    }
+    if (this._sigma != null) {
+      data['sigma'] = this._sigma.toJson();
+    }
+    if (this._soldier76 != null) {
+      data['soldier76'] = this._soldier76.toJson();
+    }
+    if (this._sombra != null) {
+      data['sombra'] = this._sombra.toJson();
+    }
+    if (this._symmetra != null) {
+      data['symmetra'] = this._symmetra.toJson();
+    }
+    if (this._torbjorn != null) {
+      data['torbjorn'] = this._torbjorn.toJson();
+    }
+    if (this._tracer != null) {
+      data['tracer'] = this._tracer.toJson();
+    }
+    if (this._widowmaker != null) {
+      data['widowmaker'] = this._widowmaker.toJson();
+    }
+    if (this._winston != null) {
+      data['winston'] = this._winston.toJson();
+    }
+    if (this._wreckingBall != null) {
+      data['wreckingBall'] = this._wreckingBall.toJson();
+    }
+    if (this._zarya != null) {
+      data['zarya'] = this._zarya.toJson();
+    }
+    if (this._zenyatta != null) {
+      data['zenyatta'] = this._zenyatta.toJson();
+    }
+    return data;
+  }
+}
+
+class TopHero {
+  DateTime _timePlayed;
+  int _gamesWon;
+  int _winPercentage;
+  int _weaponAccuracy;
+  double _eliminationsPerLife;
+  int _multiKillBest;
+  int _objectiveKills;
+
+  TopHero(
+      {DateTime timePlayed,
+      int gamesWon,
+      int winPercentage,
+      int weaponAccuracy,
+      double eliminationsPerLife,
+      int multiKillBest,
+      int objectiveKills}) {
+    this._timePlayed = timePlayed;
+    this._gamesWon = gamesWon;
+    this._winPercentage = winPercentage;
+    this._weaponAccuracy = weaponAccuracy;
+    this._eliminationsPerLife = eliminationsPerLife;
+    this._multiKillBest = multiKillBest;
+    this._objectiveKills = objectiveKills;
+  }
+
+  DateTime get timePlayed => _timePlayed;
+
+  set timePlayed(DateTime timePlayed) => _timePlayed = timePlayed;
+
+  int get gamesWon => _gamesWon;
+
+  set gamesWon(int gamesWon) => _gamesWon = gamesWon;
+
+  int get winPercentage => _winPercentage;
+
+  set winPercentage(int winPercentage) => _winPercentage = winPercentage;
+
+  int get weaponAccuracy => _weaponAccuracy;
+
+  set weaponAccuracy(int weaponAccuracy) => _weaponAccuracy = weaponAccuracy;
+
+  double get eliminationsPerLife => _eliminationsPerLife;
+
+  set eliminationsPerLife(double eliminationsPerLife) =>
+      _eliminationsPerLife = eliminationsPerLife;
+
+  int get multiKillBest => _multiKillBest;
+
+  set multiKillBest(int multiKillBest) => _multiKillBest = multiKillBest;
+
+  int get objectiveKills => _objectiveKills;
+
+  set objectiveKills(int objectiveKills) => _objectiveKills = objectiveKills;
+
+  TopHero.fromJson(Map<String, dynamic> json) {
+    if (RegExp(r"\d\d:\d\d:\d\d").hasMatch(json['timePlayed'])) {
+      _timePlayed = DateTime.parse(
+          GlobalVariables.standardConversionDate + json['timePlayed'] + ".000");
+    } else {
+      _timePlayed = DateTime.parse(GlobalVariables.standardConversionDate +
+          "00:" +
+          json['timePlayed'] +
+          ".000");
+    }
+    _gamesWon = json['gamesWon'];
+    _winPercentage = json['winPercentage'];
+    _weaponAccuracy = json['weaponAccuracy'];
+    _eliminationsPerLife = json['eliminationsPerLife'].toDouble();
+    _multiKillBest = json['multiKillBest'];
+    _objectiveKills = json['objectiveKills'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['timePlayed'] = this._timePlayed;
+    data['gamesWon'] = this._gamesWon;
+    data['winPercentage'] = this._winPercentage;
+    data['weaponAccuracy'] = this._weaponAccuracy;
+    data['eliminationsPerLife'] = this._eliminationsPerLife;
+    data['multiKillBest'] = this._multiKillBest;
+    data['objectiveKills'] = this._objectiveKills;
     return data;
   }
 }

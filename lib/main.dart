@@ -49,7 +49,9 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'OW-API',
-          theme: AppThemes.getDarkTheme(),
+          themeMode: ThemeMode.light,
+          theme: AppThemes.getLightTheme(),
+          darkTheme: AppThemes.getDarkTheme(),
           home: SplashScreen(),
         ),
       ),

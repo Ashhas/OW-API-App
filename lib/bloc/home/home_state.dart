@@ -14,8 +14,9 @@ class LoadingProfileState extends HomeState {
 
 class ProfileLoadedState extends HomeState {
   final Profile profileStats;
+  final List<Map<String, TopHero>> topHeroes;
 
-  ProfileLoadedState({@required this.profileStats});
+  ProfileLoadedState({@required this.profileStats, this.topHeroes});
 
   @override
   List<Object> get props => [profileStats];

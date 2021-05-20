@@ -82,61 +82,80 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
               });
             }
           },
-          child: Column(
-            children: [
-              _networkNotification(netResult),
-              _buildAppBar(),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 80,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          "Enter BattleTag",
-                          style: Theme.of(context).primaryTextTheme.bodyText2,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        TextField(
-                          controller: textController,
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                              border: InputBorder.none,
-                              fillColor: Color(0xfff3f3f4),
-                              filled: true),
-                        ),
-                        Text("Please enter a valid BattleTag (Battletag#1234)",
-                            style:
-                                Theme.of(context).primaryTextTheme.bodyText1),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        DropDown<String>(
-                          items: GlobalVariables.availablePlatforms,
-                          hint: Text("Platform",
+          child: Container(
+            color: Theme.of(context).backgroundColor,
+            child: Column(
+              children: [
+                _networkNotification(netResult),
+                _buildAppBar(),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 20),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      SizedBox(
+                        height: 80,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Text(
+                            "Enter BattleTag",
+                            style: Theme.of(context).primaryTextTheme.bodyText2,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            controller: textController,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                fillColor: Theme.of(context).canvasColor,
+                                filled: true),
+                          ),
+                          Text(
+                              "Please enter a valid BattleTag (Battletag#1234)",
                               style:
                                   Theme.of(context).primaryTextTheme.bodyText1),
-                          onChanged: (String p) {
-                            print("Chosen Platform: " + p);
-                            setState(() {
-                              selectedPlatform = p;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Visibility(
-                            visible: hasError,
+                          SizedBox(
+                            height: 20,
+                          ),
+                          DropDown<String>(
+                            items: GlobalVariables.availablePlatforms,
+                            hint: Text("Platform",
+                                style: Theme.of(context)
+                                    .primaryTextTheme
+                                    .bodyText1),
+                            onChanged: (String p) {
+                              print("Chosen Platform: " + p);
+                              setState(() {
+                                selectedPlatform = p;
+                              });
+                            },
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Visibility(
+                              visible: hasError,
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 20),
+                                  Center(
+                                    child: Text(
+                                      "Profile has not been found",
+                                      style: Theme.of(context)
+                                          .primaryTextTheme
+                                          .headline1,
+                                    ),
+                                  )
+                                ],
+                              )),
+                          Visibility(
+                            visible: hasFeedback,
                             child: Column(
                               children: [
                                 SizedBox(height: 20),
@@ -149,67 +168,54 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                   ),
                                 )
                               ],
-                            )),
-                        Visibility(
-                          visible: hasFeedback,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Center(
-                                child: Text(
-                                  "Profile has not been found",
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .headline1,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Visibility(
-                          visible: !networkAvailable,
-                          child: Column(
-                            children: [
-                              SizedBox(height: 20),
-                              Center(
-                                child: Text(
-                                  "No internet connection",
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .headline1,
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        AspectRatio(
-                          aspectRatio: 20 / 3,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              if (networkAvailable) {
-                                FocusScope.of(context)
-                                    .requestFocus(FocusNode());
-                                //Add New Event
-                                BlocProvider.of<OnBoardingBloc>(context).add(
-                                  AddFirstProfile(
-                                      profileId: textController.text,
-                                      platformId: selectedPlatform),
-                                );
-                              }
-                            },
-                            child: Text(
-                              "Send",
-                              style: Theme.of(context).primaryTextTheme.button,
                             ),
                           ),
-                        ),
-                        SizedBox(height: 30),
-                      ],
-                    ),
-                  ],
+                          Visibility(
+                            visible: !networkAvailable,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Center(
+                                  child: Text(
+                                    "No internet connection",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .headline1,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          AspectRatio(
+                            aspectRatio: 20 / 3,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (networkAvailable) {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  //Add New Event
+                                  BlocProvider.of<OnBoardingBloc>(context).add(
+                                    AddFirstProfile(
+                                        profileId: textController.text,
+                                        platformId: selectedPlatform),
+                                  );
+                                }
+                              },
+                              child: Text(
+                                "Send",
+                                style:
+                                    Theme.of(context).primaryTextTheme.button,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),

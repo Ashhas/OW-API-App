@@ -1,45 +1,90 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:ow_api_app/data/model/profile_model.dart';
+import 'package:ow_api_app/data/util/strings.dart';
 
-class MostPlayedHeroesCard extends StatefulWidget {
-  const MostPlayedHeroesCard() : super();
+class MostPlayedHeroes extends StatefulWidget {
+  const MostPlayedHeroes() : super();
 
   @override
-  _MostPlayedHeroesCardState createState() => _MostPlayedHeroesCardState();
+  _MostPlayedHeroesState createState() => _MostPlayedHeroesState();
 }
 
-class _MostPlayedHeroesCardState extends State<MostPlayedHeroesCard> {
+class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
-        return state.profileStats.private
-            ? Expanded(
-                child: Container(
-                    color: Theme.of(context).backgroundColor,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Icon(
-                            Icons.lock,
-                            color: Colors.white,
-                          ),
-                        ])))
-            : Expanded(
-                child: Container(
-                  color: Theme.of(context).backgroundColor,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [],
-                  ),
-                ), //last one
-              );
+        return Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                height: 50,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text("Most Played Heroes"),
+                    Icon(Icons.arrow_forward_ios_sharp),
+                  ],
+                ),
+              ),
+              Container(
+                height: 135.0,
+                child: new ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: state.topHeroes.length,
+                  itemBuilder: (context, index) {
+                    return _mostPlayedHeroCard(
+                        state.topHeroes[index].entries.single.key,
+                        state.topHeroes[index].entries.single.value.timePlayed);
+                  },
+                  scrollDirection: Axis.horizontal,
+                ),
+              ),
+              SizedBox(
+                height: 15,
+              ),
+            ],
+          ),
+        );
       } else {
         return Container();
       }
     });
+  }
+
+  _mostPlayedHeroCard(String heroName, DateTime timePlayed) {
+    int competitiveHoursPlayed = timePlayed
+        .difference(DateTime.parse(GlobalVariables.standardConversionDateTime))
+        .inHours;
+
+    return Card(
+      color: Colors.grey,
+      child: Column(
+        children: [
+          Container(
+            width: 110,
+            height: 90,
+            color: Colors.blue,
+          ),
+          Text(heroName),
+          competitiveHoursPlayed == 0
+              ? Text(timePlayed
+                      .difference(DateTime.parse(
+                          GlobalVariables.standardConversionDateTime))
+                      .inMinutes
+                      .toString() +
+                  " Minutes")
+              : Text(timePlayed
+                      .difference(DateTime.parse(
+                          GlobalVariables.standardConversionDateTime))
+                      .inHours
+                      .toString() +
+                  " Hours")
+        ],
+      ),
+    );
   }
 }

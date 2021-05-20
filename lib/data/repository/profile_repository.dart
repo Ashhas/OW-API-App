@@ -12,7 +12,7 @@ class ProfileRepository {
         platformId +
         "/" +
         profileId +
-        "/profile");
+        "/complete");
 
     if (response.statusCode >= 200 && response.statusCode < 299) {
       var responseData = json.decode(response.body);
