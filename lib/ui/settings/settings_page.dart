@@ -101,6 +101,7 @@ class _SettingsPageState extends State<SettingsPage> {
         return Padding(
             padding: EdgeInsets.only(left: 10, right: 15),
             child: Card(
+              elevation: 0,
               color: Theme.of(context).buttonColor,
               child: Column(
                 children: [
@@ -194,6 +195,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: Card(
+        elevation: 0,
         color: Theme.of(context).buttonColor,
         child: ListTile(
           onTap: () {
@@ -222,6 +224,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: Card(
+        elevation: 0,
         color: Theme.of(context).buttonColor,
         child: ListTile(
           title: Text(
@@ -242,6 +245,7 @@ class _SettingsPageState extends State<SettingsPage> {
     return Padding(
       padding: EdgeInsets.only(left: 15, right: 15),
       child: Card(
+        elevation: 0,
         color: Theme.of(context).buttonColor,
         child: ListTile(
           onTap: () {

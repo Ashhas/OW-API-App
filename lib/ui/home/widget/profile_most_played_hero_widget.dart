@@ -68,6 +68,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
             width: 110,
             height: 90,
             color: Colors.blue,
+            child: Center(child: Text(heroName)),
           ),
           Text(heroName),
           competitiveHoursPlayed == 0

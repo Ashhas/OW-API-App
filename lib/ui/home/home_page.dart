@@ -55,11 +55,11 @@ class _HomePageState extends State<HomePage> {
 
   Widget buildLoadingWidget() {
     return Container(
-      color: Theme.of(context).backgroundColor,
+      color: Colors.white,
       child: Center(
         child: CircularProgressIndicator(
           valueColor:
-              new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+              new AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
           backgroundColor: Colors.white,
         ),
       ),

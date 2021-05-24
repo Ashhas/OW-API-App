@@ -74,7 +74,8 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
                                 ),
                               )
                             : Padding(
-                                padding: EdgeInsets.only(left: 20, right: 20),
+                                padding: EdgeInsets.only(
+                                    left: 20, top: 5, right: 20),
                                 child: Column(
                                   children: [
                                     RankRatingWidget(),
