@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:ow_api_app/data/model/profile_model.dart';
-import 'package:ow_api_app/data/util/api_exception.dart';
+import 'package:ow_api_app/util/api_exception.dart';
 
 class ProfileRepository {
   ProfileRepository();

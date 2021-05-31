@@ -20,6 +20,8 @@ dependencies:
   equatable: ^1.2.5
   path_provider: ^1.6.5
   connectivity: ^2.0.2
+  intl: ^0.17.0
+  google_fonts: ^1.1.2
 
   # Networking
   http: ^0.12.2
@@ -39,21 +41,39 @@ dev_dependencies:
   build_runner: ^1.10.1
 
 flutter:
-  fonts:
-    - family: Roboto
-      fonts:
-        - asset: fonts/Roboto-Black.ttf
-        - asset: fonts/Roboto-BlackItalic.ttf
-        - asset: fonts/Roboto-Bold.ttf
-        - asset: fonts/Roboto-BoldItalic.ttf
-        - asset: fonts/Roboto-Italic.ttf
-        - asset: fonts/Roboto-Light.ttf
-        - asset: fonts/Roboto-LightItalic.ttf
-        - asset: fonts/Roboto-Medium.ttf
-        - asset: fonts/Roboto-MediumItalic.ttf
-        - asset: fonts/Roboto-Regular.ttf
-        - asset: fonts/Roboto-Thin.ttf
-        - asset: fonts/Roboto-ThinItalic.ttf
+  assets:
+    - assets/heroIcons/ana.png
+    - assets/heroIcons/ashe.png
+    - assets/heroIcons/baptiste.png
+    - assets/heroIcons/bastion.png
+    - assets/heroIcons/brigitte.png
+    - assets/heroIcons/doomfist.png
+    - assets/heroIcons/dva.png
+    - assets/heroIcons/echo.png
+    - assets/heroIcons/genji.png
+    - assets/heroIcons/hanzo.png
+    - assets/heroIcons/junkrat.png
+    - assets/heroIcons/lucio.png
+    - assets/heroIcons/mccree.png
+    - assets/heroIcons/mei.png
+    - assets/heroIcons/mercy.png
+    - assets/heroIcons/moira.png
+    - assets/heroIcons/orisa.png
+    - assets/heroIcons/pharah.png
+    - assets/heroIcons/reaper.png
+    - assets/heroIcons/rein.png
+    - assets/heroIcons/roadhog.png
+    - assets/heroIcons/sigma.png
+    - assets/heroIcons/soldier-76.png
+    - assets/heroIcons/sombra.png
+    - assets/heroIcons/symmetra.png
+    - assets/heroIcons/torbjorn.png
+    - assets/heroIcons/tracer.png
+    - assets/heroIcons/widowmaker.png
+    - assets/heroIcons/winston.png
+    - assets/heroIcons/wrecking-ball.png
+    - assets/heroIcons/zarya.png
+    - assets/heroIcons/zenyatta.png
 
   uses-material-design: true
 

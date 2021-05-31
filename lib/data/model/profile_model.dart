@@ -1,4 +1,4 @@
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/strings.dart';
 
 class Profile {
   CompetitiveStats _competitiveStats;

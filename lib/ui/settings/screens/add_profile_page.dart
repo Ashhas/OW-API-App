@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
-import 'package:ow_api_app/data/util/api_exception_mapper.dart';
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/api_exception_mapper.dart';
+import 'package:ow_api_app/util/strings.dart';
 
 class AddProfilePage extends StatefulWidget {
   AddProfilePage() : super();

@@ -5,8 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:ow_api_app/data/util/api_exception.dart';
-import 'package:ow_api_app/data/util/shared_pref_service.dart';
+import 'package:ow_api_app/util/api_exception.dart';
+import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'on_boarding_event.dart';

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/strings.dart';
 
 class SelectMainAccountPage extends StatefulWidget {
   final String mainAccount;
@@ -83,6 +83,13 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
     return AppBar(
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back),
+        color: Colors.black,
+        onPressed: () {
+          Navigator.pop(context, selectedMainAccount);
+        },
+      ),
       title: Text(
         GlobalVariables.settingsMainAccountTitle,
         style: Theme.of(context).primaryTextTheme.headline2,

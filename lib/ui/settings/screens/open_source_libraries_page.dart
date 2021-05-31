@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/strings.dart';
 
 class OpenSourceLibrariesPage extends StatefulWidget {
   @override

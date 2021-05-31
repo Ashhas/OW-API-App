@@ -6,7 +6,7 @@ class AppThemes {
   static const Color _errorColor = Colors.red;
 
   static const Color _lightPrimaryColor = Color(0xFFF26513);
-  static const Color _lightAccentColor = Color(0xFF495CDD);
+  static const Color _lightAccentColor = Color(0xFF01407c);
   static const Color _lightCanvasColor = Color(0xFFffffff);
   static const Color _lightCardColor = Color(0xFF2B2B31);
   static const Color _lightTileColor = Color(0xFFffffff);

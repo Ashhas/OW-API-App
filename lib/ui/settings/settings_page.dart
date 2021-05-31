@@ -8,7 +8,7 @@ import 'package:ow_api_app/ui/settings/screens/open_source_libraries_page.dart';
 import 'package:ow_api_app/ui/settings/screens/select_main_account_page.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/strings.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
@@ -98,6 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildAvailableAccountsWidget() {
     return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
       if (state is SettingsLoadedState) {
+        print("MainAccount: " + state.mainAccount);
         return Padding(
             padding: EdgeInsets.only(left: 10, right: 15),
             child: Card(
@@ -123,6 +124,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         itemCount: box.values.length,
                         itemBuilder: (context, index) {
                           AccountModel account = box.getAt(index);
+
                           return ListTile(
                               title: Text(account.battleNetId,
                                   style: Theme.of(context)
@@ -132,7 +134,7 @@ class _SettingsPageState extends State<SettingsPage> {
                               trailing: IconButton(
                                 icon: Icon(Icons.close),
                                 iconSize: 25,
-                                color: Colors.white,
+                                color: Colors.black,
                                 onPressed: () {
                                   setState(() {
                                     state.allAccounts.deleteAt(index);
@@ -209,10 +211,6 @@ class _SettingsPageState extends State<SettingsPage> {
           title: Text(
             GlobalVariables.settingsMainAccountTitle,
             style: Theme.of(context).primaryTextTheme.subtitle2,
-          ),
-          trailing: Text(
-            mainAccount,
-            style: Theme.of(context).primaryTextTheme.caption,
           ),
           enabled: true,
         ),

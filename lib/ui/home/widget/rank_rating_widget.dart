@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/strings.dart';
 
 class RankRatingWidget extends StatelessWidget {
   const RankRatingWidget() : super();

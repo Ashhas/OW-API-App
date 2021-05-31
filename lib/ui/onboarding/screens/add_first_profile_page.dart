@@ -5,8 +5,8 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
-import 'package:ow_api_app/data/util/api_exception_mapper.dart';
-import 'package:ow_api_app/data/util/strings.dart';
+import 'package:ow_api_app/util/api_exception_mapper.dart';
+import 'package:ow_api_app/util/strings.dart';
 import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 
 class AddFirstProfilePage extends StatefulWidget {
@@ -203,8 +203,11 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                               },
                               child: Text(
                                 "Send",
-                                style:
-                                    Theme.of(context).primaryTextTheme.button,
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context).accentColor,
+                                onPrimary: Colors.white,
                               ),
                             ),
                           ),
@@ -229,7 +232,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
             FocusScope.of(context).requestFocus(FocusNode());
             Navigator.pop(context);
           },
-          child: Icon(Icons.close, color: Colors.white)),
+          child: Icon(Icons.close, color: Colors.black)),
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
     );

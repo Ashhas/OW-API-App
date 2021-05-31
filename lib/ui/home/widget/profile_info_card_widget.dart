@@ -14,7 +14,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
         return Container(
-          height: 150,
+          height: 140,
           width: double.infinity,
           child: Padding(
             padding: EdgeInsets.only(top: 20, left: 20, right: 20),
@@ -27,20 +27,19 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                     ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
                       child: Image(
-                          height: 105,
-                          width: 105,
+                          height: 95,
+                          width: 95,
                           image: NetworkImage(state.profileStats.icon)),
                     ),
                     SizedBox(
                       width: 18,
                     ),
-                    Container(
-                        child: Column(
+                    Column(
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 13,
+                          height: 8,
                         ),
                         Text(
                           state.profileStats.name,
@@ -89,7 +88,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                           ],
                         ),
                       ],
-                    ))
+                    )
                   ],
                 ),
               ],
