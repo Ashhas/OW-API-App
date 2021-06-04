@@ -22,6 +22,7 @@ dependencies:
   connectivity: ^2.0.2
   intl: ^0.17.0
   google_fonts: ^1.1.2
+  flutter_svg: ^0.22.0
 
   # Networking
   http: ^0.12.2
