@@ -7,6 +7,7 @@ import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart'
 import 'package:ow_api_app/ui/settings/screens/about_page.dart';
 import 'package:ow_api_app/ui/settings/screens/help_and_faq_page.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_page.dart';
+import 'package:ow_api_app/ui/settings/screens/setting_page.dart';
 import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -193,7 +194,14 @@ class _SettingsPageState extends State<SettingsPage> {
     return SettingsTile(
       title: "Settings",
       leading: Icon(Icons.settings),
-      onPressed: (BuildContext context) {},
+      onPressed: (BuildContext context) {
+        pushNewScreen(
+          context,
+          screen: SettingPage(),
+          withNavBar: false,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+      },
     );
   }
 
