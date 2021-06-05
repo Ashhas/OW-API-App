@@ -343,7 +343,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
           ),
         ),
       );
-    } else if (heroName == "Lúcio") {
+    } else if (heroName == "Lucio") {
       return Container(
         width: 110,
         height: 90,
