@@ -564,17 +564,34 @@ class Average {
       _timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
 
   Average.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'].toDouble();
-    _barrierDamageDoneAvgPer10Min =
-        json['barrierDamageDoneAvgPer10Min'].toDouble();
-    _deathsAvgPer10Min = json['deathsAvgPer10Min'].toDouble();
-    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'].toDouble();
-    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'].toDouble();
-    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'].toDouble();
-    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'].toDouble();
-    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'].toDouble();
+    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'] != null
+        ? json['allDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'] != null
+        ? json['barrierDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _deathsAvgPer10Min = json['deathsAvgPer10Min'] != null
+        ? json['deathsAvgPer10Min'].toDouble()
+        : null;
+    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'] != null
+        ? json['eliminationsAvgPer10Min'].toDouble()
+        : null;
+    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'] != null
+        ? json['finalBlowsAvgPer10Min'].toDouble()
+        : null;
+    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'] != null
+        ? json['healingDoneAvgPer10Min'].toDouble()
+        : null;
+    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'] != null
+        ? json['heroDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'] != null
+        ? json['objectiveKillsAvgPer10Min'].toDouble()
+        : null;
     _objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
-    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'].toDouble();
+    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'] != null
+        ? json['soloKillsAvgPer10Min'].toDouble()
+        : null;
     _timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
   }
 
@@ -1963,17 +1980,34 @@ class QuickPlayAverage {
       _timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
 
   QuickPlayAverage.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'].toDouble();
-    _barrierDamageDoneAvgPer10Min =
-        json['barrierDamageDoneAvgPer10Min'].toDouble();
-    _deathsAvgPer10Min = json['deathsAvgPer10Min'].toDouble();
-    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'].toDouble();
-    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'].toDouble();
-    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'].toDouble();
-    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'].toDouble();
-    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'].toDouble();
+    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'] != null
+        ? json['allDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'] != null
+        ? json['barrierDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _deathsAvgPer10Min = json['deathsAvgPer10Min'] != null
+        ? json['deathsAvgPer10Min'].toDouble()
+        : null;
+    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'] != null
+        ? json['eliminationsAvgPer10Min'].toDouble()
+        : null;
+    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'] != null
+        ? json['finalBlowsAvgPer10Min'].toDouble()
+        : null;
+    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'] != null
+        ? json['healingDoneAvgPer10Min'].toDouble()
+        : null;
+    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'] != null
+        ? json['heroDamageDoneAvgPer10Min'].toDouble()
+        : null;
+    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'] != null
+        ? json['objectiveKillsAvgPer10Min'].toDouble()
+        : null;
     _objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
-    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'].toDouble();
+    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'] != null
+        ? json['soloKillsAvgPer10Min'].toDouble()
+        : null;
     _timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
   }
 
