@@ -471,26 +471,26 @@ class Assists {
 }
 
 class Average {
-  int _allDamageDoneAvgPer10Min;
-  int _barrierDamageDoneAvgPer10Min;
+  double _allDamageDoneAvgPer10Min;
+  double _barrierDamageDoneAvgPer10Min;
   double _deathsAvgPer10Min;
   double _eliminationsAvgPer10Min;
   double _finalBlowsAvgPer10Min;
-  int _healingDoneAvgPer10Min;
-  int _heroDamageDoneAvgPer10Min;
+  double _healingDoneAvgPer10Min;
+  double _heroDamageDoneAvgPer10Min;
   double _objectiveKillsAvgPer10Min;
   String _objectiveTimeAvgPer10Min;
   double _soloKillsAvgPer10Min;
   String _timeSpentOnFireAvgPer10Min;
 
   Average(
-      {int allDamageDoneAvgPer10Min,
-      int barrierDamageDoneAvgPer10Min,
+      {double allDamageDoneAvgPer10Min,
+      double barrierDamageDoneAvgPer10Min,
       double deathsAvgPer10Min,
       double eliminationsAvgPer10Min,
       double finalBlowsAvgPer10Min,
-      int healingDoneAvgPer10Min,
-      int heroDamageDoneAvgPer10Min,
+      double healingDoneAvgPer10Min,
+      double heroDamageDoneAvgPer10Min,
       double objectiveKillsAvgPer10Min,
       String objectiveTimeAvgPer10Min,
       double soloKillsAvgPer10Min,
@@ -508,14 +508,14 @@ class Average {
     this._timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
   }
 
-  int get allDamageDoneAvgPer10Min => _allDamageDoneAvgPer10Min;
+  double get allDamageDoneAvgPer10Min => _allDamageDoneAvgPer10Min;
 
-  set allDamageDoneAvgPer10Min(int allDamageDoneAvgPer10Min) =>
+  set allDamageDoneAvgPer10Min(double allDamageDoneAvgPer10Min) =>
       _allDamageDoneAvgPer10Min = allDamageDoneAvgPer10Min;
 
-  int get barrierDamageDoneAvgPer10Min => _barrierDamageDoneAvgPer10Min;
+  double get barrierDamageDoneAvgPer10Min => _barrierDamageDoneAvgPer10Min;
 
-  set barrierDamageDoneAvgPer10Min(int barrierDamageDoneAvgPer10Min) =>
+  set barrierDamageDoneAvgPer10Min(double barrierDamageDoneAvgPer10Min) =>
       _barrierDamageDoneAvgPer10Min = barrierDamageDoneAvgPer10Min;
 
   double get deathsAvgPer10Min => _deathsAvgPer10Min;
@@ -533,14 +533,14 @@ class Average {
   set finalBlowsAvgPer10Min(double finalBlowsAvgPer10Min) =>
       _finalBlowsAvgPer10Min = finalBlowsAvgPer10Min;
 
-  int get healingDoneAvgPer10Min => _healingDoneAvgPer10Min;
+  double get healingDoneAvgPer10Min => _healingDoneAvgPer10Min;
 
-  set healingDoneAvgPer10Min(int healingDoneAvgPer10Min) =>
+  set healingDoneAvgPer10Min(double healingDoneAvgPer10Min) =>
       _healingDoneAvgPer10Min = healingDoneAvgPer10Min;
 
-  int get heroDamageDoneAvgPer10Min => _heroDamageDoneAvgPer10Min;
+  double get heroDamageDoneAvgPer10Min => _heroDamageDoneAvgPer10Min;
 
-  set heroDamageDoneAvgPer10Min(int heroDamageDoneAvgPer10Min) =>
+  set heroDamageDoneAvgPer10Min(double heroDamageDoneAvgPer10Min) =>
       _heroDamageDoneAvgPer10Min = heroDamageDoneAvgPer10Min;
 
   double get objectiveKillsAvgPer10Min => _objectiveKillsAvgPer10Min;
@@ -564,16 +564,17 @@ class Average {
       _timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
 
   Average.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'];
-    _barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'];
-    _deathsAvgPer10Min = json['deathsAvgPer10Min'];
-    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'];
-    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'];
-    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'];
-    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'];
-    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'];
+    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'].toDouble();
+    _barrierDamageDoneAvgPer10Min =
+        json['barrierDamageDoneAvgPer10Min'].toDouble();
+    _deathsAvgPer10Min = json['deathsAvgPer10Min'].toDouble();
+    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'].toDouble();
+    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'].toDouble();
+    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'].toDouble();
+    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'].toDouble();
+    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'].toDouble();
     _objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
-    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'];
+    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'].toDouble();
     _timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
   }
 
@@ -1869,26 +1870,26 @@ class QuickPlayAssists {
 }
 
 class QuickPlayAverage {
-  int _allDamageDoneAvgPer10Min;
-  int _barrierDamageDoneAvgPer10Min;
+  double _allDamageDoneAvgPer10Min;
+  double _barrierDamageDoneAvgPer10Min;
   double _deathsAvgPer10Min;
   double _eliminationsAvgPer10Min;
   double _finalBlowsAvgPer10Min;
-  int _healingDoneAvgPer10Min;
-  int _heroDamageDoneAvgPer10Min;
+  double _healingDoneAvgPer10Min;
+  double _heroDamageDoneAvgPer10Min;
   double _objectiveKillsAvgPer10Min;
   String _objectiveTimeAvgPer10Min;
   double _soloKillsAvgPer10Min;
   String _timeSpentOnFireAvgPer10Min;
 
   QuickPlayAverage(
-      {int allDamageDoneAvgPer10Min,
-      int barrierDamageDoneAvgPer10Min,
+      {double allDamageDoneAvgPer10Min,
+      double barrierDamageDoneAvgPer10Min,
       double deathsAvgPer10Min,
       double eliminationsAvgPer10Min,
       double finalBlowsAvgPer10Min,
-      int healingDoneAvgPer10Min,
-      int heroDamageDoneAvgPer10Min,
+      double healingDoneAvgPer10Min,
+      double heroDamageDoneAvgPer10Min,
       double objectiveKillsAvgPer10Min,
       String objectiveTimeAvgPer10Min,
       double soloKillsAvgPer10Min,
@@ -1906,14 +1907,14 @@ class QuickPlayAverage {
     this._timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
   }
 
-  int get allDamageDoneAvgPer10Min => _allDamageDoneAvgPer10Min;
+  double get allDamageDoneAvgPer10Min => _allDamageDoneAvgPer10Min;
 
-  set allDamageDoneAvgPer10Min(int allDamageDoneAvgPer10Min) =>
+  set allDamageDoneAvgPer10Min(double allDamageDoneAvgPer10Min) =>
       _allDamageDoneAvgPer10Min = allDamageDoneAvgPer10Min;
 
-  int get barrierDamageDoneAvgPer10Min => _barrierDamageDoneAvgPer10Min;
+  double get barrierDamageDoneAvgPer10Min => _barrierDamageDoneAvgPer10Min;
 
-  set barrierDamageDoneAvgPer10Min(int barrierDamageDoneAvgPer10Min) =>
+  set barrierDamageDoneAvgPer10Min(double barrierDamageDoneAvgPer10Min) =>
       _barrierDamageDoneAvgPer10Min = barrierDamageDoneAvgPer10Min;
 
   double get deathsAvgPer10Min => _deathsAvgPer10Min;
@@ -1931,14 +1932,14 @@ class QuickPlayAverage {
   set finalBlowsAvgPer10Min(double finalBlowsAvgPer10Min) =>
       _finalBlowsAvgPer10Min = finalBlowsAvgPer10Min;
 
-  int get healingDoneAvgPer10Min => _healingDoneAvgPer10Min;
+  double get healingDoneAvgPer10Min => _healingDoneAvgPer10Min;
 
-  set healingDoneAvgPer10Min(int healingDoneAvgPer10Min) =>
+  set healingDoneAvgPer10Min(double healingDoneAvgPer10Min) =>
       _healingDoneAvgPer10Min = healingDoneAvgPer10Min;
 
-  int get heroDamageDoneAvgPer10Min => _heroDamageDoneAvgPer10Min;
+  double get heroDamageDoneAvgPer10Min => _heroDamageDoneAvgPer10Min;
 
-  set heroDamageDoneAvgPer10Min(int heroDamageDoneAvgPer10Min) =>
+  set heroDamageDoneAvgPer10Min(double heroDamageDoneAvgPer10Min) =>
       _heroDamageDoneAvgPer10Min = heroDamageDoneAvgPer10Min;
 
   double get objectiveKillsAvgPer10Min => _objectiveKillsAvgPer10Min;
@@ -1962,16 +1963,17 @@ class QuickPlayAverage {
       _timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
 
   QuickPlayAverage.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'];
-    _barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'];
-    _deathsAvgPer10Min = json['deathsAvgPer10Min'];
-    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'];
-    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'];
-    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'];
-    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'];
-    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'];
+    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'].toDouble();
+    _barrierDamageDoneAvgPer10Min =
+        json['barrierDamageDoneAvgPer10Min'].toDouble();
+    _deathsAvgPer10Min = json['deathsAvgPer10Min'].toDouble();
+    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'].toDouble();
+    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'].toDouble();
+    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'].toDouble();
+    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'].toDouble();
+    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'].toDouble();
     _objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
-    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'];
+    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'].toDouble();
     _timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
   }
 
