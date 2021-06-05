@@ -81,8 +81,8 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
 
   Widget _buildAppBar() {
     return AppBar(
-      elevation: 0.0,
-      backgroundColor: Theme.of(context).backgroundColor,
+      elevation: 1,
+      backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
         icon: Icon(Icons.arrow_back),
         color: Colors.black,

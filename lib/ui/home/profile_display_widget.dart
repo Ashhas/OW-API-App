@@ -107,9 +107,9 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
     if (result == ConnectivityResult.none) {
       return Container(
         width: double.infinity,
-        height: 20,
-        color: Color(0xFF0033aa),
-        alignment: Alignment.bottomCenter,
+        height: 22,
+        color: Theme.of(context).errorColor,
+        alignment: Alignment.center,
         child: Text(
           GlobalVariables.networkUnavailableMessage,
           style: TextStyle(fontSize: 14, color: Colors.white),

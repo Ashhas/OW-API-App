@@ -4,13 +4,12 @@ class AppThemes {
   static const Color _profileVisibilityColor =
       Color.fromRGBO(246, 246, 133, 1.0);
   static const Color _errorColor = Colors.red;
-
   static const Color _lightPrimaryColor = Color(0xFFF26513);
   static const Color _lightAccentColor = Color(0xFF01407c);
   static const Color _lightCanvasColor = Color(0xFFffffff);
   static const Color _lightCardColor = Color(0xFF2B2B31);
   static const Color _lightTileColor = Color(0xFFffffff);
-  static const Color _lightBackgroundColor = Color(0xFFF8F8F8);
+  static const Color _lightBackgroundColor = Color(0xFFfafafa);
   static const Color _lightPrimaryTextColor = Color(0xFF323238);
 
   static const Color _darkPrimaryColor = Color(0xFFF26513);
@@ -116,6 +115,7 @@ class AppThemes {
       buttonColor: _darkTileColor,
       bottomAppBarColor: _darkBackgroundColor,
       hintColor: _profileVisibilityColor,
+      errorColor: _errorColor,
       primaryTextTheme: TextTheme(
         bodyText2: TextStyle(
           fontSize: 15,

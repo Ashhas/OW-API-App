@@ -191,7 +191,11 @@ class _AddProfilePageState extends State<AddProfilePage> {
                             },
                             child: Text(
                               "Send",
-                              style: Theme.of(context).primaryTextTheme.button,
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            style: ElevatedButton.styleFrom(
+                              primary: Theme.of(context).accentColor,
+                              onPrimary: Colors.white,
                             ),
                           ),
                         ),
@@ -215,7 +219,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
             FocusScope.of(context).requestFocus(FocusNode());
             Navigator.pop(context);
           },
-          child: Icon(Icons.close, color: Colors.white)),
+          child: Icon(Icons.close, color: Colors.black)),
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
     );

@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/ui/settings/screens/open_source_libraries_page.dart';
-import 'package:ow_api_app/ui/settings/screens/select_main_account_page.dart';
+import 'package:ow_api_app/ui/settings/screens/about_page.dart';
+import 'package:ow_api_app/ui/settings/screens/help_and_faq_page.dart';
+import 'package:ow_api_app/ui/settings/screens/main_account_page.dart';
+import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/util/strings.dart';
@@ -58,20 +60,16 @@ class _SettingsPageState extends State<SettingsPage> {
               return SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _buildAvailableAccountsWidget(),
-                    SizedBox(
-                      height: 20,
-                    ),
+                    Divider(height: 1, thickness: 1),
                     _buildMainAccountTile(state.mainAccount),
-                    SizedBox(
-                      height: 15,
-                    ),
-                    _buildVersionTile(state.appVersion),
-                    _buildLibrariesTile(),
-                    SizedBox(
-                      height: 100,
-                    ),
+                    Divider(height: 1, thickness: 1),
+                    _buildSettingsTile(),
+                    _buildAboutTile(),
+                    _buildHelpAndFaqTile(),
+                    SizedBox(height: 100),
                   ],
                 ),
               );
@@ -87,10 +85,10 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildAppBar() {
     return AppBar(
       elevation: 0.0,
-      backgroundColor: Theme.of(context).backgroundColor,
+      backgroundColor: Theme.of(context).accentColor,
       title: Text(
         GlobalVariables.settingsPageTitle,
-        style: Theme.of(context).primaryTextTheme.headline2,
+        style: TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
   }
@@ -98,95 +96,78 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildAvailableAccountsWidget() {
     return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
       if (state is SettingsLoadedState) {
-        print("MainAccount: " + state.mainAccount);
-        return Padding(
-            padding: EdgeInsets.only(left: 10, right: 15),
-            child: Card(
-              elevation: 0,
-              color: Theme.of(context).buttonColor,
-              child: Column(
-                children: [
-                  ValueListenableBuilder(
-                    valueListenable: state.allAccounts.listenable(),
-                    builder: (context, box, widget) {
-                      if (box.values.isEmpty)
-                        return ListTile(
-                          title: Text(
-                            GlobalVariables.settingsNoAccountTitle,
-                            style: Theme.of(context).primaryTextTheme.subtitle2,
-                          ),
-                          enabled: true,
-                        );
+        return Container(
+          child: Column(
+            children: [
+              ValueListenableBuilder(
+                valueListenable: state.allAccounts.listenable(),
+                builder: (context, box, widget) {
+                  if (box.values.isEmpty)
+                    return ListTile(
+                      title: Text(GlobalVariables.settingsNoAccountTitle),
+                      enabled: true,
+                    );
 
-                      return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: box.values.length,
-                        itemBuilder: (context, index) {
-                          AccountModel account = box.getAt(index);
+                  return ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemCount: box.values.length,
+                    itemBuilder: (context, index) {
+                      AccountModel account = box.getAt(index);
 
-                          return ListTile(
-                              title: Text(account.battleNetId,
-                                  style: Theme.of(context)
-                                      .primaryTextTheme
-                                      .subtitle1),
-                              dense: true,
-                              trailing: IconButton(
-                                icon: Icon(Icons.close),
-                                iconSize: 25,
-                                color: Colors.black,
-                                onPressed: () {
-                                  setState(() {
-                                    state.allAccounts.deleteAt(index);
-                                  });
-                                },
-                              ),
-                              onTap: () {
-                                if (networkAvailable) {
-                                  BlocProvider.of<SettingsBloc>(context).add(
-                                      ChangeLoadedProfile(
-                                          profileId: account.battleNetId,
-                                          platformId: account.platformId));
-                                }
-                              });
+                      return ListTile(
+                        title: Text(account.battleNetId,
+                            style: TextStyle(color: Colors.white)),
+                        dense: true,
+                        tileColor: Theme.of(context).accentColor,
+                        trailing: IconButton(
+                          icon: Icon(Icons.close, color: Colors.white),
+                          iconSize: 25,
+                          color: Colors.black,
+                          onPressed: () {
+                            setState(() {
+                              state.allAccounts.deleteAt(index);
+                            });
+                          },
+                        ),
+                        onTap: () {
+                          if (networkAvailable) {
+                            BlocProvider.of<SettingsBloc>(context).add(
+                                ChangeLoadedProfile(
+                                    profileId: account.battleNetId,
+                                    platformId: account.platformId));
+                          }
                         },
                       );
                     },
-                  ),
-                  SizedBox(
-                    width: 200,
-                    child: TextButton(
-                      onPressed: () {
-                        pushNewScreen(
-                          context,
-                          screen: AddProfilePage(),
-                          withNavBar: false,
-                          pageTransitionAnimation:
-                              PageTransitionAnimation.cupertino,
-                        );
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add,
-                            color: Colors.white,
-                          ),
-                          Text(
-                            "Add Account",
-                            style: Theme.of(context).primaryTextTheme.button,
-                          )
-                        ],
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Theme.of(context).primaryColor),
-                      ),
-                    ),
-                  )
-                ],
+                  );
+                },
               ),
-            ));
+              Container(
+                color: Theme.of(context).accentColor,
+                child: TextButton(
+                  onPressed: () {
+                    pushNewScreen(
+                      context,
+                      screen: AddProfilePage(),
+                      withNavBar: false,
+                      pageTransitionAnimation:
+                          PageTransitionAnimation.cupertino,
+                    );
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(Icons.add, color: Colors.white),
+                      Text("Add Account", style: TextStyle(color: Colors.white))
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
       } else {
         return Container();
       }
@@ -194,77 +175,55 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Widget _buildMainAccountTile(String mainAccount) {
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
-      child: Card(
-        elevation: 0,
-        color: Theme.of(context).buttonColor,
-        child: ListTile(
-          onTap: () {
-            pushNewScreen(
-              context,
-              screen: SelectMainAccountPage(mainAccount: mainAccount),
-              withNavBar: false,
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            ).then((value) => setState(() {}));
-          },
-          title: Text(
-            GlobalVariables.settingsMainAccountTitle,
-            style: Theme.of(context).primaryTextTheme.subtitle2,
-          ),
-          enabled: true,
-        ),
-      ),
+    return SettingsTile(
+      title: GlobalVariables.settingsMainAccountTitle,
+      leading: Icon(Icons.account_circle_outlined),
+      onPressed: (BuildContext context) {
+        pushNewScreen(
+          context,
+          screen: SelectMainAccountPage(mainAccount: mainAccount),
+          withNavBar: false,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        ).then((value) => setState(() {}));
+      },
     );
   }
 
-  Widget _buildVersionTile(String appVersion) {
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
-      child: Card(
-        elevation: 0,
-        color: Theme.of(context).buttonColor,
-        child: ListTile(
-          title: Text(
-            GlobalVariables.settingsVersionTitle,
-            style: Theme.of(context).primaryTextTheme.subtitle2,
-          ),
-          trailing: Text(
-            appVersion,
-            style: Theme.of(context).primaryTextTheme.caption,
-          ),
-          enabled: true,
-        ),
-      ),
+  Widget _buildSettingsTile() {
+    return SettingsTile(
+      title: "Settings",
+      leading: Icon(Icons.settings),
+      onPressed: (BuildContext context) {},
     );
   }
 
-  Widget _buildLibrariesTile() {
-    return Padding(
-      padding: EdgeInsets.only(left: 15, right: 15),
-      child: Card(
-        elevation: 0,
-        color: Theme.of(context).buttonColor,
-        child: ListTile(
-          onTap: () {
-            pushNewScreen(
-              context,
-              screen: OpenSourceLibrariesPage(),
-              withNavBar: false,
-              pageTransitionAnimation: PageTransitionAnimation.cupertino,
-            );
-          },
-          title: Text(
-            GlobalVariables.settingsOpenSourceTitle,
-            style: Theme.of(context).primaryTextTheme.subtitle2,
-          ),
-          trailing: Icon(
-            Icons.arrow_forward_ios,
-            color: Colors.white,
-          ),
-          enabled: true,
-        ),
-      ),
+  Widget _buildAboutTile() {
+    return SettingsTile(
+      title: "About",
+      leading: Icon(Icons.info_outline),
+      onPressed: (BuildContext context) {
+        pushNewScreen(
+          context,
+          screen: AboutPage(),
+          withNavBar: false,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+      },
+    );
+  }
+
+  Widget _buildHelpAndFaqTile() {
+    return SettingsTile(
+      title: "Help/FAQ",
+      leading: Icon(Icons.help_outline),
+      onPressed: (BuildContext context) {
+        pushNewScreen(
+          context,
+          screen: HelpFaqPage(),
+          withNavBar: false,
+          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+        );
+      },
     );
   }
 }
