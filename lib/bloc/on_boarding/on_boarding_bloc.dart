@@ -50,7 +50,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
         //Determines that setup is done
         final sharedPrefService = await SharedPreferencesService.instance;
         sharedPrefService.setOnBoardingSeenBefore(false);
-        sharedPrefService.setMainAccount(event.profileId);
+        sharedPrefService.setMainAccountName(event.profileId);
+        sharedPrefService.setMainAccountPlatform(event.platformId);
 
         yield FirstProfileValidatedState();
       } else {

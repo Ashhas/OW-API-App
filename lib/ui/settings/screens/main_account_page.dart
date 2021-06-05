@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
+import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/util/strings.dart';
 
 class SelectMainAccountPage extends StatefulWidget {
@@ -15,7 +16,7 @@ class SelectMainAccountPage extends StatefulWidget {
 }
 
 class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
-  String selectedMainAccount;
+  AccountModel selectedMainAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +51,22 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                                     .primaryTextTheme
                                     .headline5,
                               ),
-                              value: account.battleNetId,
+                              value: account,
                               groupValue: selectedMainAccount,
                               onChanged: (val) {
-                                setState(() {
-                                  selectedMainAccount = val;
-                                  BlocProvider.of<SettingsBloc>(context).add(
-                                    SaveMainAccount(
-                                      battleNetId: val,
-                                    ),
-                                  );
-                                });
+                                setState(
+                                  () {
+                                    selectedMainAccount = val;
+                                    BlocProvider.of<SettingsBloc>(context).add(
+                                      SaveMainAccount(
+                                        battleNetId:
+                                            selectedMainAccount.battleNetId,
+                                        platformId:
+                                            selectedMainAccount.platformId,
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             );
                           },

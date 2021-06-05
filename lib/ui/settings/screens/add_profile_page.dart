@@ -117,7 +117,6 @@ class _AddProfilePageState extends State<AddProfilePage> {
                               style:
                                   Theme.of(context).primaryTextTheme.bodyText1),
                           onChanged: (String p) {
-                            print("Chosen Platform: " + p);
                             setState(() {
                               selectedPlatform = p;
                             });

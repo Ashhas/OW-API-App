@@ -9,6 +9,7 @@ import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/util/api_exception.dart';
+import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'package:ow_api_app/bloc/home/home_event.dart';
@@ -35,18 +36,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     List<Map<String, TopHero>> selectedTopHeroes;
     yield LoadingProfileState();
 
-    //Get first account to Fetch
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
-    Box _profileBox = await Hive.openBox('accountBox');
-    AccountModel fetchedAccount = _profileBox.getAt(0);
+    //Save MainAccount in SharedPref
+    final sharedPrefService = await SharedPreferencesService.instance;
+    String mainAccount = sharedPrefService.getMainAccountName;
+    String mainAccountPlatform = sharedPrefService.getMainAccountPlatform;
 
     //Fetch Data from repo
     try {
       // Add profile ID and Platform ID to the request
       Profile profile = await repository.getProfileStats(
-          fetchedAccount.battleNetId.replaceAll("#", "-"),
-          fetchedAccount.platformId);
+          mainAccount.replaceAll("#", "-"), mainAccountPlatform);
 
       if (profile.competitiveStats.topHeroes != null) {
         //Sort TopHero List

@@ -130,7 +130,6 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                     .primaryTextTheme
                                     .bodyText1),
                             onChanged: (String p) {
-                              print("Chosen Platform: " + p);
                               setState(() {
                                 selectedPlatform = p;
                               });

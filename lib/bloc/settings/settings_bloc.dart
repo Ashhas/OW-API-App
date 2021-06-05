@@ -21,7 +21,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   SettingsBloc({@required this.repository}) : super(SettingsOpenedState());
 
-
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
     if (event is SettingsOpened) {
@@ -47,7 +46,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -69,7 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -98,7 +97,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -144,6 +143,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       SaveMainAccount event, SettingsState state) async* {
     //Save MainAccount in SharedPref
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setMainAccount(event.battleNetId);
+    sharedPrefService.setMainAccountName(event.battleNetId);
+    sharedPrefService.setMainAccountPlatform(event.platformId);
   }
 }
