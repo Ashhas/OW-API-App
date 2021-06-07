@@ -30,6 +30,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   //Feedback Variables
   bool hasError = false;
   bool hasFeedback = false;
+  bool allFilledIn = true;
 
   //Network Variables
   ConnectivityResult netResult;
@@ -164,71 +165,28 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                               ],
                             ),
                           ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Visibility(
-                            visible: hasError,
-                            child: Column(
-                              children: [
-                                SizedBox(height: 20),
-                                Center(
-                                  child: Text(
-                                    "Profile has not been found",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .subtitle2,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: hasFeedback,
-                            child: Column(
-                              children: [
-                                SizedBox(height: 20),
-                                Center(
-                                  child: Text(
-                                    "Profile has not been found",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .subtitle2,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Visibility(
-                            visible: netResult == ConnectivityResult.none,
-                            child: Column(
-                              children: [
-                                SizedBox(height: 20),
-                                Center(
-                                  child: Text(
-                                    "No internet connection",
-                                    style: Theme.of(context)
-                                        .primaryTextTheme
-                                        .subtitle2,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
+                          _feedbackMessageWidgets(),
                           SizedBox(height: 20),
                           AspectRatio(
                             aspectRatio: 20 / 3,
                             child: ElevatedButton(
                               onPressed: () {
-                                if (netResult != ConnectivityResult.none) {
-                                  FocusScope.of(context)
-                                      .requestFocus(FocusNode());
-                                  //Add New Event
-                                  BlocProvider.of<SettingsBloc>(context).add(
-                                    AddProfile(
-                                        profileId: accountIdController.text,
-                                        platformId: selectedPlatform),
-                                  );
+                                if (accountIdController.text.isEmpty ||
+                                    selectedPlatform == null) {
+                                  setState(() {
+                                    _showNotFilledInMessage();
+                                  });
+                                } else {
+                                  if (netResult != ConnectivityResult.none) {
+                                    FocusScope.of(context)
+                                        .requestFocus(FocusNode());
+
+                                    BlocProvider.of<SettingsBloc>(context).add(
+                                      AddProfile(
+                                          profileId: accountIdController.text,
+                                          platformId: selectedPlatform),
+                                    );
+                                  }
                                 }
                               },
                               child: state is ValidatingProfileState
@@ -293,12 +251,81 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     }
   }
 
+  _feedbackMessageWidgets() {
+    return Column(
+      children: [
+        Visibility(
+          visible: !allFilledIn,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Not everything has been filled in",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+        Visibility(
+          visible: hasError,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Profile has not been found",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+        Visibility(
+          visible: hasFeedback,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Profile has not been found",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+        Visibility(
+          visible: netResult == ConnectivityResult.none,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "No internet connection",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
   _showFeedbackMessage() {
     Future.delayed(Duration(seconds: 6)).then((value) => {
           setState(() {
             hasFeedback = false;
           })
         });
+  }
+
+  _showNotFilledInMessage() {
+    setState(() {
+      allFilledIn = false;
+    });
   }
 
   _showErrorMessage(Exception e) {
