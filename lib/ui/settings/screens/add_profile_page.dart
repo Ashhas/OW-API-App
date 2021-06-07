@@ -86,161 +86,176 @@ class _AddProfilePageState extends State<AddProfilePage> {
                 });
               }
             },
-            child: Column(
-              children: [
-                _networkNotification(netResult),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      SizedBox(
-                        height: 80,
-                      ),
-                      Text(
-                        "Enter BattleTag",
-                        style: Theme.of(context).primaryTextTheme.bodyText2,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        controller: accountIdController,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: InputDecoration(
-                            border: InputBorder.none,
-                            fillColor: Color(0xfff3f3f4),
-                            filled: true),
-                      ),
-                      Text("Please enter a valid BattleTag (Battletag#1234)",
-                          style: Theme.of(context).primaryTextTheme.bodyText1),
-                      SizedBox(
-                        height: 40,
-                      ),
-                      Text(
-                        "Select a Platform",
-                        style: Theme.of(context).primaryTextTheme.bodyText2,
-                      ),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        height: 40,
-                        child: Row(
-                          children: <Widget>[
-                            WidgetBtnPc(
-                                selected: pcBtnSelected,
-                                onPressed: (BuildContext context) {
-                                  selectedPlatform = "pc";
-                                  pcBtnSelected = true;
-                                }),
-                            SizedBox(width: 20),
-                            WidgetBtnPsn(
-                                selected: psnBtnSelected,
-                                onPressed: (BuildContext context) {
-                                  selectedPlatform = "psn";
-                                  pcBtnSelected = true;
-                                }),
-                            SizedBox(width: 20),
-                            WidgetBtnXbox(
-                                selected: xblBtnSelected,
-                                onPressed: (BuildContext context) {
-                                  selectedPlatform = "xbl";
-                                  pcBtnSelected = true;
-                                }),
-                            SizedBox(width: 20),
-                            WidgetBtnSwitch(
-                                selected: switchBtnSelected,
-                                onPressed: (BuildContext context) {
-                                  selectedPlatform = "nintendo-switch";
-                                  pcBtnSelected = true;
-                                }),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Visibility(
-                        visible: hasError,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            Center(
-                              child: Text(
-                                "Profile has not been found",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .subtitle2,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: hasFeedback,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            Center(
-                              child: Text(
-                                "Profile has not been found",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .subtitle2,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      Visibility(
-                        visible: netResult == ConnectivityResult.none,
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            Center(
-                              child: Text(
-                                "No internet connection",
-                                style: Theme.of(context)
-                                    .primaryTextTheme
-                                    .subtitle2,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      AspectRatio(
-                        aspectRatio: 20 / 3,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (netResult != ConnectivityResult.none) {
-                              FocusScope.of(context).requestFocus(FocusNode());
-                              //Add New Event
-                              BlocProvider.of<SettingsBloc>(context).add(
-                                AddProfile(
-                                    profileId: accountIdController.text,
-                                    platformId: selectedPlatform),
-                              );
-                            }
-                          },
-                          child: Text(
-                            "Send",
-                            style: TextStyle(color: Colors.white),
+            child: BlocBuilder<SettingsBloc, SettingsState>(
+              builder: (context, state) {
+                return Column(
+                  children: [
+                    _networkNotification(netResult),
+                    Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 20),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 80,
                           ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).accentColor,
-                            onPrimary: Colors.white,
+                          Text(
+                            "Enter BattleTag",
+                            style: Theme.of(context).primaryTextTheme.bodyText2,
                           ),
-                        ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          TextField(
+                            controller: accountIdController,
+                            autofocus: true,
+                            obscureText: false,
+                            decoration: InputDecoration(
+                                border: InputBorder.none,
+                                fillColor: Color(0xfff3f3f4),
+                                filled: true),
+                          ),
+                          Text(
+                              "Please enter a valid BattleTag (Battletag#1234)",
+                              style:
+                                  Theme.of(context).primaryTextTheme.bodyText1),
+                          SizedBox(
+                            height: 40,
+                          ),
+                          Text(
+                            "Select a Platform",
+                            style: Theme.of(context).primaryTextTheme.bodyText2,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 40,
+                            child: Row(
+                              children: <Widget>[
+                                WidgetBtnPc(
+                                    selected: pcBtnSelected,
+                                    onPressed: (BuildContext context) {
+                                      selectedPlatform = "pc";
+                                      pcBtnSelected = true;
+                                    }),
+                                SizedBox(width: 20),
+                                WidgetBtnPsn(
+                                    selected: psnBtnSelected,
+                                    onPressed: (BuildContext context) {
+                                      selectedPlatform = "psn";
+                                      pcBtnSelected = true;
+                                    }),
+                                SizedBox(width: 20),
+                                WidgetBtnXbox(
+                                    selected: xblBtnSelected,
+                                    onPressed: (BuildContext context) {
+                                      selectedPlatform = "xbl";
+                                      pcBtnSelected = true;
+                                    }),
+                                SizedBox(width: 20),
+                                WidgetBtnSwitch(
+                                    selected: switchBtnSelected,
+                                    onPressed: (BuildContext context) {
+                                      selectedPlatform = "nintendo-switch";
+                                      pcBtnSelected = true;
+                                    }),
+                              ],
+                            ),
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Visibility(
+                            visible: hasError,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Center(
+                                  child: Text(
+                                    "Profile has not been found",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .subtitle2,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: hasFeedback,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Center(
+                                  child: Text(
+                                    "Profile has not been found",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .subtitle2,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          Visibility(
+                            visible: netResult == ConnectivityResult.none,
+                            child: Column(
+                              children: [
+                                SizedBox(height: 20),
+                                Center(
+                                  child: Text(
+                                    "No internet connection",
+                                    style: Theme.of(context)
+                                        .primaryTextTheme
+                                        .subtitle2,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                          SizedBox(height: 20),
+                          AspectRatio(
+                            aspectRatio: 20 / 3,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (netResult != ConnectivityResult.none) {
+                                  FocusScope.of(context)
+                                      .requestFocus(FocusNode());
+                                  //Add New Event
+                                  BlocProvider.of<SettingsBloc>(context).add(
+                                    AddProfile(
+                                        profileId: accountIdController.text,
+                                        platformId: selectedPlatform),
+                                  );
+                                }
+                              },
+                              child: state is ValidatingProfileState
+                                  ? Center(
+                                      child: CircularProgressIndicator(
+                                        valueColor:
+                                            new AlwaysStoppedAnimation<Color>(
+                                                Colors.white),
+                                      ),
+                                    )
+                                  : Text(
+                                      "Send",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                              style: ElevatedButton.styleFrom(
+                                primary: Theme.of(context).accentColor,
+                                onPrimary: Colors.white,
+                              ),
+                            ),
+                          ),
+                          SizedBox(height: 30),
+                        ],
                       ),
-                      SizedBox(height: 30),
-                    ],
-                  ),
-                ),
-              ],
+                    ),
+                  ],
+                );
+              },
             ),
           ),
         ),

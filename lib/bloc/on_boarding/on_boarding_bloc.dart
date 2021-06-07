@@ -27,6 +27,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
 
   Stream<OnBoardingState> _mapFirstProfileAddedToState(
       AddFirstProfile event, OnBoardingState state) async* {
+    yield ValidatingFirstProfileState();
+
     //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);

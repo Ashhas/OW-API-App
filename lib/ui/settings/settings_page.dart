@@ -12,7 +12,6 @@ import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'package:ow_api_app/util/constants/variable_const.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
