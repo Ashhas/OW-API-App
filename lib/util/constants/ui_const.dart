@@ -8,7 +8,7 @@ class UiConst {
   static const String damageRoleTitle = "Damage";
   static const String supportRoleTitle = "Support";
   static const String noRankText = "--";
-  static const String currentRankSeason = "- Competitive Season 23 -";
+  static const String competitiveRankTitle = "- Competitive Ranking -";
 
   static const String mostPlayedHeroesTitle = "Most Played Heroes";
   static const String mostPlayedHeroesRedirectTitle = "See All";

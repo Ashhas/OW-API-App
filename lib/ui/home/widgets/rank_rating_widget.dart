@@ -19,7 +19,7 @@ class RankRatingWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: Text(
-                    UiConst.currentRankSeason,
+                    UiConst.competitiveRankTitle,
                     style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                 ),

@@ -2,11 +2,10 @@ import 'package:connectivity/connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/ui/home/widgets/profile_info_card_widget.dart';
 import 'package:ow_api_app/ui/home/widgets/profile_most_played_hero_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/rank_rating_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/statistics_card.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -41,62 +40,23 @@ class _ProfileScreenState extends State<ProfileScreen> {
               });
             }
           },
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              _networkNotification(netResult),
-              ProfileInfoCard(),
-              BlocBuilder<HomeBloc, HomeState>(
-                builder: (context, state) {
-                  if (state is ProfileLoadedState) {
-                    return Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10),
-                          ),
-                        ),
-                        child: state.profileStats.private
-                            ? Padding(
-                                padding: EdgeInsets.only(left: 20, right: 20),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  children: [
-                                    Icon(
-                                      Icons.lock,
-                                      color: Colors.black,
-                                    ),
-                                  ],
-                                ),
-                              )
-                            : Padding(
-                                padding: EdgeInsets.only(
-                                    left: 20, top: 5, right: 20),
-                                child: Column(
-                                  children: [
-                                    RankRatingWidget(),
-                                    Divider(
-                                      color: Color(0xFFC7CEDB),
-                                    ),
-                                    MostPlayedHeroes(),
-                                    Divider(
-                                      color: Color(0xFFC7CEDB),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                },
-              ),
-            ],
+          child: LayoutBuilder(
+            builder: (context, constraint) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: <Widget>[
+                        _networkNotification(netResult),
+                        ProfileInfoWidget(),
+                        StatisticsCard()
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            },
           ),
         ),
       ),

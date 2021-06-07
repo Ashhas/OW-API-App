@@ -4,12 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class ProfileInfoCard extends StatefulWidget {
+class ProfileInfoWidget extends StatefulWidget {
   @override
-  _ProfileInfoCardState createState() => _ProfileInfoCardState();
+  _ProfileInfoWidgetState createState() => _ProfileInfoWidgetState();
 }
 
-class _ProfileInfoCardState extends State<ProfileInfoCard> {
+class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
