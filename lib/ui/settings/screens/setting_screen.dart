@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class HelpFaqPage extends StatefulWidget {
-  HelpFaqPage();
+class SettingScreen extends StatefulWidget {
+  SettingScreen();
 
   @override
-  _HelpFaqPageState createState() => _HelpFaqPageState();
+  _SettingScreenState createState() => _SettingScreenState();
 }
 
-class _HelpFaqPageState extends State<HelpFaqPage> {
+class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _HelpFaqPageState extends State<HelpFaqPage> {
       body: Container(
         width: double.infinity,
         child: Center(
-          child: Text("Help/FAQ"),
+          child: Text("Setting"),
         ),
       ),
     );
@@ -35,7 +35,7 @@ class _HelpFaqPageState extends State<HelpFaqPage> {
         },
       ),
       title: Text(
-        "Help/FAQ",
+        "Setting",
         style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );

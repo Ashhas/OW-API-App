@@ -3,20 +3,19 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
-import 'package:ow_api_app/util/constants/variable_const.dart';
 
-class SelectMainAccountPage extends StatefulWidget {
+class SelectMainAccountScreen extends StatefulWidget {
   final String mainAccount;
 
-  SelectMainAccountPage({@required this.mainAccount});
+  SelectMainAccountScreen({@required this.mainAccount});
 
   @override
-  _SelectMainAccountPageState createState() => _SelectMainAccountPageState();
+  _SelectMainAccountScreenState createState() =>
+      _SelectMainAccountScreenState();
 }
 
-class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
+class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
   AccountModel selectedMainAccount;
 
   @override

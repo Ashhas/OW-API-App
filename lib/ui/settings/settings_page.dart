@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/ui/settings/screens/about_page.dart';
-import 'package:ow_api_app/ui/settings/screens/help_and_faq_page.dart';
-import 'package:ow_api_app/ui/settings/screens/main_account_page.dart';
-import 'package:ow_api_app/ui/settings/screens/setting_page.dart';
+import 'package:ow_api_app/ui/settings/screens/about_screen.dart';
+import 'package:ow_api_app/ui/settings/screens/add_profile_screen.dart';
+import 'package:ow_api_app/ui/settings/screens/help_and_faq_screen.dart';
+import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
+import 'package:ow_api_app/ui/settings/screens/setting_screen.dart';
 import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -15,18 +16,16 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
-import 'screens/add_profile_page.dart';
-
-class SettingsPage extends StatefulWidget {
+class SettingsScreen extends StatefulWidget {
   final PersistentTabController navBarController;
 
-  const SettingsPage({this.navBarController}) : super();
+  const SettingsScreen({this.navBarController}) : super();
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  _SettingsScreenState createState() => _SettingsScreenState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class _SettingsScreenState extends State<SettingsScreen> {
   bool networkAvailable = true;
 
   @override
@@ -150,7 +149,7 @@ class _SettingsPageState extends State<SettingsPage> {
                   onPressed: () {
                     pushNewScreen(
                       context,
-                      screen: AddProfilePage(),
+                      screen: AddProfileScreen(),
                       withNavBar: false,
                       pageTransitionAnimation:
                           PageTransitionAnimation.cupertino,
@@ -182,7 +181,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
-          screen: SelectMainAccountPage(mainAccount: mainAccount),
+          screen: SelectMainAccountScreen(mainAccount: mainAccount),
           withNavBar: false,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         ).then((value) => setState(() {}));
@@ -197,7 +196,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
-          screen: SettingPage(),
+          screen: SettingScreen(),
           withNavBar: false,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );
@@ -212,7 +211,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
-          screen: AboutPage(),
+          screen: AboutScreen(),
           withNavBar: false,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );
@@ -227,7 +226,7 @@ class _SettingsPageState extends State<SettingsPage> {
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
-          screen: HelpFaqPage(),
+          screen: HelpFaqScreen(),
           withNavBar: false,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );

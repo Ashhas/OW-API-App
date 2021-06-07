@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SettingPage extends StatefulWidget {
-  SettingPage();
+class AboutScreen extends StatefulWidget {
+  AboutScreen();
 
   @override
-  _SettingPageState createState() => _SettingPageState();
+  _AboutScreenState createState() => _AboutScreenState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _AboutScreenState extends State<AboutScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +17,7 @@ class _SettingPageState extends State<SettingPage> {
       body: Container(
         width: double.infinity,
         child: Center(
-          child: Text("Setting"),
+          child: Text("About"),
         ),
       ),
     );
@@ -35,7 +35,7 @@ class _SettingPageState extends State<SettingPage> {
         },
       ),
       title: Text(
-        "Setting",
+        "About",
         style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );

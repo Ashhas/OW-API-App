@@ -4,20 +4,19 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
+import 'package:ow_api_app/ui/home/widgets/profile_info_card_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/profile_most_played_hero_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/rank_rating_widget.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
-import 'package:ow_api_app/util/constants/variable_const.dart';
-import 'package:ow_api_app/ui/home/widget/profile_info_card_widget.dart';
-import 'package:ow_api_app/ui/home/widget/profile_most_played_hero_widget.dart';
-import 'package:ow_api_app/ui/home/widget/rank_rating_widget.dart';
 
-class ProfileDisplayWidget extends StatefulWidget {
-  const ProfileDisplayWidget() : super();
+class ProfileScreen extends StatefulWidget {
+  const ProfileScreen() : super();
 
   @override
-  _ProfileDisplayWidgetState createState() => _ProfileDisplayWidgetState();
+  _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
+class _ProfileScreenState extends State<ProfileScreen> {
   ConnectivityResult netResult;
 
   @override

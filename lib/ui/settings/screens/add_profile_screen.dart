@@ -10,14 +10,14 @@ import 'package:ow_api_app/ui/settings/widgets/widget_btn_xbl.dart';
 import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
-class AddProfilePage extends StatefulWidget {
-  AddProfilePage() : super();
+class AddProfileScreen extends StatefulWidget {
+  AddProfileScreen() : super();
 
   @override
-  _AddProfilePageState createState() => _AddProfilePageState();
+  _AddProfileScreenState createState() => _AddProfileScreenState();
 }
 
-class _AddProfilePageState extends State<AddProfilePage> {
+class _AddProfileScreenState extends State<AddProfileScreen> {
   final TextEditingController accountIdController = TextEditingController();
 
   //Platform Variables
