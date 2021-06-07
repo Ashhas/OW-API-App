@@ -1,5 +1,3 @@
-import 'package:flutter/material.dart';
-
 class UiConst {
   static const String profilePublicTitle = "Public";
   static const String profilePrivateTitle = "Private";

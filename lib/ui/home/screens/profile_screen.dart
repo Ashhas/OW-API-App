@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info_card_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_most_played_hero_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/profile_info_widget.dart';
 import 'package:ow_api_app/ui/home/widgets/statistics_card.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
