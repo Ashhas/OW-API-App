@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetBtnPsn extends StatefulWidget {
   final Function(BuildContext context) onPressed;
@@ -20,7 +19,7 @@ class _WidgetBtnPsnState extends State<WidgetBtnPsn> {
           height: 40,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: widget.selected ? Color(0xFFA0AEC5) : Color(0xFFF5F9FF),
+              color: Color(0xFFF5F9FF),
               border: Border.all(
                 width: 0.2,
                 color: Color(0xFF3164CE),

@@ -20,7 +20,7 @@ class _WidgetBtnXboxState extends State<WidgetBtnXbox> {
           height: 40,
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(5),
-              color: widget.selected ? Color(0xFFA0AEC5) : Color(0xFFF5F9FF),
+              color: Color(0xFFF5F9FF),
               border: Border.all(
                 width: 0.2,
                 color: Color(0xFF3164CE),
