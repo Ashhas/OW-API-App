@@ -4,7 +4,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 import 'package:ow_api_app/ui/home/widget/profile_info_card_widget.dart';
 import 'package:ow_api_app/ui/home/widget/profile_most_played_hero_widget.dart';
 import 'package:ow_api_app/ui/home/widget/rank_rating_widget.dart';
@@ -111,7 +112,7 @@ class _ProfileDisplayWidgetState extends State<ProfileDisplayWidget> {
         color: Theme.of(context).errorColor,
         alignment: Alignment.center,
         child: Text(
-          GlobalVariables.networkUnavailableMessage,
+          UiConst.networkUnavailableMessage,
           style: TextStyle(fontSize: 14, color: Colors.white),
         ),
       );

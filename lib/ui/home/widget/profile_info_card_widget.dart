@@ -47,7 +47,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                             Text(
                               state.profileStats.name,
                               style:
-                                  Theme.of(context).primaryTextTheme.headline3,
+                                  Theme.of(context).primaryTextTheme.headline2,
                             ),
                             SizedBox(
                               width: 6,
@@ -116,7 +116,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
               children: [
                 Text(
                   "Public",
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                  style: Theme.of(context).primaryTextTheme.bodyText2,
                 ),
                 Icon(
                   Icons.check,

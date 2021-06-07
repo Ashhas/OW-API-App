@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 
 class MostPlayedHeroes extends StatefulWidget {
   const MostPlayedHeroes() : super();
@@ -56,7 +56,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
 
   _mostPlayedHeroCard(String heroName, DateTime timePlayed) {
     int competitiveHoursPlayed = timePlayed
-        .difference(DateTime.parse(GlobalVariables.standardConversionDateTime))
+        .difference(DateTime.parse(VariableConst.standardConversionDateTime))
         .inHours;
 
     return Card(
@@ -73,13 +73,13 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
           competitiveHoursPlayed == 0
               ? Text(timePlayed
                       .difference(DateTime.parse(
-                          GlobalVariables.standardConversionDateTime))
+                          VariableConst.standardConversionDateTime))
                       .inMinutes
                       .toString() +
                   " Minutes")
               : Text(timePlayed
                       .difference(DateTime.parse(
-                          GlobalVariables.standardConversionDateTime))
+                          VariableConst.standardConversionDateTime))
                       .inHours
                       .toString() +
                   " Hours")

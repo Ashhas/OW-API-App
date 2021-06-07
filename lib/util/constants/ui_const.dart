@@ -1,4 +1,6 @@
-class GlobalVariables {
+import 'package:flutter/material.dart';
+
+class UiConst {
   static const String profilePublicTitle = "Public";
   static const String profilePrivateTitle = "Private";
 
@@ -20,9 +22,6 @@ class GlobalVariables {
   static const String settingsVersionTitle = "Version";
   static const String settingsVersionNumber = "0.0.7";
 
-  static const String standardConversionDate = "1970-01-01 ";
-  static const String standardConversionDateTime = "1970-01-01 00:00:00.000";
-
   static const String networkUnavailableMessage =
       "Network connectivity limited or unavailable";
 
@@ -31,39 +30,5 @@ class GlobalVariables {
     "psn",
     "xbl",
     "nintendo-switch"
-  ];
-
-  static const List<String> heroNames = [
-    'Orisa',
-    'Reinhardt',
-    'Roadhog',
-    'Sigma',
-    'Winston',
-    'Wrecking',
-    'Zarya',
-    'Ashe',
-    'Bastion',
-    'Doomfist',
-    'Echo',
-    'Genji',
-    'Hanzo',
-    'Junkrat',
-    'McCree',
-    'Mei',
-    'Pharah',
-    'Reaper',
-    'Soldier: 76',
-    'Sombra',
-    'Symmetra',
-    'Torbjörn',
-    'Tracer',
-    'Widowmaker',
-    'Ana',
-    'Baptiste',
-    'Brigitte',
-    'Lúcio',
-    'Mercy',
-    'Moira',
-    'Zenyatta',
   ];
 }

@@ -5,8 +5,9 @@ import 'package:flutter_dropdown/flutter_dropdown.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
-import 'package:ow_api_app/util/api_exception_mapper.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 
 class AddFirstProfilePage extends StatefulWidget {
@@ -124,7 +125,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                             height: 20,
                           ),
                           DropDown<String>(
-                            items: GlobalVariables.availablePlatforms,
+                            items: UiConst.availablePlatforms,
                             hint: Text("Platform",
                                 style: Theme.of(context)
                                     .primaryTextTheme
@@ -245,7 +246,7 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
         color: Colors.red,
         alignment: Alignment.bottomCenter,
         child: Text(
-          GlobalVariables.networkUnavailableMessage,
+          UiConst.networkUnavailableMessage,
           style: Theme.of(context).primaryTextTheme.bodyText1,
         ),
       );

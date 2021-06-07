@@ -4,7 +4,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 
 class SelectMainAccountPage extends StatefulWidget {
   final String mainAccount;
@@ -35,7 +36,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                     valueListenable: state.allAccounts.listenable(),
                     builder: (context, box, widget) {
                       if (box.values.isEmpty) {
-                        return Text(GlobalVariables.settingsNoAccountTitle);
+                        return Text(UiConst.settingsNoAccountTitle);
                       } else {
                         return ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -97,7 +98,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
         },
       ),
       title: Text(
-        GlobalVariables.settingsMainAccountTitle,
+        UiConst.settingsMainAccountTitle,
         style: Theme.of(context).primaryTextTheme.headline2,
       ),
     );

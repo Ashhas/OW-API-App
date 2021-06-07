@@ -4,7 +4,7 @@ import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
-import 'package:ow_api_app/util/themes.dart';
+import 'package:ow_api_app/util/constants/theme_const.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
@@ -50,8 +50,8 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'OW-API',
           themeMode: ThemeMode.light,
-          theme: AppThemes.getLightTheme(),
-          darkTheme: AppThemes.getDarkTheme(),
+          theme: AppTheme.getLightTheme(),
+          darkTheme: AppTheme.getDarkTheme(),
           home: SplashScreen(),
         ),
       ),

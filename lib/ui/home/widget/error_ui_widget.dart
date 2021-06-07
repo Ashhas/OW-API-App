@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/util/api_exception.dart';
-import 'package:ow_api_app/util/api_exception_mapper.dart';
+import 'package:ow_api_app/util/exception/api_exception.dart';
+import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 
 class ErrorUiWidget extends StatelessWidget {
   final Exception exception;

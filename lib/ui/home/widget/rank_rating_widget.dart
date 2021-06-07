@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
 
 class RankRatingWidget extends StatelessWidget {
   const RankRatingWidget() : super();
@@ -20,8 +19,8 @@ class RankRatingWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(bottom: 10),
                   child: Text(
-                    GlobalVariables.currentRankSeason,
-                    style: Theme.of(context).primaryTextTheme.headline5,
+                    UiConst.currentRankSeason,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                 ),
                 Row(
@@ -32,18 +31,18 @@ class RankRatingWidget extends StatelessWidget {
                                 ? _StatTile(
                                     ratingImageUrl: state
                                         .profileStats.ratings.tank.rankIcon,
-                                    title: GlobalVariables.tankRoleTitle,
+                                    title: UiConst.tankRoleTitle,
                                     rating: state
                                         .profileStats.ratings.tank.level
                                         .toString())
                                 : _StatTile(
                                     ratingImageUrl: "--",
-                                    title: GlobalVariables.tankRoleTitle,
-                                    rating: GlobalVariables.noRankText)
+                                    title: UiConst.tankRoleTitle,
+                                    rating: UiConst.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: GlobalVariables.tankRoleTitle,
-                                rating: GlobalVariables.noRankText)),
+                                title: UiConst.tankRoleTitle,
+                                rating: UiConst.noRankText)),
                     const _Divider(),
                     Expanded(
                         child: state.profileStats.ratings != null
@@ -51,18 +50,18 @@ class RankRatingWidget extends StatelessWidget {
                                 ? _StatTile(
                                     ratingImageUrl: state
                                         .profileStats.ratings.damage.rankIcon,
-                                    title: GlobalVariables.damageRoleTitle,
+                                    title: UiConst.damageRoleTitle,
                                     rating: state
                                         .profileStats.ratings.damage.level
                                         .toString())
                                 : _StatTile(
                                     ratingImageUrl: "--",
-                                    title: GlobalVariables.damageRoleTitle,
-                                    rating: GlobalVariables.noRankText)
+                                    title: UiConst.damageRoleTitle,
+                                    rating: UiConst.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: GlobalVariables.damageRoleTitle,
-                                rating: GlobalVariables.noRankText)),
+                                title: UiConst.damageRoleTitle,
+                                rating: UiConst.noRankText)),
                     const _Divider(),
                     Expanded(
                         child: state.profileStats.ratings != null
@@ -70,18 +69,18 @@ class RankRatingWidget extends StatelessWidget {
                                 ? _StatTile(
                                     ratingImageUrl: state
                                         .profileStats.ratings.support.rankIcon,
-                                    title: GlobalVariables.supportRoleTitle,
+                                    title: UiConst.supportRoleTitle,
                                     rating: state
                                         .profileStats.ratings.support.level
                                         .toString())
                                 : _StatTile(
                                     ratingImageUrl: "--",
-                                    title: GlobalVariables.supportRoleTitle,
-                                    rating: GlobalVariables.noRankText)
+                                    title: UiConst.supportRoleTitle,
+                                    rating: UiConst.noRankText)
                             : _StatTile(
                                 ratingImageUrl: "--",
-                                title: GlobalVariables.supportRoleTitle,
-                                rating: GlobalVariables.noRankText)),
+                                title: UiConst.supportRoleTitle,
+                                rating: UiConst.noRankText)),
                   ],
                 ),
               ],
@@ -124,12 +123,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.headline5,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.headline5,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                 ],
               )
@@ -152,12 +151,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.headline4,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.headline5,
+                    style: Theme.of(context).primaryTextTheme.bodyText2,
                   ),
                 ],
               )

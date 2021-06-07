@@ -9,9 +9,10 @@ import 'package:ow_api_app/ui/settings/screens/help_and_faq_page.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_page.dart';
 import 'package:ow_api_app/ui/settings/screens/setting_page.dart';
 import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
@@ -88,7 +89,7 @@ class _SettingsPageState extends State<SettingsPage> {
       elevation: 0.0,
       backgroundColor: Theme.of(context).accentColor,
       title: Text(
-        GlobalVariables.settingsPageTitle,
+        UiConst.settingsPageTitle,
         style: TextStyle(color: Colors.white, fontSize: 20),
       ),
     );
@@ -105,7 +106,7 @@ class _SettingsPageState extends State<SettingsPage> {
                 builder: (context, box, widget) {
                   if (box.values.isEmpty)
                     return ListTile(
-                      title: Text(GlobalVariables.settingsNoAccountTitle),
+                      title: Text(UiConst.settingsNoAccountTitle),
                       enabled: true,
                     );
 
@@ -177,7 +178,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
   Widget _buildMainAccountTile(String mainAccount) {
     return SettingsTile(
-      title: GlobalVariables.settingsMainAccountTitle,
+      title: UiConst.settingsMainAccountTitle,
       leading: Icon(Icons.account_circle_outlined),
       onPressed: (BuildContext context) {
         pushNewScreen(
