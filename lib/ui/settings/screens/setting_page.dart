@@ -36,7 +36,7 @@ class _SettingPageState extends State<SettingPage> {
       ),
       title: Text(
         "Setting",
-        style: Theme.of(context).primaryTextTheme.headline2,
+        style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
   }

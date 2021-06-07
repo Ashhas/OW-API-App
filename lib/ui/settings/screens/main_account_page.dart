@@ -50,7 +50,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                                 account.battleNetId,
                                 style: Theme.of(context)
                                     .primaryTextTheme
-                                    .headline5,
+                                    .bodyText2,
                               ),
                               value: account,
                               groupValue: selectedMainAccount,
@@ -99,7 +99,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
       ),
       title: Text(
         UiConst.settingsMainAccountTitle,
-        style: Theme.of(context).primaryTextTheme.headline2,
+        style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
   }

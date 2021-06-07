@@ -36,7 +36,7 @@ class _HelpFaqPageState extends State<HelpFaqPage> {
       ),
       title: Text(
         "Help/FAQ",
-        style: Theme.of(context).primaryTextTheme.headline2,
+        style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
   }

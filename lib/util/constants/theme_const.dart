@@ -17,6 +17,7 @@ class AppTheme {
       primaryTextTheme: TextTheme(
         bodyText2: FontConst.REGULAR_DEFAULT,
         bodyText1: FontConst.REGULAR_SMALL,
+        headline4: FontConst.LARGE_TILE,
         headline3: FontConst.REGULAR_SMALL,
         headline2: FontConst.LARGE_NAME_TITLE,
         headline1: FontConst.LARGE_TILE_WHITE,

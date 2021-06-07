@@ -36,7 +36,7 @@ class _AboutPagePageState extends State<AboutPage> {
       ),
       title: Text(
         "About",
-        style: Theme.of(context).primaryTextTheme.headline2,
+        style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
   }

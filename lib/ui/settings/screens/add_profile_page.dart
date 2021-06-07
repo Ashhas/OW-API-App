@@ -196,7 +196,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
                         ),
                       ),
                       Visibility(
-                        visible: !networkAvailable,
+                        visible: netResult == ConnectivityResult.none,
                         child: Column(
                           children: [
                             SizedBox(height: 20),
@@ -216,7 +216,7 @@ class _AddProfilePageState extends State<AddProfilePage> {
                         aspectRatio: 20 / 3,
                         child: ElevatedButton(
                           onPressed: () {
-                            if (networkAvailable) {
+                            if (netResult != ConnectivityResult.none) {
                               FocusScope.of(context).requestFocus(FocusNode());
                               //Add New Event
                               BlocProvider.of<SettingsBloc>(context).add(

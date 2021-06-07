@@ -14,7 +14,7 @@ class FontConst {
 
   //LARGE
   static final LARGE_NAME_TITLE =
-      LARGE.copyWith(fontSize: 27, color: ColorConst.darkPrimaryTextColor);
+      LARGE.copyWith(fontSize: 25, color: ColorConst.darkPrimaryTextColor);
 
   static final LARGE_TILE = LARGE.copyWith(fontSize: 21);
   static final LARGE_TILE_WHITE =
