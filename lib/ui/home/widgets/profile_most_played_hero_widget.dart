@@ -89,30 +89,56 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
   }
 
   _heroImage(String heroName) {
-    if (heroName == "Orisa") {
+    if (heroName == "Diva") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/orisa.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/dva.png'),
+          ),
+        ),
+      );
+    } else if (heroName == "Orisa") {
+      return Container(
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/orisa.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Reinhardt") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/rein.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/rein.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Roadhog") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/roadhog.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/roadhog.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Sigma") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/sigma.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/sigma.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Winston") {
       return Container(
         width: 110,
