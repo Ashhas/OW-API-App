@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/util/constants/variable_const.dart';
 
 class RoleStatisticsWidget extends StatefulWidget {
   const RoleStatisticsWidget() : super();
@@ -19,48 +18,11 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           color: Colors.white,
           child: Column(
             children: [
-              Container(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Role Statistics"),
-                  ],
-                ),
-              ),
-              Container(
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Tank"),
-                    Text(state.tankGamesPlayed.toString()),
-                    Text(state.tankWinRate.toStringAsFixed(2) + "%"),
-                  ],
-                ),
-              ),
-              Container(
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Damage"),
-                    Text(state.damageGamesPlayed.toString()),
-                    Text(state.damageWinRate.toStringAsFixed(2) + "%"),
-                  ],
-                ),
-              ),
-              Container(
-                height: 30,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Support"),
-                    Text(state.supportGamesPlayed.toString()),
-                    Text(state.supportWinRate.toStringAsFixed(2) + "%"),
-                  ],
-                ),
-              ),
+              _titleView(),
+              _statsTitle(),
+              _tankStatsTile(state.tankGamesPlayed, state.tankWinRate),
+              _damageStatsTile(state.damageGamesPlayed, state.damageWinRate),
+              _supportStatsTile(state.supportGamesPlayed, state.supportWinRate),
               SizedBox(
                 height: 15,
               ),
@@ -71,5 +33,82 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
         return Container();
       }
     });
+  }
+
+  Widget _titleView() {
+    return Container(
+      height: 50,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Role Statistics"),
+        ],
+      ),
+    );
+  }
+
+  Widget _statsTitle() {
+    return Container(
+      height: 30,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text("Roles"),
+          Text("Games Played"),
+          Text("Win Rate"),
+        ],
+      ),
+    );
+  }
+
+  Widget _tankStatsTile(int gamesPlayed, double winRate) {
+    return Container(
+      height: 30,
+      child: gamesPlayed != 0
+          ? ListTile(
+              leading: Text("Tank"),
+              title: Center(child: Text(gamesPlayed.toString())),
+              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+            )
+          : ListTile(
+              leading: Text("Tank"),
+              title: Center(child: Text("--")),
+              trailing: Text("--"),
+            ),
+    );
+  }
+
+  Widget _damageStatsTile(int gamesPlayed, double winRate) {
+    return Container(
+      height: 30,
+      child: gamesPlayed != 0
+          ? ListTile(
+              leading: Text("Damage"),
+              title: Center(child: Text(gamesPlayed.toString())),
+              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+            )
+          : ListTile(
+              leading: Text("Damage"),
+              title: Center(child: Text("--")),
+              trailing: Text("--"),
+            ),
+    );
+  }
+
+  Widget _supportStatsTile(int gamesPlayed, double winRate) {
+    return Container(
+      height: 30,
+      child: gamesPlayed != 0
+          ? ListTile(
+              leading: Text("Support"),
+              title: Center(child: Text(gamesPlayed.toString())),
+              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+            )
+          : ListTile(
+              leading: Text("Support"),
+              title: Center(child: Text("--")),
+              trailing: Text("--"),
+            ),
+    );
   }
 }
