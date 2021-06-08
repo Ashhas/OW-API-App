@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/ui/home/widgets/profile_most_played_hero_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/profile_role_statistics_widget.dart';
 import 'package:ow_api_app/ui/home/widgets/rank_rating_widget.dart';
 
 class StatisticsCard extends StatefulWidget {
@@ -42,6 +43,8 @@ class _StatisticsCardState extends State<StatisticsCard> {
                     : Column(
                         children: [
                           RankRatingWidget(),
+                          Divider(height: 1, thickness: 1),
+                          RoleStatisticsWidget(),
                           Divider(height: 1, thickness: 1),
                           MostPlayedHeroes(),
                           Divider(height: 1, thickness: 1),
