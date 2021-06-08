@@ -273,21 +273,292 @@ class Awards {
 
 class CareerStats {
   AllHeroes _allHeroes;
+  Hero _ana;
+  Hero _ashe;
+  Hero _baptiste;
+  Hero _bastion;
+  Hero _brigitte;
+  Hero _dVa;
+  Hero _doomfist;
+  Hero _echo;
+  Hero _genji;
+  Hero _hanzo;
+  Hero _junkrat;
+  Hero _lucio;
+  Hero _mccree;
+  Hero _mei;
+  Hero _mercy;
+  Hero _moira;
+  Hero _orisa;
+  Hero _pharah;
+  Hero _reaper;
+  Hero _reinhardt;
+  Hero _roadhog;
+  Hero _sigma;
+  Hero _soldier76;
+  Hero _sombra;
+  Hero _symmetra;
+  Hero _torbjorn;
+  Hero _tracer;
+  Hero _widowmaker;
+  Hero _winston;
+  Hero _wreckingBall;
+  Hero _zarya;
+  Hero _zenyatta;
 
-  CareerStats({
-    AllHeroes allHeroes,
-  }) {
+  CareerStats(
+      {AllHeroes allHeroes,
+      Hero ana,
+      Hero ashe,
+      Hero baptiste,
+      Hero bastion,
+      Hero brigitte,
+      Hero dVa,
+      Hero doomfist,
+      Hero echo,
+      Hero genji,
+      Hero hanzo,
+      Hero junkrat,
+      Hero lucio,
+      Hero mccree,
+      Hero mei,
+      Hero mercy,
+      Hero moira,
+      Hero orisa,
+      Hero pharah,
+      Hero reaper,
+      Hero reinhardt,
+      Hero roadhog,
+      Hero sigma,
+      Hero soldier76,
+      Hero sombra,
+      Hero symmetra,
+      Hero torbjorn,
+      Hero tracer,
+      Hero widowmaker,
+      Hero winston,
+      Hero wreckingBall,
+      Hero zarya,
+      Hero zenyatta}) {
     this._allHeroes = allHeroes;
+    this._ana = ana;
+    this._ashe = ashe;
+    this._baptiste = baptiste;
+    this._bastion = bastion;
+    this._brigitte = brigitte;
+    this._dVa = dVa;
+    this._doomfist = doomfist;
+    this._echo = echo;
+    this._genji = genji;
+    this._hanzo = hanzo;
+    this._junkrat = junkrat;
+    this._lucio = lucio;
+    this._mccree = mccree;
+    this._mei = mei;
+    this._mercy = mercy;
+    this._moira = moira;
+    this._orisa = orisa;
+    this._pharah = pharah;
+    this._reaper = reaper;
+    this._reinhardt = reinhardt;
+    this._roadhog = roadhog;
+    this._sigma = sigma;
+    this._soldier76 = soldier76;
+    this._sombra = sombra;
+    this._symmetra = symmetra;
+    this._torbjorn = torbjorn;
+    this._tracer = tracer;
+    this._widowmaker = widowmaker;
+    this._winston = winston;
+    this._wreckingBall = wreckingBall;
+    this._zarya = zarya;
+    this._zenyatta = zenyatta;
   }
 
   AllHeroes get allHeroes => _allHeroes;
 
   set allHeroes(AllHeroes allHeroes) => _allHeroes = allHeroes;
 
+  Hero get ana => _ana;
+
+  set ana(Hero ana) => _ana = ana;
+
+  Hero get ashe => _ashe;
+
+  set ashe(Hero ashe) => _ashe = ashe;
+
+  Hero get baptiste => _baptiste;
+
+  set baptiste(Hero baptiste) => _baptiste = baptiste;
+
+  Hero get bastion => _bastion;
+
+  set bastion(Hero bastion) => _bastion = bastion;
+
+  Hero get brigitte => _brigitte;
+
+  set brigitte(Hero brigitte) => _brigitte = brigitte;
+
+  Hero get dVa => _dVa;
+
+  set dVa(Hero dVa) => _dVa = dVa;
+
+  Hero get doomfist => _doomfist;
+
+  set doomfist(Hero doomfist) => _doomfist = doomfist;
+
+  Hero get echo => _echo;
+
+  set echo(Hero echo) => _echo = echo;
+
+  Hero get genji => _genji;
+
+  set genji(Hero genji) => _genji = genji;
+
+  Hero get hanzo => _hanzo;
+
+  set hanzo(Hero hanzo) => _hanzo = hanzo;
+
+  Hero get junkrat => _junkrat;
+
+  set junkrat(Hero junkrat) => _junkrat = junkrat;
+
+  Hero get lucio => _lucio;
+
+  set lucio(Hero lucio) => _lucio = lucio;
+
+  Hero get mccree => _mccree;
+
+  set mccree(Hero mccree) => _mccree = mccree;
+
+  Hero get mei => _mei;
+
+  set mei(Hero mei) => _mei = mei;
+
+  Hero get mercy => _mercy;
+
+  set mercy(Hero mercy) => _mercy = mercy;
+
+  Hero get moira => _moira;
+
+  set moira(Hero moira) => _moira = moira;
+
+  Hero get orisa => _orisa;
+
+  set orisa(Hero orisa) => _orisa = orisa;
+
+  Hero get pharah => _pharah;
+
+  set pharah(Hero pharah) => _pharah = pharah;
+
+  Hero get reaper => _reaper;
+
+  set reaper(Hero reaper) => _reaper = reaper;
+
+  Hero get reinhardt => _reinhardt;
+
+  set reinhardt(Hero reinhardt) => _reinhardt = reinhardt;
+
+  Hero get roadhog => _roadhog;
+
+  set roadhog(Hero roadhog) => _roadhog = roadhog;
+
+  Hero get sigma => _sigma;
+
+  set sigma(Hero sigma) => _sigma = sigma;
+
+  Hero get soldier76 => _soldier76;
+
+  set soldier76(Hero soldier76) => _soldier76 = soldier76;
+
+  Hero get sombra => _sombra;
+
+  set sombra(Hero sombra) => _sombra = sombra;
+
+  Hero get symmetra => _symmetra;
+
+  set symmetra(Hero symmetra) => _symmetra = symmetra;
+
+  Hero get torbjorn => _torbjorn;
+
+  set torbjorn(Hero torbjorn) => _torbjorn = torbjorn;
+
+  Hero get tracer => _tracer;
+
+  set tracer(Hero tracer) => _tracer = tracer;
+
+  Hero get widowmaker => _widowmaker;
+
+  set widowmaker(Hero widowmaker) => _widowmaker = widowmaker;
+
+  Hero get winston => _winston;
+
+  set winston(Hero winston) => _winston = winston;
+
+  Hero get wreckingBall => _wreckingBall;
+
+  set wreckingBall(Hero wreckingBall) => _wreckingBall = wreckingBall;
+
+  Hero get zarya => _zarya;
+
+  set zarya(Hero zarya) => _zarya = zarya;
+
+  Hero get zenyatta => _zenyatta;
+
+  set zenyatta(Hero zenyatta) => _zenyatta = zenyatta;
+
   CareerStats.fromJson(Map<String, dynamic> json) {
     _allHeroes = json['allHeroes'] != null
         ? new AllHeroes.fromJson(json['allHeroes'])
         : null;
+    _ana = json['ana'] != null ? new Hero.fromJson(json['ana']) : null;
+    _ashe = json['ashe'] != null ? new Hero.fromJson(json['ashe']) : null;
+    _baptiste =
+        json['baptiste'] != null ? new Hero.fromJson(json['baptiste']) : null;
+    _bastion =
+        json['bastion'] != null ? new Hero.fromJson(json['bastion']) : null;
+    _brigitte =
+        json['brigitte'] != null ? new Hero.fromJson(json['brigitte']) : null;
+    _dVa = json['dVa'] != null ? new Hero.fromJson(json['dVa']) : null;
+    _doomfist =
+        json['doomfist'] != null ? new Hero.fromJson(json['doomfist']) : null;
+    _echo = json['echo'] != null ? new Hero.fromJson(json['echo']) : null;
+    _genji = json['genji'] != null ? new Hero.fromJson(json['genji']) : null;
+    _hanzo = json['hanzo'] != null ? new Hero.fromJson(json['hanzo']) : null;
+    _junkrat =
+        json['junkrat'] != null ? new Hero.fromJson(json['junkrat']) : null;
+    _lucio = json['lucio'] != null ? new Hero.fromJson(json['lucio']) : null;
+    _mccree = json['mccree'] != null ? new Hero.fromJson(json['mccree']) : null;
+    _mei = json['mei'] != null ? new Hero.fromJson(json['mei']) : null;
+    _mercy = json['mercy'] != null ? new Hero.fromJson(json['mercy']) : null;
+    _moira = json['moira'] != null ? new Hero.fromJson(json['moira']) : null;
+    _orisa = json['orisa'] != null ? new Hero.fromJson(json['orisa']) : null;
+    _pharah = json['pharah'] != null ? new Hero.fromJson(json['pharah']) : null;
+    _reaper = json['reaper'] != null ? new Hero.fromJson(json['reaper']) : null;
+    _reinhardt =
+        json['reinhardt'] != null ? new Hero.fromJson(json['reinhardt']) : null;
+    _roadhog =
+        json['roadhog'] != null ? new Hero.fromJson(json['roadhog']) : null;
+    _sigma = json['sigma'] != null ? new Hero.fromJson(json['sigma']) : null;
+    _soldier76 =
+        json['soldier76'] != null ? new Hero.fromJson(json['soldier76']) : null;
+    _sombra = json['sombra'] != null ? new Hero.fromJson(json['sombra']) : null;
+    _symmetra =
+        json['symmetra'] != null ? new Hero.fromJson(json['symmetra']) : null;
+    _torbjorn =
+        json['torbjorn'] != null ? new Hero.fromJson(json['torbjorn']) : null;
+    _tracer = json['tracer'] != null ? new Hero.fromJson(json['tracer']) : null;
+    _widowmaker = json['widowmaker'] != null
+        ? new Hero.fromJson(json['widowmaker'])
+        : null;
+    _winston =
+        json['winston'] != null ? new Hero.fromJson(json['winston']) : null;
+    _wreckingBall = json['wreckingBall'] != null
+        ? new Hero.fromJson(json['wreckingBall'])
+        : null;
+    _zarya = json['zarya'] != null ? new Hero.fromJson(json['zarya']) : null;
+    _zenyatta =
+        json['zenyatta'] != null ? new Hero.fromJson(json['zenyatta']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -412,6 +683,30 @@ class AllHeroes {
     if (this._miscellaneous != null) {
       data['miscellaneous'] = this._miscellaneous.toJson();
     }
+    return data;
+  }
+}
+
+class Hero {
+  Game _allHeroGame;
+
+  Hero({
+    Game allHeroGame,
+  }) {
+    this._allHeroGame = allHeroGame;
+  }
+
+  Game get allHeroGame => _allHeroGame;
+
+  set allHeroGame(Game allHeroGame) => _allHeroGame = allHeroGame;
+
+  Hero.fromJson(Map<String, dynamic> json) {
+    _allHeroGame = json['game'] != null ? new Game.fromJson(json['game']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['timePlayed'] = this._allHeroGame;
     return data;
   }
 }
