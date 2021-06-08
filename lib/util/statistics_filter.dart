@@ -161,8 +161,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Support GamesPlayed: $supportGamesPlayed");
-
     return supportGamesPlayed;
   }
 
@@ -206,8 +204,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Support GamesWon: $supportGamesWon");
-
     return supportGamesWon;
   }
 
@@ -219,9 +215,7 @@ class StatisticsFilter {
     supportGamesPlayed = calculateSupportGamesPlayed(profile);
     supportGamesWon = calculateSupportGamesWon(profile);
 
-    supportWinRate = (100 * supportGamesWon / supportGamesPlayed);
-
-    print("Support WinRate: $supportWinRate");
+    supportWinRate = ((100 * supportGamesWon) / supportGamesPlayed);
 
     return supportWinRate;
   }
@@ -317,8 +311,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Damage GamesPlayed: $damageGamesPlayed");
-
     return damageGamesPlayed;
   }
 
@@ -413,8 +405,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Damage GamesWon: $damageGamesWon");
-
     return damageGamesWon;
   }
 
@@ -426,9 +416,7 @@ class StatisticsFilter {
     damageGamesPlayed = calculateDamageGamesPlayed(profile);
     damageGamesWon = calculateDamageGamesWon(profile);
 
-    damageWinRate = (100 * damageGamesWon / damageGamesPlayed);
-
-    print("Damage WinRate: $damageWinRate");
+    damageWinRate = ((100 * damageGamesWon) / damageGamesPlayed);
 
     return damageWinRate;
   }
@@ -474,8 +462,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Tank GamesPlayed: $tankGamesPlayed");
-
     return tankGamesPlayed;
   }
 
@@ -519,8 +505,6 @@ class StatisticsFilter {
       }
     }
 
-    print("Tank GamesWon: $tankGamesWon");
-
     return tankGamesWon;
   }
 
@@ -529,12 +513,10 @@ class StatisticsFilter {
     int tankGamesWon = 0;
     double tankWinRate = 0;
 
-    tankGamesPlayed = calculateDamageGamesPlayed(profile);
-    tankGamesWon = calculateDamageGamesWon(profile);
+    tankGamesPlayed = calculateTankGamesPlayed(profile);
+    tankGamesWon = calculateTankGamesWon(profile);
 
-    tankWinRate = (100 * tankGamesWon / tankGamesPlayed);
-
-    print("Damage WinRate: $tankWinRate");
+    tankWinRate = ((100 * tankGamesWon) / tankGamesPlayed);
 
     return tankWinRate;
   }
