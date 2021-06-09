@@ -5,8 +5,8 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:ow_api_app/data/util/api_exception.dart';
-import 'package:ow_api_app/data/util/shared_pref_service.dart';
+import 'package:ow_api_app/util/exception/api_exception.dart';
+import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:path_provider/path_provider.dart';
 
 part 'on_boarding_event.dart';
@@ -27,6 +27,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
 
   Stream<OnBoardingState> _mapFirstProfileAddedToState(
       AddFirstProfile event, OnBoardingState state) async* {
+    yield ValidatingFirstProfileState();
+
     //Open DB for saving
     var dir = await getApplicationDocumentsDirectory();
     Hive.init(dir.path);
@@ -50,7 +52,8 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
         //Determines that setup is done
         final sharedPrefService = await SharedPreferencesService.instance;
         sharedPrefService.setOnBoardingSeenBefore(false);
-        sharedPrefService.setMainAccount(event.profileId);
+        sharedPrefService.setMainAccountName(event.profileId);
+        sharedPrefService.setMainAccountPlatform(event.platformId);
 
         yield FirstProfileValidatedState();
       } else {

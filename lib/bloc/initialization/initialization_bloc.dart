@@ -6,7 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/data/util/shared_pref_service.dart';
+import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'initialization_event.dart';

@@ -35,8 +35,9 @@ class AddProfile extends SettingsEvent {
 
 class SaveMainAccount extends SettingsEvent {
   final String battleNetId;
+  final String platformId;
 
-  SaveMainAccount({@required this.battleNetId});
+  SaveMainAccount({@required this.battleNetId, @required this.platformId});
 
   @override
   List<Object> get props => [battleNetId];
