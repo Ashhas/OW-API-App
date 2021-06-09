@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
-import 'package:ow_api_app/ui/home/home_page.dart';
-import 'package:ow_api_app/ui/settings/settings_page.dart';
+import 'package:ow_api_app/ui/home/home_screen.dart';
+import 'package:ow_api_app/ui/settings/settings_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -41,19 +41,18 @@ class BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: BlocBuilder<InitializationBloc, InitializationState>(
         builder: (context, state) {
           if (state is InitializedState) {
             return PersistentTabView(
               screens: [
-                HomePage(state.navBarController),
-                SettingsPage(navBarController: state.navBarController)
+                HomeScreen(state.navBarController),
+                SettingsScreen(navBarController: state.navBarController)
               ],
               controller: state.navBarController,
               items: _navBarsItems(),
               confineInSafeArea: true,
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).bottomAppBarColor,
               handleAndroidBackButtonPress: false,
               resizeToAvoidBottomInset: true,
               stateManagement: true,

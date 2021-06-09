@@ -3,19 +3,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/ui_const.dart';
 
-class SelectMainAccountPage extends StatefulWidget {
+class SelectMainAccountScreen extends StatefulWidget {
   final String mainAccount;
 
-  SelectMainAccountPage({@required this.mainAccount});
+  SelectMainAccountScreen({@required this.mainAccount});
 
   @override
-  _SelectMainAccountPageState createState() => _SelectMainAccountPageState();
+  _SelectMainAccountScreenState createState() =>
+      _SelectMainAccountScreenState();
 }
 
-class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
-  String selectedMainAccount;
+class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
+  AccountModel selectedMainAccount;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +35,7 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                     valueListenable: state.allAccounts.listenable(),
                     builder: (context, box, widget) {
                       if (box.values.isEmpty) {
-                        return Text(GlobalVariables.settingsNoAccountTitle);
+                        return Text(UiConst.settingsNoAccountTitle);
                       } else {
                         return ListView.builder(
                           physics: NeverScrollableScrollPhysics(),
@@ -48,19 +49,24 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
                                 account.battleNetId,
                                 style: Theme.of(context)
                                     .primaryTextTheme
-                                    .headline5,
+                                    .bodyText2,
                               ),
-                              value: account.battleNetId,
+                              value: account,
                               groupValue: selectedMainAccount,
                               onChanged: (val) {
-                                setState(() {
-                                  selectedMainAccount = val;
-                                  BlocProvider.of<SettingsBloc>(context).add(
-                                    SaveMainAccount(
-                                      battleNetId: val,
-                                    ),
-                                  );
-                                });
+                                setState(
+                                  () {
+                                    selectedMainAccount = val;
+                                    BlocProvider.of<SettingsBloc>(context).add(
+                                      SaveMainAccount(
+                                        battleNetId:
+                                            selectedMainAccount.battleNetId,
+                                        platformId:
+                                            selectedMainAccount.platformId,
+                                      ),
+                                    );
+                                  },
+                                );
                               },
                             );
                           },
@@ -81,18 +87,20 @@ class _SelectMainAccountPageState extends State<SelectMainAccountPage> {
 
   Widget _buildAppBar() {
     return AppBar(
-      elevation: 0.0,
-      backgroundColor: Theme.of(context).backgroundColor,
+      elevation: 1,
+      backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: Icon(Icons.arrow_back,
+          color: Theme.of(context).buttonColor,
+      ),
         color: Colors.black,
         onPressed: () {
           Navigator.pop(context, selectedMainAccount);
         },
       ),
       title: Text(
-        GlobalVariables.settingsMainAccountTitle,
-        style: Theme.of(context).primaryTextTheme.headline2,
+        UiConst.settingsMainAccountTitle,
+        style: Theme.of(context).primaryTextTheme.headline4,
       ),
     );
   }

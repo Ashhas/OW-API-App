@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/util/strings.dart';
+import 'package:ow_api_app/util/constants/variable_const.dart';
 
 class MostPlayedHeroes extends StatefulWidget {
   const MostPlayedHeroes() : super();
@@ -16,7 +16,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
         return Container(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           child: Column(
             children: [
               Container(
@@ -24,8 +24,10 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Most Played Heroes"),
-                    Icon(Icons.arrow_forward_ios_sharp),
+                    Text("Most Played Heroes",
+                        style: Theme.of(context).primaryTextTheme.bodyText2),
+                    Icon(Icons.arrow_forward_ios_sharp,
+                        color: Theme.of(context).buttonColor),
                   ],
                 ),
               ),
@@ -56,7 +58,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
 
   _mostPlayedHeroCard(String heroName, DateTime timePlayed) {
     int competitiveHoursPlayed = timePlayed
-        .difference(DateTime.parse(GlobalVariables.standardConversionDateTime))
+        .difference(DateTime.parse(VariableConst.standardConversionDateTime))
         .inHours;
 
     return Card(
@@ -73,13 +75,13 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
           competitiveHoursPlayed == 0
               ? Text(timePlayed
                       .difference(DateTime.parse(
-                          GlobalVariables.standardConversionDateTime))
+                          VariableConst.standardConversionDateTime))
                       .inMinutes
                       .toString() +
                   " Minutes")
               : Text(timePlayed
                       .difference(DateTime.parse(
-                          GlobalVariables.standardConversionDateTime))
+                          VariableConst.standardConversionDateTime))
                       .inHours
                       .toString() +
                   " Hours")
@@ -89,30 +91,56 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
   }
 
   _heroImage(String heroName) {
-    if (heroName == "Orisa") {
+    if (heroName == "Diva") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/orisa.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/dva.png'),
+          ),
+        ),
+      );
+    } else if (heroName == "Orisa") {
+      return Container(
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/orisa.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Reinhardt") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/rein.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/rein.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Roadhog") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/roadhog.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/roadhog.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Sigma") {
       return Container(
-          width: 110,
-          height: 90,
-          child: Center(
-              child: Image(image: AssetImage('assets/heroIcons/sigma.png'))));
+        width: 110,
+        height: 90,
+        child: Center(
+          child: Image(
+            image: AssetImage('assets/heroIcons/sigma.png'),
+          ),
+        ),
+      );
     } else if (heroName == "Winston") {
       return Container(
         width: 110,

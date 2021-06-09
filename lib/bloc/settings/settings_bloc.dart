@@ -9,7 +9,7 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:ow_api_app/util/api_exception.dart';
+import 'package:ow_api_app/util/exception/api_exception.dart';
 
 part 'settings_event.dart';
 
@@ -20,7 +20,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   PersistentTabController _navBarController;
 
   SettingsBloc({@required this.repository}) : super(SettingsOpenedState());
-
 
   @override
   Stream<SettingsState> mapEventToState(SettingsEvent event) async* {
@@ -47,7 +46,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -69,7 +68,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -98,7 +97,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccount;
+    final mainAccount = sharedPrefService.getMainAccountName;
 
     //Fetch App Version
     PackageInfo packageInfo = await PackageInfo.fromPlatform();
@@ -144,6 +143,7 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       SaveMainAccount event, SettingsState state) async* {
     //Save MainAccount in SharedPref
     final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setMainAccount(event.battleNetId);
+    sharedPrefService.setMainAccountName(event.battleNetId);
+    sharedPrefService.setMainAccountPlatform(event.platformId);
   }
 }

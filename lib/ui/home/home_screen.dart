@@ -2,20 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
-import 'package:ow_api_app/ui/home/profile_display_widget.dart';
-import 'package:ow_api_app/ui/home/widget/error_ui_widget.dart';
+import 'package:ow_api_app/ui/home/screens/error_ui_screen.dart';
+import 'package:ow_api_app/ui/home/screens/home_loading_widget.dart';
+import 'package:ow_api_app/ui/home/screens/profile_screen.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
-class HomePage extends StatefulWidget {
+class HomeScreen extends StatefulWidget {
   final PersistentTabController navBarController;
 
-  const HomePage(this.navBarController) : super();
+  const HomeScreen(this.navBarController) : super();
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
@@ -40,27 +41,14 @@ class _HomePageState extends State<HomePage> {
         child: BlocBuilder<HomeBloc, HomeState>(
           builder: (context, state) {
             if (state is LoadingProfileState) {
-              return buildLoadingWidget();
+              return HomeLoadingScreen();
             } else if (state is ProfileLoadedState) {
-              return ProfileDisplayWidget();
+              return ProfileScreen();
             } else if (state is HomeErrorState) {
-              return ErrorUiWidget(state.exception);
+              return ErrorUiScreen(state.exception);
             } else
-              return buildLoadingWidget();
+              return HomeLoadingScreen();
           },
-        ),
-      ),
-    );
-  }
-
-  Widget buildLoadingWidget() {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: CircularProgressIndicator(
-          valueColor:
-              new AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
-          backgroundColor: Colors.white,
         ),
       ),
     );

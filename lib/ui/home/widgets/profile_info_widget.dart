@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ow_api_app/util/constants/color_const.dart';
 
-class ProfileInfoCard extends StatefulWidget {
+class ProfileInfoWidget extends StatefulWidget {
   @override
-  _ProfileInfoCardState createState() => _ProfileInfoCardState();
+  _ProfileInfoWidgetState createState() => _ProfileInfoWidgetState();
 }
 
-class _ProfileInfoCardState extends State<ProfileInfoCard> {
+class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
@@ -47,7 +48,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
                             Text(
                               state.profileStats.name,
                               style:
-                                  Theme.of(context).primaryTextTheme.headline3,
+                                  Theme.of(context).primaryTextTheme.headline2,
                             ),
                             SizedBox(
                               width: 6,
@@ -116,7 +117,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
               children: [
                 Text(
                   "Public",
-                  style: Theme.of(context).primaryTextTheme.headline6,
+                  style: TextStyle(color: ColorConst.darkCanvasColor),
                 ),
                 Icon(
                   Icons.check,
@@ -128,7 +129,7 @@ class _ProfileInfoCardState extends State<ProfileInfoCard> {
               children: [
                 Text(
                   "Private",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: ColorConst.darkCanvasColor),
                 ),
                 Icon(
                   Icons.lock,

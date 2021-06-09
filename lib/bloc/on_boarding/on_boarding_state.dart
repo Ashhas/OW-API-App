@@ -13,6 +13,11 @@ class FirstProfileValidatedState extends OnBoardingState {
   List<Object> get props => [];
 }
 
+class ValidatingFirstProfileState extends OnBoardingState {
+  @override
+  List<Object> get props => [];
+}
+
 class FirstProfileNotValidatedState extends OnBoardingState {
   @override
   List<Object> get props => [];
