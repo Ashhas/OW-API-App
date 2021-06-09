@@ -60,10 +60,14 @@ class _SettingScreenState extends State<SettingScreen> {
   }
 
   Widget _darkThemeTile() {
+    bool turnOnDarkTheme;
+
     return BlocBuilder<ThemeBloc, ThemeState>(
       builder: (context, state) {
         if (state is CurrentThemeState) {
-          bool turnOnDarkTheme = state.isDarkTheme;
+          state.isDarkTheme == null
+              ? turnOnDarkTheme = false
+              : turnOnDarkTheme = state.isDarkTheme;
 
           return SettingsSwitchTile(
             title: "Dark Theme",
