@@ -20,7 +20,7 @@ class _StatisticsCardState extends State<StatisticsCard> {
       fit: FlexFit.loose,
       child: Container(
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: Theme.of(context).cardColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -39,7 +39,6 @@ class _StatisticsCardState extends State<StatisticsCard> {
                           RoleStatisticsWidget(),
                           Divider(height: 1, thickness: 1),
                           MostPlayedHeroes(),
-                          Divider(height: 1, thickness: 1),
                         ],
                       ),
               );

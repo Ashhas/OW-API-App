@@ -59,7 +59,7 @@ class _AboutScreenState extends State<AboutScreen> {
               children: [
                 IconButton(
                   icon: Icon(Icons.arrow_back),
-                  color: Colors.white,
+                  color: Theme.of(context).buttonColor,
                   onPressed: () {
                     Navigator.pop(context);
                   },

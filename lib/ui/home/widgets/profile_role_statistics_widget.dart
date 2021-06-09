@@ -15,7 +15,7 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
         return Container(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           child: Column(
             children: [
               _titleView(),
@@ -41,7 +41,8 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text("Role Statistics"),
+          Text("Role Statistics",
+              style: Theme.of(context).primaryTextTheme.bodyText2),
         ],
       ),
     );
@@ -53,26 +54,20 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       child: ListTile(
         leading: Container(
           width: 80,
-          child: Text(
-            "Roles",
-            style: TextStyle(fontSize: 15),
-          ),
+          child: Text("Roles",
+              style: Theme.of(context).primaryTextTheme.bodyText1),
         ),
         title: Center(
           child: Container(
             width: 100,
-            child: Text(
-              "Games Played",
-              style: TextStyle(fontSize: 15),
-            ),
+            child: Text("Games Played",
+                style: Theme.of(context).primaryTextTheme.bodyText1),
           ),
         ),
         trailing: Container(
           width: 60,
-          child: Text(
-            "Win Rate",
-            style: TextStyle(fontSize: 15),
-          ),
+          child: Text("Win Rate",
+              style: Theme.of(context).primaryTextTheme.bodyText1),
         ),
       ),
     );
@@ -85,25 +80,30 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Tank"),
+                child: Text("Tank",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
               title: Center(
                 child: Container(
                   width: 40,
-                  child: Text(
-                    gamesPlayed.toString(),
-                  ),
+                  child: Text(gamesPlayed.toString(),
+                      style: Theme.of(context).primaryTextTheme.bodyText1),
                 ),
               ),
               trailing: Container(
                 width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%"),
+                child: Text(winRate.toStringAsFixed(2) + "%",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
             )
           : ListTile(
-              leading: Text("Tank"),
-              title: Center(child: Text("--")),
-              trailing: Text("--"),
+              leading: Text("Tank",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              title: Center(
+                  child: Text("--",
+                      style: Theme.of(context).primaryTextTheme.bodyText1)),
+              trailing: Text("--",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
     );
   }
@@ -115,25 +115,32 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Damage"),
+                child: Text("Damage",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
               title: Center(
                 child: Container(
                   width: 40,
                   child: Text(
                     gamesPlayed.toString(),
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ),
               ),
               trailing: Container(
                 width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%"),
+                child: Text(winRate.toStringAsFixed(2) + "%",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
             )
           : ListTile(
-              leading: Text("Damage"),
-              title: Center(child: Text("--")),
-              trailing: Text("--"),
+              leading: Text("Damage",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              title: Center(
+                  child: Text("--",
+                      style: Theme.of(context).primaryTextTheme.bodyText1)),
+              trailing: Text("--",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
     );
   }
@@ -145,25 +152,32 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Support"),
+                child: Text("Support",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
               title: Center(
                 child: Container(
                   width: 40,
                   child: Text(
                     gamesPlayed.toString(),
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ),
               ),
               trailing: Container(
                 width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%"),
+                child: Text(winRate.toStringAsFixed(2) + "%",
+                    style: Theme.of(context).primaryTextTheme.bodyText1),
               ),
             )
           : ListTile(
-              leading: Text("Support"),
-              title: Center(child: Text("--")),
-              trailing: Text("--"),
+              leading: Text("Support",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              title: Center(
+                  child: Text("--",
+                      style: Theme.of(context).primaryTextTheme.bodyText1)),
+              trailing: Text("--",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
     );
   }

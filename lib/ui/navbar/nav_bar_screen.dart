@@ -41,7 +41,6 @@ class BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       body: BlocBuilder<InitializationBloc, InitializationState>(
         builder: (context, state) {
           if (state is InitializedState) {
@@ -53,7 +52,7 @@ class BottomNavBarState extends State<BottomNavBar> {
               controller: state.navBarController,
               items: _navBarsItems(),
               confineInSafeArea: true,
-              backgroundColor: Colors.white,
+              backgroundColor: Theme.of(context).bottomAppBarColor,
               handleAndroidBackButtonPress: false,
               resizeToAvoidBottomInset: true,
               stateManagement: true,

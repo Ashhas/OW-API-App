@@ -43,7 +43,10 @@ class _SettingScreenState extends State<SettingScreen> {
       elevation: 1,
       backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: Icon(
+          Icons.arrow_back,
+          color: Theme.of(context).buttonColor,
+        ),
         color: Colors.black,
         onPressed: () {
           Navigator.pop(context);
@@ -64,7 +67,9 @@ class _SettingScreenState extends State<SettingScreen> {
 
           return SettingsSwitchTile(
             title: "Dark Theme",
+            titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
             switchValue: turnOnDarkTheme,
+            switchActiveColor: Theme.of(context).highlightColor,
             onToggle: (bool value) {
               setState(() {
                 BlocProvider.of<ThemeBloc>(context).add(ThemeChanged(value));

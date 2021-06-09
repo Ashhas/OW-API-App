@@ -177,7 +177,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildMainAccountTile(String mainAccount) {
     return SettingsTile(
       title: UiConst.settingsMainAccountTitle,
-      leading: Icon(Icons.account_circle_outlined),
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.account_circle_outlined,
+        color: Theme.of(context).highlightColor,
+      ),
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
@@ -192,7 +196,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildSettingsTile() {
     return SettingsTile(
       title: "Settings",
-      leading: Icon(Icons.settings),
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.settings,
+        color: Theme.of(context).highlightColor,
+      ),
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
@@ -207,7 +215,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
       title: "About",
-      leading: Icon(Icons.info_outline),
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.info_outline,
+        color: Theme.of(context).highlightColor,
+      ),
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
@@ -222,7 +234,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildHelpAndFaqTile() {
     return SettingsTile(
       title: "Help/FAQ",
-      leading: Icon(Icons.help_outline),
+      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      leading: Icon(
+        Icons.help_outline,
+        color: Theme.of(context).highlightColor,
+      ),
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,

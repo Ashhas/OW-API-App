@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:ow_api_app/util/constants/color_const.dart';
 
 class ProfileInfoWidget extends StatefulWidget {
   @override
@@ -116,7 +117,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
               children: [
                 Text(
                   "Public",
-                  style: Theme.of(context).primaryTextTheme.bodyText2,
+                  style: TextStyle(color: ColorConst.darkCanvasColor),
                 ),
                 Icon(
                   Icons.check,
@@ -128,7 +129,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
               children: [
                 Text(
                   "Private",
-                  style: TextStyle(color: Colors.black),
+                  style: TextStyle(color: ColorConst.darkCanvasColor),
                 ),
                 Icon(
                   Icons.lock,

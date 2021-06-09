@@ -28,7 +28,7 @@ class _HelpFaqScreenState extends State<HelpFaqScreen> {
       elevation: 1,
       backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back),
+        icon: Icon(Icons.arrow_back, color: Theme.of(context).buttonColor),
         color: Colors.black,
         onPressed: () {
           Navigator.pop(context);

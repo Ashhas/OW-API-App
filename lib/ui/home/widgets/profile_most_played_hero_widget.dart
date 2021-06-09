@@ -16,7 +16,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
         return Container(
-          color: Colors.white,
+          color: Theme.of(context).cardColor,
           child: Column(
             children: [
               Container(
@@ -24,8 +24,10 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Most Played Heroes"),
-                    Icon(Icons.arrow_forward_ios_sharp),
+                    Text("Most Played Heroes",
+                        style: Theme.of(context).primaryTextTheme.bodyText2),
+                    Icon(Icons.arrow_forward_ios_sharp,
+                        color: Theme.of(context).buttonColor),
                   ],
                 ),
               ),

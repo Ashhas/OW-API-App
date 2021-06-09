@@ -11,7 +11,7 @@ class PrivateProfileWidget extends StatelessWidget {
       children: [
         Icon(
           Icons.lock,
-          color: Colors.black,
+          color: Theme.of(context).buttonColor,
         ),
       ],
     );

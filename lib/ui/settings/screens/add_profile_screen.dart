@@ -228,7 +228,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
             FocusScope.of(context).requestFocus(FocusNode());
             Navigator.pop(context);
           },
-          child: Icon(Icons.close, color: Colors.black)),
+          child: Icon(Icons.close, color: Theme.of(context).buttonColor)),
       elevation: 0.0,
       backgroundColor: Theme.of(context).backgroundColor,
     );
