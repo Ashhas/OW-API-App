@@ -30,6 +30,7 @@ class AppTheme {
   static ThemeData getDarkTheme() {
     return ThemeData(
       primaryColor: ColorConst.darkPrimaryColor,
+      accentColor: ColorConst.darkAccentColor,
       backgroundColor: ColorConst.darkBackgroundColor,
       cardColor: ColorConst.darkCardColor,
       canvasColor: ColorConst.darkCanvasColor,

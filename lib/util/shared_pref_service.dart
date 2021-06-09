@@ -7,6 +7,7 @@ class SharedPrefKeys {
   static const onBoardingSeenBefore = 'onboardingscreen';
   static const mainAccountName = 'mainAccountName';
   static const mainAccountPlatform = 'mainAccountPlatform';
+  static const String themeIsDarkMode = 'themeDarkMode';
 }
 
 class SharedPreferencesService {
@@ -39,6 +40,9 @@ class SharedPreferencesService {
       await _preferences.setString(
           SharedPrefKeys.mainAccountPlatform, mainAccountPlatform);
 
+  Future<void> setThemeDarkMode(bool isDarkMode) async =>
+      await _preferences.setBool(SharedPrefKeys.themeIsDarkMode, isDarkMode);
+
   bool get getOnBoardingSeenBefore =>
       _preferences.getBool(SharedPrefKeys.onBoardingSeenBefore);
 
@@ -47,4 +51,7 @@ class SharedPreferencesService {
 
   String get getMainAccountPlatform =>
       _preferences.getString(SharedPrefKeys.mainAccountPlatform);
+
+  bool get getThemeDarkMode =>
+      _preferences.getBool(SharedPrefKeys.themeIsDarkMode);
 }
