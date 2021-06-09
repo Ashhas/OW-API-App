@@ -25,6 +25,7 @@ class _AboutScreenState extends State<AboutScreen> {
           children: [
             SettingsTile(
               title: "Github",
+              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
               leading: Icon(Icons.developer_board_outlined),
               onPressed: (BuildContext context) {
                 _launchURL();
@@ -33,11 +34,13 @@ class _AboutScreenState extends State<AboutScreen> {
             Divider(height: 1, thickness: 1),
             SettingsTile(
               title: "Version",
+              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
               subtitle: widget.appVersion,
               onPressed: (BuildContext context) {},
             ),
             SettingsTile(
               title: "Open-source licenses",
+              titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
               onPressed: (BuildContext context) {},
             ),
           ],
