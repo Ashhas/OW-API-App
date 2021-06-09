@@ -23,6 +23,7 @@ dependencies:
   intl: ^0.17.0
   google_fonts: ^1.1.2
   flutter_svg: ^0.22.0
+  url_launcher: ^5.7.8
 
   # Networking
   http: ^0.12.2
@@ -43,6 +44,7 @@ dev_dependencies:
 
 flutter:
   assets:
+    - assets/overwatch-logo.png
     - assets/heroIcons/ana.png
     - assets/heroIcons/ashe.png
     - assets/heroIcons/baptiste.png

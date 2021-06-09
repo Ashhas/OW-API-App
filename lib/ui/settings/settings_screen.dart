@@ -67,7 +67,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     _buildMainAccountTile(state.mainAccount),
                     Divider(height: 1, thickness: 1),
                     _buildSettingsTile(),
-                    _buildAboutTile(),
+                    _buildAboutTile(state.appVersion),
                     _buildHelpAndFaqTile(),
                     SizedBox(height: 100),
                   ],
@@ -204,14 +204,14 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildAboutTile() {
+  Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
       title: "About",
       leading: Icon(Icons.info_outline),
       onPressed: (BuildContext context) {
         pushNewScreen(
           context,
-          screen: AboutScreen(),
+          screen: AboutScreen(appVersion: appVersion),
           withNavBar: false,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );

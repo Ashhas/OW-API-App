@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ow_api_app/ui/settings/widgets/settings_switch_tile.dart';
+import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 
 class SettingScreen extends StatefulWidget {
   SettingScreen();
@@ -8,6 +10,8 @@ class SettingScreen extends StatefulWidget {
 }
 
 class _SettingScreenState extends State<SettingScreen> {
+  bool turnOnDarkTheme = false;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,8 +20,10 @@ class _SettingScreenState extends State<SettingScreen> {
       appBar: _buildAppBar(),
       body: Container(
         width: double.infinity,
-        child: Center(
-          child: Text("Setting"),
+        child: Column(
+          children: [
+            _darkThemeTile(),
+          ],
         ),
       ),
     );
@@ -38,6 +44,18 @@ class _SettingScreenState extends State<SettingScreen> {
         "Setting",
         style: Theme.of(context).primaryTextTheme.headline4,
       ),
+    );
+  }
+
+  Widget _darkThemeTile() {
+    return SettingsSwitchTile(
+      title: "Dark Theme",
+      switchValue: turnOnDarkTheme,
+      onToggle: (bool value) {
+        setState(() {
+          turnOnDarkTheme = value;
+        });
+      },
     );
   }
 }

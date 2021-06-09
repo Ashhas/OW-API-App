@@ -1,6 +1,7 @@
 class VariableConst {
   static const String standardConversionDate = "1970-01-01 ";
   static const String standardConversionDateTime = "1970-01-01 00:00:00.000";
+  static const String githubUrl = "https://github.com/Ashhas/OW-API-App";
 
   static const List<String> heroNames = [
     'Orisa',

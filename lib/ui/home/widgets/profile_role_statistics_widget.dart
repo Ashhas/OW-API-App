@@ -49,14 +49,31 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
 
   Widget _statsTitle() {
     return Container(
-      height: 30,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("Roles"),
-          Text("Games Played"),
-          Text("Win Rate"),
-        ],
+      height: 40,
+      child: ListTile(
+        leading: Container(
+          width: 80,
+          child: Text(
+            "Roles",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
+        title: Center(
+          child: Container(
+            width: 100,
+            child: Text(
+              "Games Played",
+              style: TextStyle(fontSize: 15),
+            ),
+          ),
+        ),
+        trailing: Container(
+          width: 60,
+          child: Text(
+            "Win Rate",
+            style: TextStyle(fontSize: 15),
+          ),
+        ),
       ),
     );
   }
@@ -66,9 +83,22 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       height: 30,
       child: gamesPlayed != 0
           ? ListTile(
-              leading: Text("Tank"),
-              title: Center(child: Text(gamesPlayed.toString())),
-              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+              leading: Container(
+                width: 80,
+                child: Text("Tank"),
+              ),
+              title: Center(
+                child: Container(
+                  width: 40,
+                  child: Text(
+                    gamesPlayed.toString(),
+                  ),
+                ),
+              ),
+              trailing: Container(
+                width: 55,
+                child: Text(winRate.toStringAsFixed(2) + "%"),
+              ),
             )
           : ListTile(
               leading: Text("Tank"),
@@ -83,9 +113,22 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       height: 30,
       child: gamesPlayed != 0
           ? ListTile(
-              leading: Text("Damage"),
-              title: Center(child: Text(gamesPlayed.toString())),
-              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+              leading: Container(
+                width: 80,
+                child: Text("Damage"),
+              ),
+              title: Center(
+                child: Container(
+                  width: 40,
+                  child: Text(
+                    gamesPlayed.toString(),
+                  ),
+                ),
+              ),
+              trailing: Container(
+                width: 55,
+                child: Text(winRate.toStringAsFixed(2) + "%"),
+              ),
             )
           : ListTile(
               leading: Text("Damage"),
@@ -100,9 +143,22 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       height: 30,
       child: gamesPlayed != 0
           ? ListTile(
-              leading: Text("Support"),
-              title: Center(child: Text(gamesPlayed.toString())),
-              trailing: Text(winRate.toStringAsFixed(2) + "%"),
+              leading: Container(
+                width: 80,
+                child: Text("Support"),
+              ),
+              title: Center(
+                child: Container(
+                  width: 40,
+                  child: Text(
+                    gamesPlayed.toString(),
+                  ),
+                ),
+              ),
+              trailing: Container(
+                width: 55,
+                child: Text(winRate.toStringAsFixed(2) + "%"),
+              ),
             )
           : ListTile(
               leading: Text("Support"),
