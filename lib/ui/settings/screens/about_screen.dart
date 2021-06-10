@@ -26,7 +26,8 @@ class _AboutScreenState extends State<AboutScreen> {
             SettingsTile(
               title: "Github",
               titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-              leading: Icon(Icons.developer_board_outlined),
+              leading: Icon(Icons.developer_board_outlined,
+                  color: Theme.of(context).buttonColor),
               onPressed: (BuildContext context) {
                 _launchURL();
               },
@@ -36,6 +37,7 @@ class _AboutScreenState extends State<AboutScreen> {
               title: "Version",
               titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
               subtitle: widget.appVersion,
+              subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle1,
               onPressed: (BuildContext context) {},
             ),
             SettingsTile(
