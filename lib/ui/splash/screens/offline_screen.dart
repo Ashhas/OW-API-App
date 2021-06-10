@@ -13,7 +13,7 @@ class OfflineScreen extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(Icons.signal_wifi_off, color: Colors.white),
+          Icon(Icons.signal_wifi_off, color: Theme.of(context).buttonColor),
           Text(
             "No Internet Connection",
             style: Theme.of(context).primaryTextTheme.bodyText2,

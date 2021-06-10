@@ -80,8 +80,20 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Tank",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-tank.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Tank",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
               ),
               title: Center(
                 child: Container(
@@ -97,8 +109,23 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
               ),
             )
           : ListTile(
-              leading: Text("Tank",
-                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              leading: Container(
+                width: 80,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-tank.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Tank",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
+              ),
               title: Center(
                   child: Text("--",
                       style: Theme.of(context).primaryTextTheme.bodyText1)),
@@ -115,8 +142,20 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Damage",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-offense.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Damage",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
               ),
               title: Center(
                 child: Container(
@@ -134,8 +173,23 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
               ),
             )
           : ListTile(
-              leading: Text("Damage",
-                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              leading: Container(
+                width: 80,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-offense.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Damage",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
+              ),
               title: Center(
                   child: Text("--",
                       style: Theme.of(context).primaryTextTheme.bodyText1)),
@@ -152,8 +206,20 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           ? ListTile(
               leading: Container(
                 width: 80,
-                child: Text("Support",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-support.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Support",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
               ),
               title: Center(
                 child: Container(
@@ -171,8 +237,23 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
               ),
             )
           : ListTile(
-              leading: Text("Support",
-                  style: Theme.of(context).primaryTextTheme.bodyText1),
+              leading: Container(
+                width: 80,
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 15,
+                      height: 15,
+                      child: Image(
+                        image: AssetImage('assets/roleIcons/icon-support.png'),
+                      ),
+                    ),
+                    SizedBox(width: 5),
+                    Text("Support",
+                        style: Theme.of(context).primaryTextTheme.bodyText1),
+                  ],
+                ),
+              ),
               title: Center(
                   child: Text("--",
                       style: Theme.of(context).primaryTextTheme.bodyText1)),
