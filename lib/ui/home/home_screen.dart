@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
-import 'package:ow_api_app/ui/home/screens/error_ui_screen.dart';
-import 'package:ow_api_app/ui/home/screens/home_loading_widget.dart';
+import 'package:ow_api_app/ui/home/screens/error_screen.dart';
+import 'package:ow_api_app/ui/home/screens/loading_widget.dart';
 import 'package:ow_api_app/ui/home/screens/profile_screen.dart';
 
 class HomeScreen extends StatefulWidget {

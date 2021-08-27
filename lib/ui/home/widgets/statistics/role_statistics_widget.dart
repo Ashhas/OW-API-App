@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:ow_api_app/ui/home/widgets/statistics/title_view_widget.dart';
 
 class RoleStatisticsWidget extends StatefulWidget {
   const RoleStatisticsWidget() : super();
@@ -14,11 +15,12 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
   Widget build(BuildContext context) {
     return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
       if (state is ProfileLoadedState) {
-        return Container(
-          color: Theme.of(context).cardColor,
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _titleView(),
+              TitleView(title: "Role Statistics"),
               _statsTitle(),
               _tankStatsTile(state.tankGamesPlayed, state.tankWinRate),
               _damageStatsTile(state.damageGamesPlayed, state.damageWinRate),
@@ -33,19 +35,6 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
         return Container();
       }
     });
-  }
-
-  Widget _titleView() {
-    return Container(
-      height: 50,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text("Role Statistics",
-              style: Theme.of(context).primaryTextTheme.bodyText2),
-        ],
-      ),
-    );
   }
 
   Widget _statsTitle() {

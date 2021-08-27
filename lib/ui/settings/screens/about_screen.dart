@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ow_api_app/util/constants/variable_const.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
+import 'package:ow_api_app/ui/settings/widgets/tiles/settings_tile.dart';
 
 class AboutScreen extends StatefulWidget {
   final String appVersion;

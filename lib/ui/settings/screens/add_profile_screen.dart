@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_pc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_psn.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_switch.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_xbl.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_pc.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_psn.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_switch.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_xbl.dart';
 import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 

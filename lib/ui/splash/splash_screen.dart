@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
-import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
+import 'package:ow_api_app/ui/navbar/bottom_nav_bar.dart';
 import 'package:ow_api_app/ui/onboarding/onboarding_screen.dart';
 import 'package:ow_api_app/ui/offline/offline_screen.dart';
 

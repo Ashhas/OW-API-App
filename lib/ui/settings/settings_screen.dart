@@ -8,8 +8,7 @@ import 'package:ow_api_app/ui/settings/screens/about_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/add_profile_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
-import 'package:ow_api_app/ui/settings/screens/setting_screen.dart';
-import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
+import 'package:ow_api_app/ui/settings/widgets/tiles/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -93,78 +92,56 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAvailableAccountsWidget() {
     return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
       if (state is SettingsLoadedState) {
-        return Container(
-          child: Column(
-            children: [
-              ValueListenableBuilder(
-                valueListenable: state.allAccounts.listenable(),
-                builder: (context, box, widget) {
-                  if (box.values.isEmpty)
-                    return ListTile(
-                      title: Text(UiConst.settingsNoAccountTitle),
-                      enabled: true,
-                    );
-
-                  return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: box.values.length,
-                    itemBuilder: (context, index) {
-                      AccountModel account = box.getAt(index);
-
-                      return ListTile(
-                        title: Text(account.battleNetId,
-                            style: TextStyle(color: Colors.white)),
-                        dense: true,
-                        tileColor: Theme.of(context).accentColor,
-                        trailing: IconButton(
-                          icon: Icon(Icons.close, color: Colors.white),
-                          iconSize: 25,
-                          color: Colors.black,
-                          onPressed: () {
-                            setState(() {
-                              state.allAccounts.deleteAt(index);
-                            });
-                          },
-                        ),
-                        onTap: () {
-                          if (networkAvailable) {
-                            BlocProvider.of<SettingsBloc>(context).add(
-                                ChangeLoadedProfile(
-                                    profileId: account.battleNetId,
-                                    platformId: account.platformId));
-                          }
-                        },
-                      );
-                    },
+        return Column(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: state.allAccounts.listenable(),
+              builder: (context, box, widget) {
+                if (box.values.isEmpty)
+                  return ListTile(
+                    title: Text(UiConst.settingsNoAccountTitle),
+                    enabled: true,
                   );
-                },
-              ),
-              Container(
-                color: Theme.of(context).accentColor,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      PageTransition(
-                        type: PageTransitionType.rightToLeftJoined,
-                        child: AddProfileScreen(),
-                        childCurrent: this.widget,
+
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: box.values.length,
+                  itemBuilder: (context, index) {
+                    AccountModel account = box.getAt(index);
+
+                    return ListTile(
+                      title: Text(
+                        account.battleNetId,
+                        style: TextStyle(color: Colors.white),
                       ),
+                      dense: true,
+                      tileColor: Theme.of(context).accentColor,
+                      trailing: IconButton(
+                        icon: Icon(Icons.close, color: Colors.white),
+                        iconSize: 25,
+                        color: Colors.black,
+                        onPressed: () {
+                          setState(() {
+                            state.allAccounts.deleteAt(index);
+                          });
+                        },
+                      ),
+                      onTap: () {
+                        if (networkAvailable) {
+                          BlocProvider.of<SettingsBloc>(context).add(
+                              ChangeLoadedProfile(
+                                  profileId: account.battleNetId,
+                                  platformId: account.platformId));
+                        }
+                      },
                     );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add, color: Colors.white),
-                      Text("Add Account", style: TextStyle(color: Colors.white))
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+                );
+              },
+            ),
+            _buildAddAccountTile()
+          ],
         );
       } else {
         return Container();
@@ -190,6 +167,32 @@ class _SettingsScreenState extends State<SettingsScreen> {
           ),
         ).then((value) => setState(() {}));
       },
+    );
+  }
+
+  Widget _buildAddAccountTile() {
+    return Container(
+      color: Theme.of(context).accentColor,
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.rightToLeftJoined,
+              child: AddProfileScreen(),
+              childCurrent: this.widget,
+            ),
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.add, color: Colors.white),
+            Text("Add Account", style: TextStyle(color: Colors.white))
+          ],
+        ),
+      ),
     );
   }
 

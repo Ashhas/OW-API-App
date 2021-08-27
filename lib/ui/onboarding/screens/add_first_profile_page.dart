@@ -4,13 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_pc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_psn.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_switch.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_xbl.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_pc.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_psn.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_switch.dart';
+import 'package:ow_api_app/ui/settings/widgets/platform_buttons/widget_btn_xbl.dart';
 import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
-import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
+import 'package:ow_api_app/ui/navbar/bottom_nav_bar.dart';
 
 class AddFirstProfilePage extends StatefulWidget {
   AddFirstProfilePage() : super();
