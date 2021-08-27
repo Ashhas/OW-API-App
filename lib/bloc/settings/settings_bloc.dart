@@ -5,8 +5,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/util/exception/api_exception.dart';
@@ -17,7 +15,6 @@ part 'settings_state.dart';
 
 class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
   final ProfileRepository repository;
-  PersistentTabController _navBarController;
 
   SettingsBloc({@required this.repository}) : super(SettingsOpenedState());
 
@@ -36,8 +33,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapSettingsStartedToState(
       SettingsOpened event, SettingsState state) async* {
-    //Set NavBar Controller
-    _navBarController = event.navBarController;
 
     //Open DB
     var dir = await getApplicationDocumentsDirectory();
@@ -75,7 +70,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     String version = packageInfo.version;
 
     //Navigate back to Home w/ Data
-    _navBarController.jumpToTab(0);
     yield ProfileChangedState(
         profileId: event.profileId, platformId: event.platformId);
 

@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/util/shared_pref_service.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 part 'initialization_event.dart';
 
@@ -30,10 +29,6 @@ class InitializationBloc
   }
 
   Stream<InitializationState> _mapAppStartedEventToState() async* {
-    //Creating NavBar Controller
-    PersistentTabController navBarController =
-        PersistentTabController(initialIndex: 0);
-
     //Delay for Splash Screen
     await Future.delayed(Duration(seconds: 1));
 
@@ -54,7 +49,7 @@ class InitializationBloc
       } else if (onBoardingSeenBefore == true) {
         yield UninitializedState();
       } else if (onBoardingSeenBefore == false) {
-        yield InitializedState(navBarController: navBarController);
+        yield InitializedState();
       }
     } else {
       yield NoNetworkOnStartup();
@@ -62,10 +57,6 @@ class InitializationBloc
   }
 
   Stream<InitializationState> _mapNoNetworkOnStartupEventToState() async* {
-    //Creating NavBar Controller
-    PersistentTabController navBarController =
-        PersistentTabController(initialIndex: 0);
-
     //Check if OnBoarding has been finished
     final sharedPrefService = await SharedPreferencesService.instance;
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
@@ -79,7 +70,7 @@ class InitializationBloc
       } else if (onBoardingSeenBefore == true) {
         yield UninitializedState();
       } else if (onBoardingSeenBefore == false) {
-        yield InitializedState(navBarController: navBarController);
+        yield InitializedState();
       }
     } else {
       yield NoNetworkOnStartup();
@@ -87,10 +78,6 @@ class InitializationBloc
   }
 
   Stream<InitializationState> _mapOnBoardingFinishedEventToState() async* {
-    //Creating NavBar Controller
-    PersistentTabController navBarController =
-        PersistentTabController(initialIndex: 0);
-
     //Check if OnBoarding has been finished
     final sharedPrefService = await SharedPreferencesService.instance;
     final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
@@ -100,7 +87,7 @@ class InitializationBloc
     } else if (onBoardingSeenBefore == true) {
       yield UninitializedState();
     } else if (onBoardingSeenBefore == false) {
-      yield InitializedState(navBarController: navBarController);
+      yield InitializedState();
     }
   }
 }

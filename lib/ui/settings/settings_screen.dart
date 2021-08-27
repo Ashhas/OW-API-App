@@ -11,15 +11,13 @@ import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/setting_screen.dart';
 import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final PersistentTabController navBarController;
-
-  const SettingsScreen({this.navBarController}) : super();
+  const SettingsScreen() : super();
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -31,8 +29,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SettingsBloc>(context)
-        .add(SettingsOpened(navBarController: widget.navBarController));
+    BlocProvider.of<SettingsBloc>(context).add(SettingsOpened());
     BlocProvider.of<NetworkConnectionBloc>(context)
         .add(UpdateNetworkConnection());
   }
@@ -147,12 +144,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
                 color: Theme.of(context).accentColor,
                 child: TextButton(
                   onPressed: () {
-                    pushNewScreen(
+                    Navigator.push(
                       context,
-                      screen: AddProfileScreen(),
-                      withNavBar: false,
-                      pageTransitionAnimation:
-                          PageTransitionAnimation.cupertino,
+                      PageTransition(
+                        type: PageTransitionType.rightToLeftJoined,
+                        child: AddProfileScreen(),
+                        childCurrent: context.widget,
+                      ),
                     );
                   },
                   child: Row(
@@ -183,11 +181,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).highlightColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: SelectMainAccountScreen(mainAccount: mainAccount),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: SelectMainAccountScreen(mainAccount: mainAccount),
+            childCurrent: context.widget,
+          ),
         ).then((value) => setState(() {}));
       },
     );
@@ -202,11 +202,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).highlightColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: SettingScreen(),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: SettingsScreen(),
+            childCurrent: context.widget,
+          ),
         );
       },
     );
@@ -221,11 +223,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).highlightColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: AboutScreen(appVersion: appVersion),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: AboutScreen(appVersion: appVersion),
+            childCurrent: context.widget,
+          ),
         );
       },
     );
@@ -240,11 +244,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
         color: Theme.of(context).highlightColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: HelpFaqScreen(),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: HelpFaqScreen(),
+            childCurrent: context.widget,
+          ),
         );
       },
     );

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/ui/navbar/nav_bar_screen.dart';
 import 'package:ow_api_app/ui/onboarding/onboarding_screen.dart';
-import 'package:ow_api_app/ui/splash/screens/offline_screen.dart';
+import 'package:ow_api_app/ui/offline/offline_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   @override

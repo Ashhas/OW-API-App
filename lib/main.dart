@@ -4,7 +4,6 @@ import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
-import 'package:ow_api_app/bloc/theme/theme_bloc.dart';
 import 'package:ow_api_app/util/constants/theme_const.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
@@ -35,8 +34,6 @@ class MyApp extends StatelessWidget {
           BlocProvider<NetworkConnectionBloc>(
             create: (_) => NetworkConnectionBloc(),
           ),
-          BlocProvider<ThemeBloc>(
-              create: (_) => ThemeBloc()..add(ThemeLoadStarted())),
           BlocProvider<InitializationBloc>(
             create: (_) => InitializationBloc()..add(InitializeApp()),
           ),
@@ -50,20 +47,10 @@ class MyApp extends StatelessWidget {
             create: (_) => SettingsBloc(repository: profileRepository),
           ),
         ],
-        child: BlocBuilder<ThemeBloc, ThemeState>(
-          builder: (context, themeState) {
-            if (themeState is CurrentThemeState) {
-              return MaterialApp(
-                title: 'OW-API',
-                themeMode: themeState.themeMode,
-                theme: AppTheme.getLightTheme(),
-                darkTheme: AppTheme.getDarkTheme(),
-                home: SplashScreen(),
-              );
-            } else {
-              return Container();
-            }
-          },
+        child: MaterialApp(
+          title: 'OW-API',
+          theme: AppTheme.getLightTheme(),
+          home: SplashScreen(),
         ),
       ),
     );

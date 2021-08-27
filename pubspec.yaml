@@ -33,6 +33,7 @@ dependencies:
 
   # UI
   flutter_dropdown: ^0.0.8
+  page_transition: ^2.0.2
 
 dev_dependencies:
   flutter_test:

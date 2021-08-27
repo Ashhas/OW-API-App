@@ -5,9 +5,7 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class SettingsOpened extends SettingsEvent {
-  final PersistentTabController navBarController;
-
-  SettingsOpened({this.navBarController});
+  SettingsOpened();
 
   @override
   List<Object> get props => [];
