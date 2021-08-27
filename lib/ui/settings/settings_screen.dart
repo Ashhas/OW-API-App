@@ -149,7 +149,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       PageTransition(
                         type: PageTransitionType.rightToLeftJoined,
                         child: AddProfileScreen(),
-                        childCurrent: context.widget,
+                        childCurrent: this.widget,
                       ),
                     );
                   },
