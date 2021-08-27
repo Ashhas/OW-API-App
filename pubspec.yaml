@@ -33,7 +33,6 @@ dependencies:
 
   # UI
   flutter_dropdown: ^0.0.8
-  persistent_bottom_nav_bar: ^2.1.0
 
 dev_dependencies:
   flutter_test:

@@ -5,12 +5,9 @@ import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/ui/home/screens/error_ui_screen.dart';
 import 'package:ow_api_app/ui/home/screens/home_loading_widget.dart';
 import 'package:ow_api_app/ui/home/screens/profile_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class HomeScreen extends StatefulWidget {
-  final PersistentTabController navBarController;
-
-  const HomeScreen(this.navBarController) : super();
+  const HomeScreen() : super();
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
