@@ -14,14 +14,14 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<InitializationBloc, InitializationState>(
-      builder: (context, state) {
-        if (state is InitializationStartedState) {
+      builder: (context, initState) {
+        if (initState is InitializationStartedState) {
           return Container(color: Colors.deepOrangeAccent);
-        } else if (state is NoNetworkOnStartup) {
+        } else if (initState is NoNetworkOnStartup) {
           return OfflineScreen();
-        } else if (state is UninitializedState) {
+        } else if (initState is UninitializedState) {
           return OnBoardingScreen();
-        } else if (state is InitializedState) {
+        } else if (initState is InitializedState) {
           return BottomNavBar();
         } else {
           return Container();
