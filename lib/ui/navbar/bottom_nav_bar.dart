@@ -10,27 +10,17 @@ class BottomNavBar extends StatefulWidget {
 }
 
 class BottomNavBarState extends State<BottomNavBar> {
-  Widget _navBarPages(int index) {
-    switch (index) {
-      case 0:
-        return HomeScreen();
-        break;
-      case 1:
-        return SettingsScreen();
-        break;
-      default:
-        return HomeScreen();
-        break;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<NavigationBarBloc, NavigationBarState>(
       builder: (context, navBarState) {
         return Scaffold(
-          body: Center(
-            child: _navBarPages(navBarState.tabId),
+          body: IndexedStack(
+            index: navBarState.tabId,
+            children: [
+              HomeScreen(),
+              SettingsScreen(),
+            ],
           ),
           bottomNavigationBar: BottomNavigationBar(
             items: [
