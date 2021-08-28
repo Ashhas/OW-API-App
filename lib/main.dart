@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/bloc/about/about_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
+import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
@@ -44,6 +46,9 @@ class MyApp extends StatelessWidget {
           BlocProvider<InitializationBloc>(
             create: (_) => InitializationBloc()..add(InitializeApp()),
           ),
+          BlocProvider<NavigationBarBloc>(
+            create: (_) => NavigationBarBloc(),
+          ),
           BlocProvider<OnBoardingBloc>(
             create: (_) => OnBoardingBloc(repository: profileRepository),
           ),
@@ -52,6 +57,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<SettingsBloc>(
             create: (_) => SettingsBloc(repository: profileRepository),
+          ),
+          BlocProvider<AboutBloc>(
+            create: (_) => AboutBloc(),
           ),
         ],
         child: MaterialApp(

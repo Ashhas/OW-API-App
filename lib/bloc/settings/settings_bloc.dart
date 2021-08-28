@@ -3,7 +3,6 @@ import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/util/shared_pref_service.dart';
-import 'package:package_info/package_info.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
@@ -33,24 +32,16 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
 
   Stream<SettingsState> _mapSettingsStartedToState(
       SettingsOpened event, SettingsState state) async* {
-
     //Open DB
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
 
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
     final mainAccount = sharedPrefService.getMainAccountName;
 
-    //Fetch App Version
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-
     yield SettingsLoadedState(
       allAccounts: _profileBox,
       mainAccount: mainAccount,
-      appVersion: version,
     );
   }
 
@@ -65,10 +56,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     final sharedPrefService = await SharedPreferencesService.instance;
     final mainAccount = sharedPrefService.getMainAccountName;
 
-    //Fetch App Version
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
-
     //Navigate back to Home w/ Data
     yield ProfileChangedState(
         profileId: event.profileId, platformId: event.platformId);
@@ -76,7 +63,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     yield SettingsLoadedState(
       allAccounts: _profileBox,
       mainAccount: mainAccount,
-      appVersion: version,
     );
   }
 
@@ -92,10 +78,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     //Fetch MainAccount
     final sharedPrefService = await SharedPreferencesService.instance;
     final mainAccount = sharedPrefService.getMainAccountName;
-
-    //Fetch App Version
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
 
     //Verify Account
     try {
@@ -118,7 +100,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield SettingsLoadedState(
         allAccounts: _profileBox,
         mainAccount: mainAccount,
-        appVersion: version,
       );
     } on EmptyResultException catch (e) {
       yield SettingsErrorState(exception: e);

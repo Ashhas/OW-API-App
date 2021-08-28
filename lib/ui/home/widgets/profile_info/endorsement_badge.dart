@@ -19,10 +19,6 @@ class EndorsementBadge extends StatelessWidget {
             color: Colors.white,
           ),
         ),
-        SvgPicture.network(
-          endorsementIcon,
-          color: Colors.white,
-        ),
       ],
     );
   }

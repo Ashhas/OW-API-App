@@ -6,9 +6,7 @@ import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
 class SelectMainAccountScreen extends StatefulWidget {
-  final String mainAccount;
-
-  SelectMainAccountScreen({@required this.mainAccount});
+  SelectMainAccountScreen();
 
   @override
   _SelectMainAccountScreenState createState() =>
@@ -90,9 +88,10 @@ class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
       elevation: 1,
       backgroundColor: Theme.of(context).canvasColor,
       leading: IconButton(
-        icon: Icon(Icons.arrow_back,
+        icon: Icon(
+          Icons.arrow_back,
           color: Theme.of(context).buttonColor,
-      ),
+        ),
         color: Colors.black,
         onPressed: () {
           Navigator.pop(context, selectedMainAccount);

@@ -10,12 +10,11 @@ class SettingsOpenedState extends SettingsState {
 class SettingsLoadedState extends SettingsState {
   final Box allAccounts;
   final String mainAccount;
-  final String appVersion;
 
-  SettingsLoadedState(
-      {@required this.allAccounts,
-      @required this.mainAccount,
-      @required this.appVersion});
+  SettingsLoadedState({
+    @required this.allAccounts,
+    @required this.mainAccount,
+  });
 
   @override
   List<Object> get props => [];

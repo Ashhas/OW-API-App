@@ -6,7 +6,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/ui/settings/screens/about_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/add_profile_screen.dart';
-import 'package:ow_api_app/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
 import 'package:ow_api_app/ui/settings/widgets/tiles/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
@@ -52,25 +51,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
         },
         child: BlocBuilder<SettingsBloc, SettingsState>(
           builder: (context, state) {
-            if (state is SettingsLoadedState) {
-              return SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    _buildAvailableAccountsWidget(),
-                    Divider(height: 1, thickness: 1),
-                    _buildMainAccountTile(state.mainAccount),
-                    Divider(height: 1, thickness: 1),
-                    _buildAboutTile(state.appVersion),
-                    _buildHelpAndFaqTile(),
-                    SizedBox(height: 100),
-                  ],
-                ),
-              );
-            } else {
-              return Container();
-            }
+            return SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildAvailableAccountsWidget(),
+                  Divider(height: 1, thickness: 1),
+                  _buildMainAccountTile(),
+                  Divider(height: 1, thickness: 1),
+                  _buildAboutTile(),
+                  SizedBox(height: 100),
+                ],
+              ),
+            );
           },
         ),
       ),
@@ -149,7 +143,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  Widget _buildMainAccountTile(String mainAccount) {
+  Widget _buildMainAccountTile() {
     return SettingsTile(
       title: UiConst.settingsMainAccountTitle,
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
@@ -162,8 +156,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           context,
           PageTransition(
             type: PageTransitionType.rightToLeftJoined,
-            child: SelectMainAccountScreen(mainAccount: mainAccount),
-            childCurrent: context.widget,
+            child: SelectMainAccountScreen(),
+            childCurrent: this.widget,
           ),
         ).then((value) => setState(() {}));
       },
@@ -196,7 +190,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildAboutTile(String appVersion) {
+  Widget _buildAboutTile() {
     return SettingsTile(
       title: "About",
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
@@ -209,28 +203,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
           context,
           PageTransition(
             type: PageTransitionType.rightToLeftJoined,
-            child: AboutScreen(appVersion: appVersion),
-            childCurrent: this.widget,
-          ),
-        );
-      },
-    );
-  }
-
-  Widget _buildHelpAndFaqTile() {
-    return SettingsTile(
-      title: "Help/FAQ",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-      leading: Icon(
-        Icons.help_outline,
-        color: Theme.of(context).primaryColor,
-      ),
-      onPressed: (BuildContext context) {
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeftJoined,
-            child: HelpFaqScreen(),
+            child: AboutScreen(),
             childCurrent: this.widget,
           ),
         );
