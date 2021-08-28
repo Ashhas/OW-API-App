@@ -17,15 +17,15 @@ class AppTheme {
       buttonColor: ColorConst.lightButtonColor,
       dividerColor: ColorConst.lightDividerColor,
       primaryTextTheme: TextTheme(
-        bodyText2: FontConst.REGULAR_DEFAULT_BLACK,
-        bodyText1: FontConst.REGULAR_SMALL_BLACK,
         headline5: FontConst.LARGE_TILE,
         headline4: FontConst.REGULAR_TILE_BLACK,
-        headline3: FontConst.REGULAR_SMALL_BLACK,
+        headline3: FontConst.BOLD_TITLE_VIEW_BLACK,
         headline2: FontConst.LARGE_NAME_TITLE,
         headline1: FontConst.LARGE_TILE_WHITE,
         subtitle1: FontConst.REGULAR_SMALL_BLACK,
         subtitle2: FontConst.REGULAR_ERROR,
+        bodyText2: FontConst.REGULAR_DEFAULT_BLACK,
+        bodyText1: FontConst.REGULAR_SMALL_BLACK,
       ),
     );
   }

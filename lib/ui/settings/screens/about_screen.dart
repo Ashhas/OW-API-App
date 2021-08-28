@@ -55,7 +55,7 @@ class _AboutScreenState extends State<AboutScreen> {
     return AppBar(
       elevation: 1,
       toolbarHeight: 180,
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).canvasColor,
       leading: Container(),
       flexibleSpace: SafeArea(
         child: Column(

@@ -18,15 +18,17 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TitleView(title: "Role Statistics"),
-              _statsTitle(),
-              _tankStatsTile(state.tankGamesPlayed, state.tankWinRate),
-              _damageStatsTile(state.damageGamesPlayed, state.damageWinRate),
-              _supportStatsTile(state.supportGamesPlayed, state.supportWinRate),
-              SizedBox(
-                height: 15,
+              _gridViewStats(
+                tankGamesPlayed: state.tankGamesPlayed,
+                tankWinRate: state.tankWinRate,
+                damageGamesPlayed: state.damageGamesPlayed,
+                damageWinRate: state.damageWinRate,
+                supportGamesPlayed: state.supportGamesPlayed,
+                supportWinRate: state.supportWinRate,
               ),
             ],
           ),
@@ -37,218 +39,118 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
     });
   }
 
-  Widget _statsTitle() {
+  Widget _gridViewStats(
+      {int tankGamesPlayed,
+      int damageGamesPlayed,
+      int supportGamesPlayed,
+      double tankWinRate,
+      double damageWinRate,
+      double supportWinRate}) {
     return Container(
-      height: 40,
-      child: ListTile(
-        leading: Container(
-          width: 80,
-          child: Text("Roles",
-              style: Theme.of(context).primaryTextTheme.bodyText1),
-        ),
-        title: Center(
-          child: Container(
-            width: 100,
-            child: Text("Games Played",
-                style: Theme.of(context).primaryTextTheme.bodyText1),
+      height: 150,
+      child: GridView.count(
+        crossAxisCount: 3,
+        childAspectRatio: (1 / .3),
+        physics: new NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        children: [
+          _gridNoCenterTitleTile(gridTitle: "Roles"),
+          _gridTitleTile(gridTitle: "Games Played"),
+          _gridTitleTile(gridTitle: "Win Rate"),
+          _roleTile(
+              title: "Tank", assetImage: "assets/roleIcons/icon-tank.png"),
+          _gamesPlayedTile(displayText: tankGamesPlayed),
+          _percentageTile(displayText: tankWinRate),
+          _roleTile(
+              title: "Damage", assetImage: "assets/roleIcons/icon-damage.png"),
+          _gamesPlayedTile(displayText: damageGamesPlayed),
+          _percentageTile(displayText: damageWinRate),
+          _roleTile(
+              title: "Support",
+              assetImage: "assets/roleIcons/icon-support.png"),
+          _gamesPlayedTile(displayText: supportGamesPlayed),
+          _percentageTile(displayText: supportWinRate)
+        ],
+      ),
+    );
+  }
+
+  Widget _gridTitleTile({String gridTitle}) {
+    return Container(
+      color: Colors.red,
+      child: Center(
+        child: Text(gridTitle,
+            style: Theme.of(context).primaryTextTheme.bodyText1),
+      ),
+    );
+  }
+
+  Widget _gridNoCenterTitleTile({String gridTitle}) {
+    return Container(
+      color: Colors.red,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Center(
+            child: Text(
+              gridTitle,
+              style: Theme.of(context).primaryTextTheme.bodyText1,
+            ),
           ),
-        ),
-        trailing: Container(
-          width: 60,
-          child: Text("Win Rate",
-              style: Theme.of(context).primaryTextTheme.bodyText1),
+        ],
+      ),
+    );
+  }
+
+  Widget _roleTile({String title, String assetImage}) {
+    return Center(
+      child: Container(
+        child: Row(
+          children: [
+            SizedBox(
+              width: 15,
+              height: 15,
+              child: Image(
+                image: AssetImage(assetImage),
+              ),
+            ),
+            SizedBox(width: 5),
+            Text(title, style: Theme.of(context).primaryTextTheme.bodyText1),
+          ],
         ),
       ),
     );
   }
 
-  Widget _tankStatsTile(int gamesPlayed, double winRate) {
-    return Container(
-      height: 30,
-      child: gamesPlayed != 0
-          ? ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-tank.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Tank",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                child: Container(
-                  width: 40,
-                  child: Text(gamesPlayed.toString(),
-                      style: Theme.of(context).primaryTextTheme.bodyText1),
-                ),
-              ),
-              trailing: Container(
-                width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
-              ),
-            )
-          : ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-tank.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Tank",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                  child: Text("--",
-                      style: Theme.of(context).primaryTextTheme.bodyText1)),
-              trailing: Text("--",
+  Widget _gamesPlayedTile({int displayText}) {
+    return displayText > 0 || !displayText.isNaN
+        ? Center(
+            child: Container(
+              child: Text(displayText.toString(),
                   style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
-    );
+          )
+        : Center(
+            child: Container(
+              child: Text("--",
+                  style: Theme.of(context).primaryTextTheme.bodyText1),
+            ),
+          );
   }
 
-  Widget _damageStatsTile(int gamesPlayed, double winRate) {
-    return Container(
-      height: 30,
-      child: gamesPlayed != 0
-          ? ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-offense.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Damage",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                child: Container(
-                  width: 40,
-                  child: Text(
-                    gamesPlayed.toString(),
-                    style: Theme.of(context).primaryTextTheme.bodyText1,
-                  ),
-                ),
-              ),
-              trailing: Container(
-                width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
-              ),
-            )
-          : ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-offense.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Damage",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                  child: Text("--",
-                      style: Theme.of(context).primaryTextTheme.bodyText1)),
-              trailing: Text("--",
+  Widget _percentageTile({double displayText}) {
+    return !displayText.isNaN
+        ? Center(
+            child: Container(
+              child: Text(displayText.toStringAsFixed(2) + "%",
                   style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
-    );
-  }
-
-  Widget _supportStatsTile(int gamesPlayed, double winRate) {
-    return Container(
-      height: 30,
-      child: gamesPlayed != 0
-          ? ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-support.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Support",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                child: Container(
-                  width: 40,
-                  child: Text(
-                    gamesPlayed.toString(),
-                    style: Theme.of(context).primaryTextTheme.bodyText1,
-                  ),
-                ),
-              ),
-              trailing: Container(
-                width: 55,
-                child: Text(winRate.toStringAsFixed(2) + "%",
-                    style: Theme.of(context).primaryTextTheme.bodyText1),
-              ),
-            )
-          : ListTile(
-              leading: Container(
-                width: 80,
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 15,
-                      height: 15,
-                      child: Image(
-                        image: AssetImage('assets/roleIcons/icon-support.png'),
-                      ),
-                    ),
-                    SizedBox(width: 5),
-                    Text("Support",
-                        style: Theme.of(context).primaryTextTheme.bodyText1),
-                  ],
-                ),
-              ),
-              title: Center(
-                  child: Text("--",
-                      style: Theme.of(context).primaryTextTheme.bodyText1)),
-              trailing: Text("--",
+          )
+        : Center(
+            child: Container(
+              child: Text("--%",
                   style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
-    );
+          );
   }
 }

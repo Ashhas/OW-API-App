@@ -24,7 +24,7 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
               children: [
                 TitleView(title: "Most Played Heroes"),
                 Container(
-                  height: 135.0,
+                  height: 150.0,
                   child: new ListView.builder(
                     shrinkWrap: true,
                     itemCount: state.topHeroes.length,
@@ -60,8 +60,8 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
       child: Column(
         children: [
           Container(
-            width: 100,
-            height: 90,
+            width: 120,
+            height: 100,
             color: Colors.blue,
             child: _heroImage(heroName),
           ),
