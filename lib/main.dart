@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
@@ -15,6 +16,12 @@ void main() async {
 
   //Initialize Bloc Observer
   Bloc.observer = SimpleBlocObserver();
+
+  //Set Orientation and Run App
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+      .then((_) {
+    runApp(MyApp());
+  });
 
   runApp(MyApp());
 }
@@ -49,7 +56,7 @@ class MyApp extends StatelessWidget {
         ],
         child: MaterialApp(
           title: 'OW-API',
-          theme: AppTheme.getLightTheme(),
+          theme: AppTheme.getDefaultTheme(),
           home: SplashScreen(),
         ),
       ),

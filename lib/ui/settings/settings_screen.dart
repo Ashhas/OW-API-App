@@ -8,7 +8,6 @@ import 'package:ow_api_app/ui/settings/screens/about_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/add_profile_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
-import 'package:ow_api_app/ui/settings/screens/setting_screen.dart';
 import 'package:ow_api_app/ui/settings/widgets/tiles/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 import 'package:page_transition/page_transition.dart';
@@ -63,7 +62,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     Divider(height: 1, thickness: 1),
                     _buildMainAccountTile(state.mainAccount),
                     Divider(height: 1, thickness: 1),
-                    _buildSettingsTile(),
                     _buildAboutTile(state.appVersion),
                     _buildHelpAndFaqTile(),
                     SizedBox(height: 100),
@@ -119,7 +117,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       dense: true,
                       tileColor: Theme.of(context).canvasColor,
                       trailing: IconButton(
-                        icon: Icon(Icons.close, color: Colors.white),
+                        icon: Icon(Icons.close,
+                            color: Theme.of(context).cardColor),
                         iconSize: 25,
                         color: Colors.black,
                         onPressed: () {
@@ -156,7 +155,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.account_circle_outlined,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).primaryColor,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -197,34 +196,13 @@ class _SettingsScreenState extends State<SettingsScreen> {
     );
   }
 
-  Widget _buildSettingsTile() {
-    return SettingsTile(
-      title: "Settings",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-      leading: Icon(
-        Icons.settings,
-        color: Theme.of(context).highlightColor,
-      ),
-      onPressed: (BuildContext context) {
-        Navigator.push(
-          context,
-          PageTransition(
-            type: PageTransitionType.rightToLeftJoined,
-            child: SettingScreen(),
-            childCurrent: this.widget,
-          ),
-        );
-      },
-    );
-  }
-
   Widget _buildAboutTile(String appVersion) {
     return SettingsTile(
       title: "About",
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.info_outline,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).primaryColor,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(
@@ -245,7 +223,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
       leading: Icon(
         Icons.help_outline,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).primaryColor,
       ),
       onPressed: (BuildContext context) {
         Navigator.push(

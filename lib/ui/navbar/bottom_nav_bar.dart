@@ -54,17 +54,18 @@ class BottomNavBarState extends State<BottomNavBar> {
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.dashboard_outlined),
+            icon: Icon(Icons.space_dashboard_outlined),
             label: "Home",
           ),
-          BottomNavigationBarItem(icon: Icon(Icons.more_horiz), label: "More"),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.more_horiz_sharp), label: "More"),
         ],
         currentIndex: _selectedIndex,
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: TextStyle(fontSize: 12),
         unselectedLabelStyle: TextStyle(fontSize: 12),
         backgroundColor: Theme.of(context).bottomAppBarColor,
-        selectedItemColor: Theme.of(context).focusColor,
+        selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Theme.of(context).shadowColor,
         elevation: 6.0,
         onTap: _onItemTapped,

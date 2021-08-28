@@ -10,8 +10,8 @@ class HomeLoadingScreen extends StatelessWidget {
       child: Center(
         child: CircularProgressIndicator(
           valueColor:
-              new AlwaysStoppedAnimation<Color>(Theme.of(context).accentColor),
-          backgroundColor: Colors.white,
+              new AlwaysStoppedAnimation<Color>(Theme.of(context).primaryColor),
+          backgroundColor: Theme.of(context).shadowColor,
         ),
       ),
     );

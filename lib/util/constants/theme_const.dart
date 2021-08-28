@@ -3,7 +3,7 @@ import 'package:ow_api_app/util/constants/font_const.dart';
 import 'color_const.dart';
 
 class AppTheme {
-  static ThemeData getLightTheme() {
+  static ThemeData getDefaultTheme() {
     return ThemeData(
       primaryColor: ColorConst.lightPrimaryColor,
       accentColor: ColorConst.lightAccentColor,
@@ -16,6 +16,7 @@ class AppTheme {
       errorColor: ColorConst.errorColor,
       buttonColor: ColorConst.lightButtonColor,
       dividerColor: ColorConst.lightDividerColor,
+      shadowColor: ColorConst.lightShadowColor,
       primaryTextTheme: TextTheme(
         headline5: FontConst.LARGE_TILE,
         headline4: FontConst.REGULAR_TILE_BLACK,

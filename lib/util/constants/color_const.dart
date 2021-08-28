@@ -8,8 +8,9 @@ class ColorConst {
   static const Color lightPrimaryColor = Color(0xFFF26513);
   static const Color lightAccentColor = Color(0xFF01407c);
   static const Color lightCanvasColor = Color(0xFF1a2320);
-  static const Color lightBottomAppBarColor = Color(0xFFffffff);
+  static const Color lightBottomAppBarColor = Color(0xFFfefefe);
   static const Color lightCardColor = Color(0xFFffffff);
+  static const Color lightShadowColor = Colors.grey;
   static const Color lightButtonColor = Color(0xFF323238);
   static const Color lightHighlightColor = Colors.blue;
   static const Color lightDividerColor = Color(0x1f000000);
