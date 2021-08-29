@@ -24,8 +24,6 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
       yield* _mapChangeProfileEventToState(event, state);
     } else if (event is AddProfile) {
       yield* _mapAddProfileEventToState(event, state);
-    } else if (event is SaveMainAccount) {
-      yield* _mapSaveMainAccountToState(event, state);
     }
   }
 
@@ -107,13 +105,5 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     } on UnknownException catch (e) {
       yield SettingsErrorState(exception: e);
     }
-  }
-
-  Stream<SettingsState> _mapSaveMainAccountToState(
-      SaveMainAccount event, SettingsState state) async* {
-    //Save MainAccount in SharedPref
-    final sharedPrefService = await SharedPreferencesService.instance;
-    sharedPrefService.setMainAccountName(event.battleNetId);
-    sharedPrefService.setMainAccountPlatform(event.platformId);
   }
 }

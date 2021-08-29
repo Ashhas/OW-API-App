@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/about/about_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
+import 'package:ow_api_app/bloc/main_account/main_account_bloc.dart';
 import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
@@ -58,6 +59,9 @@ class MyApp extends StatelessWidget {
           ),
           BlocProvider<AboutBloc>(
             create: (_) => AboutBloc(),
+          ),
+          BlocProvider<MainAccountBloc>(
+            create: (_) => MainAccountBloc(),
           ),
         ],
         child: MaterialApp(

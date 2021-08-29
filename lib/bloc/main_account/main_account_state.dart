@@ -1,19 +1,21 @@
-part of 'about_bloc.dart';
+part of 'main_account_bloc.dart';
 
 @immutable
-abstract class AboutState extends Equatable {
-  final String appVersion = "";
-}
+abstract class MainAccountState extends Equatable {}
 
-class InitialAboutState extends AboutState {
+class InitialMainAccountState extends MainAccountState {
   @override
   List<Object> get props => [];
 }
 
-class AboutLoaded extends AboutState {
-  final String appVersion;
+class AccountDataLoaded extends MainAccountState {
+  final Box allAccountBox;
+  final String mainAccount;
 
-  AboutLoaded({this.appVersion});
+  AccountDataLoaded({
+    @required this.allAccountBox,
+    @required this.mainAccount,
+  });
 
   @override
   List<Object> get props => [];

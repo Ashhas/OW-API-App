@@ -1,9 +1,19 @@
-part of 'about_bloc.dart';
+part of 'main_account_bloc.dart';
 
 @immutable
-abstract class AboutEvent extends Equatable {}
+abstract class MainAccountEvent extends Equatable {}
 
-class LoadAboutData extends AboutEvent {
+class LoadAccountData extends MainAccountEvent {
   @override
   List<Object> get props => [];
+}
+
+class SaveMainAccount extends MainAccountEvent {
+  final String battleNetId;
+  final String platformId;
+
+  SaveMainAccount({@required this.battleNetId, @required this.platformId});
+
+  @override
+  List<Object> get props => [battleNetId];
 }

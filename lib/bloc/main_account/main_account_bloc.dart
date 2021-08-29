@@ -1,29 +1,46 @@
 import 'dart:async';
 import 'package:bloc/bloc.dart';
+import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
-import 'package:package_info/package_info.dart';
+import 'package:ow_api_app/util/shared_pref_service.dart';
 
-part 'about_event.dart';
+part 'main_account_event.dart';
 
-part 'about_state.dart';
+part 'main_account_state.dart';
 
-class AboutBloc extends Bloc<AboutEvent, AboutState> {
-  AboutBloc() : super(InitialAboutState());
+class MainAccountBloc extends Bloc<MainAccountEvent, MainAccountState> {
+  MainAccountBloc() : super(InitialMainAccountState());
 
   @override
-  Stream<AboutState> mapEventToState(AboutEvent event) async* {
-    if (event is LoadAboutData) {
-      yield* _mapLoadAboutDataToState(event, state);
+  Stream<MainAccountState> mapEventToState(MainAccountEvent event) async* {
+    if (event is LoadAccountData) {
+      yield* _mapLoadAccountDataToState(event, state);
+    } else if (event is SaveMainAccount) {
+      yield* _mapSaveMainAccountToState(event, state);
     }
   }
 
-  Stream<AboutState> _mapLoadAboutDataToState(
-      LoadAboutData event, AboutState state) async* {
-    //Fetch App Version
-    PackageInfo packageInfo = await PackageInfo.fromPlatform();
-    String version = packageInfo.version;
+  Stream<MainAccountState> _mapLoadAccountDataToState(
+      LoadAccountData event, MainAccountState state) async* {
+    //Open DB
+    Box _profileBox = await Hive.openBox('accountBox');
 
-    yield AboutLoaded(appVersion: version);
+    //Fetch MainAccount
+    final sharedPrefService = await SharedPreferencesService.instance;
+    final mainAccount = sharedPrefService.getMainAccountName;
+
+    yield AccountDataLoaded(
+      allAccountBox: _profileBox,
+      mainAccount: mainAccount,
+    );
+  }
+
+  Stream<MainAccountState> _mapSaveMainAccountToState(
+      SaveMainAccount event, MainAccountState state) async* {
+    //Save MainAccount in SharedPref
+    final sharedPrefService = await SharedPreferencesService.instance;
+    sharedPrefService.setMainAccountName(event.battleNetId);
+    sharedPrefService.setMainAccountPlatform(event.platformId);
   }
 }
