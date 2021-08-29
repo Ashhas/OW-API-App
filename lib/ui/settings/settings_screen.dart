@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
@@ -39,44 +38,45 @@ class _SettingsScreenState extends State<SettingsScreen> {
       appBar: _buildAppBar(),
       backgroundColor: Theme.of(context).backgroundColor,
       body: BlocListener<NetworkConnectionBloc, NetworkConnectionState>(
-          listener: (context, networkState) {
-            if (networkState is NetworkConnectionUpdatedState) {
-              setState(() {
-                networkAvailable = true;
-              });
-            } else if (networkState is NoNetworkConnectionState) {
-              setState(() {
-                networkAvailable = false;
-              });
+        listener: (context, networkState) {
+          if (networkState is NetworkConnectionUpdatedState) {
+            setState(() {
+              networkAvailable = true;
+            });
+          } else if (networkState is NoNetworkConnectionState) {
+            setState(() {
+              networkAvailable = false;
+            });
+          }
+        },
+        child: BlocListener<SettingsBloc, SettingsState>(
+          listener: (context, settingsState) {
+            if (settingsState is ProfileChangedState) {
+              BlocProvider.of<NavigationBarBloc>(context).add(
+                NavigateToScreen(selectedIndex: 0),
+              );
             }
           },
-          child: BlocListener<SettingsBloc, SettingsState>(
-            listener: (context, settingsState) {
-              if (settingsState is ProfileChangedState) {
-                BlocProvider.of<NavigationBarBloc>(context).add(
-                  NavigateToScreen(selectedIndex: 0),
-                );
-              }
+          child: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, state) {
+              return SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildAvailableAccountsWidget(),
+                    Divider(height: 1, thickness: 1),
+                    _buildMainAccountTile(),
+                    Divider(height: 1, thickness: 1),
+                    _buildAboutTile(),
+                    SizedBox(height: 100),
+                  ],
+                ),
+              );
             },
-            child: BlocBuilder<SettingsBloc, SettingsState>(
-              builder: (context, state) {
-                return SingleChildScrollView(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      _buildAvailableAccountsWidget(),
-                      Divider(height: 1, thickness: 1),
-                      _buildMainAccountTile(),
-                      Divider(height: 1, thickness: 1),
-                      _buildAboutTile(),
-                      SizedBox(height: 100),
-                    ],
-                  ),
-                );
-              },
-            ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 
