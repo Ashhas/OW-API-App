@@ -79,8 +79,10 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
     return Container(
       color: Colors.red,
       child: Center(
-        child: Text(gridTitle,
-            style: Theme.of(context).primaryTextTheme.bodyText1),
+        child: Text(
+          gridTitle,
+          style: Theme.of(context).primaryTextTheme.bodyText2,
+        ),
       ),
     );
   }
@@ -94,7 +96,7 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           Center(
             child: Text(
               gridTitle,
-              style: Theme.of(context).primaryTextTheme.bodyText1,
+              style: Theme.of(context).primaryTextTheme.bodyText2,
             ),
           ),
         ],

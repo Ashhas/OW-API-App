@@ -123,7 +123,7 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.headline3,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
@@ -151,7 +151,7 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.headline3,
                   ),
                   const SizedBox(height: 2.0),
                   Text(

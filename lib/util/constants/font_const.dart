@@ -10,27 +10,35 @@ class FontConst {
     fontWeight: FontWeight.w400,
   );
 
-  //LARGE
-  static final LARGE_NAME_TITLE =
+  //AppBar Fonts
+  static final BOLD_APP_BAR_TITLE_WHITE =
+      BOLD.copyWith(fontSize: 20, color: ColorConst.darkPrimaryTextColor);
+
+  //Title ID Fonts
+  static final BOLD_TITLE_ID_WHITE =
       BOLD.copyWith(fontSize: 25, color: ColorConst.darkPrimaryTextColor);
 
-  //LARGE TILE
-  static final LARGE_TILE = BOLD.copyWith(fontSize: 21);
-  static final LARGE_TILE_WHITE =
-      LARGE_TILE.copyWith(color: ColorConst.lightPrimaryTextColor);
+  //Rank Number Fonts
+  static final BOLD_RANK_NUMBER_BLACK =
+      BOLD.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
 
-  //REGULAR
-  static final REGULAR_DEFAULT_BLACK =
+  //Body Fonts
+  static final REGULAR_BODY_BIG_BLACK =
       REGULAR.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_SMALL_BLACK =
+  static final REGULAR_BODY_SMALL_BLACK =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
+
+  //Tile Fonts
   static final REGULAR_TILE_BLACK =
       REGULAR.copyWith(fontSize: 16, color: ColorConst.lightPrimaryTextColor);
+  static final REGULAR_TILE_WHITE =
+      REGULAR.copyWith(fontSize: 15, color: ColorConst.darkPrimaryTextColor);
 
-  //REGULAR
+  //Title View Fonts
   static final BOLD_TITLE_VIEW_BLACK =
       BOLD.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
 
+  //Error Fonts
   static final REGULAR_ERROR =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.errorColor);
 }

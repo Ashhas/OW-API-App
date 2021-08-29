@@ -55,7 +55,7 @@ class _AboutScreenState extends State<AboutScreen> {
               children: [
                 IconButton(
                   icon: Icon(Icons.arrow_back),
-                  color: Theme.of(context).buttonColor,
+                  color: Theme.of(context).cardColor,
                   onPressed: () {
                     Navigator.pop(context);
                   },
@@ -63,7 +63,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 SizedBox(width: 10),
                 Text(
                   "About",
-                  style: TextStyle(color: Colors.white, fontSize: 20),
+                  style: Theme.of(context).primaryTextTheme.headline6,
                 )
               ],
             ),

@@ -86,7 +86,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         UiConst.settingsPageTitle,
-        style: TextStyle(color: Colors.white, fontSize: 20),
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }
@@ -115,7 +115,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                     return ListTile(
                       title: Text(
                         account.battleNetId,
-                        style: TextStyle(color: Colors.white),
+                        style: Theme.of(context).primaryTextTheme.subtitle1,
                       ),
                       dense: true,
                       tileColor: Theme.of(context).canvasColor,
@@ -155,7 +155,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildMainAccountTile() {
     return SettingsTile(
       title: UiConst.settingsMainAccountTitle,
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       leading: Icon(
         Icons.account_circle_outlined,
         color: Theme.of(context).primaryColor,
@@ -202,7 +202,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAboutTile() {
     return SettingsTile(
       title: "About",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       leading: Icon(
         Icons.info_outline,
         color: Theme.of(context).primaryColor,

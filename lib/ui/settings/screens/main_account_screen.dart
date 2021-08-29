@@ -90,7 +90,7 @@ class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
       leading: IconButton(
         icon: Icon(
           Icons.arrow_back,
-          color: Theme.of(context).buttonColor,
+          color: Theme.of(context).cardColor,
         ),
         color: Colors.black,
         onPressed: () {
@@ -99,7 +99,7 @@ class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
       ),
       title: Text(
         UiConst.settingsMainAccountTitle,
-        style: Theme.of(context).primaryTextTheme.headline4,
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }

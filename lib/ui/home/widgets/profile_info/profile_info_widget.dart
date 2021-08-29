@@ -47,7 +47,7 @@ class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
                       children: [
                         Text(
                           state.profileStats.name,
-                          style: Theme.of(context).primaryTextTheme.headline2,
+                          style: Theme.of(context).primaryTextTheme.headline5,
                         ),
                         SizedBox(
                           width: 6,
