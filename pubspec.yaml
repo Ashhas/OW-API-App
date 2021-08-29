@@ -21,12 +21,11 @@ dependencies:
   path_provider: ^2.0.2
   connectivity_plus: ^1.0.2
   intl: ^0.17.0
-  google_fonts: ^1.1.2
-  flutter_svg: ^0.22.0
+  google_fonts: ^2.1.0
   url_launcher: ^6.0.6
 
   # Networking
-  http: ^0.12.2
+  http: ^0.13.0
 
   #BLoC
   flutter_bloc: ^6.0.6
