@@ -66,44 +66,52 @@ class SettingsBloc extends Bloc<SettingsEvent, SettingsState> {
     yield ValidatingProfileState();
 
     //Open DB for saving
-    Box _profileBox = await Hive.openBox('accountBox');
+    Box _profileBox = Hive.box('accountBox');
+    var foundList = _profileBox.values
+        .where((element) => element.battleNetId == event.profileId)
+        .toList();
 
-    //Fetch MainAccount
-    final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccountName;
+    //Check if profileID is already saved
+    if (foundList == null || foundList.isEmpty) {
+      //Fetch MainAccount
+      final sharedPrefService = await SharedPreferencesService.instance;
+      final mainAccount = sharedPrefService.getMainAccountName;
 
-    //Verify Account
-    try {
-      // Add profile ID and Platform ID to the request
-      bool profileValidated = await repository.validateProfileId(
-          event.profileId.replaceAll("#", "-"), event.platformId);
+      //Verify Account
+      try {
+        // Add profile ID and Platform ID to the request
+        bool profileValidated = await repository.validateProfileId(
+            event.profileId.replaceAll("#", "-"), event.platformId);
 
-      if (profileValidated) {
-        var newAccount = AccountModel(
-            1,
-            event.profileId,
-            event.profileId.replaceAll("#", "-"),
-            event.platformId,
-            DateTime.now());
-        _profileBox.add(newAccount);
+        if (profileValidated) {
+          var newAccount = AccountModel(
+              1,
+              event.profileId,
+              event.profileId.replaceAll("#", "-"),
+              event.platformId,
+              DateTime.now());
+          _profileBox.add(newAccount);
+        }
+
+        yield ProfileValidatedState();
+
+        yield SettingsLoadedState(
+          allAccounts: _profileBox,
+          mainAccount: mainAccount,
+        );
+      } on EmptyResultException catch (e) {
+        yield SettingsErrorState(exception: e);
+      } on ClientErrorException catch (e) {
+        yield SettingsErrorState(exception: e);
+      } on ServerErrorException catch (e) {
+        yield SettingsErrorState(exception: e);
+      } on ConnectionException catch (e) {
+        yield SettingsErrorState(exception: e);
+      } on UnknownException catch (e) {
+        yield SettingsErrorState(exception: e);
       }
-
-      yield ProfileValidatedState();
-
-      yield SettingsLoadedState(
-        allAccounts: _profileBox,
-        mainAccount: mainAccount,
-      );
-    } on EmptyResultException catch (e) {
-      yield SettingsErrorState(exception: e);
-    } on ClientErrorException catch (e) {
-      yield SettingsErrorState(exception: e);
-    } on ServerErrorException catch (e) {
-      yield SettingsErrorState(exception: e);
-    } on ConnectionException catch (e) {
-      yield SettingsErrorState(exception: e);
-    } on UnknownException catch (e) {
-      yield SettingsErrorState(exception: e);
+    } else {
+      yield DuplicateProfileState();
     }
   }
 }

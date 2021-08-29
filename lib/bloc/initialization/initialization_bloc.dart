@@ -35,6 +35,7 @@ class InitializationBloc
     //Initializing and open Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
+    await Hive.openBox('accountBox');
 
     //Check if OnBoarding has been finished
     final sharedPrefService = await SharedPreferencesService.instance;

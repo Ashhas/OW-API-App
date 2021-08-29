@@ -26,13 +26,8 @@ class MainAccountBloc extends Bloc<MainAccountEvent, MainAccountState> {
     //Open DB
     Box _profileBox = await Hive.openBox('accountBox');
 
-    //Fetch MainAccount
-    final sharedPrefService = await SharedPreferencesService.instance;
-    final mainAccount = sharedPrefService.getMainAccountName;
-
     yield AccountDataLoaded(
       allAccountBox: _profileBox,
-      mainAccount: mainAccount,
     );
   }
 

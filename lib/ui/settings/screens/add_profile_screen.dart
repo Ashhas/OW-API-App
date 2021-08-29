@@ -33,6 +33,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   bool switchBtnSelected = false;
 
   //Feedback Variables
+  bool duplicateProfile = false;
   bool hasError = false;
   bool hasFeedback = false;
   bool allFilledIn = true;
@@ -89,12 +90,17 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
 
                   _showFeedbackMessage();
                 });
-              }
-              if (state is SettingsErrorState) {
+              } else if (state is SettingsErrorState) {
                 setState(() {
                   hasError = true;
 
                   _showErrorMessage(state.exception);
+                });
+              } else if (state is DuplicateProfileState) {
+                setState(() {
+                  duplicateProfile = true;
+
+                  _showDuplicateMessage();
                 });
               }
             },
@@ -338,6 +344,20 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
           ),
         ),
         Visibility(
+          visible: duplicateProfile,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Profile already registered!",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+        Visibility(
           visible: hasFeedback,
           child: Column(
             children: [
@@ -381,6 +401,14 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     setState(() {
       allFilledIn = false;
     });
+  }
+
+  _showDuplicateMessage() {
+    Future.delayed(Duration(seconds: 6)).then((value) => {
+          setState(() {
+            duplicateProfile = false;
+          })
+        });
   }
 
   _showErrorMessage(Exception e) {

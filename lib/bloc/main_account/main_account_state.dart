@@ -10,11 +10,9 @@ class InitialMainAccountState extends MainAccountState {
 
 class AccountDataLoaded extends MainAccountState {
   final Box allAccountBox;
-  final String mainAccount;
 
   AccountDataLoaded({
     @required this.allAccountBox,
-    @required this.mainAccount,
   });
 
   @override
