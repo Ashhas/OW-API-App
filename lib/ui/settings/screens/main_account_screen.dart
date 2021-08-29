@@ -47,7 +47,7 @@ class _SelectMainAccountScreenState extends State<SelectMainAccountScreen> {
                                 account.battleNetId,
                                 style: Theme.of(context)
                                     .primaryTextTheme
-                                    .bodyText2,
+                                    .subtitle2,
                               ),
                               value: account,
                               groupValue: selectedMainAccount,

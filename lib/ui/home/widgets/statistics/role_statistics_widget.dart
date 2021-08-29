@@ -77,7 +77,6 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
 
   Widget _gridTitleTile({String gridTitle}) {
     return Container(
-      color: Colors.red,
       child: Center(
         child: Text(
           gridTitle,
@@ -89,7 +88,6 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
 
   Widget _gridNoCenterTitleTile({String gridTitle}) {
     return Container(
-      color: Colors.red,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

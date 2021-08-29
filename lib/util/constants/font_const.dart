@@ -9,6 +9,12 @@ class FontConst {
     ),
   );
 
+  static final MEDIUM = GoogleFonts.roboto(
+    textStyle: TextStyle(
+      fontWeight: FontWeight.w500,
+    ),
+  );
+
   static final REGULAR = GoogleFonts.roboto(
     textStyle: TextStyle(
       fontWeight: FontWeight.w400,
@@ -29,7 +35,7 @@ class FontConst {
 
   //Body Fonts
   static final REGULAR_BODY_BIG_BLACK =
-      REGULAR.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
+      MEDIUM.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
   static final REGULAR_BODY_SMALL_BLACK =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
 

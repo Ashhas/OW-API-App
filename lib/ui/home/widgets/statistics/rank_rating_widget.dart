@@ -128,7 +128,7 @@ class _StatTile extends StatelessWidget {
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               )
@@ -156,7 +156,7 @@ class _StatTile extends StatelessWidget {
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               )

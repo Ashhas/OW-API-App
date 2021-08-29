@@ -105,7 +105,7 @@ class _AboutScreenState extends State<AboutScreen> {
       title: "Version",
       titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       subtitle: appVersion,
-      subtitleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
+      subtitleTextStyle: Theme.of(context).primaryTextTheme.bodyText1,
       onPressed: (BuildContext context) {},
     );
   }
