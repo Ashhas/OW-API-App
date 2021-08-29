@@ -148,7 +148,7 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
           )
         : Center(
             child: Container(
-              child: Text("--%",
+              child: Text("--",
                   style: Theme.of(context).primaryTextTheme.bodyText1),
             ),
           );
