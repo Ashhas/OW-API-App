@@ -21,17 +21,7 @@ void main() async {
   Bloc.observer = SimpleBlocObserver();
 
   //Set Orientation and Run App
-  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-      .then((_) {
-    runApp(MyApp());
-  });
-
-  //Set StatusBar Colors
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-        statusBarColor: ColorConst.lightCanvasColor,
-        statusBarIconBrightness: Brightness.light),
-  );
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(MyApp());
 }
