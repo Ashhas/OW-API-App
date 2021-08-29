@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetBtnSwitch extends StatefulWidget {
   final Function(BuildContext context) onPressed;

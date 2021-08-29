@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ow_api_app/util/constants/color_const.dart';
 
 class AccountVisibilityBadge extends StatelessWidget {
