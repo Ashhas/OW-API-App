@@ -44,6 +44,10 @@ dev_dependencies:
 flutter:
   assets:
     - assets/overwatch-logo.png
+    - assets/platformIcon/xbox_icon.png
+    - assets/platformIcon/playstation_icon.png
+    - assets/platformIcon/nintendo_switch_icon.png
+    - assets/platformIcon/battle_net_icon.png
     - assets/roleIcons/icon-damage.png
     - assets/roleIcons/icon-support.png
     - assets/roleIcons/icon-tank.png

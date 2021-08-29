@@ -170,9 +170,8 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 height: 35,
                                 width: 35,
                                 child: Image(
-                                  image: NetworkImage(
-                                    "https://play-lh.googleusercontent.com/PuPFgmLam2WNyul3lUQywQT5Y5sPgL6VzWSUAdXOS1oIQwHYnrB_MyfXCOrR4LzZcjeP",
-                                  ),
+                                  image: AssetImage(
+                                      'assets/platformIcon/battle_net_icon.png'),
                                 ),
                               ),
                             ),
@@ -182,9 +181,8 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 height: 35,
                                 width: 35,
                                 child: Image(
-                                  image: NetworkImage(
-                                    "https://www.pinclipart.com/picdir/middle/392-3925154_playstation-transparent-background-blue-playstation-4-logo-clipart.png",
-                                  ),
+                                  image: AssetImage(
+                                      'assets/platformIcon/nintendo_switch_icon.png'),
                                 ),
                               ),
                             ),
@@ -194,9 +192,8 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 height: 35,
                                 width: 35,
                                 child: Image(
-                                  image: NetworkImage(
-                                    "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f9/Xbox_one_logo.svg/1024px-Xbox_one_logo.svg.png",
-                                  ),
+                                  image: AssetImage(
+                                      'assets/platformIcon/playstation_icon.png'),
                                 ),
                               ),
                             ),
@@ -206,9 +203,8 @@ class _AddFirstProfilePageState extends State<AddFirstProfilePage> {
                                 height: 35,
                                 width: 35,
                                 child: Image(
-                                  image: NetworkImage(
-                                    "https://www.iphonerepairtwente.nl/wp-content/uploads/2020/12/nintendo-switch-logo-38D4F5C7E7-seeklogo.com_.png",
-                                  ),
+                                  image: AssetImage(
+                                      'assets/platformIcon/xbox_icon.png'),
                                 ),
                               ),
                             ),
