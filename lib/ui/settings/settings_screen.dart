@@ -101,7 +101,11 @@ class _SettingsScreenState extends State<SettingsScreen> {
               builder: (context, box, widget) {
                 if (box.values.isEmpty)
                   return ListTile(
-                    title: Text(UiConst.settingsNoAccountTitle),
+                    title: Text(
+                      UiConst.settingsNoAccountTitle,
+                      style: Theme.of(context).primaryTextTheme.subtitle1,
+                    ),
+                    tileColor: Theme.of(context).canvasColor,
                     enabled: true,
                   );
 
@@ -119,17 +123,21 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                       dense: true,
                       tileColor: Theme.of(context).canvasColor,
-                      trailing: IconButton(
-                        icon: Icon(Icons.close,
-                            color: Theme.of(context).cardColor),
-                        iconSize: 25,
-                        color: Colors.black,
-                        onPressed: () {
-                          setState(() {
-                            state.allAccounts.deleteAt(index);
-                          });
-                        },
-                      ),
+                      trailing: account.battleNetId == state.mainAccount
+                          ? SizedBox(width: 10)
+                          : IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Theme.of(context).cardColor,
+                              ),
+                              iconSize: 25,
+                              color: Colors.black,
+                              onPressed: () {
+                                setState(() {
+                                  state.allAccounts.deleteAt(index);
+                                });
+                              },
+                            ),
                       onTap: () {
                         if (networkAvailable) {
                           BlocProvider.of<SettingsBloc>(context).add(
