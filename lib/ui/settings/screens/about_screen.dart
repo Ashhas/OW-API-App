@@ -91,7 +91,7 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget _githubTile() {
     return SettingsTile(
       title: "Github",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       leading: Icon(Icons.developer_board_outlined,
           color: Theme.of(context).buttonColor),
       onPressed: (BuildContext context) {
@@ -103,9 +103,9 @@ class _AboutScreenState extends State<AboutScreen> {
   Widget _versionTile(String appVersion) {
     return SettingsTile(
       title: "Version",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       subtitle: appVersion,
-      subtitleTextStyle: Theme.of(context).primaryTextTheme.subtitle1,
+      subtitleTextStyle: Theme.of(context).primaryTextTheme.bodyText2,
       onPressed: (BuildContext context) {},
     );
   }
