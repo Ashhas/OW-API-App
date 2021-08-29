@@ -7,6 +7,7 @@ import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
+import 'package:ow_api_app/util/constants/color_const.dart';
 import 'package:ow_api_app/util/constants/theme_const.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
@@ -24,6 +25,13 @@ void main() async {
       .then((_) {
     runApp(MyApp());
   });
+
+  //Set StatusBar Colors
+  SystemChrome.setSystemUIOverlayStyle(
+    SystemUiOverlayStyle(
+        statusBarColor: ColorConst.lightCanvasColor,
+        statusBarIconBrightness: Brightness.light),
+  );
 
   runApp(MyApp());
 }
