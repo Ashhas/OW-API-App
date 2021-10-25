@@ -54,15 +54,15 @@ Plugin | Usage
 ```
 flutter doctor -v
 [√] Flutter (Channel stable, 2.0.5, on Microsoft Windows [Version 10.0.19042.928], locale nl-NL)
-    • Flutter version 2.0.5 at C:\SDK\flutter
+    • Flutter version 2.0.5 at C:\--------
     • Framework revision adc687823a (3 weeks ago), 2021-04-16 09:40:20 -0700
     • Engine revision b09f014e96
     • Dart version 2.12.3
 
 [√] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
-    • Android SDK at C:\Users\aschw\AppData\Local\Android\sdk
+    • Android SDK at C:\--------
     • Platform android-30, build-tools 30.0.3
-    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java binary at: C:\--------
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
     • All Android licenses accepted.
 
@@ -70,7 +70,7 @@ flutter doctor -v
     ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
 
 [√] Android Studio (version 4.1.0)
-    • Android Studio at C:\Program Files\Android\Android Studio
+    • Android Studio at C:\--------
     • Flutter plugin can be installed from:
        https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
@@ -78,12 +78,12 @@ flutter doctor -v
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
 
 [√] IntelliJ IDEA Community Edition (version 2021.1)
-    • IntelliJ at C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.3
+    • IntelliJ at C:\--------
     • Flutter plugin version 55.1.5
     • Dart plugin version 211.7179
 
 [√] VS Code, 64-bit edition (version 1.55.0)
-    • VS Code at C:\Program Files\Microsoft VS Code
+    • VS Code at C:\--------
     • Flutter extension can be installed from:
        https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
 
