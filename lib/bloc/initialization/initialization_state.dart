@@ -19,9 +19,8 @@ class NoNetworkOnStartup extends InitializationState {
 }
 
 class InitializedState extends InitializationState {
-  final PersistentTabController navBarController;
 
-  InitializedState({@required this.navBarController});
+  InitializedState();
 
   @override
   List<Object> get props => [];

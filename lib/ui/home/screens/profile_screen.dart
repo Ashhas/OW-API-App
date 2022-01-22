@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics_card.dart';
-import 'package:ow_api_app/util/constants/ui_const.dart';
+import 'package:ow_api_app/ui/home/widgets/network_notification.dart';
+import 'package:ow_api_app/ui/home/widgets/profile_info/profile_info_widget.dart';
+import 'package:ow_api_app/ui/home/widgets/statistics/statistics_card.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen() : super();
@@ -25,7 +25,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).accentColor,
       body: SafeArea(
         child: BlocListener<NetworkConnectionBloc, NetworkConnectionState>(
           listener: (context, state) {
@@ -47,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   child: IntrinsicHeight(
                     child: Column(
                       children: <Widget>[
-                        _networkNotification(netResult),
+                        NetworkNotification(networkResult: netResult),
                         ProfileInfoWidget(),
                         StatisticsCard()
                       ],
@@ -60,22 +59,5 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ),
       ),
     );
-  }
-
-  _networkNotification(ConnectivityResult result) {
-    if (result == ConnectivityResult.none) {
-      return Container(
-        width: double.infinity,
-        height: 22,
-        color: Theme.of(context).errorColor,
-        alignment: Alignment.center,
-        child: Text(
-          UiConst.networkUnavailableMessage,
-          style: TextStyle(fontSize: 14, color: Colors.white),
-        ),
-      );
-    } else {
-      return Container();
-    }
   }
 }

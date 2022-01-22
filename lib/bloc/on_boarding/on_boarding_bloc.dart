@@ -30,8 +30,6 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
     yield ValidatingFirstProfileState();
 
     //Open DB for saving
-    var dir = await getApplicationDocumentsDirectory();
-    Hive.init(dir.path);
     Box _profileBox = await Hive.openBox('accountBox');
 
     //Verify Account

@@ -126,88 +126,117 @@ class StatisticsFilter {
     int supportGamesPlayed = 0;
 
     if (profile.competitiveStats.topHeroes.baptiste is TopHero) {
-      if (profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed += profile
+            .competitiveStats.careerStats.baptiste.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.moira is TopHero) {
-      if (profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.moira.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed +=
+            profile.competitiveStats.careerStats.moira.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.mercy is TopHero) {
-      if (profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.mercy.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed +=
+            profile.competitiveStats.careerStats.mercy.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.lucio is TopHero) {
-      if (profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.lucio.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed +=
+            profile.competitiveStats.careerStats.lucio.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.brigitte is TopHero) {
-      if (profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed += profile
+            .competitiveStats.careerStats.brigitte.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.ana is TopHero) {
-      if (profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.ana.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed +=
+            profile.competitiveStats.careerStats.ana.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.zenyatta is TopHero) {
-      if (profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon != null) {
-        supportGamesPlayed += profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon !=
+          null) {
+        supportGamesPlayed += profile
+            .competitiveStats.careerStats.zenyatta.allHeroGame.gamesPlayed;
       }
     }
 
     return supportGamesPlayed;
   }
 
-  ///Calculate The amount of competitive support games played
+  ///Calculate The amount of competitive support games won
   static int calculateSupportGamesWon(Profile profile) {
     int supportGamesWon = 0;
 
     if (profile.competitiveStats.topHeroes.baptiste is TopHero) {
-      if (profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.baptiste.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.moira is TopHero) {
-      if (profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.moira.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.mercy is TopHero) {
-      if (profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.mercy.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.lucio is TopHero) {
-      if (profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.lucio.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.brigitte is TopHero) {
-      if (profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.brigitte.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.ana is TopHero) {
-      if (profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.ana.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.zenyatta is TopHero) {
-      if (profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon != null) {
-        supportGamesWon += profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon !=
+          null) {
+        supportGamesWon +=
+            profile.competitiveStats.careerStats.zenyatta.allHeroGame.gamesWon;
       }
     }
 
     return supportGamesWon;
   }
 
-  static double calculateSupportGamesWinRate(Profile profile){
+  ///Calculate The amount of competitive support games winrate
+  static double calculateSupportGamesWinRate(Profile profile) {
     int supportGamesPlayed = 0;
     int supportGamesWon = 0;
     double supportWinRate = 0;
@@ -220,195 +249,270 @@ class StatisticsFilter {
     return supportWinRate;
   }
 
-  ///Calculate The amount of competitive support games played
+  ///Calculate The amount of competitive damage games played
   static int calculateDamageGamesPlayed(Profile profile) {
     int damageGamesPlayed = 0;
 
     if (profile.competitiveStats.topHeroes.ashe is TopHero) {
-      if (profile.competitiveStats.careerStats.ashe.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.ashe.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.ashe.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.ashe.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.bastion is TopHero) {
-      if (profile.competitiveStats.careerStats.bastion.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.bastion.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.bastion.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.bastion.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.doomfist is TopHero) {
-      if (profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.doomfist.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.doomfist.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.echo is TopHero) {
-      if (profile.competitiveStats.careerStats.echo.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.echo.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.echo.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.echo.allHeroGame.gamesPlayed;
       }
-
     }
     if (profile.competitiveStats.topHeroes.genji is TopHero) {
-      if (profile.competitiveStats.careerStats.genji.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.genji.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.genji.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.genji.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.hanzo is TopHero) {
-      if (profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.junkrat is TopHero) {
-      if (profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.junkrat.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.junkrat.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.mccree is TopHero) {
-      if (profile.competitiveStats.careerStats.mccree.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.mccree.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.mccree.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.mccree.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.mei is TopHero) {
-      if (profile.competitiveStats.careerStats.mei.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.mei.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.mei.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.mei.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.pharah is TopHero) {
-      if (profile.competitiveStats.careerStats.pharah.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.pharah.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.pharah.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.pharah.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.reaper is TopHero) {
-      if (profile.competitiveStats.careerStats.reaper.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.reaper.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.reaper.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.reaper.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.soldier76 is TopHero) {
-      if (profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.soldier76.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.soldier76.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.sombra is TopHero) {
-      if (profile.competitiveStats.careerStats.sombra.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.sombra.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.sombra.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.sombra.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.symmetra is TopHero) {
-      if (profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.symmetra.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.symmetra.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.torbjorn is TopHero) {
-      if (profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.torbjorn.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.torbjorn.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.tracer is TopHero) {
-      if (profile.competitiveStats.careerStats.tracer.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.tracer.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.tracer.allHeroGame.gamesPlayed !=
+          null) {
+        damageGamesPlayed +=
+            profile.competitiveStats.careerStats.tracer.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.widowmaker is TopHero) {
-      if (profile.competitiveStats.careerStats.widowmaker.allHeroGame.gamesPlayed != null) {
-        damageGamesPlayed += profile.competitiveStats.careerStats.widowmaker.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.widowmaker.allHeroGame
+              .gamesPlayed !=
+          null) {
+        damageGamesPlayed += profile
+            .competitiveStats.careerStats.widowmaker.allHeroGame.gamesPlayed;
       }
     }
 
     return damageGamesPlayed;
   }
 
-  ///Calculate The amount of competitive support games played
+  ///Calculate The amount of competitive damage games won
   static int calculateDamageGamesWon(Profile profile) {
     int damageGamesWon = 0;
 
     if (profile.competitiveStats.topHeroes.ashe is TopHero) {
-      if (profile.competitiveStats.careerStats.ashe.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.ashe.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.ashe.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.ashe.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.bastion is TopHero) {
-      if (profile.competitiveStats.careerStats.bastion.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.bastion.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.bastion.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.bastion.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.doomfist is TopHero) {
-      if (profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.doomfist.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.echo is TopHero) {
-      if (profile.competitiveStats.careerStats.echo.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.echo.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.echo.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.echo.allHeroGame.gamesWon;
       }
-
     }
     if (profile.competitiveStats.topHeroes.genji is TopHero) {
-      if (profile.competitiveStats.careerStats.genji.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.genji.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.genji.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.genji.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.hanzo is TopHero) {
-      if (profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.hanzo.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.junkrat is TopHero) {
-      if (profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.junkrat.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.mccree is TopHero) {
-      if (profile.competitiveStats.careerStats.mccree.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.mccree.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.mccree.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.mccree.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.mei is TopHero) {
-      if (profile.competitiveStats.careerStats.mei.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.mei.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.mei.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.mei.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.pharah is TopHero) {
-      if (profile.competitiveStats.careerStats.pharah.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.pharah.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.pharah.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.pharah.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.reaper is TopHero) {
-      if (profile.competitiveStats.careerStats.reaper.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.reaper.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.reaper.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.reaper.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.soldier76 is TopHero) {
-      if (profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.soldier76.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.sombra is TopHero) {
-      if (profile.competitiveStats.careerStats.sombra.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.sombra.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.sombra.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.sombra.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.symmetra is TopHero) {
-      if (profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.symmetra.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.torbjorn is TopHero) {
-      if (profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.torbjorn.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.tracer is TopHero) {
-      if (profile.competitiveStats.careerStats.tracer.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.tracer.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.tracer.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon +=
+            profile.competitiveStats.careerStats.tracer.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.widowmaker is TopHero) {
-      if (profile.competitiveStats.careerStats.widowmaker.allHeroGame.gamesWon != null) {
-        damageGamesWon += profile.competitiveStats.careerStats.widowmaker.allHeroGame.gamesWon;
+      if (profile
+              .competitiveStats.careerStats.widowmaker.allHeroGame.gamesWon !=
+          null) {
+        damageGamesWon += profile
+            .competitiveStats.careerStats.widowmaker.allHeroGame.gamesWon;
       }
     }
 
     return damageGamesWon;
   }
 
-  static double calculateDamageGamesWinRate(Profile profile){
+  ///Calculate The competitive damage games winrate
+  static double calculateDamageGamesWinRate(Profile profile) {
     int damageGamesPlayed = 0;
     int damageGamesWon = 0;
     double damageWinRate = 0;
@@ -421,94 +525,127 @@ class StatisticsFilter {
     return damageWinRate;
   }
 
-  ///Calculate The amount of competitive support games played
+  ///Calculate The amount of competitive tank games played
   static int calculateTankGamesPlayed(Profile profile) {
     int tankGamesPlayed = 0;
 
     if (profile.competitiveStats.topHeroes.orisa is TopHero) {
-      if (profile.competitiveStats.careerStats.orisa.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.orisa.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.orisa.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed +=
+            profile.competitiveStats.careerStats.orisa.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.reinhardt is TopHero) {
-      if (profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.reinhardt.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed += profile
+            .competitiveStats.careerStats.reinhardt.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.roadhog is TopHero) {
-      if (profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.roadhog.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed += profile
+            .competitiveStats.careerStats.roadhog.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.sigma is TopHero) {
-      if (profile.competitiveStats.careerStats.sigma.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.sigma.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.sigma.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed +=
+            profile.competitiveStats.careerStats.sigma.allHeroGame.gamesPlayed;
       }
-
     }
     if (profile.competitiveStats.topHeroes.winston is TopHero) {
-      if (profile.competitiveStats.careerStats.winston.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.winston.allHeroGame.gamesPlayed;
+      if (profile
+              .competitiveStats.careerStats.winston.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed += profile
+            .competitiveStats.careerStats.winston.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.wreckingBall is TopHero) {
-      if (profile.competitiveStats.careerStats.wreckingBall.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.wreckingBall.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.wreckingBall.allHeroGame
+              .gamesPlayed !=
+          null) {
+        tankGamesPlayed += profile
+            .competitiveStats.careerStats.wreckingBall.allHeroGame.gamesPlayed;
       }
     }
     if (profile.competitiveStats.topHeroes.zarya is TopHero) {
-      if (profile.competitiveStats.careerStats.zarya.allHeroGame.gamesPlayed != null) {
-        tankGamesPlayed += profile.competitiveStats.careerStats.zarya.allHeroGame.gamesPlayed;
+      if (profile.competitiveStats.careerStats.zarya.allHeroGame.gamesPlayed !=
+          null) {
+        tankGamesPlayed +=
+            profile.competitiveStats.careerStats.zarya.allHeroGame.gamesPlayed;
       }
     }
 
     return tankGamesPlayed;
   }
 
-  ///Calculate The amount of competitive support games played
+  ///Calculate The amount of competitive support games won
   static int calculateTankGamesWon(Profile profile) {
     int tankGamesWon = 0;
 
     if (profile.competitiveStats.topHeroes.orisa is TopHero) {
-      if (profile.competitiveStats.careerStats.orisa.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.orisa.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.orisa.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.orisa.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.reinhardt is TopHero) {
-      if (profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.reinhardt.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.roadhog is TopHero) {
-      if (profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.roadhog.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.sigma is TopHero) {
-      if (profile.competitiveStats.careerStats.sigma.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.sigma.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.sigma.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.sigma.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.winston is TopHero) {
-      if (profile.competitiveStats.careerStats.winston.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.winston.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.winston.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.winston.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.wreckingBall is TopHero) {
-      if (profile.competitiveStats.careerStats.wreckingBall.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.wreckingBall.allHeroGame.gamesWon;
+      if (profile
+              .competitiveStats.careerStats.wreckingBall.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon += profile
+            .competitiveStats.careerStats.wreckingBall.allHeroGame.gamesWon;
       }
     }
     if (profile.competitiveStats.topHeroes.zarya is TopHero) {
-      if (profile.competitiveStats.careerStats.zarya.allHeroGame.gamesWon != null) {
-        tankGamesWon += profile.competitiveStats.careerStats.zarya.allHeroGame.gamesWon;
+      if (profile.competitiveStats.careerStats.zarya.allHeroGame.gamesWon !=
+          null) {
+        tankGamesWon +=
+            profile.competitiveStats.careerStats.zarya.allHeroGame.gamesWon;
       }
     }
 
     return tankGamesWon;
   }
 
-  static double calculateTankGamesWinRate(Profile profile){
+  ///Calculate The competitive tank games winrate
+  static double calculateTankGamesWinRate(Profile profile) {
     int tankGamesPlayed = 0;
     int tankGamesWon = 0;
     double tankWinRate = 0;

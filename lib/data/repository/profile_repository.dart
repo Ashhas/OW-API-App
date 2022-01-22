@@ -8,11 +8,13 @@ class ProfileRepository {
   ProfileRepository();
 
   Future<Profile> getProfileStats(String profileId, String platformId) async {
-    var response = await http.get("https://ow-api.com/v3/stats/" +
-        platformId +
-        "/" +
-        profileId +
-        "/complete");
+    var response = await http.get(
+      Uri.parse("https://ow-api.com/v3/stats/" +
+          platformId +
+          "/" +
+          profileId +
+          "/complete"),
+    );
 
     if (response.statusCode >= 200 && response.statusCode < 299) {
       var responseData = json.decode(response.body);
@@ -27,11 +29,13 @@ class ProfileRepository {
   }
 
   Future<bool> validateProfileId(String profileId, String platformId) async {
-    var response = await http.get("https://ow-api.com/v3/stats/" +
-        platformId +
-        "/" +
-        profileId +
-        "/profile");
+    var response = await http.get(
+      Uri.parse("https://ow-api.com/v3/stats/" +
+          platformId +
+          "/" +
+          profileId +
+          "/profile"),
+    );
 
     if (response.statusCode >= 200 && response.statusCode < 299) {
       return true;

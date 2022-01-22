@@ -3,10 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_pc.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_psn.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_switch.dart';
-import 'package:ow_api_app/ui/settings/widgets/widget_btn_xbl.dart';
 import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
@@ -20,6 +16,15 @@ class AddProfileScreen extends StatefulWidget {
 class _AddProfileScreenState extends State<AddProfileScreen> {
   final TextEditingController accountIdController = TextEditingController();
 
+  //ToggleButtons Values
+  List<bool> isSelected = [false, false, false, false];
+  List<String> buttonValue = ["pc", "psn", "xbl", "nintendo-switch"];
+  FocusNode focusNodeButton1 = FocusNode();
+  FocusNode focusNodeButton2 = FocusNode();
+  FocusNode focusNodeButton3 = FocusNode();
+  FocusNode focusNodeButton4 = FocusNode();
+  List<FocusNode> focusToggle;
+
   //Platform Variables
   String selectedPlatform;
   bool pcBtnSelected = false;
@@ -28,6 +33,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   bool switchBtnSelected = false;
 
   //Feedback Variables
+  bool duplicateProfile = false;
   bool hasError = false;
   bool hasFeedback = false;
   bool allFilledIn = true;
@@ -40,6 +46,12 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
   void initState() {
     BlocProvider.of<NetworkConnectionBloc>(context)
         .add(UpdateNetworkConnection());
+    focusToggle = [
+      focusNodeButton1,
+      focusNodeButton2,
+      focusNodeButton3,
+      focusNodeButton4,
+    ];
     super.initState();
   }
 
@@ -78,12 +90,17 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
 
                   _showFeedbackMessage();
                 });
-              }
-              if (state is SettingsErrorState) {
+              } else if (state is SettingsErrorState) {
                 setState(() {
                   hasError = true;
 
                   _showErrorMessage(state.exception);
+                });
+              } else if (state is DuplicateProfileState) {
+                setState(() {
+                  duplicateProfile = true;
+
+                  _showDuplicateMessage();
                 });
               }
             },
@@ -131,40 +148,84 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                           SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: 40,
-                            child: Row(
-                              children: <Widget>[
-                                WidgetBtnPc(
-                                    selected: pcBtnSelected,
-                                    onPressed: (BuildContext context) {
-                                      selectedPlatform = "pc";
-                                      pcBtnSelected = true;
-                                    }),
-                                SizedBox(width: 20),
-                                WidgetBtnPsn(
-                                    selected: psnBtnSelected,
-                                    onPressed: (BuildContext context) {
-                                      selectedPlatform = "psn";
-                                      pcBtnSelected = true;
-                                    }),
-                                SizedBox(width: 20),
-                                WidgetBtnXbox(
-                                    selected: xblBtnSelected,
-                                    onPressed: (BuildContext context) {
-                                      selectedPlatform = "xbl";
-                                      pcBtnSelected = true;
-                                    }),
-                                SizedBox(width: 20),
-                                WidgetBtnSwitch(
-                                    selected: switchBtnSelected,
-                                    onPressed: (BuildContext context) {
-                                      selectedPlatform = "nintendo-switch";
-                                      pcBtnSelected = true;
-                                    }),
-                              ],
-                            ),
+                          ToggleButtons(
+                            selectedColor: Colors.white,
+                            borderColor: Colors.white,
+                            fillColor: Colors.white,
+                            borderWidth: 5,
+                            selectedBorderColor: Theme.of(context).primaryColor,
+                            renderBorder: true,
+                            disabledColor: Colors.white,
+                            disabledBorderColor: Colors.white,
+                            focusNodes: focusToggle,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/platformIcon/battle_net_icon.png'),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/platformIcon/nintendo_switch_icon.png'),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/platformIcon/playstation_icon.png'),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 20),
+                                child: Container(
+                                  height: 35,
+                                  width: 35,
+                                  child: Image(
+                                    image: AssetImage(
+                                        'assets/platformIcon/xbox_icon.png'),
+                                  ),
+                                ),
+                              ),
+                            ],
+                            isSelected: isSelected,
+                            onPressed: (int index) {
+                              setState(() {
+                                for (int buttonIndex = 0;
+                                    buttonIndex < isSelected.length;
+                                    buttonIndex++) {
+                                  if (buttonIndex == index) {
+                                    //Show Selected
+                                    isSelected[buttonIndex] =
+                                        !isSelected[buttonIndex];
+
+                                    //Set Value
+                                    selectedPlatform = buttonValue[buttonIndex];
+                                    print(selectedPlatform);
+                                  } else {
+                                    isSelected[buttonIndex] = false;
+                                  }
+                                }
+                              });
+                            },
                           ),
+                          SizedBox(height: 20),
                           _feedbackMessageWidgets(),
                           SizedBox(height: 20),
                           AspectRatio(
@@ -283,6 +344,20 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
           ),
         ),
         Visibility(
+          visible: duplicateProfile,
+          child: Column(
+            children: [
+              SizedBox(height: 20),
+              Center(
+                child: Text(
+                  "Profile already registered!",
+                  style: Theme.of(context).primaryTextTheme.subtitle2,
+                ),
+              )
+            ],
+          ),
+        ),
+        Visibility(
           visible: hasFeedback,
           child: Column(
             children: [
@@ -326,6 +401,14 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
     setState(() {
       allFilledIn = false;
     });
+  }
+
+  _showDuplicateMessage() {
+    Future.delayed(Duration(seconds: 6)).then((value) => {
+          setState(() {
+            duplicateProfile = false;
+          })
+        });
   }
 
   _showErrorMessage(Exception e) {
