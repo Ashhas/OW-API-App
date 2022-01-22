@@ -5,9 +5,7 @@ abstract class SettingsEvent extends Equatable {
 }
 
 class SettingsOpened extends SettingsEvent {
-  final PersistentTabController navBarController;
-
-  SettingsOpened({this.navBarController});
+  SettingsOpened();
 
   @override
   List<Object> get props => [];
@@ -31,14 +29,4 @@ class AddProfile extends SettingsEvent {
 
   @override
   List<Object> get props => [profileId, platformId];
-}
-
-class SaveMainAccount extends SettingsEvent {
-  final String battleNetId;
-  final String platformId;
-
-  SaveMainAccount({@required this.battleNetId, @required this.platformId});
-
-  @override
-  List<Object> get props => [battleNetId];
 }

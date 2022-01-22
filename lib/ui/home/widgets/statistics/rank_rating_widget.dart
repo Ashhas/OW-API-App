@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:ow_api_app/ui/home/widgets/statistics/title_view_widget.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
 class RankRatingWidget extends StatelessWidget {
@@ -10,19 +11,15 @@ class RankRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      if (state is ProfileLoadedState) {
-        return Container(
-            padding: const EdgeInsets.symmetric(vertical: 20.0),
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        if (state is ProfileLoadedState) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: EdgeInsets.only(bottom: 10),
-                  child: Text(
-                    UiConst.competitiveRankTitle,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
-                  ),
-                ),
+                TitleView(title: UiConst.competitiveRankTitle),
                 Row(
                   children: <Widget>[
                     Expanded(
@@ -83,12 +80,15 @@ class RankRatingWidget extends StatelessWidget {
                                 rating: UiConst.noRankText)),
                   ],
                 ),
+                SizedBox(height: 20)
               ],
-            ));
-      } else {
-        return Container();
-      }
-    });
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 }
 
@@ -123,12 +123,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.headline3,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               )
@@ -151,12 +151,12 @@ class _StatTile extends StatelessWidget {
                 children: <Widget>[
                   Text(
                     rating,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.headline3,
                   ),
                   const SizedBox(height: 2.0),
                   Text(
                     title,
-                    style: Theme.of(context).primaryTextTheme.bodyText2,
+                    style: Theme.of(context).primaryTextTheme.bodyText1,
                   ),
                 ],
               )

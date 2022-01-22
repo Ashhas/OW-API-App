@@ -10,12 +10,11 @@ class SettingsOpenedState extends SettingsState {
 class SettingsLoadedState extends SettingsState {
   final Box allAccounts;
   final String mainAccount;
-  final String appVersion;
 
-  SettingsLoadedState(
-      {@required this.allAccounts,
-      @required this.mainAccount,
-      @required this.appVersion});
+  SettingsLoadedState({
+    @required this.allAccounts,
+    @required this.mainAccount,
+  });
 
   @override
   List<Object> get props => [];
@@ -36,6 +35,11 @@ class ProfileNotValidatedState extends SettingsState {
   List<Object> get props => [];
 }
 
+class DuplicateProfileState extends SettingsState {
+  @override
+  List<Object> get props => [];
+}
+
 class ProfileChangedState extends SettingsState {
   final String profileId;
   final String platformId;
@@ -49,7 +53,7 @@ class ProfileChangedState extends SettingsState {
 class SettingsErrorState extends SettingsState {
   final Exception exception;
 
-  SettingsErrorState({@required this.exception});
+  SettingsErrorState({this.exception});
 
   @override
   List<Object> get props => [exception];

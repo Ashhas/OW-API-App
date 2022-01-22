@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/home/home_bloc.dart';
+import 'package:ow_api_app/ui/home/widgets/statistics/title_view_widget.dart';
 import 'package:ow_api_app/util/constants/variable_const.dart';
 
 class MostPlayedHeroes extends StatefulWidget {
@@ -13,47 +14,40 @@ class MostPlayedHeroes extends StatefulWidget {
 class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      if (state is ProfileLoadedState) {
-        return Container(
-          color: Theme.of(context).cardColor,
-          child: Column(
-            children: [
-              Container(
-                height: 50,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text("Most Played Heroes",
-                        style: Theme.of(context).primaryTextTheme.bodyText2),
-                    Icon(Icons.arrow_forward_ios_sharp,
-                        color: Theme.of(context).buttonColor),
-                  ],
+    return BlocBuilder<HomeBloc, HomeState>(
+      builder: (context, state) {
+        if (state is ProfileLoadedState) {
+          return Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                TitleView(title: "Most Played Heroes"),
+                Container(
+                  height: 150.0,
+                  child: new ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: state.topHeroes.length,
+                    itemBuilder: (context, index) {
+                      return _mostPlayedHeroCard(
+                          state.topHeroes[index].entries.single.key,
+                          state.topHeroes[index].entries.single.value
+                              .timePlayed);
+                    },
+                    scrollDirection: Axis.horizontal,
+                  ),
                 ),
-              ),
-              Container(
-                height: 135.0,
-                child: new ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: state.topHeroes.length,
-                  itemBuilder: (context, index) {
-                    return _mostPlayedHeroCard(
-                        state.topHeroes[index].entries.single.key,
-                        state.topHeroes[index].entries.single.value.timePlayed);
-                  },
-                  scrollDirection: Axis.horizontal,
+                SizedBox(
+                  height: 15,
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-            ],
-          ),
-        );
-      } else {
-        return Container();
-      }
-    });
+              ],
+            ),
+          );
+        } else {
+          return Container();
+        }
+      },
+    );
   }
 
   _mostPlayedHeroCard(String heroName, DateTime timePlayed) {
@@ -66,8 +60,8 @@ class _MostPlayedHeroesState extends State<MostPlayedHeroes> {
       child: Column(
         children: [
           Container(
-            width: 100,
-            height: 90,
+            width: 120,
+            height: 100,
             color: Colors.blue,
             child: _heroImage(heroName),
           ),

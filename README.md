@@ -6,12 +6,12 @@ This project is for focusing on how the BLoC pattern would perform in an complet
 </p>
 
 ## I. Introduction
-I always felt like Blizzard never did much with the Overwatch IP on mobile. To view your stats, progress and achievements you have to really go out of your way to view them. That's why I build this project and now share it with the community. I hope that in the future this project can provide an easy way for the community to get insight into their performance at home & on-the-go. 
+To get more comfortable with the BLoC pattern, I decided to develop an app for practice purposes. Eventually that app turned into this little project for Overwatch Statistics. 
+I always feel like it's hard to see your stats, progress and achievements through your phone. That's why I started working on this project and now share it with the community.
 
-The first version of the project (v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using `flutter_bloc` for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding user statistics to the application and improving the UI by working with an UI Designer (still looking for one).
+The first version of the project (~ v1.0) is just about viewing your competitive rank and building up backend of the application. I applied the BloC pattern by using `flutter_bloc` for state management and tried to implement some of the clean-architecture principles. In the next version (v2.0) i'm planning on addding mroe user statistics to the application and improving the UI. 
 
 ## II. Showcase
-
 <p>
   <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175330.jpg" width="200">
   <img src="https://github.com/Ashhas/OW-API-App/blob/master/screenshots/Screenshot_20210508-175556.jpg" width="200">
@@ -54,15 +54,15 @@ Plugin | Usage
 ```
 flutter doctor -v
 [√] Flutter (Channel stable, 2.0.5, on Microsoft Windows [Version 10.0.19042.928], locale nl-NL)
-    • Flutter version 2.0.5 at C:\SDK\flutter
+    • Flutter version 2.0.5 at C:\--------
     • Framework revision adc687823a (3 weeks ago), 2021-04-16 09:40:20 -0700
     • Engine revision b09f014e96
     • Dart version 2.12.3
 
 [√] Android toolchain - develop for Android devices (Android SDK version 30.0.3)
-    • Android SDK at C:\Users\aschw\AppData\Local\Android\sdk
+    • Android SDK at C:\--------
     • Platform android-30, build-tools 30.0.3
-    • Java binary at: C:\Program Files\Android\Android Studio\jre\bin\java
+    • Java binary at: C:\--------
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
     • All Android licenses accepted.
 
@@ -70,7 +70,7 @@ flutter doctor -v
     ! Cannot find Chrome. Try setting CHROME_EXECUTABLE to a Chrome executable.
 
 [√] Android Studio (version 4.1.0)
-    • Android Studio at C:\Program Files\Android\Android Studio
+    • Android Studio at C:\--------
     • Flutter plugin can be installed from:
        https://plugins.jetbrains.com/plugin/9212-flutter
     • Dart plugin can be installed from:
@@ -78,12 +78,12 @@ flutter doctor -v
     • Java version OpenJDK Runtime Environment (build 1.8.0_242-release-1644-b01)
 
 [√] IntelliJ IDEA Community Edition (version 2021.1)
-    • IntelliJ at C:\Program Files\JetBrains\IntelliJ IDEA Community Edition 2020.3.3
+    • IntelliJ at C:\--------
     • Flutter plugin version 55.1.5
     • Dart plugin version 211.7179
 
 [√] VS Code, 64-bit edition (version 1.55.0)
-    • VS Code at C:\Program Files\Microsoft VS Code
+    • VS Code at C:\--------
     • Flutter extension can be installed from:
        https://marketplace.visualstudio.com/items?itemName=Dart-Code.flutter
 

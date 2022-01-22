@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ow_api_app/ui/onboarding/screens/add_first_profile_page.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class OnBoardingScreen extends StatefulWidget {
@@ -69,12 +69,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                   constraints: BoxConstraints.tightFor(width: 350, height: 50),
                   child: ElevatedButton(
                     onPressed: () {
-                      pushNewScreen(
+                      Navigator.push(
                         context,
-                        screen: AddFirstProfilePage(),
-                        withNavBar: false,
-                        pageTransitionAnimation:
-                        PageTransitionAnimation.cupertino,
+                        PageTransition(
+                          type: PageTransitionType.rightToLeftJoined,
+                          child: AddFirstProfilePage(),
+                          childCurrent: context.widget,
+                        ),
                       );
                     },
                     child: Text(

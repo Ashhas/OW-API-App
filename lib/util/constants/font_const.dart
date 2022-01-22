@@ -1,42 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ow_api_app/util/constants/color_const.dart';
 
 class FontConst {
-  static final LARGE = TextStyle(
-    fontWeight: FontWeight.w700,
-    color: ColorConst.lightPrimaryTextColor,
+  static final BOLD = GoogleFonts.roboto(
+    textStyle: TextStyle(
+      fontWeight: FontWeight.w700,
+    ),
   );
 
-  static final REGULAR = TextStyle(
-    fontWeight: FontWeight.w400,
-    color: ColorConst.lightPrimaryTextColor,
+  static final MEDIUM = GoogleFonts.roboto(
+    textStyle: TextStyle(
+      fontWeight: FontWeight.w500,
+    ),
   );
 
-  //LARGE
-  static final LARGE_NAME_TITLE =
-      LARGE.copyWith(fontSize: 25, color: ColorConst.darkPrimaryTextColor);
+  static final REGULAR = GoogleFonts.roboto(
+    textStyle: TextStyle(
+      fontWeight: FontWeight.w400,
+    ),
+  );
 
-  //LARGE TILE
-  static final LARGE_TILE = LARGE.copyWith(fontSize: 21);
-  static final LARGE_TILE_WHITE =
-      LARGE_TILE.copyWith(color: ColorConst.lightPrimaryTextColor);
-  static final LARGE_TILE_BLACK =
-      LARGE_TILE.copyWith(color: ColorConst.darkPrimaryTextColor);
+  //AppBar Fonts
+  static final BOLD_APP_BAR_TITLE_WHITE =
+      BOLD.copyWith(fontSize: 20, color: ColorConst.darkPrimaryTextColor);
 
-  //REGULAR
-  static final REGULAR_DEFAULT_BLACK =
-      REGULAR.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_DEFAULT_WHITE =
-      REGULAR.copyWith(fontSize: 15, color: ColorConst.darkPrimaryTextColor);
-  static final REGULAR_SMALL_BLACK =
+  //Title ID Fonts
+  static final BOLD_TITLE_ID_WHITE =
+      BOLD.copyWith(fontSize: 25, color: ColorConst.darkPrimaryTextColor);
+
+  //Rank Number Fonts
+  static final BOLD_RANK_NUMBER_BLACK =
+      BOLD.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
+
+  //Body Fonts
+  static final REGULAR_BODY_BIG_BLACK =
+      MEDIUM.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
+  static final REGULAR_BODY_SMALL_BLACK =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.lightPrimaryTextColor);
-  static final REGULAR_SMALL_WHITE =
-      REGULAR.copyWith(fontSize: 14, color: ColorConst.darkPrimaryTextColor);
+
+  //Tile Fonts
   static final REGULAR_TILE_BLACK =
       REGULAR.copyWith(fontSize: 16, color: ColorConst.lightPrimaryTextColor);
   static final REGULAR_TILE_WHITE =
-      REGULAR.copyWith(fontSize: 16, color: ColorConst.darkPrimaryTextColor);
+      REGULAR.copyWith(fontSize: 15, color: ColorConst.darkPrimaryTextColor);
 
+  //Title View Fonts
+  static final BOLD_TITLE_VIEW_BLACK =
+      BOLD.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
+
+  //Error Fonts
   static final REGULAR_ERROR =
       REGULAR.copyWith(fontSize: 14, color: ColorConst.errorColor);
 }

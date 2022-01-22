@@ -21,19 +21,18 @@ dependencies:
   path_provider: ^2.0.2
   connectivity_plus: ^1.0.2
   intl: ^0.17.0
-  google_fonts: ^1.1.2
-  flutter_svg: ^0.22.0
+  google_fonts: ^2.1.0
   url_launcher: ^6.0.6
 
   # Networking
-  http: ^0.12.2
+  http: ^0.13.0
 
   #BLoC
   flutter_bloc: ^6.0.6
 
   # UI
   flutter_dropdown: ^0.0.8
-  persistent_bottom_nav_bar: ^2.1.0
+  page_transition: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -45,7 +44,11 @@ dev_dependencies:
 flutter:
   assets:
     - assets/overwatch-logo.png
-    - assets/roleIcons/icon-offense.png
+    - assets/platformIcon/xbox_icon.png
+    - assets/platformIcon/playstation_icon.png
+    - assets/platformIcon/nintendo_switch_icon.png
+    - assets/platformIcon/battle_net_icon.png
+    - assets/roleIcons/icon-damage.png
     - assets/roleIcons/icon-support.png
     - assets/roleIcons/icon-tank.png
     - assets/heroIcons/ana.png

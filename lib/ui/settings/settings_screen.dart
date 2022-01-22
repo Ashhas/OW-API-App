@@ -1,25 +1,21 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/ui/settings/screens/about_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/add_profile_screen.dart';
-import 'package:ow_api_app/ui/settings/screens/help_and_faq_screen.dart';
 import 'package:ow_api_app/ui/settings/screens/main_account_screen.dart';
-import 'package:ow_api_app/ui/settings/screens/setting_screen.dart';
-import 'package:ow_api_app/ui/settings/widgets/settings_tile.dart';
+import 'package:ow_api_app/ui/settings/widgets/tiles/settings_tile.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
-import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:page_transition/page_transition.dart';
 
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 
 class SettingsScreen extends StatefulWidget {
-  final PersistentTabController navBarController;
-
-  const SettingsScreen({this.navBarController}) : super();
+  const SettingsScreen() : super();
 
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
@@ -31,8 +27,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SettingsBloc>(context)
-        .add(SettingsOpened(navBarController: widget.navBarController));
+    BlocProvider.of<SettingsBloc>(context).add(SettingsOpened());
     BlocProvider.of<NetworkConnectionBloc>(context)
         .add(UpdateNetworkConnection());
   }
@@ -54,9 +49,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             });
           }
         },
-        child: BlocBuilder<SettingsBloc, SettingsState>(
-          builder: (context, state) {
-            if (state is SettingsLoadedState) {
+        child: BlocListener<SettingsBloc, SettingsState>(
+          listener: (context, settingsState) {
+            if (settingsState is ProfileChangedState) {
+              BlocProvider.of<NavigationBarBloc>(context).add(
+                NavigateToScreen(selectedIndex: 0),
+              );
+            }
+          },
+          child: BlocBuilder<SettingsBloc, SettingsState>(
+            builder: (context, state) {
               return SingleChildScrollView(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -64,19 +66,15 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   children: [
                     _buildAvailableAccountsWidget(),
                     Divider(height: 1, thickness: 1),
-                    _buildMainAccountTile(state.mainAccount),
+                    _buildMainAccountTile(),
                     Divider(height: 1, thickness: 1),
-                    _buildSettingsTile(),
-                    _buildAboutTile(state.appVersion),
-                    _buildHelpAndFaqTile(),
+                    _buildAboutTile(),
                     SizedBox(height: 100),
                   ],
                 ),
               );
-            } else {
-              return Container();
-            }
-          },
+            },
+          ),
         ),
       ),
     );
@@ -85,10 +83,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAppBar() {
     return AppBar(
       elevation: 0.0,
-      backgroundColor: Theme.of(context).accentColor,
+      backgroundColor: Theme.of(context).canvasColor,
       title: Text(
         UiConst.settingsPageTitle,
-        style: TextStyle(color: Colors.white, fontSize: 20),
+        style: Theme.of(context).primaryTextTheme.headline6,
       ),
     );
   }
@@ -96,77 +94,65 @@ class _SettingsScreenState extends State<SettingsScreen> {
   Widget _buildAvailableAccountsWidget() {
     return BlocBuilder<SettingsBloc, SettingsState>(builder: (context, state) {
       if (state is SettingsLoadedState) {
-        return Container(
-          child: Column(
-            children: [
-              ValueListenableBuilder(
-                valueListenable: state.allAccounts.listenable(),
-                builder: (context, box, widget) {
-                  if (box.values.isEmpty)
-                    return ListTile(
-                      title: Text(UiConst.settingsNoAccountTitle),
-                      enabled: true,
-                    );
-
-                  return ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: box.values.length,
-                    itemBuilder: (context, index) {
-                      AccountModel account = box.getAt(index);
-
-                      return ListTile(
-                        title: Text(account.battleNetId,
-                            style: TextStyle(color: Colors.white)),
-                        dense: true,
-                        tileColor: Theme.of(context).accentColor,
-                        trailing: IconButton(
-                          icon: Icon(Icons.close, color: Colors.white),
-                          iconSize: 25,
-                          color: Colors.black,
-                          onPressed: () {
-                            setState(() {
-                              state.allAccounts.deleteAt(index);
-                            });
-                          },
-                        ),
-                        onTap: () {
-                          if (networkAvailable) {
-                            BlocProvider.of<SettingsBloc>(context).add(
-                                ChangeLoadedProfile(
-                                    profileId: account.battleNetId,
-                                    platformId: account.platformId));
-                          }
-                        },
-                      );
-                    },
+        return Column(
+          children: [
+            ValueListenableBuilder(
+              valueListenable: state.allAccounts.listenable(),
+              builder: (context, box, widget) {
+                if (box.values.isEmpty)
+                  return ListTile(
+                    title: Text(
+                      UiConst.settingsNoAccountTitle,
+                      style: Theme.of(context).primaryTextTheme.subtitle1,
+                    ),
+                    tileColor: Theme.of(context).canvasColor,
+                    enabled: true,
                   );
-                },
-              ),
-              Container(
-                color: Theme.of(context).accentColor,
-                child: TextButton(
-                  onPressed: () {
-                    pushNewScreen(
-                      context,
-                      screen: AddProfileScreen(),
-                      withNavBar: false,
-                      pageTransitionAnimation:
-                          PageTransitionAnimation.cupertino,
+
+                return ListView.builder(
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: box.values.length,
+                  itemBuilder: (context, index) {
+                    AccountModel account = box.getAt(index);
+
+                    return ListTile(
+                      title: Text(
+                        account.battleNetId,
+                        style: Theme.of(context).primaryTextTheme.subtitle1,
+                      ),
+                      dense: true,
+                      tileColor: Theme.of(context).canvasColor,
+                      trailing: account.battleNetId == state.mainAccount
+                          ? SizedBox(width: 10)
+                          : IconButton(
+                              icon: Icon(
+                                Icons.close,
+                                color: Theme.of(context).cardColor,
+                              ),
+                              iconSize: 25,
+                              color: Colors.black,
+                              onPressed: () {
+                                setState(() {
+                                  state.allAccounts.deleteAt(index);
+                                });
+                              },
+                            ),
+                      onTap: () {
+                        if (networkAvailable) {
+                          BlocProvider.of<SettingsBloc>(context).add(
+                              ChangeLoadedProfile(
+                                  profileId: account.battleNetId,
+                                  platformId: account.platformId));
+                        }
+                      },
                     );
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(Icons.add, color: Colors.white),
-                      Text("Add Account", style: TextStyle(color: Colors.white))
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+                );
+              },
+            ),
+            _buildAddAccountTile()
+          ],
         );
       } else {
         return Container();
@@ -174,77 +160,69 @@ class _SettingsScreenState extends State<SettingsScreen> {
     });
   }
 
-  Widget _buildMainAccountTile(String mainAccount) {
+  Widget _buildMainAccountTile() {
     return SettingsTile(
       title: UiConst.settingsMainAccountTitle,
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       leading: Icon(
         Icons.account_circle_outlined,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).primaryColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: SelectMainAccountScreen(mainAccount: mainAccount),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: SelectMainAccountScreen(),
+            childCurrent: this.widget,
+          ),
         ).then((value) => setState(() {}));
       },
     );
   }
 
-  Widget _buildSettingsTile() {
-    return SettingsTile(
-      title: "Settings",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-      leading: Icon(
-        Icons.settings,
-        color: Theme.of(context).highlightColor,
+  Widget _buildAddAccountTile() {
+    return Container(
+      color: Theme.of(context).canvasColor,
+      child: TextButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            PageTransition(
+              type: PageTransitionType.rightToLeftJoined,
+              child: AddProfileScreen(),
+              childCurrent: this.widget,
+            ),
+          );
+        },
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Icon(Icons.add, color: Colors.white),
+            Text("Add Account", style: TextStyle(color: Colors.white))
+          ],
+        ),
       ),
-      onPressed: (BuildContext context) {
-        pushNewScreen(
-          context,
-          screen: SettingScreen(),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
-      },
     );
   }
 
-  Widget _buildAboutTile(String appVersion) {
+  Widget _buildAboutTile() {
     return SettingsTile(
       title: "About",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
+      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
       leading: Icon(
         Icons.info_outline,
-        color: Theme.of(context).highlightColor,
+        color: Theme.of(context).primaryColor,
       ),
       onPressed: (BuildContext context) {
-        pushNewScreen(
+        Navigator.push(
           context,
-          screen: AboutScreen(appVersion: appVersion),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
-        );
-      },
-    );
-  }
-
-  Widget _buildHelpAndFaqTile() {
-    return SettingsTile(
-      title: "Help/FAQ",
-      titleTextStyle: Theme.of(context).primaryTextTheme.headline4,
-      leading: Icon(
-        Icons.help_outline,
-        color: Theme.of(context).highlightColor,
-      ),
-      onPressed: (BuildContext context) {
-        pushNewScreen(
-          context,
-          screen: HelpFaqScreen(),
-          withNavBar: false,
-          pageTransitionAnimation: PageTransitionAnimation.cupertino,
+          PageTransition(
+            type: PageTransitionType.rightToLeftJoined,
+            child: AboutScreen(),
+            childCurrent: this.widget,
+          ),
         );
       },
     );
