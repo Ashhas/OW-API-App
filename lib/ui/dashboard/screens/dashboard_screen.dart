@@ -1,20 +1,19 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/network_notification.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info/profile_info_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/statistics_card.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/network_notification.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/info_card.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/statistics_card.dart';
 
-class ProfileScreen extends StatefulWidget {
-  const ProfileScreen() : super();
+class DashboardScreen extends StatefulWidget {
+  const DashboardScreen() : super();
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<DashboardScreen> {
   ConnectivityResult netResult;
 
   @override
@@ -47,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: Column(
                       children: <Widget>[
                         NetworkNotification(networkResult: netResult),
-                        ProfileInfoWidget(),
+                        InfoCard(),
                         StatisticsCard()
                       ],
                     ),

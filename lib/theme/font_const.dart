@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:ow_api_app/util/constants/color_const.dart';
+
+import 'color_const.dart';
 
 class FontConst {
   static final BOLD = GoogleFonts.roboto(

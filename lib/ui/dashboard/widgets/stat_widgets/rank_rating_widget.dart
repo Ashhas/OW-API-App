@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/title_view_widget.dart';
+import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/title_view.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 
 class RankRatingWidget extends StatelessWidget {
@@ -11,9 +9,9 @@ class RankRatingWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(
+    return BlocBuilder<DashboardBloc, DashboardState>(
       builder: (context, state) {
-        if (state is ProfileLoadedState) {
+        if (state is ProfileLoaded) {
           return Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/util/constants/color_const.dart';
+import 'package:ow_api_app/theme/color_const.dart';
 
 class AccountVisibilityBadge extends StatelessWidget {
   final bool isPrivateProfile;

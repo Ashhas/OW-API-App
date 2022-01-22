@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/title_view_widget.dart';
+import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/title_view.dart';
 
 class RoleStatisticsWidget extends StatefulWidget {
   const RoleStatisticsWidget() : super();
@@ -13,8 +13,8 @@ class RoleStatisticsWidget extends StatefulWidget {
 class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      if (state is ProfileLoadedState) {
+    return BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
+      if (state is ProfileLoaded) {
         return Padding(
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: Column(

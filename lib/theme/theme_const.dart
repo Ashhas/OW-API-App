@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ow_api_app/util/constants/font_const.dart';
 import 'color_const.dart';
+import 'font_const.dart';
 
 class AppTheme {
   static ThemeData getDefaultTheme() {

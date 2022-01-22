@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info/account_visibility_badge.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info/endorsement_badge.dart';
-import 'package:ow_api_app/ui/home/widgets/profile_info/experience_badge.dart';
+import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
 
-class ProfileInfoWidget extends StatefulWidget {
+import 'badges/account_visibility_badge.dart';
+import 'badges/endorsement_badge.dart';
+import 'badges/experience_badge.dart';
+
+
+class InfoCard extends StatefulWidget {
   @override
-  _ProfileInfoWidgetState createState() => _ProfileInfoWidgetState();
+  _InfoCardState createState() => _InfoCardState();
 }
 
-class _ProfileInfoWidgetState extends State<ProfileInfoWidget> {
+class _InfoCardState extends State<InfoCard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-      if (state is ProfileLoadedState) {
+    return BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
+      if (state is ProfileLoaded) {
         return Container(
           height: 140,
           width: double.infinity,

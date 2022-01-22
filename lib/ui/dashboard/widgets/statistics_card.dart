@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/home_bloc.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/private_profile_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/most_played_heroes_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/role_statistics_widget.dart';
-import 'package:ow_api_app/ui/home/widgets/statistics/rank_rating_widget.dart';
+import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/most_played_heroes_widget.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/private_profile_widget.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/rank_rating_widget.dart';
+import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/role_statistics_widget.dart';
 
 class StatisticsCard extends StatefulWidget {
   const StatisticsCard({Key key}) : super(key: key);
@@ -26,8 +26,8 @@ class _StatisticsCardState extends State<StatisticsCard> {
               topRight: Radius.circular(20),
             ),
           ),
-          child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
-            if (state is ProfileLoadedState) {
+          child: BlocBuilder<DashboardBloc, DashboardState>(builder: (context, state) {
+            if (state is ProfileLoaded) {
               return state.profileStats.private
                   ? PrivateProfileWidget()
                   : Column(

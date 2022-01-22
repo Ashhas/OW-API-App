@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomeLoadingScreen extends StatelessWidget {
-  const HomeLoadingScreen() : super();
+class DashboardLoading extends StatelessWidget {
+  const DashboardLoading() : super();
 
   @override
   Widget build(BuildContext context) {

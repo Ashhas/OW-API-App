@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
-import 'package:ow_api_app/ui/home/home_screen.dart';
+import 'package:ow_api_app/ui/dashboard/dashboard_container.dart';
 import 'package:ow_api_app/ui/settings/settings_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -18,7 +18,7 @@ class BottomNavBarState extends State<BottomNavBar> {
           body: IndexedStack(
             index: navBarState.tabId,
             children: [
-              HomeScreen(),
+              DashboardContainer(),
               SettingsScreen(),
             ],
           ),

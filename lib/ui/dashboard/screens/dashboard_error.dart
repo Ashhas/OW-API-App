@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ow_api_app/util/exception/api_exception.dart';
 import 'package:ow_api_app/util/exception/api_exception_mapper.dart';
 
-class ErrorUiScreen extends StatelessWidget {
+class DashboardError extends StatelessWidget {
   final Exception exception;
 
-  ErrorUiScreen(this.exception);
+  DashboardError(this.exception);
 
   @override
   Widget build(BuildContext context) {

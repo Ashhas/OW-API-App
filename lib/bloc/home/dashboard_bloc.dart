@@ -10,27 +10,27 @@ import 'package:ow_api_app/util/exception/api_exception.dart';
 import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:ow_api_app/util/statistics_filter.dart';
 
-part 'package:ow_api_app/bloc/home/home_event.dart';
+part 'package:ow_api_app/bloc/home/dashboard_event.dart';
 
-part 'package:ow_api_app/bloc/home/home_state.dart';
+part 'package:ow_api_app/bloc/home/dashboard_state.dart';
 
-class HomeBloc extends Bloc<HomeEvent, HomeState> {
+class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final ProfileRepository repository;
 
-  HomeBloc({@required this.repository}) : super(HomeOpenedState());
+  DashboardBloc({@required this.repository}) : super(DashboardOpened());
 
   @override
-  Stream<HomeState> mapEventToState(HomeEvent event) async* {
-    if (event is HomeOpened) {
-      yield* _mapHomeStartedToState(event, state);
+  Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
+    if (event is OpenDashboard) {
+      yield* _mapOpenDashboardToState(event, state);
     }
     if (event is LoadProfile) {
       yield* _mapFetchProfileEventToState(event, state);
     }
   }
 
-  Stream<HomeState> _mapHomeStartedToState(
-      HomeOpened event, HomeState state) async* {
+  Stream<DashboardState> _mapOpenDashboardToState(
+      OpenDashboard event, DashboardState state) async* {
     List<Map<String, TopHero>> selectedTopHeroes;
     int supportGamesPlayed;
     int supportGamesWon;
@@ -42,7 +42,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     int tankGamesWon;
     double tankWinRate;
 
-    yield LoadingProfileState();
+    yield LoadingProfile();
 
     //Save MainAccount in SharedPref
     final sharedPrefService = await SharedPreferencesService.instance;
@@ -69,7 +69,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         tankGamesWon = StatisticsFilter.calculateTankGamesWon(profile);
         tankWinRate = StatisticsFilter.calculateTankGamesWinRate(profile);
       }
-      yield ProfileLoadedState(
+      yield ProfileLoaded(
           profileStats: profile,
           topHeroes: selectedTopHeroes,
           supportGamesPlayed: supportGamesPlayed,
@@ -82,20 +82,20 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           damageGamesWon: damageGamesWon,
           damageWinRate: damageWinRate);
     } on EmptyResultException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ClientErrorException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ServerErrorException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ConnectionException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on UnknownException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     }
   }
 
-  Stream<HomeState> _mapFetchProfileEventToState(
-      LoadProfile event, HomeState state) async* {
+  Stream<DashboardState> _mapFetchProfileEventToState(
+      LoadProfile event, DashboardState state) async* {
     List<Map<String, TopHero>> selectedTopHeroes;
     int supportGamesPlayed;
     int supportGamesWon;
@@ -106,7 +106,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     int tankGamesPlayed;
     int tankGamesWon;
     double tankWinRate;
-    yield LoadingProfileState();
+    yield LoadingProfile();
 
     try {
       // Add profile ID and Platform ID to the request
@@ -127,7 +127,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         tankGamesWon = StatisticsFilter.calculateTankGamesWon(profile);
         tankWinRate = StatisticsFilter.calculateTankGamesWinRate(profile);
       }
-      yield ProfileLoadedState(
+      yield ProfileLoaded(
           profileStats: profile,
           topHeroes: selectedTopHeroes,
           supportGamesPlayed: supportGamesPlayed,
@@ -140,15 +140,15 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           damageGamesWon: damageGamesWon,
           damageWinRate: damageWinRate);
     } on EmptyResultException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ClientErrorException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ServerErrorException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on ConnectionException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     } on UnknownException catch (e) {
-      yield HomeErrorState(exception: e);
+      yield ProfileError(exception: e);
     }
   }
 }
