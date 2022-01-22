@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
 import 'package:ow_api_app/ui/dashboard/widgets/title_view.dart';
 import 'package:ow_api_app/util/constants/ui_const.dart';
 

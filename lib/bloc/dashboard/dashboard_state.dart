@@ -1,4 +1,4 @@
-part of 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+part of 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
 
 abstract class DashboardState extends Equatable {}
 

@@ -10,9 +10,9 @@ import 'package:ow_api_app/util/exception/api_exception.dart';
 import 'package:ow_api_app/util/shared_pref_service.dart';
 import 'package:ow_api_app/util/statistics_filter.dart';
 
-part 'package:ow_api_app/bloc/home/dashboard_event.dart';
+part 'package:ow_api_app/bloc/dashboard/dashboard_event.dart';
 
-part 'package:ow_api_app/bloc/home/dashboard_state.dart';
+part 'package:ow_api_app/bloc/dashboard/dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final ProfileRepository repository;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
 
 import 'badges/account_visibility_badge.dart';
 import 'badges/endorsement_badge.dart';

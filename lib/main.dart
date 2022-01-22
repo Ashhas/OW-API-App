@@ -8,7 +8,7 @@ import 'package:ow_api_app/bloc/navigation/navigation_bar_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
-import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
 import 'package:ow_api_app/bloc/settings/settings_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
 import 'package:ow_api_app/theme/theme_const.dart';

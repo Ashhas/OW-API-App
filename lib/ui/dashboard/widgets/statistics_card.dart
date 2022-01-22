@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/home/dashboard_bloc.dart';
+import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
 import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/most_played_heroes_widget.dart';
 import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/private_profile_widget.dart';
 import 'package:ow_api_app/ui/dashboard/widgets/stat_widgets/rank_rating_widget.dart';
