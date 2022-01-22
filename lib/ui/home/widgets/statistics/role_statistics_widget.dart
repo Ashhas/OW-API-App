@@ -22,14 +22,65 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TitleView(title: "Role Statistics"),
-              _gridViewStats(
-                tankGamesPlayed: state.tankGamesPlayed,
-                tankWinRate: state.tankWinRate,
-                damageGamesPlayed: state.damageGamesPlayed,
-                damageWinRate: state.damageWinRate,
-                supportGamesPlayed: state.supportGamesPlayed,
-                supportWinRate: state.supportWinRate,
-              ),
+              Table(
+                children: [
+                  TableRow(
+                    children: [
+                      _gridTitleTile(
+                        gridTitle: "Roles",
+                      ),
+                      _gridTitleTile(
+                        gridTitle: "Games Played",
+                      ),
+                      _gridTitleTile(
+                        gridTitle: "Winrate",
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      _roleTile(
+                        title: "Tank",
+                        assetImage: "assets/roleIcons/icon-tank.png",
+                      ),
+                      _gamesPlayedTile(
+                        displayText: state.tankGamesPlayed,
+                      ),
+                      _percentageTile(
+                        displayText: state.tankWinRate,
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      _roleTile(
+                        title: "Damage",
+                        assetImage: "assets/roleIcons/icon-damage.png",
+                      ),
+                      _gamesPlayedTile(
+                        displayText: state.damageGamesPlayed,
+                      ),
+                      _percentageTile(
+                        displayText: state.damageWinRate,
+                      ),
+                    ],
+                  ),
+                  TableRow(
+                    children: [
+                      _roleTile(
+                        title: "Tank",
+                        assetImage: "assets/roleIcons/icon-support.png",
+                      ),
+                      _gamesPlayedTile(
+                        displayText: state.supportGamesPlayed,
+                      ),
+                      _percentageTile(
+                        displayText: state.supportWinRate,
+                      ),
+                    ],
+                  ),
+                ],
+              )
             ],
           ),
         );
@@ -37,42 +88,6 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
         return Container();
       }
     });
-  }
-
-  Widget _gridViewStats(
-      {int tankGamesPlayed,
-      int damageGamesPlayed,
-      int supportGamesPlayed,
-      double tankWinRate,
-      double damageWinRate,
-      double supportWinRate}) {
-    return Container(
-      height: 150,
-      child: GridView.count(
-        crossAxisCount: 3,
-        childAspectRatio: (1 / .3),
-        physics: new NeverScrollableScrollPhysics(),
-        shrinkWrap: true,
-        children: [
-          _gridNoCenterTitleTile(gridTitle: "Roles"),
-          _gridTitleTile(gridTitle: "Games Played"),
-          _gridTitleTile(gridTitle: "Win Rate"),
-          _roleTile(
-              title: "Tank", assetImage: "assets/roleIcons/icon-tank.png"),
-          _gamesPlayedTile(displayText: tankGamesPlayed),
-          _percentageTile(displayText: tankWinRate),
-          _roleTile(
-              title: "Damage", assetImage: "assets/roleIcons/icon-damage.png"),
-          _gamesPlayedTile(displayText: damageGamesPlayed),
-          _percentageTile(displayText: damageWinRate),
-          _roleTile(
-              title: "Support",
-              assetImage: "assets/roleIcons/icon-support.png"),
-          _gamesPlayedTile(displayText: supportGamesPlayed),
-          _percentageTile(displayText: supportWinRate)
-        ],
-      ),
-    );
   }
 
   Widget _gridTitleTile({String gridTitle}) {
