@@ -1,1914 +1,1732 @@
-import 'package:ow_api_app/util/constants/variable_const.dart';
+import 'package:ow_api_app/utils/strings.dart';
 
 class Profile {
-  CompetitiveStats _competitiveStats;
-  int _endorsement;
-  String _endorsementIcon;
-  int _gamesWon;
-  String _icon;
-  int _level;
-  String _levelIcon;
-  String _name;
-  int _prestige;
-  String _prestigeIcon;
-  bool _private;
-  int _rating;
-  String _ratingIcon;
-  Ratings _ratings;
+  CompetitiveStats? competitiveStats;
+  int? endorsement;
+  String? endorsementIcon;
+  int? gamesWon;
+  String? icon;
+  int? level;
+  String? levelIcon;
+  String? name;
+  int? prestige;
+  String? prestigeIcon;
+  late bool private;
+  int? rating;
+  String? ratingIcon;
+  Ratings? ratings;
 
-  Profile(
-      {CompetitiveStats competitiveStats,
-      int endorsement,
-      String endorsementIcon,
-      int gamesWon,
-      String icon,
-      int level,
-      String levelIcon,
-      String name,
-      int prestige,
-      String prestigeIcon,
-      bool private,
-      int rating,
-      String ratingIcon,
-      Ratings ratings}) {
-    this._competitiveStats = competitiveStats;
-    this._endorsement = endorsement;
-    this._endorsementIcon = endorsementIcon;
-    this._gamesWon = gamesWon;
-    this._icon = icon;
-    this._level = level;
-    this._levelIcon = levelIcon;
-    this._name = name;
-    this._prestige = prestige;
-    this._prestigeIcon = prestigeIcon;
-    this._private = private;
-    this._rating = rating;
-    this._ratingIcon = ratingIcon;
-    this._ratings = ratings;
-  }
+  Profile({
+    this.competitiveStats,
+    this.endorsement,
+    this.endorsementIcon,
+    this.gamesWon,
+    this.icon,
+    this.level,
+    this.levelIcon,
+    this.name,
+    this.prestige,
+    this.prestigeIcon,
+    required this.private,
+    this.rating,
+    this.ratingIcon,
+    this.ratings,
+  });
 
-  CompetitiveStats get competitiveStats => _competitiveStats;
+  CompetitiveStats? get getCompetitiveStats => competitiveStats;
 
-  set competitiveStats(CompetitiveStats competitiveStats) =>
-      _competitiveStats = competitiveStats;
+  set setCompetitiveStats(CompetitiveStats competitiveStats) =>
+      competitiveStats = competitiveStats;
 
-  int get endorsement => _endorsement;
+  int? get getEndorsement => endorsement;
 
-  set endorsement(int endorsement) => _endorsement = endorsement;
+  set setEndorsement(int endorsement) => endorsement = endorsement;
 
-  String get endorsementIcon => _endorsementIcon;
+  String? get getEndorsementIcon => endorsementIcon;
 
-  set endorsementIcon(String endorsementIcon) =>
-      _endorsementIcon = endorsementIcon;
+  set setEndorsementIcon(String endorsementIcon) =>
+      endorsementIcon = endorsementIcon;
 
-  int get gamesWon => _gamesWon;
+  int? get getGamesWon => gamesWon;
 
-  set gamesWon(int gamesWon) => _gamesWon = gamesWon;
+  set setGamesWon(int gamesWon) => gamesWon = gamesWon;
 
-  String get icon => _icon;
+  String? get getIcon => icon;
 
-  set icon(String icon) => _icon = icon;
+  set setIcon(String icon) => icon = icon;
 
-  int get level => _level;
+  int? get getLevel => level;
 
-  set level(int level) => _level = level;
+  set setLevel(int level) => level = level;
 
-  String get levelIcon => _levelIcon;
+  String? get getLevelIcon => levelIcon;
 
-  set levelIcon(String levelIcon) => _levelIcon = levelIcon;
+  set setLevelIcon(String levelIcon) => levelIcon = levelIcon;
 
-  String get name => _name;
+  String? get getName => name;
 
-  set name(String name) => _name = name;
+  set setName(String name) => name = name;
 
-  int get prestige => _prestige;
+  int? get getPrestige => prestige;
 
-  set prestige(int prestige) => _prestige = prestige;
+  set setPrestige(int prestige) => prestige = prestige;
 
-  String get prestigeIcon => _prestigeIcon;
+  String? get getPrestigeIcon => prestigeIcon;
 
-  set prestigeIcon(String prestigeIcon) => _prestigeIcon = prestigeIcon;
+  set setPrestigeIcon(String prestigeIcon) => prestigeIcon = prestigeIcon;
 
-  bool get private => _private;
+  bool? get getPrivate => private;
 
-  set private(bool private) => _private = private;
+  set setPrivate(bool private) => private = private;
 
-  int get rating => _rating;
+  int? get getRating => rating;
 
-  set rating(int rating) => _rating = rating;
+  set setRating(int rating) => rating = rating;
 
-  String get ratingIcon => _ratingIcon;
+  String? get getRatingIcon => ratingIcon;
 
-  set ratingIcon(String ratingIcon) => _ratingIcon = ratingIcon;
+  set setRatingIcon(String ratingIcon) => ratingIcon = ratingIcon;
 
-  Ratings get ratings => _ratings;
+  Ratings? get getRatings => ratings;
 
-  set ratings(Ratings ratings) => _ratings = ratings;
+  set setRatings(Ratings ratings) => ratings = ratings;
 
   Profile.fromJson(Map<String, dynamic> json) {
-    _competitiveStats = json['competitiveStats'] != null
-        ? new CompetitiveStats.fromJson(json['competitiveStats'])
+    competitiveStats = json['competitiveStats'] != null
+        ? CompetitiveStats.fromJson(json['competitiveStats'])
         : null;
-    _endorsement = json['endorsement'];
-    _endorsementIcon = json['endorsementIcon'];
-    _gamesWon = json['gamesWon'];
-    _icon = json['icon'];
-    _level = json['level'];
-    _levelIcon = json['levelIcon'];
-    _name = json['name'];
-    _prestige = json['prestige'];
-    _prestigeIcon = json['prestigeIcon'];
-    _private = json['private'];
-    _rating = json['rating'];
-    _ratingIcon = json['ratingIcon'];
-    _ratings =
-        json['ratings'] != null ? new Ratings.fromJson(json['ratings']) : null;
+    endorsement = json['endorsement'];
+    endorsementIcon = json['endorsementIcon'];
+    gamesWon = json['gamesWon'];
+    icon = json['icon'];
+    level = json['level'];
+    levelIcon = json['levelIcon'];
+    name = json['name'];
+    prestige = json['prestige'];
+    prestigeIcon = json['prestigeIcon'];
+    private = json['private'];
+    rating = json['rating'];
+    ratingIcon = json['ratingIcon'];
+    ratings =
+        json['ratings'] != null ? Ratings.fromJson(json['ratings']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._competitiveStats != null) {
-      data['competitiveStats'] = this._competitiveStats.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (competitiveStats != null) {
+      data['competitiveStats'] = competitiveStats?.toJson();
     }
-    data['endorsement'] = this._endorsement;
-    data['endorsementIcon'] = this._endorsementIcon;
-    data['gamesWon'] = this._gamesWon;
-    data['icon'] = this._icon;
-    data['level'] = this._level;
-    data['levelIcon'] = this._levelIcon;
-    data['name'] = this._name;
-    data['prestige'] = this._prestige;
-    data['prestigeIcon'] = this._prestigeIcon;
-    data['private'] = this._private;
-    data['rating'] = this._rating;
-    data['ratingIcon'] = this._ratingIcon;
-    if (this._ratings != null) {
-      data['ratings'] = this._ratings.toJson();
+    data['endorsement'] = endorsement;
+    data['endorsementIcon'] = endorsementIcon;
+    data['gamesWon'] = gamesWon;
+    data['icon'] = icon;
+    data['level'] = level;
+    data['levelIcon'] = levelIcon;
+    data['name'] = name;
+    data['prestige'] = prestige;
+    data['prestigeIcon'] = prestigeIcon;
+    data['private'] = private;
+    data['rating'] = rating;
+    data['ratingIcon'] = ratingIcon;
+    if (ratings != null) {
+      data['ratings'] = ratings?.toJson();
     }
     return data;
   }
 }
 
 class CompetitiveStats {
-  Awards _awards;
-  CareerStats _careerStats;
-  Games _games;
-  TopHeroes _topHeroes;
+  Awards? awards;
+  CareerStats? careerStats;
+  Games? games;
+  TopHeroes? topHeroes;
 
-  CompetitiveStats(
-      {Awards awards,
-      CareerStats careerStats,
-      Games games,
-      TopHeroes topHeroes}) {
-    this._awards = awards;
-    this._careerStats = careerStats;
-    this._games = games;
-    this._topHeroes = topHeroes;
-  }
+  CompetitiveStats({
+    this.awards,
+    this.careerStats,
+    this.games,
+    this.topHeroes,
+  });
 
-  Awards get awards => _awards;
+  Awards? get getAwards => awards;
 
-  set awards(Awards awards) => _awards = awards;
+  set setAwards(Awards awards) => awards = awards;
 
-  CareerStats get careerStats => _careerStats;
+  CareerStats? get getCareerStats => careerStats;
 
-  set careerStats(CareerStats careerStats) => _careerStats = careerStats;
+  set setCareerStats(CareerStats careerStats) => careerStats = careerStats;
 
-  Games get games => _games;
+  Games? get getGames => games;
 
-  set games(Games games) => _games = games;
+  set setGames(Games games) => games = games;
 
-  TopHeroes get topHeroes => _topHeroes;
+  TopHeroes? get getTopHeroes => topHeroes;
 
-  set topHeroes(TopHeroes topHeroes) => _topHeroes = topHeroes;
+  set setTopHeroes(TopHeroes topHeroes) => topHeroes = topHeroes;
 
   CompetitiveStats.fromJson(Map<String, dynamic> json) {
-    _awards =
-        json['awards'] != null ? new Awards.fromJson(json['awards']) : null;
-    _careerStats = json['careerStats'] != null
-        ? new CareerStats.fromJson(json['careerStats'])
+    awards = json['awards'] != null ? Awards.fromJson(json['awards']) : null;
+    careerStats = json['careerStats'] != null
+        ? CareerStats.fromJson(json['careerStats'])
         : null;
-    _games = json['games'] != null ? new Games.fromJson(json['games']) : null;
-    _topHeroes = json['topHeroes'] != null
-        ? new TopHeroes.fromJson(json['topHeroes'])
+    games = json['games'] != null ? Games.fromJson(json['games']) : null;
+    topHeroes = json['topHeroes'] != null
+        ? TopHeroes.fromJson(json['topHeroes'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._awards != null) {
-      data['awards'] = this._awards.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (awards != null) {
+      data['awards'] = awards?.toJson();
     }
-    if (this._careerStats != null) {
-      data['careerStats'] = this._careerStats.toJson();
+    if (careerStats != null) {
+      data['careerStats'] = careerStats?.toJson();
     }
-    if (this._games != null) {
-      data['game'] = this._games.toJson();
+    if (games != null) {
+      data['game'] = games?.toJson();
     }
-    if (this._topHeroes != null) {
-      data['topHeroes'] = this._topHeroes.toJson();
+    if (topHeroes != null) {
+      data['topHeroes'] = topHeroes?.toJson();
     }
     return data;
   }
 }
 
 class Awards {
-  int _cards;
-  int _medals;
-  int _medalsBronze;
-  int _medalsSilver;
-  int _medalsGold;
+  int? cards;
+  int? medals;
+  int? medalsBronze;
+  int? medalsSilver;
+  int? medalsGold;
 
-  Awards(
-      {int cards,
-      int medals,
-      int medalsBronze,
-      int medalsSilver,
-      int medalsGold}) {
-    this._cards = cards;
-    this._medals = medals;
-    this._medalsBronze = medalsBronze;
-    this._medalsSilver = medalsSilver;
-    this._medalsGold = medalsGold;
-  }
+  Awards({
+    this.cards,
+    this.medals,
+    this.medalsBronze,
+    this.medalsSilver,
+    this.medalsGold,
+  });
 
-  int get cards => _cards;
+  int? get getCards => cards;
 
-  set cards(int cards) => _cards = cards;
+  set setCards(int cards) => cards = cards;
 
-  int get medals => _medals;
+  int? get getMedals => medals;
 
-  set medals(int medals) => _medals = medals;
+  set setMedals(int medals) => medals = medals;
 
-  int get medalsBronze => _medalsBronze;
+  int? get getMedalsBronze => medalsBronze;
 
-  set medalsBronze(int medalsBronze) => _medalsBronze = medalsBronze;
+  set setMedalsBronze(int medalsBronze) => medalsBronze = medalsBronze;
 
-  int get medalsSilver => _medalsSilver;
+  int? get getMedalsSilver => medalsSilver;
 
-  set medalsSilver(int medalsSilver) => _medalsSilver = medalsSilver;
+  set setMedalsSilver(int medalsSilver) => medalsSilver = medalsSilver;
 
-  int get medalsGold => _medalsGold;
+  int? get getMedalsGold => medalsGold;
 
-  set medalsGold(int medalsGold) => _medalsGold = medalsGold;
+  set setMedalsGold(int medalsGold) => medalsGold = medalsGold;
 
   Awards.fromJson(Map<String, dynamic> json) {
-    _cards = json['cards'];
-    _medals = json['medals'];
-    _medalsBronze = json['medalsBronze'];
-    _medalsSilver = json['medalsSilver'];
-    _medalsGold = json['medalsGold'];
+    cards = json['cards'];
+    medals = json['medals'];
+    medalsBronze = json['medalsBronze'];
+    medalsSilver = json['medalsSilver'];
+    medalsGold = json['medalsGold'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['cards'] = this._cards;
-    data['medals'] = this._medals;
-    data['medalsBronze'] = this._medalsBronze;
-    data['medalsSilver'] = this._medalsSilver;
-    data['medalsGold'] = this._medalsGold;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['cards'] = cards;
+    data['medals'] = medals;
+    data['medalsBronze'] = medalsBronze;
+    data['medalsSilver'] = medalsSilver;
+    data['medalsGold'] = medalsGold;
     return data;
   }
 }
 
 class CareerStats {
-  AllHeroes _allHeroes;
-  Hero _ana;
-  Hero _ashe;
-  Hero _baptiste;
-  Hero _bastion;
-  Hero _brigitte;
-  Hero _dVa;
-  Hero _doomfist;
-  Hero _echo;
-  Hero _genji;
-  Hero _hanzo;
-  Hero _junkrat;
-  Hero _lucio;
-  Hero _mccree;
-  Hero _mei;
-  Hero _mercy;
-  Hero _moira;
-  Hero _orisa;
-  Hero _pharah;
-  Hero _reaper;
-  Hero _reinhardt;
-  Hero _roadhog;
-  Hero _sigma;
-  Hero _soldier76;
-  Hero _sombra;
-  Hero _symmetra;
-  Hero _torbjorn;
-  Hero _tracer;
-  Hero _widowmaker;
-  Hero _winston;
-  Hero _wreckingBall;
-  Hero _zarya;
-  Hero _zenyatta;
-
-  CareerStats(
-      {AllHeroes allHeroes,
-      Hero ana,
-      Hero ashe,
-      Hero baptiste,
-      Hero bastion,
-      Hero brigitte,
-      Hero dVa,
-      Hero doomfist,
-      Hero echo,
-      Hero genji,
-      Hero hanzo,
-      Hero junkrat,
-      Hero lucio,
-      Hero mccree,
-      Hero mei,
-      Hero mercy,
-      Hero moira,
-      Hero orisa,
-      Hero pharah,
-      Hero reaper,
-      Hero reinhardt,
-      Hero roadhog,
-      Hero sigma,
-      Hero soldier76,
-      Hero sombra,
-      Hero symmetra,
-      Hero torbjorn,
-      Hero tracer,
-      Hero widowmaker,
-      Hero winston,
-      Hero wreckingBall,
-      Hero zarya,
-      Hero zenyatta}) {
-    this._allHeroes = allHeroes;
-    this._ana = ana;
-    this._ashe = ashe;
-    this._baptiste = baptiste;
-    this._bastion = bastion;
-    this._brigitte = brigitte;
-    this._dVa = dVa;
-    this._doomfist = doomfist;
-    this._echo = echo;
-    this._genji = genji;
-    this._hanzo = hanzo;
-    this._junkrat = junkrat;
-    this._lucio = lucio;
-    this._mccree = mccree;
-    this._mei = mei;
-    this._mercy = mercy;
-    this._moira = moira;
-    this._orisa = orisa;
-    this._pharah = pharah;
-    this._reaper = reaper;
-    this._reinhardt = reinhardt;
-    this._roadhog = roadhog;
-    this._sigma = sigma;
-    this._soldier76 = soldier76;
-    this._sombra = sombra;
-    this._symmetra = symmetra;
-    this._torbjorn = torbjorn;
-    this._tracer = tracer;
-    this._widowmaker = widowmaker;
-    this._winston = winston;
-    this._wreckingBall = wreckingBall;
-    this._zarya = zarya;
-    this._zenyatta = zenyatta;
-  }
+  AllHeroes? allHeroes;
+  Hero? ana;
+  Hero? ashe;
+  Hero? baptiste;
+  Hero? bastion;
+  Hero? brigitte;
+  Hero? dVa;
+  Hero? doomfist;
+  Hero? echo;
+  Hero? genji;
+  Hero? hanzo;
+  Hero? junkrat;
+  Hero? lucio;
+  Hero? mccree;
+  Hero? mei;
+  Hero? mercy;
+  Hero? moira;
+  Hero? orisa;
+  Hero? pharah;
+  Hero? reaper;
+  Hero? reinhardt;
+  Hero? roadhog;
+  Hero? sigma;
+  Hero? soldier76;
+  Hero? sombra;
+  Hero? symmetra;
+  Hero? torbjorn;
+  Hero? tracer;
+  Hero? widowmaker;
+  Hero? winston;
+  Hero? wreckingBall;
+  Hero? zarya;
+  Hero? zenyatta;
+
+  CareerStats({
+    this.allHeroes,
+    this.ana,
+    this.ashe,
+    this.baptiste,
+    this.bastion,
+    this.brigitte,
+    this.dVa,
+    this.doomfist,
+    this.echo,
+    this.genji,
+    this.hanzo,
+    this.junkrat,
+    this.lucio,
+    this.mccree,
+    this.mei,
+    this.mercy,
+    this.moira,
+    this.orisa,
+    this.pharah,
+    this.reaper,
+    this.reinhardt,
+    this.roadhog,
+    this.sigma,
+    this.soldier76,
+    this.sombra,
+    this.symmetra,
+    this.torbjorn,
+    this.tracer,
+    this.widowmaker,
+    this.winston,
+    this.wreckingBall,
+    this.zarya,
+    this.zenyatta,
+  });
 
-  AllHeroes get allHeroes => _allHeroes;
+  AllHeroes? get getAllHeroes => allHeroes;
 
-  set allHeroes(AllHeroes allHeroes) => _allHeroes = allHeroes;
+  set setAllHeroes(AllHeroes allHeroes) => allHeroes = allHeroes;
 
-  Hero get ana => _ana;
+  Hero? get getAna => ana;
 
-  set ana(Hero ana) => _ana = ana;
+  set setAna(Hero ana) => ana = ana;
 
-  Hero get ashe => _ashe;
+  Hero? get getAshe => ashe;
 
-  set ashe(Hero ashe) => _ashe = ashe;
+  set setAshe(Hero ashe) => ashe = ashe;
 
-  Hero get baptiste => _baptiste;
+  Hero? get getBaptiste => baptiste;
 
-  set baptiste(Hero baptiste) => _baptiste = baptiste;
+  set setBaptiste(Hero baptiste) => baptiste = baptiste;
 
-  Hero get bastion => _bastion;
+  Hero? get getBastion => bastion;
 
-  set bastion(Hero bastion) => _bastion = bastion;
+  set setBastion(Hero bastion) => bastion = bastion;
 
-  Hero get brigitte => _brigitte;
+  Hero? get getBrigitte => brigitte;
 
-  set brigitte(Hero brigitte) => _brigitte = brigitte;
+  set setBrigitte(Hero brigitte) => brigitte = brigitte;
 
-  Hero get dVa => _dVa;
+  Hero? get getDVa => dVa;
 
-  set dVa(Hero dVa) => _dVa = dVa;
+  set setDVa(Hero dVa) => dVa = dVa;
 
-  Hero get doomfist => _doomfist;
+  Hero? get getDoomfist => doomfist;
 
-  set doomfist(Hero doomfist) => _doomfist = doomfist;
+  set setDoomfist(Hero doomfist) => doomfist = doomfist;
 
-  Hero get echo => _echo;
+  Hero? get getEcho => echo;
 
-  set echo(Hero echo) => _echo = echo;
+  set setEcho(Hero echo) => echo = echo;
 
-  Hero get genji => _genji;
+  Hero? get getGenji => genji;
 
-  set genji(Hero genji) => _genji = genji;
+  set setGenji(Hero genji) => genji = genji;
 
-  Hero get hanzo => _hanzo;
+  Hero? get getHanzo => hanzo;
 
-  set hanzo(Hero hanzo) => _hanzo = hanzo;
+  set setHanzo(Hero hanzo) => hanzo = hanzo;
 
-  Hero get junkrat => _junkrat;
+  Hero? get getJunkrat => junkrat;
 
-  set junkrat(Hero junkrat) => _junkrat = junkrat;
+  set setJunkrat(Hero junkrat) => junkrat = junkrat;
 
-  Hero get lucio => _lucio;
+  Hero? get getLucio => lucio;
 
-  set lucio(Hero lucio) => _lucio = lucio;
+  set setLucio(Hero lucio) => lucio = lucio;
 
-  Hero get mccree => _mccree;
+  Hero? get getMccree => mccree;
 
-  set mccree(Hero mccree) => _mccree = mccree;
+  set setMccree(Hero mccree) => mccree = mccree;
 
-  Hero get mei => _mei;
+  Hero? get getMei => mei;
 
-  set mei(Hero mei) => _mei = mei;
+  set setMei(Hero mei) => mei = mei;
 
-  Hero get mercy => _mercy;
+  Hero? get getNercy => mercy;
 
-  set mercy(Hero mercy) => _mercy = mercy;
+  set setMercy(Hero mercy) => mercy = mercy;
 
-  Hero get moira => _moira;
+  Hero? get getMoira => moira;
 
-  set moira(Hero moira) => _moira = moira;
+  set setMoira(Hero moira) => moira = moira;
 
-  Hero get orisa => _orisa;
+  Hero? get getOrisa => orisa;
 
-  set orisa(Hero orisa) => _orisa = orisa;
+  set setOrisa(Hero orisa) => orisa = orisa;
 
-  Hero get pharah => _pharah;
+  Hero? get getPharah => pharah;
 
-  set pharah(Hero pharah) => _pharah = pharah;
+  set setPharah(Hero pharah) => pharah = pharah;
 
-  Hero get reaper => _reaper;
+  Hero? get getReaper => reaper;
 
-  set reaper(Hero reaper) => _reaper = reaper;
+  set setReaper(Hero reaper) => reaper = reaper;
 
-  Hero get reinhardt => _reinhardt;
+  Hero? get getReinhardt => reinhardt;
 
-  set reinhardt(Hero reinhardt) => _reinhardt = reinhardt;
+  set setReinhardt(Hero reinhardt) => reinhardt = reinhardt;
 
-  Hero get roadhog => _roadhog;
+  Hero? get getRoadhog => roadhog;
 
-  set roadhog(Hero roadhog) => _roadhog = roadhog;
+  set setRoadhog(Hero roadhog) => roadhog = roadhog;
 
-  Hero get sigma => _sigma;
+  Hero? get getSigma => sigma;
 
-  set sigma(Hero sigma) => _sigma = sigma;
+  set setSigma(Hero sigma) => sigma = sigma;
 
-  Hero get soldier76 => _soldier76;
+  Hero? get getSoldier76 => soldier76;
 
-  set soldier76(Hero soldier76) => _soldier76 = soldier76;
+  set setSoldier76(Hero soldier76) => soldier76 = soldier76;
 
-  Hero get sombra => _sombra;
+  Hero? get getSombra => sombra;
 
-  set sombra(Hero sombra) => _sombra = sombra;
+  set setSombra(Hero sombra) => sombra = sombra;
 
-  Hero get symmetra => _symmetra;
+  Hero? get getSymmetra => symmetra;
 
-  set symmetra(Hero symmetra) => _symmetra = symmetra;
+  set setSymmetra(Hero symmetra) => symmetra = symmetra;
 
-  Hero get torbjorn => _torbjorn;
+  Hero? get getTorbjorn => torbjorn;
 
-  set torbjorn(Hero torbjorn) => _torbjorn = torbjorn;
+  set setTorbjorn(Hero torbjorn) => torbjorn = torbjorn;
 
-  Hero get tracer => _tracer;
+  Hero? get getTracer => tracer;
 
-  set tracer(Hero tracer) => _tracer = tracer;
+  set setTracer(Hero tracer) => tracer = tracer;
 
-  Hero get widowmaker => _widowmaker;
+  Hero? get getWidowmaker => widowmaker;
 
-  set widowmaker(Hero widowmaker) => _widowmaker = widowmaker;
+  set setWidowmaker(Hero widowmaker) => widowmaker = widowmaker;
 
-  Hero get winston => _winston;
+  Hero? get getWinston => winston;
 
-  set winston(Hero winston) => _winston = winston;
+  set setWinston(Hero winston) => winston = winston;
 
-  Hero get wreckingBall => _wreckingBall;
+  Hero? get getWreckingBall => wreckingBall;
 
-  set wreckingBall(Hero wreckingBall) => _wreckingBall = wreckingBall;
+  set setWreckingBall(Hero wreckingBall) => wreckingBall = wreckingBall;
 
-  Hero get zarya => _zarya;
+  Hero? get getZarya => zarya;
 
-  set zarya(Hero zarya) => _zarya = zarya;
+  set setZarya(Hero zarya) => zarya = zarya;
 
-  Hero get zenyatta => _zenyatta;
+  Hero? get getZenyatta => zenyatta;
 
-  set zenyatta(Hero zenyatta) => _zenyatta = zenyatta;
+  set setZenyatta(Hero zenyatta) => zenyatta = zenyatta;
 
   CareerStats.fromJson(Map<String, dynamic> json) {
-    _allHeroes = json['allHeroes'] != null
-        ? new AllHeroes.fromJson(json['allHeroes'])
+    allHeroes = json['allHeroes'] != null
+        ? AllHeroes.fromJson(json['allHeroes'])
         : null;
-    _ana = json['ana'] != null ? new Hero.fromJson(json['ana']) : null;
-    _ashe = json['ashe'] != null ? new Hero.fromJson(json['ashe']) : null;
-    _baptiste =
-        json['baptiste'] != null ? new Hero.fromJson(json['baptiste']) : null;
-    _bastion =
-        json['bastion'] != null ? new Hero.fromJson(json['bastion']) : null;
-    _brigitte =
-        json['brigitte'] != null ? new Hero.fromJson(json['brigitte']) : null;
-    _dVa = json['dVa'] != null ? new Hero.fromJson(json['dVa']) : null;
-    _doomfist =
-        json['doomfist'] != null ? new Hero.fromJson(json['doomfist']) : null;
-    _echo = json['echo'] != null ? new Hero.fromJson(json['echo']) : null;
-    _genji = json['genji'] != null ? new Hero.fromJson(json['genji']) : null;
-    _hanzo = json['hanzo'] != null ? new Hero.fromJson(json['hanzo']) : null;
-    _junkrat =
-        json['junkrat'] != null ? new Hero.fromJson(json['junkrat']) : null;
-    _lucio = json['lucio'] != null ? new Hero.fromJson(json['lucio']) : null;
-    _mccree = json['mccree'] != null ? new Hero.fromJson(json['mccree']) : null;
-    _mei = json['mei'] != null ? new Hero.fromJson(json['mei']) : null;
-    _mercy = json['mercy'] != null ? new Hero.fromJson(json['mercy']) : null;
-    _moira = json['moira'] != null ? new Hero.fromJson(json['moira']) : null;
-    _orisa = json['orisa'] != null ? new Hero.fromJson(json['orisa']) : null;
-    _pharah = json['pharah'] != null ? new Hero.fromJson(json['pharah']) : null;
-    _reaper = json['reaper'] != null ? new Hero.fromJson(json['reaper']) : null;
-    _reinhardt =
-        json['reinhardt'] != null ? new Hero.fromJson(json['reinhardt']) : null;
-    _roadhog =
-        json['roadhog'] != null ? new Hero.fromJson(json['roadhog']) : null;
-    _sigma = json['sigma'] != null ? new Hero.fromJson(json['sigma']) : null;
-    _soldier76 =
-        json['soldier76'] != null ? new Hero.fromJson(json['soldier76']) : null;
-    _sombra = json['sombra'] != null ? new Hero.fromJson(json['sombra']) : null;
-    _symmetra =
-        json['symmetra'] != null ? new Hero.fromJson(json['symmetra']) : null;
-    _torbjorn =
-        json['torbjorn'] != null ? new Hero.fromJson(json['torbjorn']) : null;
-    _tracer = json['tracer'] != null ? new Hero.fromJson(json['tracer']) : null;
-    _widowmaker = json['widowmaker'] != null
-        ? new Hero.fromJson(json['widowmaker'])
+    ana = json['ana'] != null ? Hero.fromJson(json['ana']) : null;
+    ashe = json['ashe'] != null ? Hero.fromJson(json['ashe']) : null;
+    baptiste =
+        json['baptiste'] != null ? Hero.fromJson(json['baptiste']) : null;
+    bastion = json['bastion'] != null ? Hero.fromJson(json['bastion']) : null;
+    brigitte =
+        json['brigitte'] != null ? Hero.fromJson(json['brigitte']) : null;
+    dVa = json['dVa'] != null ? Hero.fromJson(json['dVa']) : null;
+    doomfist =
+        json['doomfist'] != null ? Hero.fromJson(json['doomfist']) : null;
+    echo = json['echo'] != null ? Hero.fromJson(json['echo']) : null;
+    genji = json['genji'] != null ? Hero.fromJson(json['genji']) : null;
+    hanzo = json['hanzo'] != null ? Hero.fromJson(json['hanzo']) : null;
+    junkrat = json['junkrat'] != null ? Hero.fromJson(json['junkrat']) : null;
+    lucio = json['lucio'] != null ? Hero.fromJson(json['lucio']) : null;
+    mccree = json['mccree'] != null ? Hero.fromJson(json['mccree']) : null;
+    mei = json['mei'] != null ? Hero.fromJson(json['mei']) : null;
+    mercy = json['mercy'] != null ? Hero.fromJson(json['mercy']) : null;
+    moira = json['moira'] != null ? Hero.fromJson(json['moira']) : null;
+    orisa = json['orisa'] != null ? Hero.fromJson(json['orisa']) : null;
+    pharah = json['pharah'] != null ? Hero.fromJson(json['pharah']) : null;
+    reaper = json['reaper'] != null ? Hero.fromJson(json['reaper']) : null;
+    reinhardt =
+        json['reinhardt'] != null ? Hero.fromJson(json['reinhardt']) : null;
+    roadhog = json['roadhog'] != null ? Hero.fromJson(json['roadhog']) : null;
+    sigma = json['sigma'] != null ? Hero.fromJson(json['sigma']) : null;
+    soldier76 =
+        json['soldier76'] != null ? Hero.fromJson(json['soldier76']) : null;
+    sombra = json['sombra'] != null ? Hero.fromJson(json['sombra']) : null;
+    symmetra =
+        json['symmetra'] != null ? Hero.fromJson(json['symmetra']) : null;
+    torbjorn =
+        json['torbjorn'] != null ? Hero.fromJson(json['torbjorn']) : null;
+    tracer = json['tracer'] != null ? Hero.fromJson(json['tracer']) : null;
+    widowmaker =
+        json['widowmaker'] != null ? Hero.fromJson(json['widowmaker']) : null;
+    winston = json['winston'] != null ? Hero.fromJson(json['winston']) : null;
+    wreckingBall = json['wreckingBall'] != null
+        ? Hero.fromJson(json['wreckingBall'])
         : null;
-    _winston =
-        json['winston'] != null ? new Hero.fromJson(json['winston']) : null;
-    _wreckingBall = json['wreckingBall'] != null
-        ? new Hero.fromJson(json['wreckingBall'])
-        : null;
-    _zarya = json['zarya'] != null ? new Hero.fromJson(json['zarya']) : null;
-    _zenyatta =
-        json['zenyatta'] != null ? new Hero.fromJson(json['zenyatta']) : null;
+    zarya = json['zarya'] != null ? Hero.fromJson(json['zarya']) : null;
+    zenyatta =
+        json['zenyatta'] != null ? Hero.fromJson(json['zenyatta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._allHeroes != null) {
-      data['allHeroes'] = this._allHeroes.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (allHeroes != null) {
+      data['allHeroes'] = allHeroes?.toJson();
     }
     return data;
   }
 }
 
 class AllHeroes {
-  Assists _assists;
-  Average _average;
-  Best _best;
-  Combat _combat;
-  Null _deaths;
-  Null _heroSpecific;
-  Game _game;
-  MatchAwards _matchAwards;
-  Miscellaneous _miscellaneous;
+  Assists? assists;
+  Average? average;
+  Best? best;
+  Combat? combat;
+  void deaths;
+  void heroSpecific;
+  Game? game;
+  MatchAwards? matchAwards;
+  Miscellaneous? miscellaneous;
 
-  AllHeroes(
-      {Assists assists,
-      Average average,
-      Best best,
-      Combat combat,
-      Null deaths,
-      Null heroSpecific,
-      Game game,
-      MatchAwards matchAwards,
-      Miscellaneous miscellaneous}) {
-    this._assists = assists;
-    this._average = average;
-    this._best = best;
-    this._combat = combat;
-    this._deaths = deaths;
-    this._heroSpecific = heroSpecific;
-    this._game = game;
-    this._matchAwards = matchAwards;
-    this._miscellaneous = miscellaneous;
-  }
+  AllHeroes({
+    this.assists,
+    this.average,
+    this.best,
+    this.combat,
+    this.deaths,
+    this.heroSpecific,
+    this.game,
+    this.matchAwards,
+    this.miscellaneous,
+  });
 
-  Assists get assists => _assists;
+  Assists? get getAssists => assists;
 
-  set assists(Assists assists) => _assists = assists;
+  set setAssists(Assists assists) => assists = assists;
 
-  Average get average => _average;
+  Average? get getAverage => average;
 
-  set average(Average average) => _average = average;
+  set setAverage(Average average) => average = average;
 
-  Best get best => _best;
+  Best? get getBest => best;
 
-  set best(Best best) => _best = best;
+  set setBest(Best best) => best = best;
 
-  Combat get combat => _combat;
+  Combat? get getCombat => combat;
 
-  set combat(Combat combat) => _combat = combat;
+  set setCombat(Combat combat) => combat = combat;
 
-  Null get deaths => _deaths;
+  Game? get getGame => game;
 
-  set deaths(Null deaths) => _deaths = deaths;
+  set setGame(Game game) => game = game;
 
-  Null get heroSpecific => _heroSpecific;
+  MatchAwards? get getMatchAwards => matchAwards;
 
-  set heroSpecific(Null heroSpecific) => _heroSpecific = heroSpecific;
+  set setMatchAwards(MatchAwards matchAwards) => matchAwards = matchAwards;
 
-  Game get game => _game;
+  Miscellaneous? get getMiscellaneous => miscellaneous;
 
-  set game(Game game) => _game = game;
-
-  MatchAwards get matchAwards => _matchAwards;
-
-  set matchAwards(MatchAwards matchAwards) => _matchAwards = matchAwards;
-
-  Miscellaneous get miscellaneous => _miscellaneous;
-
-  set miscellaneous(Miscellaneous miscellaneous) =>
-      _miscellaneous = miscellaneous;
+  set setMiscellaneous(Miscellaneous miscellaneous) =>
+      miscellaneous = miscellaneous;
 
   AllHeroes.fromJson(Map<String, dynamic> json) {
-    _assists =
-        json['assists'] != null ? new Assists.fromJson(json['assists']) : null;
-    _average =
-        json['average'] != null ? new Average.fromJson(json['average']) : null;
-    _best = json['best'] != null ? new Best.fromJson(json['best']) : null;
-    _combat =
-        json['combat'] != null ? new Combat.fromJson(json['combat']) : null;
-    _deaths = json['deaths'];
-    _heroSpecific = json['heroSpecific'];
-    _game = json['game'] != null ? new Game.fromJson(json['game']) : null;
-    _matchAwards = json['matchAwards'] != null
-        ? new MatchAwards.fromJson(json['matchAwards'])
+    assists =
+        json['assists'] != null ? Assists.fromJson(json['assists']) : null;
+    average =
+        json['average'] != null ? Average.fromJson(json['average']) : null;
+    best = json['best'] != null ? Best.fromJson(json['best']) : null;
+    combat = json['combat'] != null ? Combat.fromJson(json['combat']) : null;
+    game = json['game'] != null ? Game.fromJson(json['game']) : null;
+    matchAwards = json['matchAwards'] != null
+        ? MatchAwards.fromJson(json['matchAwards'])
         : null;
-    _miscellaneous = json['miscellaneous'] != null
-        ? new Miscellaneous.fromJson(json['miscellaneous'])
+    miscellaneous = json['miscellaneous'] != null
+        ? Miscellaneous.fromJson(json['miscellaneous'])
         : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._assists != null) {
-      data['assists'] = this._assists.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (assists != null) {
+      data['assists'] = assists?.toJson();
     }
-    if (this._average != null) {
-      data['average'] = this._average.toJson();
+    if (average != null) {
+      data['average'] = average?.toJson();
     }
-    if (this._best != null) {
-      data['best'] = this._best.toJson();
+    if (best != null) {
+      data['best'] = best?.toJson();
     }
-    if (this._combat != null) {
-      data['combat'] = this._combat.toJson();
+    if (combat != null) {
+      data['combat'] = combat?.toJson();
     }
-    data['deaths'] = this._deaths;
-    data['heroSpecific'] = this._heroSpecific;
-    if (this._game != null) {
-      data['game'] = this._game.toJson();
+    if (game != null) {
+      data['game'] = game?.toJson();
     }
-    if (this._matchAwards != null) {
-      data['matchAwards'] = this._matchAwards.toJson();
+    if (matchAwards != null) {
+      data['matchAwards'] = matchAwards?.toJson();
     }
-    if (this._miscellaneous != null) {
-      data['miscellaneous'] = this._miscellaneous.toJson();
+    if (miscellaneous != null) {
+      data['miscellaneous'] = miscellaneous?.toJson();
     }
     return data;
   }
 }
 
 class Hero {
-  Game _allHeroGame;
+  Game? allHeroGame;
 
   Hero({
-    Game allHeroGame,
-  }) {
-    this._allHeroGame = allHeroGame;
-  }
+    this.allHeroGame,
+  });
 
-  Game get allHeroGame => _allHeroGame;
+  Game? get getAllHeroGame => allHeroGame;
 
-  set allHeroGame(Game allHeroGame) => _allHeroGame = allHeroGame;
+  set setAllHeroGame(Game allHeroGame) => allHeroGame = allHeroGame;
 
   Hero.fromJson(Map<String, dynamic> json) {
-    _allHeroGame = json['game'] != null ? new Game.fromJson(json['game']) : null;
+    allHeroGame = json['game'] != null ? Game.fromJson(json['game']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['timePlayed'] = this._allHeroGame;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['timePlayed'] = allHeroGame;
     return data;
   }
 }
 
 class Assists {
-  int _defensiveAssists;
-  int _healingDone;
-  int _offensiveAssists;
+  int? defensiveAssists;
+  int? healingDone;
+  int? offensiveAssists;
 
-  Assists({int defensiveAssists, int healingDone, int offensiveAssists}) {
-    this._defensiveAssists = defensiveAssists;
-    this._healingDone = healingDone;
-    this._offensiveAssists = offensiveAssists;
-  }
+  Assists({
+    this.defensiveAssists,
+    this.healingDone,
+    this.offensiveAssists,
+  });
 
-  int get defensiveAssists => _defensiveAssists;
+  int? get getDefensiveAssists => defensiveAssists;
 
-  set defensiveAssists(int defensiveAssists) =>
-      _defensiveAssists = defensiveAssists;
+  set setDefensiveAssists(int defensiveAssists) =>
+      defensiveAssists = defensiveAssists;
 
-  int get healingDone => _healingDone;
+  int? get getHealingDone => healingDone;
 
-  set healingDone(int healingDone) => _healingDone = healingDone;
+  set setHealingDone(int healingDone) => healingDone = healingDone;
 
-  int get offensiveAssists => _offensiveAssists;
+  int? get getOffensiveAssists => offensiveAssists;
 
-  set offensiveAssists(int offensiveAssists) =>
-      _offensiveAssists = offensiveAssists;
+  set setOffensiveAssists(int offensiveAssists) =>
+      offensiveAssists = offensiveAssists;
 
   Assists.fromJson(Map<String, dynamic> json) {
-    _defensiveAssists = json['defensiveAssists'];
-    _healingDone = json['healingDone'];
-    _offensiveAssists = json['offensiveAssists'];
+    defensiveAssists = json['defensiveAssists'];
+    healingDone = json['healingDone'];
+    offensiveAssists = json['offensiveAssists'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['defensiveAssists'] = this._defensiveAssists;
-    data['healingDone'] = this._healingDone;
-    data['offensiveAssists'] = this._offensiveAssists;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['defensiveAssists'] = defensiveAssists;
+    data['healingDone'] = healingDone;
+    data['offensiveAssists'] = offensiveAssists;
     return data;
   }
 }
 
 class Average {
-  double _allDamageDoneAvgPer10Min;
-  double _barrierDamageDoneAvgPer10Min;
-  double _deathsAvgPer10Min;
-  double _eliminationsAvgPer10Min;
-  double _finalBlowsAvgPer10Min;
-  double _healingDoneAvgPer10Min;
-  double _heroDamageDoneAvgPer10Min;
-  double _objectiveKillsAvgPer10Min;
-  String _objectiveTimeAvgPer10Min;
-  double _soloKillsAvgPer10Min;
-  String _timeSpentOnFireAvgPer10Min;
+  double? allDamageDoneAvgPer10Min;
+  double? barrierDamageDoneAvgPer10Min;
+  double? deathsAvgPer10Min;
+  double? eliminationsAvgPer10Min;
+  double? finalBlowsAvgPer10Min;
+  double? healingDoneAvgPer10Min;
+  double? heroDamageDoneAvgPer10Min;
+  double? objectiveKillsAvgPer10Min;
+  String? objectiveTimeAvgPer10Min;
+  double? soloKillsAvgPer10Min;
+  String? timeSpentOnFireAvgPer10Min;
 
-  Average(
-      {double allDamageDoneAvgPer10Min,
-      double barrierDamageDoneAvgPer10Min,
-      double deathsAvgPer10Min,
-      double eliminationsAvgPer10Min,
-      double finalBlowsAvgPer10Min,
-      double healingDoneAvgPer10Min,
-      double heroDamageDoneAvgPer10Min,
-      double objectiveKillsAvgPer10Min,
-      String objectiveTimeAvgPer10Min,
-      double soloKillsAvgPer10Min,
-      String timeSpentOnFireAvgPer10Min}) {
-    this._allDamageDoneAvgPer10Min = allDamageDoneAvgPer10Min;
-    this._barrierDamageDoneAvgPer10Min = barrierDamageDoneAvgPer10Min;
-    this._deathsAvgPer10Min = deathsAvgPer10Min;
-    this._eliminationsAvgPer10Min = eliminationsAvgPer10Min;
-    this._finalBlowsAvgPer10Min = finalBlowsAvgPer10Min;
-    this._healingDoneAvgPer10Min = healingDoneAvgPer10Min;
-    this._heroDamageDoneAvgPer10Min = heroDamageDoneAvgPer10Min;
-    this._objectiveKillsAvgPer10Min = objectiveKillsAvgPer10Min;
-    this._objectiveTimeAvgPer10Min = objectiveTimeAvgPer10Min;
-    this._soloKillsAvgPer10Min = soloKillsAvgPer10Min;
-    this._timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
-  }
+  Average({
+    this.allDamageDoneAvgPer10Min,
+    this.barrierDamageDoneAvgPer10Min,
+    this.deathsAvgPer10Min,
+    this.eliminationsAvgPer10Min,
+    this.finalBlowsAvgPer10Min,
+    this.healingDoneAvgPer10Min,
+    this.heroDamageDoneAvgPer10Min,
+    this.objectiveKillsAvgPer10Min,
+    this.objectiveTimeAvgPer10Min,
+    this.soloKillsAvgPer10Min,
+    this.timeSpentOnFireAvgPer10Min,
+  });
 
-  double get allDamageDoneAvgPer10Min => _allDamageDoneAvgPer10Min;
+  double? get getAllDamageDoneAvgPer10Min => allDamageDoneAvgPer10Min;
 
-  set allDamageDoneAvgPer10Min(double allDamageDoneAvgPer10Min) =>
-      _allDamageDoneAvgPer10Min = allDamageDoneAvgPer10Min;
+  set setAllDamageDoneAvgPer10Min(double allDamageDoneAvgPer10Min) =>
+      allDamageDoneAvgPer10Min = allDamageDoneAvgPer10Min;
 
-  double get barrierDamageDoneAvgPer10Min => _barrierDamageDoneAvgPer10Min;
+  double? get getBarrierDamageDoneAvgPer10Min => barrierDamageDoneAvgPer10Min;
 
-  set barrierDamageDoneAvgPer10Min(double barrierDamageDoneAvgPer10Min) =>
-      _barrierDamageDoneAvgPer10Min = barrierDamageDoneAvgPer10Min;
+  set setBarrierDamageDoneAvgPer10Min(double barrierDamageDoneAvgPer10Min) =>
+      barrierDamageDoneAvgPer10Min = barrierDamageDoneAvgPer10Min;
 
-  double get deathsAvgPer10Min => _deathsAvgPer10Min;
+  double? get getDeathsAvgPer10Min => deathsAvgPer10Min;
 
-  set deathsAvgPer10Min(double deathsAvgPer10Min) =>
-      _deathsAvgPer10Min = deathsAvgPer10Min;
+  set setDeathsAvgPer10Min(double deathsAvgPer10Min) =>
+      deathsAvgPer10Min = deathsAvgPer10Min;
 
-  double get eliminationsAvgPer10Min => _eliminationsAvgPer10Min;
+  double? get getEliminationsAvgPer10Min => eliminationsAvgPer10Min;
 
-  set eliminationsAvgPer10Min(double eliminationsAvgPer10Min) =>
-      _eliminationsAvgPer10Min = eliminationsAvgPer10Min;
+  set setEliminationsAvgPer10Min(double eliminationsAvgPer10Min) =>
+      eliminationsAvgPer10Min = eliminationsAvgPer10Min;
 
-  double get finalBlowsAvgPer10Min => _finalBlowsAvgPer10Min;
+  double? get getFinalBlowsAvgPer10Min => finalBlowsAvgPer10Min;
 
-  set finalBlowsAvgPer10Min(double finalBlowsAvgPer10Min) =>
-      _finalBlowsAvgPer10Min = finalBlowsAvgPer10Min;
+  set setFinalBlowsAvgPer10Min(double finalBlowsAvgPer10Min) =>
+      finalBlowsAvgPer10Min = finalBlowsAvgPer10Min;
 
-  double get healingDoneAvgPer10Min => _healingDoneAvgPer10Min;
+  double? get getHealingDoneAvgPer10Min => healingDoneAvgPer10Min;
 
-  set healingDoneAvgPer10Min(double healingDoneAvgPer10Min) =>
-      _healingDoneAvgPer10Min = healingDoneAvgPer10Min;
+  set setHealingDoneAvgPer10Min(double healingDoneAvgPer10Min) =>
+      healingDoneAvgPer10Min = healingDoneAvgPer10Min;
 
-  double get heroDamageDoneAvgPer10Min => _heroDamageDoneAvgPer10Min;
+  double? get getHeroDamageDoneAvgPer10Min => heroDamageDoneAvgPer10Min;
 
-  set heroDamageDoneAvgPer10Min(double heroDamageDoneAvgPer10Min) =>
-      _heroDamageDoneAvgPer10Min = heroDamageDoneAvgPer10Min;
+  set setHeroDamageDoneAvgPer10Min(double heroDamageDoneAvgPer10Min) =>
+      heroDamageDoneAvgPer10Min = heroDamageDoneAvgPer10Min;
 
-  double get objectiveKillsAvgPer10Min => _objectiveKillsAvgPer10Min;
+  double? get getObjectiveKillsAvgPer10Min => objectiveKillsAvgPer10Min;
 
-  set objectiveKillsAvgPer10Min(double objectiveKillsAvgPer10Min) =>
-      _objectiveKillsAvgPer10Min = objectiveKillsAvgPer10Min;
+  set setObjectiveKillsAvgPer10Min(double objectiveKillsAvgPer10Min) =>
+      objectiveKillsAvgPer10Min = objectiveKillsAvgPer10Min;
 
-  String get objectiveTimeAvgPer10Min => _objectiveTimeAvgPer10Min;
+  String? get getObjectiveTimeAvgPer10Min => objectiveTimeAvgPer10Min;
 
-  set objectiveTimeAvgPer10Min(String objectiveTimeAvgPer10Min) =>
-      _objectiveTimeAvgPer10Min = objectiveTimeAvgPer10Min;
+  set setObjectiveTimeAvgPer10Min(String objectiveTimeAvgPer10Min) =>
+      objectiveTimeAvgPer10Min = objectiveTimeAvgPer10Min;
 
-  double get soloKillsAvgPer10Min => _soloKillsAvgPer10Min;
+  double? get getSoloKillsAvgPer10Min => soloKillsAvgPer10Min;
 
-  set soloKillsAvgPer10Min(double soloKillsAvgPer10Min) =>
-      _soloKillsAvgPer10Min = soloKillsAvgPer10Min;
+  set setSoloKillsAvgPer10Min(double soloKillsAvgPer10Min) =>
+      soloKillsAvgPer10Min = soloKillsAvgPer10Min;
 
-  String get timeSpentOnFireAvgPer10Min => _timeSpentOnFireAvgPer10Min;
+  String? get getTimeSpentOnFireAvgPer10Min => timeSpentOnFireAvgPer10Min;
 
-  set timeSpentOnFireAvgPer10Min(String timeSpentOnFireAvgPer10Min) =>
-      _timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
+  set setTimeSpentOnFireAvgPer10Min(String timeSpentOnFireAvgPer10Min) =>
+      timeSpentOnFireAvgPer10Min = timeSpentOnFireAvgPer10Min;
 
   Average.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'] != null
+    allDamageDoneAvgPer10Min = json['allDamageDoneAvgPer10Min'] != null
         ? json['allDamageDoneAvgPer10Min'].toDouble()
         : null;
-    _barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'] != null
+    barrierDamageDoneAvgPer10Min = json['barrierDamageDoneAvgPer10Min'] != null
         ? json['barrierDamageDoneAvgPer10Min'].toDouble()
         : null;
-    _deathsAvgPer10Min = json['deathsAvgPer10Min'] != null
+    deathsAvgPer10Min = json['deathsAvgPer10Min'] != null
         ? json['deathsAvgPer10Min'].toDouble()
         : null;
-    _eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'] != null
+    eliminationsAvgPer10Min = json['eliminationsAvgPer10Min'] != null
         ? json['eliminationsAvgPer10Min'].toDouble()
         : null;
-    _finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'] != null
+    finalBlowsAvgPer10Min = json['finalBlowsAvgPer10Min'] != null
         ? json['finalBlowsAvgPer10Min'].toDouble()
         : null;
-    _healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'] != null
+    healingDoneAvgPer10Min = json['healingDoneAvgPer10Min'] != null
         ? json['healingDoneAvgPer10Min'].toDouble()
         : null;
-    _heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'] != null
+    heroDamageDoneAvgPer10Min = json['heroDamageDoneAvgPer10Min'] != null
         ? json['heroDamageDoneAvgPer10Min'].toDouble()
         : null;
-    _objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'] != null
+    objectiveKillsAvgPer10Min = json['objectiveKillsAvgPer10Min'] != null
         ? json['objectiveKillsAvgPer10Min'].toDouble()
         : null;
-    _objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
-    _soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'] != null
+    objectiveTimeAvgPer10Min = json['objectiveTimeAvgPer10Min'];
+    soloKillsAvgPer10Min = json['soloKillsAvgPer10Min'] != null
         ? json['soloKillsAvgPer10Min'].toDouble()
         : null;
-    _timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
+    timeSpentOnFireAvgPer10Min = json['timeSpentOnFireAvgPer10Min'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['allDamageDoneAvgPer10Min'] = this._allDamageDoneAvgPer10Min;
-    data['barrierDamageDoneAvgPer10Min'] = this._barrierDamageDoneAvgPer10Min;
-    data['deathsAvgPer10Min'] = this._deathsAvgPer10Min;
-    data['eliminationsAvgPer10Min'] = this._eliminationsAvgPer10Min;
-    data['finalBlowsAvgPer10Min'] = this._finalBlowsAvgPer10Min;
-    data['healingDoneAvgPer10Min'] = this._healingDoneAvgPer10Min;
-    data['heroDamageDoneAvgPer10Min'] = this._heroDamageDoneAvgPer10Min;
-    data['objectiveKillsAvgPer10Min'] = this._objectiveKillsAvgPer10Min;
-    data['objectiveTimeAvgPer10Min'] = this._objectiveTimeAvgPer10Min;
-    data['soloKillsAvgPer10Min'] = this._soloKillsAvgPer10Min;
-    data['timeSpentOnFireAvgPer10Min'] = this._timeSpentOnFireAvgPer10Min;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['allDamageDoneAvgPer10Min'] = allDamageDoneAvgPer10Min;
+    data['barrierDamageDoneAvgPer10Min'] = barrierDamageDoneAvgPer10Min;
+    data['deathsAvgPer10Min'] = deathsAvgPer10Min;
+    data['eliminationsAvgPer10Min'] = eliminationsAvgPer10Min;
+    data['finalBlowsAvgPer10Min'] = finalBlowsAvgPer10Min;
+    data['healingDoneAvgPer10Min'] = healingDoneAvgPer10Min;
+    data['heroDamageDoneAvgPer10Min'] = heroDamageDoneAvgPer10Min;
+    data['objectiveKillsAvgPer10Min'] = objectiveKillsAvgPer10Min;
+    data['objectiveTimeAvgPer10Min'] = objectiveTimeAvgPer10Min;
+    data['soloKillsAvgPer10Min'] = soloKillsAvgPer10Min;
+    data['timeSpentOnFireAvgPer10Min'] = timeSpentOnFireAvgPer10Min;
     return data;
   }
 }
 
 class Best {
-  int _allDamageDoneMostInGame;
-  int _barrierDamageDoneMostInGame;
-  int _defensiveAssistsMostInGame;
-  int _eliminationsMostInGame;
-  int _environmentalKillsMostInGame;
-  int _finalBlowsMostInGame;
-  int _healingDoneMostInGame;
-  int _heroDamageDoneMostInGame;
-  int _killsStreakBest;
-  int _meleeFinalBlowsMostInGame;
-  int _multikillsBest;
-  int _objectiveKillsMostInGame;
-  String _objectiveTimeMostInGame;
-  int _offensiveAssistsMostInGame;
-  int _soloKillsMostInGame;
-  String _timeSpentOnFireMostInGame;
-  int _turretsDestroyedMostInGame;
+  int? allDamageDoneMostInGame;
+  int? barrierDamageDoneMostInGame;
+  int? defensiveAssistsMostInGame;
+  int? eliminationsMostInGame;
+  int? environmentalKillsMostInGame;
+  int? finalBlowsMostInGame;
+  int? healingDoneMostInGame;
+  int? heroDamageDoneMostInGame;
+  int? killsStreakBest;
+  int? meleeFinalBlowsMostInGame;
+  int? multiKillsBest;
+  int? objectiveKillsMostInGame;
+  String? objectiveTimeMostInGame;
+  int? offensiveAssistsMostInGame;
+  int? soloKillsMostInGame;
+  String? timeSpentOnFireMostInGame;
+  int? turretsDestroyedMostInGame;
 
-  Best(
-      {int allDamageDoneMostInGame,
-      int barrierDamageDoneMostInGame,
-      int defensiveAssistsMostInGame,
-      int eliminationsMostInGame,
-      int environmentalKillsMostInGame,
-      int finalBlowsMostInGame,
-      int healingDoneMostInGame,
-      int heroDamageDoneMostInGame,
-      int killsStreakBest,
-      int meleeFinalBlowsMostInGame,
-      int multikillsBest,
-      int objectiveKillsMostInGame,
-      String objectiveTimeMostInGame,
-      int offensiveAssistsMostInGame,
-      int soloKillsMostInGame,
-      String timeSpentOnFireMostInGame,
-      int turretsDestroyedMostInGame}) {
-    this._allDamageDoneMostInGame = allDamageDoneMostInGame;
-    this._barrierDamageDoneMostInGame = barrierDamageDoneMostInGame;
-    this._defensiveAssistsMostInGame = defensiveAssistsMostInGame;
-    this._eliminationsMostInGame = eliminationsMostInGame;
-    this._environmentalKillsMostInGame = environmentalKillsMostInGame;
-    this._finalBlowsMostInGame = finalBlowsMostInGame;
-    this._healingDoneMostInGame = healingDoneMostInGame;
-    this._heroDamageDoneMostInGame = heroDamageDoneMostInGame;
-    this._killsStreakBest = killsStreakBest;
-    this._meleeFinalBlowsMostInGame = meleeFinalBlowsMostInGame;
-    this._multikillsBest = multikillsBest;
-    this._objectiveKillsMostInGame = objectiveKillsMostInGame;
-    this._objectiveTimeMostInGame = objectiveTimeMostInGame;
-    this._offensiveAssistsMostInGame = offensiveAssistsMostInGame;
-    this._soloKillsMostInGame = soloKillsMostInGame;
-    this._timeSpentOnFireMostInGame = timeSpentOnFireMostInGame;
-    this._turretsDestroyedMostInGame = turretsDestroyedMostInGame;
-  }
+  Best({
+    this.allDamageDoneMostInGame,
+    this.barrierDamageDoneMostInGame,
+    this.defensiveAssistsMostInGame,
+    this.eliminationsMostInGame,
+    this.environmentalKillsMostInGame,
+    this.finalBlowsMostInGame,
+    this.healingDoneMostInGame,
+    this.heroDamageDoneMostInGame,
+    this.killsStreakBest,
+    this.meleeFinalBlowsMostInGame,
+    this.multiKillsBest,
+    this.objectiveKillsMostInGame,
+    this.objectiveTimeMostInGame,
+    this.offensiveAssistsMostInGame,
+    this.soloKillsMostInGame,
+    this.timeSpentOnFireMostInGame,
+    this.turretsDestroyedMostInGame,
+  });
 
-  int get allDamageDoneMostInGame => _allDamageDoneMostInGame;
+  int? get getAllDamageDoneMostInGame => allDamageDoneMostInGame;
 
-  set allDamageDoneMostInGame(int allDamageDoneMostInGame) =>
-      _allDamageDoneMostInGame = allDamageDoneMostInGame;
+  set setAllDamageDoneMostInGame(int allDamageDoneMostInGame) =>
+      allDamageDoneMostInGame = allDamageDoneMostInGame;
 
-  int get barrierDamageDoneMostInGame => _barrierDamageDoneMostInGame;
+  int? get getBarrierDamageDoneMostInGame => barrierDamageDoneMostInGame;
 
-  set barrierDamageDoneMostInGame(int barrierDamageDoneMostInGame) =>
-      _barrierDamageDoneMostInGame = barrierDamageDoneMostInGame;
+  set setBarrierDamageDoneMostInGame(int barrierDamageDoneMostInGame) =>
+      barrierDamageDoneMostInGame = barrierDamageDoneMostInGame;
 
-  int get defensiveAssistsMostInGame => _defensiveAssistsMostInGame;
+  int? get getDefensiveAssistsMostInGame => defensiveAssistsMostInGame;
 
-  set defensiveAssistsMostInGame(int defensiveAssistsMostInGame) =>
-      _defensiveAssistsMostInGame = defensiveAssistsMostInGame;
+  set setDefensiveAssistsMostInGame(int defensiveAssistsMostInGame) =>
+      defensiveAssistsMostInGame = defensiveAssistsMostInGame;
 
-  int get eliminationsMostInGame => _eliminationsMostInGame;
+  int? get getEliminationsMostInGame => eliminationsMostInGame;
 
-  set eliminationsMostInGame(int eliminationsMostInGame) =>
-      _eliminationsMostInGame = eliminationsMostInGame;
+  set setEliminationsMostInGame(int eliminationsMostInGame) =>
+      eliminationsMostInGame = eliminationsMostInGame;
 
-  int get environmentalKillsMostInGame => _environmentalKillsMostInGame;
+  int? get getEnvironmentalKillsMostInGame => environmentalKillsMostInGame;
 
-  set environmentalKillsMostInGame(int environmentalKillsMostInGame) =>
-      _environmentalKillsMostInGame = environmentalKillsMostInGame;
+  set setEnvironmentalKillsMostInGame(int environmentalKillsMostInGame) =>
+      environmentalKillsMostInGame = environmentalKillsMostInGame;
 
-  int get finalBlowsMostInGame => _finalBlowsMostInGame;
+  int? get getFinalBlowsMostInGame => finalBlowsMostInGame;
 
-  set finalBlowsMostInGame(int finalBlowsMostInGame) =>
-      _finalBlowsMostInGame = finalBlowsMostInGame;
+  set setFinalBlowsMostInGame(int finalBlowsMostInGame) =>
+      finalBlowsMostInGame = finalBlowsMostInGame;
 
-  int get healingDoneMostInGame => _healingDoneMostInGame;
+  int? get getHealingDoneMostInGame => healingDoneMostInGame;
 
-  set healingDoneMostInGame(int healingDoneMostInGame) =>
-      _healingDoneMostInGame = healingDoneMostInGame;
+  set setHealingDoneMostInGame(int healingDoneMostInGame) =>
+      healingDoneMostInGame = healingDoneMostInGame;
 
-  int get heroDamageDoneMostInGame => _heroDamageDoneMostInGame;
+  int? get getHeroDamageDoneMostInGame => heroDamageDoneMostInGame;
 
-  set heroDamageDoneMostInGame(int heroDamageDoneMostInGame) =>
-      _heroDamageDoneMostInGame = heroDamageDoneMostInGame;
+  set setHeroDamageDoneMostInGame(int heroDamageDoneMostInGame) =>
+      heroDamageDoneMostInGame = heroDamageDoneMostInGame;
 
-  int get killsStreakBest => _killsStreakBest;
+  int? get getKillsStreakBest => killsStreakBest;
 
-  set killsStreakBest(int killsStreakBest) =>
-      _killsStreakBest = killsStreakBest;
+  set setKillsStreakBest(int killsStreakBest) =>
+      killsStreakBest = killsStreakBest;
 
-  int get meleeFinalBlowsMostInGame => _meleeFinalBlowsMostInGame;
+  int? get getMeleeFinalBlowsMostInGame => meleeFinalBlowsMostInGame;
 
-  set meleeFinalBlowsMostInGame(int meleeFinalBlowsMostInGame) =>
-      _meleeFinalBlowsMostInGame = meleeFinalBlowsMostInGame;
+  set setMeleeFinalBlowsMostInGame(int meleeFinalBlowsMostInGame) =>
+      meleeFinalBlowsMostInGame = meleeFinalBlowsMostInGame;
 
-  int get multikillsBest => _multikillsBest;
+  int? get getMultiKillsBest => multiKillsBest;
 
-  set multikillsBest(int multikillsBest) => _multikillsBest = multikillsBest;
+  set setMultiKillsBest(int multikillsBest) => multikillsBest = multikillsBest;
 
-  int get objectiveKillsMostInGame => _objectiveKillsMostInGame;
+  int? get getObjectiveKillsMostInGame => objectiveKillsMostInGame;
 
-  set objectiveKillsMostInGame(int objectiveKillsMostInGame) =>
-      _objectiveKillsMostInGame = objectiveKillsMostInGame;
+  set setObjectiveKillsMostInGame(int objectiveKillsMostInGame) =>
+      objectiveKillsMostInGame = objectiveKillsMostInGame;
 
-  String get objectiveTimeMostInGame => _objectiveTimeMostInGame;
+  String? get getObjectiveTimeMostInGame => objectiveTimeMostInGame;
 
-  set objectiveTimeMostInGame(String objectiveTimeMostInGame) =>
-      _objectiveTimeMostInGame = objectiveTimeMostInGame;
+  set setObjectiveTimeMostInGame(String objectiveTimeMostInGame) =>
+      objectiveTimeMostInGame = objectiveTimeMostInGame;
 
-  int get offensiveAssistsMostInGame => _offensiveAssistsMostInGame;
+  int? get getOffensiveAssistsMostInGame => offensiveAssistsMostInGame;
 
-  set offensiveAssistsMostInGame(int offensiveAssistsMostInGame) =>
-      _offensiveAssistsMostInGame = offensiveAssistsMostInGame;
+  set setOffensiveAssistsMostInGame(int offensiveAssistsMostInGame) =>
+      offensiveAssistsMostInGame = offensiveAssistsMostInGame;
 
-  int get soloKillsMostInGame => _soloKillsMostInGame;
+  int? get getSoloKillsMostInGame => soloKillsMostInGame;
 
-  set soloKillsMostInGame(int soloKillsMostInGame) =>
-      _soloKillsMostInGame = soloKillsMostInGame;
+  set setSoloKillsMostInGame(int soloKillsMostInGame) =>
+      soloKillsMostInGame = soloKillsMostInGame;
 
-  String get timeSpentOnFireMostInGame => _timeSpentOnFireMostInGame;
+  String? get getTimeSpentOnFireMostInGame => timeSpentOnFireMostInGame;
 
-  set timeSpentOnFireMostInGame(String timeSpentOnFireMostInGame) =>
-      _timeSpentOnFireMostInGame = timeSpentOnFireMostInGame;
+  set setTimeSpentOnFireMostInGame(String timeSpentOnFireMostInGame) =>
+      timeSpentOnFireMostInGame = timeSpentOnFireMostInGame;
 
-  int get turretsDestroyedMostInGame => _turretsDestroyedMostInGame;
+  int? get getTurretsDestroyedMostInGame => turretsDestroyedMostInGame;
 
-  set turretsDestroyedMostInGame(int turretsDestroyedMostInGame) =>
-      _turretsDestroyedMostInGame = turretsDestroyedMostInGame;
+  set setTurretsDestroyedMostInGame(int turretsDestroyedMostInGame) =>
+      turretsDestroyedMostInGame = turretsDestroyedMostInGame;
 
   Best.fromJson(Map<String, dynamic> json) {
-    _allDamageDoneMostInGame = json['allDamageDoneMostInGame'];
-    _barrierDamageDoneMostInGame = json['barrierDamageDoneMostInGame'];
-    _defensiveAssistsMostInGame = json['defensiveAssistsMostInGame'];
-    _eliminationsMostInGame = json['eliminationsMostInGame'];
-    _environmentalKillsMostInGame = json['environmentalKillsMostInGame'];
-    _finalBlowsMostInGame = json['finalBlowsMostInGame'];
-    _healingDoneMostInGame = json['healingDoneMostInGame'];
-    _heroDamageDoneMostInGame = json['heroDamageDoneMostInGame'];
-    _killsStreakBest = json['killsStreakBest'];
-    _meleeFinalBlowsMostInGame = json['meleeFinalBlowsMostInGame'];
-    _multikillsBest = json['multikillsBest'];
-    _objectiveKillsMostInGame = json['objectiveKillsMostInGame'];
-    _objectiveTimeMostInGame = json['objectiveTimeMostInGame'];
-    _offensiveAssistsMostInGame = json['offensiveAssistsMostInGame'];
-    _soloKillsMostInGame = json['soloKillsMostInGame'];
-    _timeSpentOnFireMostInGame = json['timeSpentOnFireMostInGame'];
-    _turretsDestroyedMostInGame = json['turretsDestroyedMostInGame'];
+    allDamageDoneMostInGame = json['allDamageDoneMostInGame'];
+    barrierDamageDoneMostInGame = json['barrierDamageDoneMostInGame'];
+    defensiveAssistsMostInGame = json['defensiveAssistsMostInGame'];
+    eliminationsMostInGame = json['eliminationsMostInGame'];
+    environmentalKillsMostInGame = json['environmentalKillsMostInGame'];
+    finalBlowsMostInGame = json['finalBlowsMostInGame'];
+    healingDoneMostInGame = json['healingDoneMostInGame'];
+    heroDamageDoneMostInGame = json['heroDamageDoneMostInGame'];
+    killsStreakBest = json['killsStreakBest'];
+    meleeFinalBlowsMostInGame = json['meleeFinalBlowsMostInGame'];
+    multiKillsBest = json['multikillsBest'];
+    objectiveKillsMostInGame = json['objectiveKillsMostInGame'];
+    objectiveTimeMostInGame = json['objectiveTimeMostInGame'];
+    offensiveAssistsMostInGame = json['offensiveAssistsMostInGame'];
+    soloKillsMostInGame = json['soloKillsMostInGame'];
+    timeSpentOnFireMostInGame = json['timeSpentOnFireMostInGame'];
+    turretsDestroyedMostInGame = json['turretsDestroyedMostInGame'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['allDamageDoneMostInGame'] = this._allDamageDoneMostInGame;
-    data['barrierDamageDoneMostInGame'] = this._barrierDamageDoneMostInGame;
-    data['defensiveAssistsMostInGame'] = this._defensiveAssistsMostInGame;
-    data['eliminationsMostInGame'] = this._eliminationsMostInGame;
-    data['environmentalKillsMostInGame'] = this._environmentalKillsMostInGame;
-    data['finalBlowsMostInGame'] = this._finalBlowsMostInGame;
-    data['healingDoneMostInGame'] = this._healingDoneMostInGame;
-    data['heroDamageDoneMostInGame'] = this._heroDamageDoneMostInGame;
-    data['killsStreakBest'] = this._killsStreakBest;
-    data['meleeFinalBlowsMostInGame'] = this._meleeFinalBlowsMostInGame;
-    data['multikillsBest'] = this._multikillsBest;
-    data['objectiveKillsMostInGame'] = this._objectiveKillsMostInGame;
-    data['objectiveTimeMostInGame'] = this._objectiveTimeMostInGame;
-    data['offensiveAssistsMostInGame'] = this._offensiveAssistsMostInGame;
-    data['soloKillsMostInGame'] = this._soloKillsMostInGame;
-    data['timeSpentOnFireMostInGame'] = this._timeSpentOnFireMostInGame;
-    data['turretsDestroyedMostInGame'] = this._turretsDestroyedMostInGame;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['allDamageDoneMostInGame'] = allDamageDoneMostInGame;
+    data['barrierDamageDoneMostInGame'] = barrierDamageDoneMostInGame;
+    data['defensiveAssistsMostInGame'] = defensiveAssistsMostInGame;
+    data['eliminationsMostInGame'] = eliminationsMostInGame;
+    data['environmentalKillsMostInGame'] = environmentalKillsMostInGame;
+    data['finalBlowsMostInGame'] = finalBlowsMostInGame;
+    data['healingDoneMostInGame'] = healingDoneMostInGame;
+    data['heroDamageDoneMostInGame'] = heroDamageDoneMostInGame;
+    data['killsStreakBest'] = killsStreakBest;
+    data['meleeFinalBlowsMostInGame'] = meleeFinalBlowsMostInGame;
+    data['multikillsBest'] = multiKillsBest;
+    data['objectiveKillsMostInGame'] = objectiveKillsMostInGame;
+    data['objectiveTimeMostInGame'] = objectiveTimeMostInGame;
+    data['offensiveAssistsMostInGame'] = offensiveAssistsMostInGame;
+    data['soloKillsMostInGame'] = soloKillsMostInGame;
+    data['timeSpentOnFireMostInGame'] = timeSpentOnFireMostInGame;
+    data['turretsDestroyedMostInGame'] = turretsDestroyedMostInGame;
     return data;
   }
 }
 
 class Combat {
-  int _barrierDamageDone;
-  int _damageDone;
-  int _deaths;
-  int _eliminations;
-  int _environmentalKills;
-  int _finalBlows;
-  int _heroDamageDone;
-  int _meleeFinalBlows;
-  int _multikills;
-  int _objectiveKills;
-  String _objectiveTime;
-  int _soloKills;
-  String _timeSpentOnFire;
+  int? barrierDamageDone;
+  int? damageDone;
+  int? deaths;
+  int? eliminations;
+  int? environmentalKills;
+  int? finalBlows;
+  int? heroDamageDone;
+  int? meleeFinalBlows;
+  int? multikills;
+  int? objectiveKills;
+  String? objectiveTime;
+  int? soloKills;
+  String? timeSpentOnFire;
 
-  Combat(
-      {int barrierDamageDone,
-      int damageDone,
-      int deaths,
-      int eliminations,
-      int environmentalKills,
-      int finalBlows,
-      int heroDamageDone,
-      int meleeFinalBlows,
-      int multikills,
-      int objectiveKills,
-      String objectiveTime,
-      int soloKills,
-      String timeSpentOnFire}) {
-    this._barrierDamageDone = barrierDamageDone;
-    this._damageDone = damageDone;
-    this._deaths = deaths;
-    this._eliminations = eliminations;
-    this._environmentalKills = environmentalKills;
-    this._finalBlows = finalBlows;
-    this._heroDamageDone = heroDamageDone;
-    this._meleeFinalBlows = meleeFinalBlows;
-    this._multikills = multikills;
-    this._objectiveKills = objectiveKills;
-    this._objectiveTime = objectiveTime;
-    this._soloKills = soloKills;
-    this._timeSpentOnFire = timeSpentOnFire;
-  }
+  Combat({
+    this.barrierDamageDone,
+    this.damageDone,
+    this.deaths,
+    this.eliminations,
+    this.environmentalKills,
+    this.finalBlows,
+    this.heroDamageDone,
+    this.meleeFinalBlows,
+    this.multikills,
+    this.objectiveKills,
+    this.objectiveTime,
+    this.soloKills,
+    this.timeSpentOnFire,
+  });
 
-  int get barrierDamageDone => _barrierDamageDone;
+  int? get getBarrierDamageDone => barrierDamageDone;
 
-  set barrierDamageDone(int barrierDamageDone) =>
-      _barrierDamageDone = barrierDamageDone;
+  set setBarrierDamageDone(int barrierDamageDone) =>
+      barrierDamageDone = barrierDamageDone;
 
-  int get damageDone => _damageDone;
+  int? get getDamageDone => damageDone;
 
-  set damageDone(int damageDone) => _damageDone = damageDone;
+  set setDamageDone(int damageDone) => damageDone = damageDone;
 
-  int get deaths => _deaths;
+  int? get getDeaths => deaths;
 
-  set deaths(int deaths) => _deaths = deaths;
+  set setDeaths(int deaths) => deaths = deaths;
 
-  int get eliminations => _eliminations;
+  int? get getEliminations => eliminations;
 
-  set eliminations(int eliminations) => _eliminations = eliminations;
+  set setEliminations(int eliminations) => eliminations = eliminations;
 
-  int get environmentalKills => _environmentalKills;
+  int? get getEnvironmentalKills => environmentalKills;
 
-  set environmentalKills(int environmentalKills) =>
-      _environmentalKills = environmentalKills;
+  set setEnvironmentalKills(int environmentalKills) =>
+      environmentalKills = environmentalKills;
 
-  int get finalBlows => _finalBlows;
+  int? get getFinalBlows => finalBlows;
 
-  set finalBlows(int finalBlows) => _finalBlows = finalBlows;
+  set setFinalBlows(int finalBlows) => finalBlows = finalBlows;
 
-  int get heroDamageDone => _heroDamageDone;
+  int? get getHeroDamageDone => heroDamageDone;
 
-  set heroDamageDone(int heroDamageDone) => _heroDamageDone = heroDamageDone;
+  set setHeroDamageDone(int heroDamageDone) => heroDamageDone = heroDamageDone;
 
-  int get meleeFinalBlows => _meleeFinalBlows;
+  int? get getMeleeFinalBlows => meleeFinalBlows;
 
-  set meleeFinalBlows(int meleeFinalBlows) =>
-      _meleeFinalBlows = meleeFinalBlows;
+  set setMeleeFinalBlows(int meleeFinalBlows) =>
+      meleeFinalBlows = meleeFinalBlows;
 
-  int get multikills => _multikills;
+  int? get getMultiKills => multikills;
 
-  set multikills(int multikills) => _multikills = multikills;
+  set setMultiKills(int multikills) => multikills = multikills;
 
-  int get objectiveKills => _objectiveKills;
+  int? get getObjectiveKills => objectiveKills;
 
-  set objectiveKills(int objectiveKills) => _objectiveKills = objectiveKills;
+  set setObjectiveKills(int objectiveKills) => objectiveKills = objectiveKills;
 
-  String get objectiveTime => _objectiveTime;
+  String? get getObjectiveTime => objectiveTime;
 
-  set objectiveTime(String objectiveTime) => _objectiveTime = objectiveTime;
+  set setObjectiveTime(String objectiveTime) => objectiveTime = objectiveTime;
 
-  int get soloKills => _soloKills;
+  int? get getSoloKills => soloKills;
 
-  set soloKills(int soloKills) => _soloKills = soloKills;
+  set setSoloKills(int soloKills) => soloKills = soloKills;
 
-  String get timeSpentOnFire => _timeSpentOnFire;
+  String? get getTimeSpentOnFire => timeSpentOnFire;
 
-  set timeSpentOnFire(String timeSpentOnFire) =>
-      _timeSpentOnFire = timeSpentOnFire;
+  set setTimeSpentOnFire(String timeSpentOnFire) =>
+      timeSpentOnFire = timeSpentOnFire;
 
   Combat.fromJson(Map<String, dynamic> json) {
-    _barrierDamageDone = json['barrierDamageDone'];
-    _damageDone = json['damageDone'];
-    _deaths = json['deaths'];
-    _eliminations = json['eliminations'];
-    _environmentalKills = json['environmentalKills'];
-    _finalBlows = json['finalBlows'];
-    _heroDamageDone = json['heroDamageDone'];
-    _meleeFinalBlows = json['meleeFinalBlows'];
-    _multikills = json['multikills'];
-    _objectiveKills = json['objectiveKills'];
-    _objectiveTime = json['objectiveTime'];
-    _soloKills = json['soloKills'];
-    _timeSpentOnFire = json['timeSpentOnFire'];
+    barrierDamageDone = json['barrierDamageDone'];
+    damageDone = json['damageDone'];
+    deaths = json['deaths'];
+    eliminations = json['eliminations'];
+    environmentalKills = json['environmentalKills'];
+    finalBlows = json['finalBlows'];
+    heroDamageDone = json['heroDamageDone'];
+    meleeFinalBlows = json['meleeFinalBlows'];
+    multikills = json['multikills'];
+    objectiveKills = json['objectiveKills'];
+    objectiveTime = json['objectiveTime'];
+    soloKills = json['soloKills'];
+    timeSpentOnFire = json['timeSpentOnFire'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['barrierDamageDone'] = this._barrierDamageDone;
-    data['damageDone'] = this._damageDone;
-    data['deaths'] = this._deaths;
-    data['eliminations'] = this._eliminations;
-    data['environmentalKills'] = this._environmentalKills;
-    data['finalBlows'] = this._finalBlows;
-    data['heroDamageDone'] = this._heroDamageDone;
-    data['meleeFinalBlows'] = this._meleeFinalBlows;
-    data['multikills'] = this._multikills;
-    data['objectiveKills'] = this._objectiveKills;
-    data['objectiveTime'] = this._objectiveTime;
-    data['soloKills'] = this._soloKills;
-    data['timeSpentOnFire'] = this._timeSpentOnFire;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['barrierDamageDone'] = barrierDamageDone;
+    data['damageDone'] = damageDone;
+    data['deaths'] = deaths;
+    data['eliminations'] = eliminations;
+    data['environmentalKills'] = environmentalKills;
+    data['finalBlows'] = finalBlows;
+    data['heroDamageDone'] = heroDamageDone;
+    data['meleeFinalBlows'] = meleeFinalBlows;
+    data['multikills'] = multikills;
+    data['objectiveKills'] = objectiveKills;
+    data['objectiveTime'] = objectiveTime;
+    data['soloKills'] = soloKills;
+    data['timeSpentOnFire'] = timeSpentOnFire;
     return data;
   }
 }
 
 class Game {
-  int _gamesLost;
-  int _gamesPlayed;
-  int _gamesTied;
-  int _gamesWon;
+  int? gamesLost;
+  int? gamesPlayed;
+  int? gamesTied;
+  int? gamesWon;
 
-  Game({int gamesLost, int gamesPlayed, int gamesTied, int gamesWon}) {
-    this._gamesLost = gamesLost;
-    this._gamesPlayed = gamesPlayed;
-    this._gamesTied = gamesTied;
-    this._gamesWon = gamesWon;
-  }
+  Game({
+    this.gamesLost,
+    this.gamesPlayed,
+    this.gamesTied,
+    this.gamesWon,
+  });
 
-  int get gamesLost => _gamesLost;
+  int? get getGamesLost => gamesLost;
 
-  set gamesLost(int gamesLost) => _gamesLost = gamesLost;
+  set setGamesLost(int gamesLost) => gamesLost = gamesLost;
 
-  int get gamesPlayed => _gamesPlayed;
+  int? get getGamesPlayed => gamesPlayed;
 
-  set gamesPlayed(int gamesPlayed) => _gamesPlayed = gamesPlayed;
+  set setGamesPlayed(int gamesPlayed) => gamesPlayed = gamesPlayed;
 
-  int get gamesTied => _gamesTied;
+  int? get getGamesTied => gamesTied;
 
-  set gamesTied(int gamesTied) => _gamesTied = gamesTied;
+  set setGamesTied(int gamesTied) => gamesTied = gamesTied;
 
-  int get gamesWon => _gamesWon;
+  int? get getGamesWon => gamesWon;
 
-  set gamesWon(int gamesWon) => _gamesWon = gamesWon;
+  set setGamesWon(int gamesWon) => gamesWon = gamesWon;
 
   Game.fromJson(Map<String, dynamic> json) {
-    _gamesLost = json['gamesLost'];
-    _gamesPlayed = json['gamesPlayed'];
-    _gamesTied = json['gamesTied'];
-    _gamesWon = json['gamesWon'];
+    gamesLost = json['gamesLost'];
+    gamesPlayed = json['gamesPlayed'];
+    gamesTied = json['gamesTied'];
+    gamesWon = json['gamesWon'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['gamesLost'] = this._gamesLost;
-    data['gamesPlayed'] = this._gamesPlayed;
-    data['gamesTied'] = this._gamesTied;
-    data['gamesWon'] = this._gamesWon;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['gamesLost'] = gamesLost;
+    data['gamesPlayed'] = gamesPlayed;
+    data['gamesTied'] = gamesTied;
+    data['gamesWon'] = gamesWon;
     return data;
   }
 }
 
 class MatchAwards {
-  int _medals;
-  int _medalsGold;
-  int _medalsSilver;
+  int? medals;
+  int? medalsGold;
+  int? medalsSilver;
 
-  MatchAwards({int medals, int medalsGold, int medalsSilver}) {
-    this._medals = medals;
-    this._medalsGold = medalsGold;
-    this._medalsSilver = medalsSilver;
-  }
+  MatchAwards({
+    this.medals,
+    this.medalsGold,
+    this.medalsSilver,
+  });
 
-  int get medals => _medals;
+  int? get getMedals => medals;
 
-  set medals(int medals) => _medals = medals;
+  set setMedals(int medals) => medals = medals;
 
-  int get medalsGold => _medalsGold;
+  int? get getMedalsGold => medalsGold;
 
-  set medalsGold(int medalsGold) => _medalsGold = medalsGold;
+  set setMedalsGold(int medalsGold) => medalsGold = medalsGold;
 
-  int get medalsSilver => _medalsSilver;
+  int? get getMedalsSilver => medalsSilver;
 
-  set medalsSilver(int medalsSilver) => _medalsSilver = medalsSilver;
+  set setMedalsSilver(int medalsSilver) => medalsSilver = medalsSilver;
 
   MatchAwards.fromJson(Map<String, dynamic> json) {
-    _medals = json['medals'];
-    _medalsGold = json['medalsGold'];
-    _medalsSilver = json['medalsSilver'];
+    medals = json['medals'];
+    medalsGold = json['medalsGold'];
+    medalsSilver = json['medalsSilver'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['medals'] = this._medals;
-    data['medalsGold'] = this._medalsGold;
-    data['medalsSilver'] = this._medalsSilver;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['medals'] = medals;
+    data['medalsGold'] = medalsGold;
+    data['medalsSilver'] = medalsSilver;
     return data;
   }
 }
 
 class Miscellaneous {
-  int _turretsDestroyed;
+  int? turretsDestroyed;
 
-  Miscellaneous({int turretsDestroyed}) {
-    this._turretsDestroyed = turretsDestroyed;
-  }
+  Miscellaneous({
+    this.turretsDestroyed,
+  });
 
-  int get turretsDestroyed => _turretsDestroyed;
+  int? get getTurretsDestroyed => turretsDestroyed;
 
-  set turretsDestroyed(int turretsDestroyed) =>
-      _turretsDestroyed = turretsDestroyed;
+  set setTurretsDestroyed(int turretsDestroyed) =>
+      turretsDestroyed = turretsDestroyed;
 
   Miscellaneous.fromJson(Map<String, dynamic> json) {
-    _turretsDestroyed = json['turretsDestroyed'];
+    turretsDestroyed = json['turretsDestroyed'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['turretsDestroyed'] = this._turretsDestroyed;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['turretsDestroyed'] = turretsDestroyed;
     return data;
   }
 }
 
 class Games {
-  int _played;
-  int _won;
+  int? played;
+  int? won;
 
-  Games({int played, int won}) {
-    this._played = played;
-    this._won = won;
-  }
+  Games({
+    this.played,
+    this.won,
+  });
 
-  int get played => _played;
+  int? get getPlayed => played;
 
-  set played(int played) => _played = played;
+  set setPlayed(int played) => played = played;
 
-  int get won => _won;
+  int? get getWon => won;
 
-  set won(int won) => _won = won;
+  set setWon(int won) => won = won;
 
   Games.fromJson(Map<String, dynamic> json) {
-    _played = json['played'];
-    _won = json['won'];
+    played = json['played'];
+    won = json['won'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['played'] = this._played;
-    data['won'] = this._won;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['played'] = played;
+    data['won'] = won;
     return data;
   }
 }
 
 class TopHeroes {
-  TopHero _ana;
-  TopHero _ashe;
-  TopHero _baptiste;
-  TopHero _bastion;
-  TopHero _brigitte;
-  TopHero _dVa;
-  TopHero _doomfist;
-  TopHero _echo;
-  TopHero _genji;
-  TopHero _hanzo;
-  TopHero _junkrat;
-  TopHero _lucio;
-  TopHero _mccree;
-  TopHero _mei;
-  TopHero _mercy;
-  TopHero _moira;
-  TopHero _orisa;
-  TopHero _pharah;
-  TopHero _reaper;
-  TopHero _reinhardt;
-  TopHero _roadhog;
-  TopHero _sigma;
-  TopHero _soldier76;
-  TopHero _sombra;
-  TopHero _symmetra;
-  TopHero _torbjorn;
-  TopHero _tracer;
-  TopHero _widowmaker;
-  TopHero _winston;
-  TopHero _wreckingBall;
-  TopHero _zarya;
-  TopHero _zenyatta;
-
-  TopHeroes(
-      {TopHero ana,
-      TopHero ashe,
-      TopHero baptiste,
-      TopHero bastion,
-      TopHero brigitte,
-      TopHero dVa,
-      TopHero doomfist,
-      TopHero echo,
-      TopHero genji,
-      TopHero hanzo,
-      TopHero junkrat,
-      TopHero lucio,
-      TopHero mccree,
-      TopHero mei,
-      TopHero mercy,
-      TopHero moira,
-      TopHero orisa,
-      TopHero pharah,
-      TopHero reaper,
-      TopHero reinhardt,
-      TopHero roadhog,
-      TopHero sigma,
-      TopHero soldier76,
-      TopHero sombra,
-      TopHero symmetra,
-      TopHero torbjorn,
-      TopHero tracer,
-      TopHero widowmaker,
-      TopHero winston,
-      TopHero wreckingBall,
-      TopHero zarya,
-      TopHero zenyatta}) {
-    this._ana = ana;
-    this._ashe = ashe;
-    this._baptiste = baptiste;
-    this._bastion = bastion;
-    this._brigitte = brigitte;
-    this._dVa = dVa;
-    this._doomfist = doomfist;
-    this._echo = echo;
-    this._genji = genji;
-    this._hanzo = hanzo;
-    this._junkrat = junkrat;
-    this._lucio = lucio;
-    this._mccree = mccree;
-    this._mei = mei;
-    this._mercy = mercy;
-    this._moira = moira;
-    this._orisa = orisa;
-    this._pharah = pharah;
-    this._reaper = reaper;
-    this._reinhardt = reinhardt;
-    this._roadhog = roadhog;
-    this._sigma = sigma;
-    this._soldier76 = soldier76;
-    this._sombra = sombra;
-    this._symmetra = symmetra;
-    this._torbjorn = torbjorn;
-    this._tracer = tracer;
-    this._widowmaker = widowmaker;
-    this._winston = winston;
-    this._wreckingBall = wreckingBall;
-    this._zarya = zarya;
-    this._zenyatta = zenyatta;
-  }
+  TopHero? ana;
+  TopHero? ashe;
+  TopHero? baptiste;
+  TopHero? bastion;
+  TopHero? brigitte;
+  TopHero? dVa;
+  TopHero? doomfist;
+  TopHero? echo;
+  TopHero? genji;
+  TopHero? hanzo;
+  TopHero? junkrat;
+  TopHero? lucio;
+  TopHero? mccree;
+  TopHero? mei;
+  TopHero? mercy;
+  TopHero? moira;
+  TopHero? orisa;
+  TopHero? pharah;
+  TopHero? reaper;
+  TopHero? reinhardt;
+  TopHero? roadhog;
+  TopHero? sigma;
+  TopHero? soldier76;
+  TopHero? sombra;
+  TopHero? symmetra;
+  TopHero? torbjorn;
+  TopHero? tracer;
+  TopHero? widowmaker;
+  TopHero? winston;
+  TopHero? wreckingBall;
+  TopHero? zarya;
+  TopHero? zenyatta;
 
-  TopHero get ana => _ana;
+  TopHeroes({
+    this.ana,
+    this.ashe,
+    this.baptiste,
+    this.bastion,
+    this.brigitte,
+    this.dVa,
+    this.doomfist,
+    this.echo,
+    this.genji,
+    this.hanzo,
+    this.junkrat,
+    this.lucio,
+    this.mccree,
+    this.mei,
+    this.mercy,
+    this.moira,
+    this.orisa,
+    this.pharah,
+    this.reaper,
+    this.reinhardt,
+    this.roadhog,
+    this.sigma,
+    this.soldier76,
+    this.sombra,
+    this.symmetra,
+    this.torbjorn,
+    this.tracer,
+    this.widowmaker,
+    this.winston,
+    this.wreckingBall,
+    this.zarya,
+    this.zenyatta,
+  });
 
-  set ana(TopHero ana) => _ana = ana;
+  TopHero? get getAna => ana;
 
-  TopHero get ashe => _ashe;
+  set setAna(TopHero ana) => ana = ana;
 
-  set ashe(TopHero ashe) => _ashe = ashe;
+  TopHero? get getAshe => ashe;
 
-  TopHero get baptiste => _baptiste;
+  set setAshe(TopHero ashe) => ashe = ashe;
 
-  set baptiste(TopHero baptiste) => _baptiste = baptiste;
+  TopHero? get getBaptiste => baptiste;
 
-  TopHero get bastion => _bastion;
+  set setBaptiste(TopHero baptiste) => baptiste = baptiste;
 
-  set bastion(TopHero bastion) => _bastion = bastion;
+  TopHero? get getBastion => bastion;
 
-  TopHero get brigitte => _brigitte;
+  set setBastion(TopHero bastion) => bastion = bastion;
 
-  set brigitte(TopHero brigitte) => _brigitte = brigitte;
+  TopHero? get getBrigitte => brigitte;
 
-  TopHero get dVa => _dVa;
+  set setBrigitte(TopHero brigitte) => brigitte = brigitte;
 
-  set dVa(TopHero dVa) => _dVa = dVa;
+  TopHero? get getDVa => dVa;
 
-  TopHero get doomfist => _doomfist;
+  set setDVa(TopHero dVa) => dVa = dVa;
 
-  set doomfist(TopHero doomfist) => _doomfist = doomfist;
+  TopHero? get getDoomfist => doomfist;
 
-  TopHero get echo => _echo;
+  set setDoomfist(TopHero doomfist) => doomfist = doomfist;
 
-  set echo(TopHero echo) => _echo = echo;
+  TopHero? get getEcho => echo;
 
-  TopHero get genji => _genji;
+  set setEcho(TopHero echo) => echo = echo;
 
-  set genji(TopHero genji) => _genji = genji;
+  TopHero? get getGenji => genji;
 
-  TopHero get hanzo => _hanzo;
+  set setGenji(TopHero genji) => genji = genji;
 
-  set hanzo(TopHero hanzo) => _hanzo = hanzo;
+  TopHero? get getHanzo => hanzo;
 
-  TopHero get junkrat => _junkrat;
+  set setHanzo(TopHero hanzo) => hanzo = hanzo;
 
-  set junkrat(TopHero junkrat) => _junkrat = junkrat;
+  TopHero? get getJunkrat => junkrat;
 
-  TopHero get lucio => _lucio;
+  set setJunkrat(TopHero junkrat) => junkrat = junkrat;
 
-  set lucio(TopHero lucio) => _lucio = lucio;
+  TopHero? get getLucio => lucio;
 
-  TopHero get mccree => _mccree;
+  set setLucio(TopHero lucio) => lucio = lucio;
 
-  set mccree(TopHero mccree) => _mccree = mccree;
+  TopHero? get getMccree => mccree;
 
-  TopHero get mei => _mei;
+  set setMccree(TopHero mccree) => mccree = mccree;
 
-  set mei(TopHero mei) => _mei = mei;
+  TopHero? get getMei => mei;
 
-  TopHero get mercy => _mercy;
+  set setMei(TopHero mei) => mei = mei;
 
-  set mercy(TopHero mercy) => _mercy = mercy;
+  TopHero? get getMercy => mercy;
 
-  TopHero get moira => _moira;
+  set setMercy(TopHero mercy) => mercy = mercy;
 
-  set moira(TopHero moira) => _moira = moira;
+  TopHero? get getMoira => moira;
 
-  TopHero get orisa => _orisa;
+  set setMoira(TopHero moira) => moira = moira;
 
-  set orisa(TopHero orisa) => _orisa = orisa;
+  TopHero? get getOrisa => orisa;
 
-  TopHero get pharah => _pharah;
+  set setOrisa(TopHero orisa) => orisa = orisa;
 
-  set pharah(TopHero pharah) => _pharah = pharah;
+  TopHero? get getPharah => pharah;
 
-  TopHero get reaper => _reaper;
+  set setPharah(TopHero pharah) => pharah = pharah;
 
-  set reaper(TopHero reaper) => _reaper = reaper;
+  TopHero? get getReaper => reaper;
 
-  TopHero get reinhardt => _reinhardt;
+  set setReaper(TopHero reaper) => reaper = reaper;
 
-  set reinhardt(TopHero reinhardt) => _reinhardt = reinhardt;
+  TopHero? get getReinhardt => reinhardt;
 
-  TopHero get roadhog => _roadhog;
+  set setReinhardt(TopHero reinhardt) => reinhardt = reinhardt;
 
-  set roadhog(TopHero roadhog) => _roadhog = roadhog;
+  TopHero? get getRoadhog => roadhog;
 
-  TopHero get sigma => _sigma;
+  set setRoadhog(TopHero roadhog) => roadhog = roadhog;
 
-  set sigma(TopHero sigma) => _sigma = sigma;
+  TopHero? get getSigma => sigma;
 
-  TopHero get soldier76 => _soldier76;
+  set setSigma(TopHero sigma) => sigma = sigma;
 
-  set soldier76(TopHero soldier76) => _soldier76 = soldier76;
+  TopHero? get getSoldier76 => soldier76;
 
-  TopHero get sombra => _sombra;
+  set setSoldier76(TopHero soldier76) => soldier76 = soldier76;
 
-  set sombra(TopHero sombra) => _sombra = sombra;
+  TopHero? get getSombra => sombra;
 
-  TopHero get symmetra => _symmetra;
+  set setSombra(TopHero sombra) => sombra = sombra;
 
-  set symmetra(TopHero symmetra) => _symmetra = symmetra;
+  TopHero? get getSymmetra => symmetra;
 
-  TopHero get torbjorn => _torbjorn;
+  set setSymmetra(TopHero symmetra) => symmetra = symmetra;
 
-  set torbjorn(TopHero torbjorn) => _torbjorn = torbjorn;
+  TopHero? get getTorbjorn => torbjorn;
 
-  TopHero get tracer => _tracer;
+  set setTorbjorn(TopHero torbjorn) => torbjorn = torbjorn;
 
-  set tracer(TopHero tracer) => _tracer = tracer;
+  TopHero? get getTracer => tracer;
 
-  TopHero get widowmaker => _widowmaker;
+  set setTracer(TopHero tracer) => tracer = tracer;
 
-  set widowmaker(TopHero widowmaker) => _widowmaker = widowmaker;
+  TopHero? get getWidowmaker => widowmaker;
 
-  TopHero get winston => _winston;
+  set setWidowmaker(TopHero widowmaker) => widowmaker = widowmaker;
 
-  set winston(TopHero winston) => _winston = winston;
+  TopHero? get getWinston => winston;
 
-  TopHero get wreckingBall => _wreckingBall;
+  set setWinston(TopHero winston) => winston = winston;
 
-  set wreckingBall(TopHero wreckingBall) => _wreckingBall = wreckingBall;
+  TopHero? get getWreckingBall => wreckingBall;
 
-  TopHero get zarya => _zarya;
+  set setWreckingBall(TopHero wreckingBall) => wreckingBall = wreckingBall;
 
-  set zarya(TopHero zarya) => _zarya = zarya;
+  TopHero? get getZarya => zarya;
 
-  TopHero get zenyatta => _zenyatta;
+  set setZarya(TopHero zarya) => zarya = zarya;
 
-  set zenyatta(TopHero zenyatta) => _zenyatta = zenyatta;
+  TopHero? get getZenyatta => zenyatta;
+
+  set setZenyatta(TopHero zenyatta) => zenyatta = zenyatta;
 
   TopHeroes.fromJson(Map<String, dynamic> json) {
-    _ana = json['ana'] != null ? new TopHero.fromJson(json['ana']) : null;
-    _ashe = json['ashe'] != null ? new TopHero.fromJson(json['ashe']) : null;
-    _baptiste = json['baptiste'] != null
-        ? new TopHero.fromJson(json['baptiste'])
+    ana = json['ana'] != null ? TopHero.fromJson(json['ana']) : null;
+    ashe = json['ashe'] != null ? TopHero.fromJson(json['ashe']) : null;
+    baptiste =
+        json['baptiste'] != null ? TopHero.fromJson(json['baptiste']) : null;
+    bastion =
+        json['bastion'] != null ? TopHero.fromJson(json['bastion']) : null;
+    brigitte =
+        json['brigitte'] != null ? TopHero.fromJson(json['brigitte']) : null;
+    dVa = json['dVa'] != null ? TopHero.fromJson(json['dVa']) : null;
+    doomfist =
+        json['doomfist'] != null ? TopHero.fromJson(json['doomfist']) : null;
+    echo = json['echo'] != null ? TopHero.fromJson(json['echo']) : null;
+    genji = json['genji'] != null ? TopHero.fromJson(json['genji']) : null;
+    hanzo = json['hanzo'] != null ? TopHero.fromJson(json['hanzo']) : null;
+    junkrat =
+        json['junkrat'] != null ? TopHero.fromJson(json['junkrat']) : null;
+    lucio = json['lucio'] != null ? TopHero.fromJson(json['lucio']) : null;
+    mccree = json['mccree'] != null ? TopHero.fromJson(json['mccree']) : null;
+    mei = json['mei'] != null ? TopHero.fromJson(json['mei']) : null;
+    mercy = json['mercy'] != null ? TopHero.fromJson(json['mercy']) : null;
+    moira = json['moira'] != null ? TopHero.fromJson(json['moira']) : null;
+    orisa = json['orisa'] != null ? TopHero.fromJson(json['orisa']) : null;
+    pharah = json['pharah'] != null ? TopHero.fromJson(json['pharah']) : null;
+    reaper = json['reaper'] != null ? TopHero.fromJson(json['reaper']) : null;
+    reinhardt =
+        json['reinhardt'] != null ? TopHero.fromJson(json['reinhardt']) : null;
+    roadhog =
+        json['roadhog'] != null ? TopHero.fromJson(json['roadhog']) : null;
+    sigma = json['sigma'] != null ? TopHero.fromJson(json['sigma']) : null;
+    soldier76 =
+        json['soldier76'] != null ? TopHero.fromJson(json['soldier76']) : null;
+    sombra = json['sombra'] != null ? TopHero.fromJson(json['sombra']) : null;
+    symmetra =
+        json['symmetra'] != null ? TopHero.fromJson(json['symmetra']) : null;
+    torbjorn =
+        json['torbjorn'] != null ? TopHero.fromJson(json['torbjorn']) : null;
+    tracer = json['tracer'] != null ? TopHero.fromJson(json['tracer']) : null;
+    widowmaker = json['widowmaker'] != null
+        ? TopHero.fromJson(json['widowmaker'])
         : null;
-    _bastion =
-        json['bastion'] != null ? new TopHero.fromJson(json['bastion']) : null;
-    _brigitte = json['brigitte'] != null
-        ? new TopHero.fromJson(json['brigitte'])
+    winston =
+        json['winston'] != null ? TopHero.fromJson(json['winston']) : null;
+    wreckingBall = json['wreckingBall'] != null
+        ? TopHero.fromJson(json['wreckingBall'])
         : null;
-    _dVa = json['dVa'] != null ? new TopHero.fromJson(json['dVa']) : null;
-    _doomfist = json['doomfist'] != null
-        ? new TopHero.fromJson(json['doomfist'])
-        : null;
-    _echo = json['echo'] != null ? new TopHero.fromJson(json['echo']) : null;
-    _genji = json['genji'] != null ? new TopHero.fromJson(json['genji']) : null;
-    _hanzo = json['hanzo'] != null ? new TopHero.fromJson(json['hanzo']) : null;
-    _junkrat =
-        json['junkrat'] != null ? new TopHero.fromJson(json['junkrat']) : null;
-    _lucio = json['lucio'] != null ? new TopHero.fromJson(json['lucio']) : null;
-    _mccree =
-        json['mccree'] != null ? new TopHero.fromJson(json['mccree']) : null;
-    _mei = json['mei'] != null ? new TopHero.fromJson(json['mei']) : null;
-    _mercy = json['mercy'] != null ? new TopHero.fromJson(json['mercy']) : null;
-    _moira = json['moira'] != null ? new TopHero.fromJson(json['moira']) : null;
-    _orisa = json['orisa'] != null ? new TopHero.fromJson(json['orisa']) : null;
-    _pharah =
-        json['pharah'] != null ? new TopHero.fromJson(json['pharah']) : null;
-    _reaper =
-        json['reaper'] != null ? new TopHero.fromJson(json['reaper']) : null;
-    _reinhardt = json['reinhardt'] != null
-        ? new TopHero.fromJson(json['reinhardt'])
-        : null;
-    _roadhog =
-        json['roadhog'] != null ? new TopHero.fromJson(json['roadhog']) : null;
-    _sigma = json['sigma'] != null ? new TopHero.fromJson(json['sigma']) : null;
-    _soldier76 = json['soldier76'] != null
-        ? new TopHero.fromJson(json['soldier76'])
-        : null;
-    _sombra =
-        json['sombra'] != null ? new TopHero.fromJson(json['sombra']) : null;
-    _symmetra = json['symmetra'] != null
-        ? new TopHero.fromJson(json['symmetra'])
-        : null;
-    _torbjorn = json['torbjorn'] != null
-        ? new TopHero.fromJson(json['torbjorn'])
-        : null;
-    _tracer =
-        json['tracer'] != null ? new TopHero.fromJson(json['tracer']) : null;
-    _widowmaker = json['widowmaker'] != null
-        ? new TopHero.fromJson(json['widowmaker'])
-        : null;
-    _winston =
-        json['winston'] != null ? new TopHero.fromJson(json['winston']) : null;
-    _wreckingBall = json['wreckingBall'] != null
-        ? new TopHero.fromJson(json['wreckingBall'])
-        : null;
-    _zarya = json['zarya'] != null ? new TopHero.fromJson(json['zarya']) : null;
-    _zenyatta = json['zenyatta'] != null
-        ? new TopHero.fromJson(json['zenyatta'])
-        : null;
+    zarya = json['zarya'] != null ? TopHero.fromJson(json['zarya']) : null;
+    zenyatta =
+        json['zenyatta'] != null ? TopHero.fromJson(json['zenyatta']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._ana != null) {
-      data['ana'] = this._ana.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (ana != null) {
+      data['ana'] = ana?.toJson();
     }
-    if (this._ashe != null) {
-      data['ashe'] = this._ashe.toJson();
+    if (ashe != null) {
+      data['ashe'] = ashe?.toJson();
     }
-    if (this._baptiste != null) {
-      data['baptiste'] = this._baptiste.toJson();
+    if (baptiste != null) {
+      data['baptiste'] = baptiste?.toJson();
     }
-    if (this._bastion != null) {
-      data['bastion'] = this._bastion.toJson();
+    if (bastion != null) {
+      data['bastion'] = bastion?.toJson();
     }
-    if (this._brigitte != null) {
-      data['brigitte'] = this._brigitte.toJson();
+    if (brigitte != null) {
+      data['brigitte'] = brigitte?.toJson();
     }
-    if (this._dVa != null) {
-      data['dVa'] = this._dVa.toJson();
+    if (dVa != null) {
+      data['dVa'] = dVa?.toJson();
     }
-    if (this._doomfist != null) {
-      data['doomfist'] = this._doomfist.toJson();
+    if (doomfist != null) {
+      data['doomfist'] = doomfist?.toJson();
     }
-    if (this._echo != null) {
-      data['echo'] = this._echo.toJson();
+    if (echo != null) {
+      data['echo'] = echo?.toJson();
     }
-    if (this._genji != null) {
-      data['genji'] = this._genji.toJson();
+    if (genji != null) {
+      data['genji'] = genji?.toJson();
     }
-    if (this._hanzo != null) {
-      data['hanzo'] = this._hanzo.toJson();
+    if (hanzo != null) {
+      data['hanzo'] = hanzo?.toJson();
     }
-    if (this._junkrat != null) {
-      data['junkrat'] = this._junkrat.toJson();
+    if (junkrat != null) {
+      data['junkrat'] = junkrat?.toJson();
     }
-    if (this._lucio != null) {
-      data['lucio'] = this._lucio.toJson();
+    if (lucio != null) {
+      data['lucio'] = lucio?.toJson();
     }
-    if (this._mccree != null) {
-      data['mccree'] = this._mccree.toJson();
+    if (mccree != null) {
+      data['mccree'] = mccree?.toJson();
     }
-    if (this._mei != null) {
-      data['mei'] = this._mei.toJson();
+    if (mei != null) {
+      data['mei'] = mei?.toJson();
     }
-    if (this._mercy != null) {
-      data['mercy'] = this._mercy.toJson();
+    if (mercy != null) {
+      data['mercy'] = mercy?.toJson();
     }
-    if (this._moira != null) {
-      data['moira'] = this._moira.toJson();
+    if (moira != null) {
+      data['moira'] = moira?.toJson();
     }
-    if (this._orisa != null) {
-      data['orisa'] = this._orisa.toJson();
+    if (orisa != null) {
+      data['orisa'] = orisa?.toJson();
     }
-    if (this._pharah != null) {
-      data['pharah'] = this._pharah.toJson();
+    if (pharah != null) {
+      data['pharah'] = pharah?.toJson();
     }
-    if (this._reaper != null) {
-      data['reaper'] = this._reaper.toJson();
+    if (reaper != null) {
+      data['reaper'] = reaper?.toJson();
     }
-    if (this._reinhardt != null) {
-      data['reinhardt'] = this._reinhardt.toJson();
+    if (reinhardt != null) {
+      data['reinhardt'] = reinhardt?.toJson();
     }
-    if (this._roadhog != null) {
-      data['roadhog'] = this._roadhog.toJson();
+    if (roadhog != null) {
+      data['roadhog'] = roadhog?.toJson();
     }
-    if (this._sigma != null) {
-      data['sigma'] = this._sigma.toJson();
+    if (sigma != null) {
+      data['sigma'] = sigma?.toJson();
     }
-    if (this._soldier76 != null) {
-      data['soldier76'] = this._soldier76.toJson();
+    if (soldier76 != null) {
+      data['soldier76'] = soldier76?.toJson();
     }
-    if (this._sombra != null) {
-      data['sombra'] = this._sombra.toJson();
+    if (sombra != null) {
+      data['sombra'] = sombra?.toJson();
     }
-    if (this._symmetra != null) {
-      data['symmetra'] = this._symmetra.toJson();
+    if (symmetra != null) {
+      data['symmetra'] = symmetra?.toJson();
     }
-    if (this._torbjorn != null) {
-      data['torbjorn'] = this._torbjorn.toJson();
+    if (torbjorn != null) {
+      data['torbjorn'] = torbjorn?.toJson();
     }
-    if (this._tracer != null) {
-      data['tracer'] = this._tracer.toJson();
+    if (tracer != null) {
+      data['tracer'] = tracer?.toJson();
     }
-    if (this._widowmaker != null) {
-      data['widowmaker'] = this._widowmaker.toJson();
+    if (widowmaker != null) {
+      data['widowmaker'] = widowmaker?.toJson();
     }
-    if (this._winston != null) {
-      data['winston'] = this._winston.toJson();
+    if (winston != null) {
+      data['winston'] = winston?.toJson();
     }
-    if (this._wreckingBall != null) {
-      data['wreckingBall'] = this._wreckingBall.toJson();
+    if (wreckingBall != null) {
+      data['wreckingBall'] = wreckingBall?.toJson();
     }
-    if (this._zarya != null) {
-      data['zarya'] = this._zarya.toJson();
+    if (zarya != null) {
+      data['zarya'] = zarya?.toJson();
     }
-    if (this._zenyatta != null) {
-      data['zenyatta'] = this._zenyatta.toJson();
+    if (zenyatta != null) {
+      data['zenyatta'] = zenyatta?.toJson();
     }
     return data;
   }
 }
 
 class TopHero {
-  DateTime _timePlayed;
-  int _gamesWon;
-  int _winPercentage;
-  int _weaponAccuracy;
-  double _eliminationsPerLife;
-  int _multiKillBest;
-  int _objectiveKills;
+  DateTime? timePlayed;
+  int? gamesWon;
+  int? winPercentage;
+  int? weaponAccuracy;
+  double? eliminationsPerLife;
+  int? multiKillBest;
+  int? objectiveKills;
 
-  TopHero(
-      {DateTime timePlayed,
-      int gamesWon,
-      int winPercentage,
-      int weaponAccuracy,
-      double eliminationsPerLife,
-      int multiKillBest,
-      int objectiveKills}) {
-    this._timePlayed = timePlayed;
-    this._gamesWon = gamesWon;
-    this._winPercentage = winPercentage;
-    this._weaponAccuracy = weaponAccuracy;
-    this._eliminationsPerLife = eliminationsPerLife;
-    this._multiKillBest = multiKillBest;
-    this._objectiveKills = objectiveKills;
-  }
+  TopHero({
+    this.timePlayed,
+    this.gamesWon,
+    this.winPercentage,
+    this.weaponAccuracy,
+    this.eliminationsPerLife,
+    this.multiKillBest,
+    this.objectiveKills,
+  });
 
-  DateTime get timePlayed => _timePlayed;
+  DateTime? get getTimePlayed => timePlayed;
 
-  set timePlayed(DateTime timePlayed) => _timePlayed = timePlayed;
+  set setTimePlayed(DateTime timePlayed) => timePlayed = timePlayed;
 
-  int get gamesWon => _gamesWon;
+  int? get getGamesWon => gamesWon;
 
-  set gamesWon(int gamesWon) => _gamesWon = gamesWon;
+  set setGamesWon(int gamesWon) => gamesWon = gamesWon;
 
-  int get winPercentage => _winPercentage;
+  int? get getWinPercentage => winPercentage;
 
-  set winPercentage(int winPercentage) => _winPercentage = winPercentage;
+  set setWinPercentage(int winPercentage) => winPercentage = winPercentage;
 
-  int get weaponAccuracy => _weaponAccuracy;
+  int? get getWeaponAccuracy => weaponAccuracy;
 
-  set weaponAccuracy(int weaponAccuracy) => _weaponAccuracy = weaponAccuracy;
+  set setWeaponAccuracy(int weaponAccuracy) => weaponAccuracy = weaponAccuracy;
 
-  double get eliminationsPerLife => _eliminationsPerLife;
+  double? get getEliminationsPerLife => eliminationsPerLife;
 
-  set eliminationsPerLife(double eliminationsPerLife) =>
-      _eliminationsPerLife = eliminationsPerLife;
+  set setEliminationsPerLife(double eliminationsPerLife) =>
+      eliminationsPerLife = eliminationsPerLife;
 
-  int get multiKillBest => _multiKillBest;
+  int? get getMultiKillBest => multiKillBest;
 
-  set multiKillBest(int multiKillBest) => _multiKillBest = multiKillBest;
+  set setMultiKillBest(int multiKillBest) => multiKillBest = multiKillBest;
 
-  int get objectiveKills => _objectiveKills;
+  int? get getObjectiveKills => objectiveKills;
 
-  set objectiveKills(int objectiveKills) => _objectiveKills = objectiveKills;
+  set setObjectiveKills(int objectiveKills) => objectiveKills = objectiveKills;
 
   TopHero.fromJson(Map<String, dynamic> json) {
     if (RegExp(r"\d\d:\d\d:\d\d").hasMatch(json['timePlayed'])) {
-      _timePlayed = DateTime.parse(
-          VariableConst.standardConversionDate + json['timePlayed'] + ".000");
+      timePlayed = DateTime.parse(
+          Strings.standardConversionDate + json['timePlayed'] + ".000");
     } else {
-      _timePlayed = DateTime.parse(VariableConst.standardConversionDate +
-          "00:" +
-          json['timePlayed'] +
-          ".000");
+      timePlayed = DateTime.parse(
+          Strings.standardConversionDate + "00:" + json['timePlayed'] + ".000");
     }
-    _gamesWon = json['gamesWon'];
-    _winPercentage = json['winPercentage'];
-    _weaponAccuracy = json['weaponAccuracy'];
-    _eliminationsPerLife = json['eliminationsPerLife'].toDouble();
-    _multiKillBest = json['multiKillBest'];
-    _objectiveKills = json['objectiveKills'];
+    gamesWon = json['gamesWon'];
+    winPercentage = json['winPercentage'];
+    weaponAccuracy = json['weaponAccuracy'];
+    eliminationsPerLife = json['eliminationsPerLife'].toDouble();
+    multiKillBest = json['multiKillBest'];
+    objectiveKills = json['objectiveKills'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['timePlayed'] = this._timePlayed;
-    data['gamesWon'] = this._gamesWon;
-    data['winPercentage'] = this._winPercentage;
-    data['weaponAccuracy'] = this._weaponAccuracy;
-    data['eliminationsPerLife'] = this._eliminationsPerLife;
-    data['multiKillBest'] = this._multiKillBest;
-    data['objectiveKills'] = this._objectiveKills;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['timePlayed'] = timePlayed;
+    data['gamesWon'] = gamesWon;
+    data['winPercentage'] = winPercentage;
+    data['weaponAccuracy'] = weaponAccuracy;
+    data['eliminationsPerLife'] = eliminationsPerLife;
+    data['multiKillBest'] = multiKillBest;
+    data['objectiveKills'] = objectiveKills;
     return data;
   }
 }
 
 class Ratings {
-  GameRole _support;
-  GameRole _tank;
-  GameRole _damage;
+  GameRole? support;
+  GameRole? tank;
+  GameRole? damage;
 
-  Ratings({GameRole support, GameRole tank, GameRole damage}) {
-    this._support = support;
-    this._tank = tank;
-    this._damage = damage;
-  }
+  Ratings({
+    this.support,
+    this.tank,
+    this.damage,
+  });
 
-  GameRole get support => _support;
+  GameRole? get getSupport => support;
 
-  set support(GameRole support) => _support = support;
+  set setSupport(GameRole support) => support = support;
 
-  GameRole get tank => _tank;
+  GameRole? get getTank => tank;
 
-  set tank(GameRole tank) => _tank = tank;
+  set setTank(GameRole tank) => tank = tank;
 
-  GameRole get damage => _damage;
+  GameRole? get getDamage => damage;
 
-  set damage(GameRole damage) => _damage = damage;
+  set setDamage(GameRole damage) => damage = damage;
 
   Ratings.fromJson(Map<String, dynamic> json) {
-    _support =
-        json['support'] != null ? new GameRole.fromJson(json['support']) : null;
-    _tank = json['tank'] != null ? new GameRole.fromJson(json['tank']) : null;
-    _damage =
-        json['damage'] != null ? new GameRole.fromJson(json['damage']) : null;
+    support =
+        json['support'] != null ? GameRole.fromJson(json['support']) : null;
+    tank = json['tank'] != null ? GameRole.fromJson(json['tank']) : null;
+    damage = json['damage'] != null ? GameRole.fromJson(json['damage']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if (this._support != null) {
-      data['support'] = this._support.toJson();
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (support != null) {
+      data['support'] = support?.toJson();
     }
-    if (this._tank != null) {
-      data['tank'] = this._tank.toJson();
+    if (tank != null) {
+      data['tank'] = tank?.toJson();
     }
-    if (this._damage != null) {
-      data['damage'] = this._damage.toJson();
+    if (damage != null) {
+      data['damage'] = damage?.toJson();
     }
     return data;
   }
 }
 
 class GameRole {
-  int _level;
-  String _rankIcon;
-  String _roleIcon;
+  int? level;
+  String? rankIcon;
+  String? roleIcon;
 
-  GameRole({int level, String rankIcon, String roleIcon}) {
-    this._level = level;
-    this._rankIcon = rankIcon;
-    this._roleIcon = roleIcon;
-  }
+  GameRole({
+    this.level,
+    this.rankIcon,
+    this.roleIcon,
+  });
 
-  int get level => _level;
+  int? get getlevel => level;
 
-  set level(int level) => _level = level;
+  set setLevel(int level) => level = level;
 
-  String get rankIcon => _rankIcon;
+  String? get getRankIcon => rankIcon;
 
-  set rankIcon(String rankIcon) => _rankIcon = rankIcon;
+  set setRankIcon(String rankIcon) => rankIcon = rankIcon;
 
-  String get roleIcon => _roleIcon;
+  String? get getRoleIcon => roleIcon;
 
-  set roleIcon(String roleIcon) => _roleIcon = roleIcon;
+  set setRoleIcon(String roleIcon) => roleIcon = roleIcon;
 
   GameRole.fromJson(Map<String, dynamic> json) {
-    _level = json['level'];
-    _rankIcon = json['rankIcon'];
-    _roleIcon = json['roleIcon'];
+    level = json['level'];
+    rankIcon = json['rankIcon'];
+    roleIcon = json['roleIcon'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['level'] = this._level;
-    data['rankIcon'] = this._rankIcon;
-    data['roleIcon'] = this._roleIcon;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['level'] = level;
+    data['rankIcon'] = rankIcon;
+    data['roleIcon'] = roleIcon;
     return data;
   }
 }

@@ -1,53 +1,42 @@
-import 'dart:async';
-
-import 'package:meta/meta.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:ow_api_app/util/exception/api_exception.dart';
-import 'package:ow_api_app/util/shared_pref_service.dart';
-import 'package:ow_api_app/util/statistics_filter.dart';
+import 'package:ow_api_app/utils/exception/api_exception.dart';
+import 'package:ow_api_app/utils/shared_preferences_service.dart';
+import 'package:ow_api_app/utils/statistics_filter.dart';
 
-part 'package:ow_api_app/bloc/dashboard/dashboard_event.dart';
+part 'dashboard_event.dart';
 
-part 'package:ow_api_app/bloc/dashboard/dashboard_state.dart';
+part 'dashboard_state.dart';
 
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final ProfileRepository repository;
 
-  DashboardBloc({@required this.repository}) : super(DashboardOpened());
-
-  @override
-  Stream<DashboardState> mapEventToState(DashboardEvent event) async* {
-    if (event is OpenDashboard) {
-      yield* _mapOpenDashboardToState(event, state);
-    }
-    if (event is LoadProfile) {
-      yield* _mapFetchProfileEventToState(event, state);
-    }
+  DashboardBloc({required this.repository}) : super(DashboardOpened()) {
+    on<OpenDashboard>((event, emit) => onOpenDashboard(event, emit));
+    on<ChangeSelectedProfile>(
+        (event, emit) => onChangeSelectedProfile(event, emit));
   }
 
-  Stream<DashboardState> _mapOpenDashboardToState(
-      OpenDashboard event, DashboardState state) async* {
-    List<Map<String, TopHero>> selectedTopHeroes;
-    int supportGamesPlayed;
-    int supportGamesWon;
-    double supportWinRate;
-    int damageGamesPlayed;
-    int damageGamesWon;
-    double damageWinRate;
-    int tankGamesPlayed;
-    int tankGamesWon;
-    double tankWinRate;
+  void onOpenDashboard(
+      OpenDashboard event, Emitter<DashboardState> emit) async {
+    late List<Map<String, TopHero?>> selectedTopHeroes;
+    late int supportGamesPlayed;
+    late int supportGamesWon;
+    late double supportWinRate;
+    late int damageGamesPlayed;
+    late int damageGamesWon;
+    late double damageWinRate;
+    late int tankGamesPlayed;
+    late int tankGamesWon;
+    late double tankWinRate;
+    emit(LoadingProfile());
 
-    yield LoadingProfile();
-
-    //Save MainAccount in SharedPref
-    final sharedPrefService = await SharedPreferencesService.instance;
-    String mainAccount = sharedPrefService.getMainAccountName;
-    String mainAccountPlatform = sharedPrefService.getMainAccountPlatform;
+    await SharedPreferencesService().init();
+    String mainAccount = SharedPreferencesService().getMainAccountName;
+    String mainAccountPlatform =
+        SharedPreferencesService().getMainAccountPlatform;
 
     //Fetch Data from repo
     try {
@@ -55,7 +44,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
       Profile profile = await repository.getProfileStats(
           mainAccount.replaceAll("#", "-"), mainAccountPlatform);
 
-      if (profile.competitiveStats.topHeroes != null) {
+      if (profile.competitiveStats?.topHeroes != null) {
         selectedTopHeroes = StatisticsFilter.sortTopHeroes(profile);
         supportGamesPlayed =
             StatisticsFilter.calculateSupportGamesPlayed(profile);
@@ -69,7 +58,7 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         tankGamesWon = StatisticsFilter.calculateTankGamesWon(profile);
         tankWinRate = StatisticsFilter.calculateTankGamesWinRate(profile);
       }
-      yield ProfileLoaded(
+      emit(ProfileLoaded(
           profileStats: profile,
           topHeroes: selectedTopHeroes,
           supportGamesPlayed: supportGamesPlayed,
@@ -80,40 +69,40 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
           tankWinRate: tankWinRate,
           damageGamesPlayed: damageGamesPlayed,
           damageGamesWon: damageGamesWon,
-          damageWinRate: damageWinRate);
+          damageWinRate: damageWinRate));
     } on EmptyResultException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ClientErrorException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ServerErrorException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ConnectionException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on UnknownException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     }
   }
 
-  Stream<DashboardState> _mapFetchProfileEventToState(
-      LoadProfile event, DashboardState state) async* {
-    List<Map<String, TopHero>> selectedTopHeroes;
-    int supportGamesPlayed;
-    int supportGamesWon;
-    double supportWinRate;
-    int damageGamesPlayed;
-    int damageGamesWon;
-    double damageWinRate;
-    int tankGamesPlayed;
-    int tankGamesWon;
-    double tankWinRate;
-    yield LoadingProfile();
+  void onChangeSelectedProfile(
+      ChangeSelectedProfile event, Emitter<DashboardState> emit) async {
+    late List<Map<String, TopHero?>> selectedTopHeroes;
+    late int supportGamesPlayed;
+    late int supportGamesWon;
+    late double supportWinRate;
+    late int damageGamesPlayed;
+    late int damageGamesWon;
+    late double damageWinRate;
+    late int tankGamesPlayed;
+    late int tankGamesWon;
+    late double tankWinRate;
+    emit(LoadingProfile());
 
     try {
       // Add profile ID and Platform ID to the request
       Profile profile = await repository.getProfileStats(
           event.profileId.replaceAll("#", "-"), event.platformId);
 
-      if (profile.competitiveStats.topHeroes != null) {
+      if (!profile.private) {
         selectedTopHeroes = StatisticsFilter.sortTopHeroes(profile);
         supportGamesPlayed =
             StatisticsFilter.calculateSupportGamesPlayed(profile);
@@ -126,29 +115,38 @@ class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
         tankGamesPlayed = StatisticsFilter.calculateTankGamesPlayed(profile);
         tankGamesWon = StatisticsFilter.calculateTankGamesWon(profile);
         tankWinRate = StatisticsFilter.calculateTankGamesWinRate(profile);
+
+        emit(
+          ProfileLoaded(
+              profileStats: profile,
+              topHeroes: selectedTopHeroes,
+              supportGamesPlayed: supportGamesPlayed,
+              supportGamesWon: supportGamesWon,
+              supportWinRate: supportWinRate,
+              tankGamesPlayed: tankGamesPlayed,
+              tankGamesWon: tankGamesWon,
+              tankWinRate: tankWinRate,
+              damageGamesPlayed: damageGamesPlayed,
+              damageGamesWon: damageGamesWon,
+              damageWinRate: damageWinRate),
+        );
+      } else {
+        emit(
+          ProfileLoaded(
+            profileStats: profile,
+          ),
+        );
       }
-      yield ProfileLoaded(
-          profileStats: profile,
-          topHeroes: selectedTopHeroes,
-          supportGamesPlayed: supportGamesPlayed,
-          supportGamesWon: supportGamesWon,
-          supportWinRate: supportWinRate,
-          tankGamesPlayed: tankGamesPlayed,
-          tankGamesWon: tankGamesWon,
-          tankWinRate: tankWinRate,
-          damageGamesPlayed: damageGamesPlayed,
-          damageGamesWon: damageGamesWon,
-          damageWinRate: damageWinRate);
     } on EmptyResultException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ClientErrorException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ServerErrorException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on ConnectionException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     } on UnknownException catch (e) {
-      yield ProfileError(exception: e);
+      emit(ProfileError(exception: e));
     }
   }
 }

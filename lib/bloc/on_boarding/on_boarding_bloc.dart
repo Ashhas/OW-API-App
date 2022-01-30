@@ -1,13 +1,11 @@
-import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
-import 'package:ow_api_app/util/exception/api_exception.dart';
-import 'package:ow_api_app/util/shared_pref_service.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:ow_api_app/utils/exception/api_exception.dart';
+import 'package:ow_api_app/utils/shared_preferences_service.dart';
 
 part 'on_boarding_event.dart';
 
@@ -16,21 +14,16 @@ part 'on_boarding_state.dart';
 class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
   final ProfileRepository repository;
 
-  OnBoardingBloc({@required this.repository}) : super(OnBoardingOpenedState());
-
-  @override
-  Stream<OnBoardingState> mapEventToState(OnBoardingEvent event) async* {
-    if (event is AddFirstProfile) {
-      yield* _mapFirstProfileAddedToState(event, state);
-    }
+  OnBoardingBloc({required this.repository}) : super(OnBoardingOpenedState()) {
+    on<AddFirstProfile>((event, emit) => onAddFirstProfile(event, emit));
   }
 
-  Stream<OnBoardingState> _mapFirstProfileAddedToState(
-      AddFirstProfile event, OnBoardingState state) async* {
-    yield ValidatingFirstProfileState();
+  void onAddFirstProfile(
+      AddFirstProfile event, Emitter<OnBoardingState> emit) async {
+    emit(ValidatingFirstProfileState());
 
     //Open DB for saving
-    Box _profileBox = await Hive.openBox('accountBox');
+    Box _profileBox = Hive.box<AccountModel>('accountBox');
 
     //Verify Account
     try {
@@ -48,25 +41,25 @@ class OnBoardingBloc extends Bloc<OnBoardingEvent, OnBoardingState> {
         _profileBox.add(newAccount);
 
         //Determines that setup is done
-        final sharedPrefService = await SharedPreferencesService.instance;
-        sharedPrefService.setOnBoardingSeenBefore(false);
-        sharedPrefService.setMainAccountName(event.profileId);
-        sharedPrefService.setMainAccountPlatform(event.platformId);
+        SharedPreferencesService().init();
+        SharedPreferencesService().setIsOnboarded = true;
+        SharedPreferencesService().setMainAccountName = event.profileId;
+        SharedPreferencesService().setMainAccountPlatform = event.platformId;
 
-        yield FirstProfileValidatedState();
+        emit(FirstProfileValidatedState());
       } else {
-        yield FirstProfileNotValidatedState();
+        emit(FirstProfileNotValidatedState());
       }
     } on EmptyResultException catch (e) {
-      yield OnBoardingErrorState(exception: e);
+      emit(OnBoardingErrorState(exception: e));
     } on ClientErrorException catch (e) {
-      yield OnBoardingErrorState(exception: e);
+      emit(OnBoardingErrorState(exception: e));
     } on ServerErrorException catch (e) {
-      yield OnBoardingErrorState(exception: e);
+      emit(OnBoardingErrorState(exception: e));
     } on ConnectionException catch (e) {
-      yield OnBoardingErrorState(exception: e);
+      emit(OnBoardingErrorState(exception: e));
     } on UnknownException catch (e) {
-      yield OnBoardingErrorState(exception: e);
+      emit(OnBoardingErrorState(exception: e));
     }
   }
 }

@@ -3,14 +3,14 @@ import 'package:intl/intl.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override
-  void onEvent(Bloc bloc, Object event) {
+  void onEvent(Bloc bloc, Object? event) {
     super.onEvent(bloc, event);
-    log('onEvent', event);
+    log('onEvent', event!);
   }
 
   @override
-  void onError(Cubit cubit, Object error, StackTrace stackTrace) {
-    super.onError(cubit, error, stackTrace);
+  void onError(BlocBase bloc, Object error, StackTrace stackTrace) {
+    super.onError(bloc, error, stackTrace);
     log('onError', error);
   }
 
@@ -19,8 +19,8 @@ class SimpleBlocObserver extends BlocObserver {
     super.onTransition(bloc, transition);
     log(
         'onTransition',
-        '\tBloC - ${bloc.toString()}\n' +
-            '\tcurrentState=${transition.currentState}\n' +
+        '\tBloC - ${bloc.toString()}\n'
+            '\tcurrentState=${transition.currentState}\n'
             '\tnextState=${transition.nextState}');
   }
 

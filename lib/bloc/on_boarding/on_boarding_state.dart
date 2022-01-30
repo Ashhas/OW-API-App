@@ -26,7 +26,7 @@ class FirstProfileNotValidatedState extends OnBoardingState {
 class OnBoardingErrorState extends OnBoardingState {
   final Exception exception;
 
-  OnBoardingErrorState({@required this.exception});
+  OnBoardingErrorState({required this.exception});
 
   @override
   List<Object> get props => [exception];

@@ -12,7 +12,7 @@ class AddFirstProfile extends OnBoardingEvent {
   final String profileId;
   final String platformId;
 
-  AddFirstProfile({this.profileId, this.platformId});
+  AddFirstProfile({required this.profileId, required this.platformId});
 
   @override
   List<Object> get props => [];

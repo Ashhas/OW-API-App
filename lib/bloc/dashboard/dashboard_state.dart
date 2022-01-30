@@ -1,4 +1,4 @@
-part of 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
+part of 'dashboard_bloc.dart';
 
 abstract class DashboardState extends Equatable {}
 
@@ -12,21 +12,26 @@ class LoadingProfile extends DashboardState {
   List<Object> get props => [];
 }
 
+class ChangingProfile extends DashboardState {
+  @override
+  List<Object> get props => [];
+}
+
 class ProfileLoaded extends DashboardState {
   final Profile profileStats;
-  final List<Map<String, TopHero>> topHeroes;
-  final int supportGamesPlayed;
-  final int supportGamesWon;
-  final double supportWinRate;
-  final int damageGamesPlayed;
-  final int damageGamesWon;
-  final double damageWinRate;
-  final int tankGamesPlayed;
-  final int tankGamesWon;
-  final double tankWinRate;
+  final List<Map<String, TopHero?>>? topHeroes;
+  final int? supportGamesPlayed;
+  final int? supportGamesWon;
+  final double? supportWinRate;
+  final int? damageGamesPlayed;
+  final int? damageGamesWon;
+  final double? damageWinRate;
+  final int? tankGamesPlayed;
+  final int? tankGamesWon;
+  final double? tankWinRate;
 
   ProfileLoaded(
-      {@required this.profileStats,
+      {required this.profileStats,
       this.topHeroes,
       this.supportGamesPlayed,
       this.supportGamesWon,
@@ -45,7 +50,7 @@ class ProfileLoaded extends DashboardState {
 class ProfileError extends DashboardState {
   final Exception exception;
 
-  ProfileError({@required this.exception});
+  ProfileError({required this.exception});
 
   @override
   List<Object> get props => [exception];

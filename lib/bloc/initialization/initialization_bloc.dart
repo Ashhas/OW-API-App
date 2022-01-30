@@ -1,12 +1,11 @@
 import 'dart:async';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:equatable/equatable.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
-import 'package:ow_api_app/util/shared_pref_service.dart';
+import 'package:ow_api_app/utils/shared_preferences_service.dart';
 
 part 'initialization_event.dart';
 
@@ -14,81 +13,67 @@ part 'initialization_state.dart';
 
 class InitializationBloc
     extends Bloc<InitializationEvent, InitializationState> {
-  InitializationBloc() : super(InitializationStartedState());
-
-  @override
-  Stream<InitializationState> mapEventToState(
-      InitializationEvent event) async* {
-    if (event is InitializeApp) {
-      yield* _mapAppStartedEventToState();
-    } else if (event is ReloadWithNetwork) {
-      yield* _mapNoNetworkOnStartupEventToState();
-    } else if (event is FinishOnBoarding) {
-      yield* _mapOnBoardingFinishedEventToState();
-    }
+  InitializationBloc() : super(InitializationStartedState()) {
+    on<StartApp>((event, emit) => _initializeApp(event, emit));
+    on<ReloadWithNetwork>((event, emit) => _reloadWithNetwork(event, emit));
+    on<FinishOnBoarding>((event, emit) => _finishOnBoarding(event, emit));
   }
 
-  Stream<InitializationState> _mapAppStartedEventToState() async* {
+  void _initializeApp(StartApp event, Emitter<InitializationState> emit) async {
     //Delay for Splash Screen
-    await Future.delayed(Duration(seconds: 1));
+    await Future.delayed(const Duration(seconds: 1));
 
     //Initializing and open Hive DB
     await Hive.initFlutter();
     Hive.registerAdapter(AccountModelAdapter());
-    await Hive.openBox('accountBox');
+    await Hive.openBox<AccountModel>('accountBox');
 
     //Check if OnBoarding has been finished
-    final sharedPrefService = await SharedPreferencesService.instance;
-    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
+    await SharedPreferencesService().init();
+    final isOnBoarded = SharedPreferencesService().isOnboarded;
 
     //Network
     var connectivityResult = await (Connectivity().checkConnectivity());
-
     if (connectivityResult != ConnectivityResult.none) {
-      if (onBoardingSeenBefore == null) {
-        yield UninitializedState();
-      } else if (onBoardingSeenBefore == true) {
-        yield UninitializedState();
-      } else if (onBoardingSeenBefore == false) {
-        yield InitializedState();
+      if (isOnBoarded == true) {
+        emit(InitializedState());
+      } else if (isOnBoarded == false) {
+        emit(UninitializedState());
       }
     } else {
-      yield NoNetworkOnStartup();
+      emit(NoNetworkOnStartup());
     }
   }
 
-  Stream<InitializationState> _mapNoNetworkOnStartupEventToState() async* {
+  void _reloadWithNetwork(
+      ReloadWithNetwork event, Emitter<InitializationState> emit) async {
     //Check if OnBoarding has been finished
-    final sharedPrefService = await SharedPreferencesService.instance;
-    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
+    await SharedPreferencesService().init();
+    final onBoardingSeenBefore = SharedPreferencesService().isOnboarded;
 
     //Network
     var connectivityResult = await (Connectivity().checkConnectivity());
-
     if (connectivityResult != ConnectivityResult.none) {
-      if (onBoardingSeenBefore == null) {
-        yield UninitializedState();
-      } else if (onBoardingSeenBefore == true) {
-        yield UninitializedState();
+      if (onBoardingSeenBefore == true) {
+        emit(UninitializedState());
       } else if (onBoardingSeenBefore == false) {
-        yield InitializedState();
+        emit(InitializedState());
       }
     } else {
-      yield NoNetworkOnStartup();
+      emit(NoNetworkOnStartup());
     }
   }
 
-  Stream<InitializationState> _mapOnBoardingFinishedEventToState() async* {
+  void _finishOnBoarding(
+      FinishOnBoarding event, Emitter<InitializationState> emit) async {
     //Check if OnBoarding has been finished
-    final sharedPrefService = await SharedPreferencesService.instance;
-    final onBoardingSeenBefore = sharedPrefService.getOnBoardingSeenBefore;
+    await SharedPreferencesService().init();
+    final isOnBoarded = SharedPreferencesService().isOnboarded;
 
-    if (onBoardingSeenBefore == null) {
-      yield UninitializedState();
-    } else if (onBoardingSeenBefore == true) {
-      yield UninitializedState();
-    } else if (onBoardingSeenBefore == false) {
-      yield InitializedState();
+    if (isOnBoarded == true) {
+      emit(InitializedState());
+    } else if (isOnBoarded == false) {
+      emit(UninitializedState());
     }
   }
 }
