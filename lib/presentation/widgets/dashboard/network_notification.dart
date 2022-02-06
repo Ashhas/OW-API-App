@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/network_connection/network_connection_bloc.dart';
-import 'package:ow_api_app/utils/strings.dart';
+import 'package:ow_api_app/utils/constants.dart';
 
 class NetworkNotification extends StatelessWidget {
   const NetworkNotification({
@@ -23,7 +23,7 @@ class NetworkNotification extends StatelessWidget {
               color: Theme.of(context).errorColor,
               alignment: Alignment.center,
               child: const Text(
-                Strings.networkUnavailableMessage,
+                Constants.networkUnavailableMessage,
                 style: TextStyle(fontSize: 14, color: Colors.white),
               ),
             );

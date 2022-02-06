@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/about/about_cubit.dart';
 import 'package:ow_api_app/presentation/widgets/more/settings_tile.dart';
-import 'package:ow_api_app/utils/strings.dart';
+import 'package:ow_api_app/utils/constants.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
@@ -108,8 +108,8 @@ class _AboutScreenState extends State<AboutScreen> {
   }
 
   void _launchURL() async {
-    await canLaunch(Strings.githubUrl)
-        ? await launch(Strings.githubUrl)
-        : throw 'Could not launch ' + Strings.githubUrl;
+    await canLaunch(Constants.githubUrl)
+        ? await launch(Constants.githubUrl)
+        : throw 'Could not launch ' + Constants.githubUrl;
   }
 }

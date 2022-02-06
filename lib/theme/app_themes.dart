@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'color_const.dart';
 import 'font_const.dart';
 
-class AppTheme {
+class AppThemes {
   static ThemeData getDefaultTheme() {
     return ThemeData(
       primaryColor: ColorConst.lightPrimaryColor,

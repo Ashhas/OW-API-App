@@ -1,4 +1,4 @@
-import 'package:ow_api_app/utils/strings.dart';
+import 'package:ow_api_app/utils/constants.dart';
 
 class Profile {
   CompetitiveStats? competitiveStats;
@@ -1622,10 +1622,10 @@ class TopHero {
   TopHero.fromJson(Map<String, dynamic> json) {
     if (RegExp(r"\d\d:\d\d:\d\d").hasMatch(json['timePlayed'])) {
       timePlayed = DateTime.parse(
-          Strings.standardConversionDate + json['timePlayed'] + ".000");
+          Constants.standardConversionDate + json['timePlayed'] + ".000");
     } else {
       timePlayed = DateTime.parse(
-          Strings.standardConversionDate + "00:" + json['timePlayed'] + ".000");
+          Constants.standardConversionDate + "00:" + json['timePlayed'] + ".000");
     }
     gamesWon = json['gamesWon'];
     winPercentage = json['winPercentage'];

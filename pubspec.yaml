@@ -52,9 +52,13 @@ flutter:
     - assets/platformIcon/playstation_icon.png
     - assets/platformIcon/nintendo_switch_icon.png
     - assets/platformIcon/battle_net_icon.png
+    - assets/rankIcons/no-rank.png
     - assets/roleIcons/icon-damage.png
     - assets/roleIcons/icon-support.png
     - assets/roleIcons/icon-tank.png
+    - assets/roleIcons/icon-damage-dark.png
+    - assets/roleIcons/icon-support-dark.png
+    - assets/roleIcons/icon-tank-dark.png
     - assets/heroIcons/ana.png
     - assets/heroIcons/ashe.png
     - assets/heroIcons/baptiste.png

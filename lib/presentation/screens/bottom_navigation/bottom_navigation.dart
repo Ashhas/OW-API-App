@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/bottom_navigation/bottom_navigation_cubit.dart.dart';
 import 'package:ow_api_app/presentation/screens/dashboard/dashboard_container.dart';
 import 'package:ow_api_app/presentation/screens/more/more_screen.dart';
+import 'package:ow_api_app/utils/constants.dart';
 
 class BottomNavigation extends StatefulWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -26,11 +27,11 @@ class BottomNavigationState extends State<BottomNavigation> {
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.space_dashboard_outlined),
-            label: "Home",
+            label: Constants.homeLabel,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.more_horiz_sharp),
-            label: "More",
+            icon: Icon(Icons.account_circle_outlined),
+            label: Constants.moreLabel,
           ),
         ],
         currentIndex: context.select(
@@ -39,6 +40,8 @@ class BottomNavigationState extends State<BottomNavigation> {
         type: BottomNavigationBarType.fixed,
         selectedLabelStyle: const TextStyle(fontSize: 12),
         unselectedLabelStyle: const TextStyle(fontSize: 12),
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
         backgroundColor: Theme.of(context).bottomAppBarColor,
         selectedItemColor: Theme.of(context).primaryColor,
         unselectedItemColor: Theme.of(context).shadowColor,

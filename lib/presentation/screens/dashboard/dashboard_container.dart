@@ -21,13 +21,22 @@ class _DashboardContainerState extends State<DashboardContainer> {
         if (state is LoadingProfile) {
           return const DashboardLoading();
         } else if (state is ProfileLoaded) {
-          return const DashboardScreen();
+          return DashboardScreen(
+            currentProfile: state.profileStats,
+            tankWinRate: state.tankWinRate,
+            tankGamesWon: state.tankGamesWon,
+            tankGamesPlayed: state.tankGamesPlayed,
+            damageWinRate: state.damageWinRate,
+            damageGamesWon: state.damageGamesWon,
+            damageGamesPlayed: state.damageGamesPlayed,
+            supportWinRate: state.supportWinRate,
+            supportGamesWon: state.supportGamesWon,
+            supportGamesPlayed: state.supportGamesPlayed,
+          );
         } else if (state is ProfileError) {
           return DashboardError(exception: state.exception);
         } else {
-          return Container(
-            color: Colors.red,
-          );
+          return Container(color: Colors.green);
         }
       },
     );

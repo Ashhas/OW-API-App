@@ -3,25 +3,22 @@ part of 'initialization_bloc.dart';
 @immutable
 abstract class InitializationState extends Equatable {}
 
-class InitializationStartedState extends InitializationState {
+class InitializationInitial extends InitializationState {
   @override
   List<Object> get props => [];
 }
 
-class UninitializedState extends InitializationState {
+class Uninitialized extends InitializationState {
+  @override
+  List<Object> get props => [];
+}
+
+class Initialized extends InitializationState {
   @override
   List<Object> get props => [];
 }
 
 class NoNetworkOnStartup extends InitializationState {
-  @override
-  List<Object> get props => [];
-}
-
-class InitializedState extends InitializationState {
-
-  InitializedState();
-
   @override
   List<Object> get props => [];
 }

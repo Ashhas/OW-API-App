@@ -22,7 +22,11 @@ class _InfoCardState extends State<InfoCard> {
           width: double.infinity,
           color: Theme.of(context).canvasColor,
           child: Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            padding: const EdgeInsets.only(
+              top: 20,
+              left: 20,
+              right: 20,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
