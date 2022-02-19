@@ -7,6 +7,9 @@ class Constants {
   static const damageRoleLabel = 'Damage';
   static const supportRoleLabel = 'Support';
   static const unRankedLabel = 'Unranked';
+  static const publicLabel = 'Public';
+  static const privateLabel = 'Private';
+  static const addAccountLabel = 'Add Account';
   static const standardConversionDate = '1970-01-01 ';
   static const networkUnavailableMessage = 'No network Available';
 

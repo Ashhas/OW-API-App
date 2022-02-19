@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ow_api_app/presentation/screens/add_profile/add_profile_screen.dart';
+import 'package:ow_api_app/utils/constants.dart';
 
 class AddAccountTile extends StatelessWidget {
   const AddAccountTile({Key? key}) : super(key: key);
@@ -20,7 +21,8 @@ class AddAccountTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Icon(Icons.add, color: Colors.white),
-            Text("Add Account", style: TextStyle(color: Colors.white))
+            Text(Constants.addAccountLabel,
+                style: TextStyle(color: Colors.white))
           ],
         ),
       ),

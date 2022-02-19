@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/profile_view.dart';
 
 import 'dashboard_error.dart';
 import 'dashboard_loading.dart';
-import 'dashboard_screen.dart';
 
 class DashboardContainer extends StatefulWidget {
   const DashboardContainer({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class _DashboardContainerState extends State<DashboardContainer> {
         if (state is LoadingProfile) {
           return const DashboardLoading();
         } else if (state is ProfileLoaded) {
-          return DashboardScreen(
+          return ProfileView(
             currentProfile: state.profileStats,
             tankWinRate: state.tankWinRate,
             tankGamesWon: state.tankGamesWon,
@@ -36,7 +36,7 @@ class _DashboardContainerState extends State<DashboardContainer> {
         } else if (state is ProfileError) {
           return DashboardError(exception: state.exception);
         } else {
-          return Container(color: Colors.green);
+          return const DashboardLoading();
         }
       },
     );

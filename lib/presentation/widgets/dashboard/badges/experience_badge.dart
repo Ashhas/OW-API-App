@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ExperienceBadge extends StatelessWidget {
-  final int profileLevel;
-  final int prestigeLevel;
+  final int? profileLevel;
+  final int? prestigeLevel;
 
   const ExperienceBadge({
     Key? key,
@@ -12,16 +12,16 @@ class ExperienceBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int prestigeStarCount = prestigeLevel % 6;
+    int prestigeStarCount = prestigeLevel! % 6;
 
     return Container(
       height: 24,
-      width: 28 + (prestigeStarCount * 12).toDouble(),
       color: const Color.fromRGBO(199, 206, 219, 0.5),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
-            padding: const EdgeInsets.all(5),
+            padding: const EdgeInsets.all(3),
             child: Center(
               child: Text(
                 profileLevel.toString(),
@@ -32,19 +32,20 @@ class ExperienceBadge extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(
-            child: ListView.builder(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: prestigeStarCount,
-              itemBuilder: (context, index) {
-                return const Icon(
+          ListView.builder(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: prestigeStarCount,
+            itemBuilder: (context, index) {
+              return const Padding(
+                padding: EdgeInsets.all(3),
+                child: Icon(
                   Icons.star,
                   color: Colors.yellowAccent,
                   size: 12,
-                );
-              },
-            ),
+                ),
+              );
+            },
           ),
         ],
       ),

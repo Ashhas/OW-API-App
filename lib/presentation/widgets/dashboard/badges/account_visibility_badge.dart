@@ -1,23 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:ow_api_app/utils/constants.dart';
 
 class AccountVisibilityBadge extends StatelessWidget {
   final bool isPrivateProfile;
 
-  const AccountVisibilityBadge({Key? key, required this.isPrivateProfile})
-      : super(key: key);
+  const AccountVisibilityBadge({
+    Key? key,
+    required this.isPrivateProfile,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      child: isPrivateProfile != true
+      child: isPrivateProfile
           ? Row(
               children: const [
                 Text(
-                  "Public",
-                  style: TextStyle(color: Colors.grey),
+                  Constants.privateLabel,
+                  style: TextStyle(color: Colors.black),
                 ),
                 Icon(
-                  Icons.check,
+                  Icons.lock,
                   color: Colors.black,
                 ),
               ],
@@ -25,11 +28,11 @@ class AccountVisibilityBadge extends StatelessWidget {
           : Row(
               children: const [
                 Text(
-                  "Private",
-                  style: TextStyle(color: Colors.grey),
+                  Constants.publicLabel,
+                  style: TextStyle(color: Colors.black),
                 ),
                 Icon(
-                  Icons.lock,
+                  Icons.check,
                   color: Colors.black,
                 ),
               ],

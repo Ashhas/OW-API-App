@@ -36,7 +36,7 @@ class RankRatingWidget extends StatelessWidget {
                 ratingImageUrl: currentProfile.ratings?.damage?.rankIcon,
               ),
               RatingTile(
-                title: Constants.damageRoleLabel,
+                title: Constants.supportRoleLabel,
                 rating: currentProfile.ratings?.support?.level.toString(),
                 ratingImageUrl: currentProfile.ratings?.support?.rankIcon,
               ),

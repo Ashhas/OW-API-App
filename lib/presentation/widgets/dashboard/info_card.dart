@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:ow_api_app/bloc/dashboard/dashboard_bloc.dart';
+import 'package:ow_api_app/data/model/profile_model.dart';
+import 'package:ow_api_app/theme/spacing_const.dart';
 import 'badges/account_visibility_badge.dart';
 import 'badges/experience_badge.dart';
 
 class InfoCard extends StatefulWidget {
-  const InfoCard({Key? key}) : super(key: key);
+  final Profile currentProfile;
+
+  const InfoCard({
+    Key? key,
+    required this.currentProfile,
+  }) : super(key: key);
 
   @override
   _InfoCardState createState() => _InfoCardState();
@@ -14,84 +19,69 @@ class InfoCard extends StatefulWidget {
 class _InfoCardState extends State<InfoCard> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<DashboardBloc, DashboardState>(
-        builder: (context, state) {
-      if (state is ProfileLoaded) {
-        return Container(
-          height: 140,
-          width: double.infinity,
-          color: Theme.of(context).canvasColor,
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 20,
-              left: 20,
-              right: 20,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8.0),
-                  child: Container(
-                    height: 95,
-                    width: 95,
-                    color: Colors.teal,
-                    child: Image(
-                      image: NetworkImage(
-                        state.profileStats.icon.toString(),
-                      ),
-                    ),
+    return Container(
+      height: 140,
+      width: double.infinity,
+      color: Theme.of(context).canvasColor,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          top: SpacingConst.paddingXL,
+          left: SpacingConst.paddingXL,
+          right: SpacingConst.paddingXL,
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: SizedBox(
+                height: 95,
+                width: 95,
+                child: Image(
+                  image: NetworkImage(
+                    widget.currentProfile.icon.toString(),
                   ),
                 ),
+              ),
+            ),
+            const SizedBox(
+              width: SpacingConst.sizeUnitXL,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
                 const SizedBox(
-                  width: 20,
+                  height: SpacingConst.paddingXS,
                 ),
-                Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Text(
+                  widget.currentProfile.name.toString(),
+                  style: Theme.of(context).primaryTextTheme.headline5,
+                ),
+                const SizedBox(
+                  height: SpacingConst.paddingXS,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Row(
-                      children: [
-                        Text(
-                          state.profileStats.name.toString(),
-                          style: Theme.of(context).primaryTextTheme.headline5,
-                        ),
-                        const SizedBox(
-                          width: 6,
-                        ),
-                      ],
+                    AccountVisibilityBadge(
+                      isPrivateProfile: widget.currentProfile.private,
                     ),
                     const SizedBox(
-                      height: 5,
+                      width: SpacingConst.paddingL,
                     ),
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: const [
-                        AccountVisibilityBadge(
-                          isPrivateProfile: false,
-                        ),
-                        SizedBox(
-                          width: 12,
-                        ),
-                        ExperienceBadge(
-                          profileLevel: 122,
-                          prestigeLevel: 1,
-                        ),
-                      ],
+                    ExperienceBadge(
+                      profileLevel: widget.currentProfile.level,
+                      prestigeLevel: widget.currentProfile.prestige,
                     ),
                   ],
                 ),
               ],
             ),
-          ),
-        );
-      } else {
-        return Container();
-      }
-    });
+          ],
+        ),
+      ),
+    );
   }
 }

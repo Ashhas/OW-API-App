@@ -48,7 +48,7 @@ class FontConst {
 
   //Title View Fonts
   static final BOLD_TITLE_VIEW_BLACK =
-      BOLD.copyWith(fontSize: 15, color: ColorConst.lightPrimaryTextColor);
+      BOLD.copyWith(fontSize: 16, color: ColorConst.lightPrimaryTextColor);
 
   //Error Fonts
   static final REGULAR_ERROR =

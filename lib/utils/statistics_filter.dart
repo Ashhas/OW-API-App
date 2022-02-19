@@ -1,7 +1,7 @@
 import 'package:ow_api_app/data/model/profile_model.dart';
 
 class StatisticsFilter {
-  ///Sort the TopHeroes list
+  /// Sort the TopHeroes list
   static List<Map<String, TopHero?>> sortTopHeroes(Profile profile) {
     List<Map<String, TopHero?>> allTopHeroes = [];
 

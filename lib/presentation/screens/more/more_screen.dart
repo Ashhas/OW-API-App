@@ -25,12 +25,12 @@ class _MoreScreenState extends State<MoreScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
-        backgroundColor: Theme.of(context).canvasColor,
         title: Text(
-          'More',
+          'Accounts',
           style: Theme.of(context).primaryTextTheme.headline6,
         ),
+        elevation: 0.0,
+        backgroundColor: Theme.of(context).canvasColor,
       ),
       backgroundColor: Theme.of(context).backgroundColor,
       body: BlocListener<MoreBloc, MoreState>(
