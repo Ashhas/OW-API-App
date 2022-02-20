@@ -13,7 +13,7 @@ part 'dashboard_state.dart';
 class DashboardBloc extends Bloc<DashboardEvent, DashboardState> {
   final ProfileRepository repository;
 
-  DashboardBloc({required this.repository}) : super(DashboardOpened()) {
+  DashboardBloc({required this.repository}) : super(LoadingProfile()) {
     on<OpenDashboard>((event, emit) => onOpenDashboard(event, emit));
     on<ChangeSelectedProfile>(
         (event, emit) => onChangeSelectedProfile(event, emit));

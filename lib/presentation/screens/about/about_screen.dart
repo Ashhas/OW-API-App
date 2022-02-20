@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/about/about_cubit.dart';
-import 'package:ow_api_app/presentation/widgets/more/settings_tile.dart';
 import 'package:ow_api_app/utils/constants.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class AboutScreen extends StatefulWidget {
   const AboutScreen({Key? key}) : super(key: key);
@@ -13,25 +11,49 @@ class AboutScreen extends StatefulWidget {
 }
 
 class _AboutScreenState extends State<AboutScreen> {
-  @override
-  void initState() {
-    super.initState();
+  late AboutCubit aboutCubit = BlocProvider.of(context);
+  String versionNumber = '';
+
+  Future<String> getVersionNumber() async {
+    return await aboutCubit.getAppInformation();
   }
 
   @override
   Widget build(BuildContext context) {
+    getVersionNumber().then((value) => setState(() {
+          versionNumber = value;
+        }));
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).backgroundColor,
-      appBar: _buildAppBar(),
+      appBar: _buildAppBar(context: context),
       body: SizedBox(
         width: double.infinity,
         child: Column(
           children: [
-            _githubTile(),
+            ListTile(
+              title: const Text(
+                Constants.githubLabel,
+              ),
+              subtitle: Text(
+                Constants.githubUrl,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              onTap: () {
+                aboutCubit.launchUrl(Constants.githubUrl);
+              },
+            ),
             const Divider(height: 1, thickness: 1),
-            _versionTile(
-              context.read<AboutCubit>().getAppInformation().toString(),
+            ListTile(
+              title: const Text(
+                Constants.versionLabel,
+              ),
+              subtitle: Text(
+                versionNumber,
+                style: TextStyle(color: Theme.of(context).primaryColor),
+              ),
+              onTap: () {},
             ),
           ],
         ),
@@ -39,7 +61,7 @@ class _AboutScreenState extends State<AboutScreen> {
     );
   }
 
-  PreferredSizeWidget _buildAppBar() {
+  PreferredSizeWidget _buildAppBar({required BuildContext context}) {
     return AppBar(
       elevation: 1,
       toolbarHeight: 180,
@@ -59,7 +81,7 @@ class _AboutScreenState extends State<AboutScreen> {
                 ),
                 const SizedBox(width: 10),
                 Text(
-                  "About",
+                  Constants.aboutLabel,
                   style: Theme.of(context).primaryTextTheme.headline6,
                 )
               ],
@@ -75,41 +97,16 @@ class _AboutScreenState extends State<AboutScreen> {
               ),
             ),
             const Text(
-              "OW-API",
-              style: TextStyle(color: Colors.white, fontSize: 20),
+              Constants.appName,
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 20,
+              ),
             ),
             const SizedBox(height: 20),
           ],
         ),
       ),
     );
-  }
-
-  Widget _githubTile() {
-    return SettingsTile(
-      title: "Github",
-      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
-      leading: Icon(Icons.developer_board_outlined,
-          color: Theme.of(context).buttonColor),
-      onPressed: (BuildContext context) {
-        _launchURL();
-      },
-    );
-  }
-
-  Widget _versionTile(String appVersion) {
-    return SettingsTile(
-      title: "Version",
-      titleTextStyle: Theme.of(context).primaryTextTheme.subtitle2,
-      subtitle: appVersion,
-      subtitleTextStyle: Theme.of(context).primaryTextTheme.bodyText1,
-      onPressed: (BuildContext context) {},
-    );
-  }
-
-  void _launchURL() async {
-    await canLaunch(Constants.githubUrl)
-        ? await launch(Constants.githubUrl)
-        : throw 'Could not launch ' + Constants.githubUrl;
   }
 }

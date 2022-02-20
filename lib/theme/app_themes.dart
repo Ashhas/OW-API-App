@@ -6,15 +6,13 @@ class AppThemes {
   static ThemeData getDefaultTheme() {
     return ThemeData(
       primaryColor: ColorConst.lightPrimaryColor,
-      accentColor: ColorConst.lightAccentColor,
+      highlightColor: ColorConst.lightHighlightColor,
       backgroundColor: ColorConst.lightBackgroundColor,
       cardColor: ColorConst.lightCardColor,
       canvasColor: ColorConst.lightCanvasColor,
       bottomAppBarColor: ColorConst.lightBottomAppBarColor,
       errorColor: ColorConst.errorColor,
-      buttonColor: ColorConst.lightButtonColor,
       dividerColor: ColorConst.lightDividerColor,
-      shadowColor: ColorConst.lightShadowColor,
       hintColor: ColorConst.profileVisibilityColor,
       primaryTextTheme: TextTheme(
         headline6: FontConst.BOLD_APP_BAR_TITLE_WHITE,

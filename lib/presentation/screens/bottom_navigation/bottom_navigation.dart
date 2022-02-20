@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/bottom_navigation/bottom_navigation_cubit.dart.dart';
-import 'package:ow_api_app/presentation/screens/dashboard/dashboard_container.dart';
+import 'package:ow_api_app/presentation/screens/dashboard/dashboard_screen.dart';
 import 'package:ow_api_app/presentation/screens/more/more_screen.dart';
 import 'package:ow_api_app/utils/constants.dart';
 
-class BottomNavigation extends StatefulWidget {
+class BottomNavigation extends StatelessWidget {
   const BottomNavigation({Key? key}) : super(key: key);
 
-  @override
-  State<StatefulWidget> createState() => BottomNavigationState();
-}
-
-class BottomNavigationState extends State<BottomNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: IndexedStack(
         index: context.read<BottomNavigationCubit>().state,
         children: const [
-          DashboardContainer(),
+          DashboardScreen(),
           MoreScreen(),
         ],
       ),

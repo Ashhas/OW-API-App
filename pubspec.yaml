@@ -48,6 +48,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/overwatch-logo.png
+    - assets/overwatch-text-logo.png
     - assets/platformIcon/xbox_icon.png
     - assets/platformIcon/playstation_icon.png
     - assets/platformIcon/nintendo_switch_icon.png

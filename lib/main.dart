@@ -7,12 +7,16 @@ import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/more/more_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/data/repository/profile_repository.dart';
+import 'package:ow_api_app/presentation/screens/bottom_navigation/bottom_navigation.dart';
+import 'package:ow_api_app/presentation/screens/offline/offline_screen.dart';
+import 'package:ow_api_app/presentation/screens/onboarding/onboarding_container.dart';
 import 'package:ow_api_app/presentation/screens/splash/splash_screen.dart';
 import 'package:ow_api_app/bloc/bottom_navigation/bottom_navigation_cubit.dart.dart';
 import 'package:ow_api_app/bloc/simple_bloc_observer.dart';
 import 'package:ow_api_app/theme/app_themes.dart';
 import 'package:ow_api_app/utils/constants.dart';
 
+import 'bloc/about/about_cubit.dart';
 import 'bloc/add_profile/add_profile_bloc.dart';
 import 'data/model/account.model.dart';
 
@@ -62,15 +66,32 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
+          create: (context) => AboutCubit(),
+        ),
+        BlocProvider(
           create: (context) => AddProfileBloc(
             repository: ProfileRepository(),
           ),
         ),
       ],
       child: MaterialApp(
-        title: 'OW-API',
+        title: Constants.appName,
         theme: AppThemes.getDefaultTheme(),
-        home: const SplashScreen(),
+        home: BlocBuilder<InitializationBloc, InitializationState>(
+          builder: (context, initState) {
+            if (initState is InitializationInitial) {
+              return const SplashScreen();
+            } else if (initState is NoNetworkOnStartup) {
+              return const OfflineScreen();
+            } else if (initState is Uninitialized) {
+              return const OnBoardingScreen();
+            } else if (initState is Initialized) {
+              return const BottomNavigation();
+            } else {
+              return const SizedBox.shrink();
+            }
+          },
+        ),
       ),
     );
   }

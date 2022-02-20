@@ -4,7 +4,7 @@ import 'package:ow_api_app/theme/spacing_const.dart';
 import 'badges/account_visibility_badge.dart';
 import 'badges/experience_badge.dart';
 
-class InfoCard extends StatefulWidget {
+class InfoCard extends StatelessWidget {
   final Profile currentProfile;
 
   const InfoCard({
@@ -13,21 +13,15 @@ class InfoCard extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _InfoCardState createState() => _InfoCardState();
-}
-
-class _InfoCardState extends State<InfoCard> {
-  @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 140,
-      width: double.infinity,
-      color: Theme.of(context).canvasColor,
+    return SizedBox(
+      height: 125,
       child: Padding(
         padding: const EdgeInsets.only(
-          top: SpacingConst.paddingXL,
           left: SpacingConst.paddingXL,
+          top: SpacingConst.paddingL,
           right: SpacingConst.paddingXL,
+          bottom: SpacingConst.paddingL,
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -36,11 +30,11 @@ class _InfoCardState extends State<InfoCard> {
             ClipRRect(
               borderRadius: BorderRadius.circular(8.0),
               child: SizedBox(
-                height: 95,
-                width: 95,
+                height: 90,
+                width: 90,
                 child: Image(
                   image: NetworkImage(
-                    widget.currentProfile.icon.toString(),
+                    currentProfile.icon.toString(),
                   ),
                 ),
               ),
@@ -55,9 +49,12 @@ class _InfoCardState extends State<InfoCard> {
                 const SizedBox(
                   height: SpacingConst.paddingXS,
                 ),
-                Text(
-                  widget.currentProfile.name.toString(),
-                  style: Theme.of(context).primaryTextTheme.headline5,
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    currentProfile.name.toString(),
+                    style: Theme.of(context).primaryTextTheme.headline5,
+                  ),
                 ),
                 const SizedBox(
                   height: SpacingConst.paddingXS,
@@ -66,14 +63,14 @@ class _InfoCardState extends State<InfoCard> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     AccountVisibilityBadge(
-                      isPrivateProfile: widget.currentProfile.private,
+                      isPrivateProfile: currentProfile.private,
                     ),
                     const SizedBox(
                       width: SpacingConst.paddingL,
                     ),
                     ExperienceBadge(
-                      profileLevel: widget.currentProfile.level,
-                      prestigeLevel: widget.currentProfile.prestige,
+                      profileLevel: currentProfile.level,
+                      prestigeLevel: currentProfile.prestige,
                     ),
                   ],
                 ),

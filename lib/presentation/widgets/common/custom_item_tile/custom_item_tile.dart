@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class SettingsTile extends StatelessWidget {
+class CustomItemTile extends StatelessWidget {
   final String title;
   final int? titleMaxLines;
   final String? subtitle;
@@ -13,7 +13,7 @@ class SettingsTile extends StatelessWidget {
   final TextStyle? subtitleTextStyle;
   final Color? switchActiveColor;
 
-  const SettingsTile({
+  const CustomItemTile({
     Key? key,
     required this.title,
     this.titleMaxLines,

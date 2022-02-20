@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/add_profile/add_profile_bloc.dart';
 import 'package:ow_api_app/bloc/more/more_bloc.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/network_notification.dart';
+import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
 
 class AddProfileScreen extends StatefulWidget {
   const AddProfileScreen({Key? key}) : super(key: key);

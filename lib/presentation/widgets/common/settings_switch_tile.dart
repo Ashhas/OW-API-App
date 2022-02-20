@@ -28,7 +28,7 @@ class SettingsSwitchTile extends StatelessWidget {
     this.titleTextStyle,
     this.subtitleTextStyle,
     this.switchActiveColor,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

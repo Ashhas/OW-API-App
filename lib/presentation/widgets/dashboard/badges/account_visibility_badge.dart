@@ -11,9 +11,17 @@ class AccountVisibilityBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.2,
+      height: MediaQuery.of(context).size.width * 0.06,
+      decoration: BoxDecoration(
+        color: Theme.of(context).hintColor,
+        borderRadius: BorderRadius.circular(3),
+      ),
       child: isPrivateProfile
           ? Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
                 Text(
                   Constants.privateLabel,
@@ -26,10 +34,15 @@ class AccountVisibilityBadge extends StatelessWidget {
               ],
             )
           : Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: const [
-                Text(
-                  Constants.publicLabel,
-                  style: TextStyle(color: Colors.black),
+                FittedBox(
+                  fit: BoxFit.fitWidth,
+                  child: Text(
+                    Constants.publicLabel,
+                    style: TextStyle(color: Colors.black),
+                  ),
                 ),
                 Icon(
                   Icons.check,
@@ -37,10 +50,6 @@ class AccountVisibilityBadge extends StatelessWidget {
                 ),
               ],
             ),
-      style: ElevatedButton.styleFrom(
-        primary: Theme.of(context).hintColor,
-      ),
-      onPressed: () {},
     );
   }
 }

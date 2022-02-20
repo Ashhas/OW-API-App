@@ -1,4 +1,5 @@
 class Constants {
+  static const appName = 'OW-API';
   static const homeLabel = 'Home';
   static const moreLabel = 'More';
   static const reloadLabel = 'Reload';
@@ -12,6 +13,12 @@ class Constants {
   static const addAccountLabel = 'Add Account';
   static const standardConversionDate = '1970-01-01 ';
   static const networkUnavailableMessage = 'No network Available';
+  static const versionLabel = 'Version';
+  static const githubLabel = 'Github';
+  static const aboutLabel = 'About';
+  static const getStartedLabel = 'Get Started';
+  static const onBoardingWelcomeLabel =
+      'With OW-API you can see your Overwatch stats on the go, whenever you want!';
 
   static const accountBoxId = 'accountBox';
   static const githubUrl = 'https://github.com/Ashhas/OW-API-App';

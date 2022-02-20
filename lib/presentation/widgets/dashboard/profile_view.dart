@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:ow_api_app/data/model/profile_model.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/circular_card.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/info_card.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/network_notification.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/stat_widgets/private_profile_widget.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/stat_widgets/rank_rating_widget.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/stat_widgets/role_statistics_widget.dart';
-import 'package:ow_api_app/theme/spacing_const.dart';
+import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/private_profile_widget.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/sections/rank_rating_widget.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/sections/role_statistics_widget.dart';
 
 class ProfileView extends StatefulWidget {
   final Profile currentProfile;
@@ -43,63 +42,57 @@ class ProfileView extends StatefulWidget {
 class _ProfileViewState extends State<ProfileView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: LayoutBuilder(
-          builder: (context, constraint) {
-            return SingleChildScrollView(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minHeight: constraint.maxHeight),
-                child: IntrinsicHeight(
-                  child: Column(
-                    children: [
-                      const NetworkNotification(),
-                      InfoCard(
-                        currentProfile: widget.currentProfile,
-                      ),
-                      Flexible(
-                        fit: FlexFit.loose,
-                        child: CircularCard(
-                          widgetColumn: widget.currentProfile.private
-                              ? const PrivateProfileWidget()
-                              : Column(
-                                  children: [
-                                    const SizedBox(
-                                        height: SpacingConst.sizeUnitXXS),
-                                    RankRatingWidget(
-                                      currentProfile: widget.currentProfile,
-                                    ),
-                                    const Divider(
-                                      height: SpacingConst.dividerHeight,
-                                      thickness: SpacingConst.dividerThickness,
-                                    ),
-                                    RoleStatisticsWidget(
-                                      tankWinRate: widget.tankWinRate,
-                                      tankGamesWon: widget.tankGamesWon,
-                                      tankGamesPlayed: widget.tankGamesPlayed,
-                                      damageWinRate: widget.damageWinRate,
-                                      damageGamesWon: widget.damageGamesWon,
-                                      damageGamesPlayed:
-                                          widget.damageGamesPlayed,
-                                      supportWinRate: widget.supportWinRate,
-                                      supportGamesWon: widget.supportGamesWon,
-                                      supportGamesPlayed:
-                                          widget.supportGamesPlayed,
-                                    ),
-                                    const Divider(
-                                      height: SpacingConst.dividerHeight,
-                                      thickness: SpacingConst.dividerThickness,
-                                    ),
-                                  ],
-                                ),
+    return AnnotatedRegion<SystemUiOverlayStyle>(
+      value: SystemUiOverlayStyle.light,
+      child: Scaffold(
+        body: SafeArea(
+          child: LayoutBuilder(
+            builder: (context, constraint) {
+              return SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraint.maxHeight),
+                  child: IntrinsicHeight(
+                    child: Column(
+                      children: [
+                        const NetworkNotification(),
+                        InfoCard(
+                          currentProfile: widget.currentProfile,
                         ),
-                      ),
-                    ],
+                        Flexible(
+                          fit: FlexFit.loose,
+                          child: Container(
+                            color: Theme.of(context).backgroundColor,
+                            child: widget.currentProfile.private
+                                ? const PrivateProfileWidget()
+                                : Column(
+                                    children: [
+                                      RankRatingWidget(
+                                        currentProfile: widget.currentProfile,
+                                      ),
+                                      RoleStatisticsWidget(
+                                        tankWinRate: widget.tankWinRate,
+                                        tankGamesWon: widget.tankGamesWon,
+                                        tankGamesPlayed: widget.tankGamesPlayed,
+                                        damageWinRate: widget.damageWinRate,
+                                        damageGamesWon: widget.damageGamesWon,
+                                        damageGamesPlayed:
+                                            widget.damageGamesPlayed,
+                                        supportWinRate: widget.supportWinRate,
+                                        supportGamesWon: widget.supportGamesWon,
+                                        supportGamesPlayed:
+                                            widget.supportGamesPlayed,
+                                      ),
+                                    ],
+                                  ),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );

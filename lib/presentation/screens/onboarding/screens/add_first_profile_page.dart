@@ -1,10 +1,11 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/initialization/initialization_bloc.dart';
 import 'package:ow_api_app/bloc/on_boarding/on_boarding_bloc.dart';
 import 'package:ow_api_app/presentation/screens/bottom_navigation/bottom_navigation.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/network_notification.dart';
+import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
+import 'package:ow_api_app/presentation/widgets/common/profile_toggle_buttons.dart';
+import 'package:ow_api_app/theme/spacing_const.dart';
 
 class AddFirstProfileScreen extends StatefulWidget {
   const AddFirstProfileScreen({Key? key}) : super(key: key);
@@ -14,254 +15,133 @@ class AddFirstProfileScreen extends StatefulWidget {
 }
 
 class _AddFirstProfileScreenState extends State<AddFirstProfileScreen> {
+  // Account Text field controller
   final TextEditingController accountIdController = TextEditingController();
 
-  //ToggleButtons Values
-  List<bool> isSelected = [false, false, false, false];
-  List<String> buttonValue = ["pc", "psn", "xbl", "nintendo-switch"];
-  FocusNode focusNodeButton1 = FocusNode();
-  FocusNode focusNodeButton2 = FocusNode();
-  FocusNode focusNodeButton3 = FocusNode();
-  FocusNode focusNodeButton4 = FocusNode();
-  late List<FocusNode> focusToggle;
+  // Selected Platform from row
+  String selectedPlatform = '';
 
-  //Platform Variables
-  late String selectedPlatform;
-  bool pcBtnSelected = false;
-  bool psnBtnSelected = false;
-  bool xblBtnSelected = false;
-  bool switchBtnSelected = false;
-
-  //Feedback Variables
+  // Feedback Variables
   bool hasError = false;
   bool hasFeedback = false;
   bool allFilledIn = true;
 
-  //Network Variables
-  late ConnectivityResult netResult;
-
-  @override
-  void initState() {
-    focusToggle = [
-      focusNodeButton1,
-      focusNodeButton2,
-      focusNodeButton3,
-      focusNodeButton4,
-    ];
-    super.initState();
-  }
-
   @override
   void dispose() {
+    accountIdController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
-      resizeToAvoidBottomInset: false,
-      backgroundColor: Theme.of(context).backgroundColor,
-      body: BlocListener<OnBoardingBloc, OnBoardingState>(
-        listener: (context, onBoardingState) {
-          if (onBoardingState is FirstProfileValidatedState) {
-            BlocProvider.of<InitializationBloc>(context)
-                .add(FinishOnBoarding());
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (BuildContext context) => const BottomNavigation(),
-              ),
-            );
-          }
-          if (onBoardingState is FirstProfileNotValidatedState) {
-            setState(() {
-              hasFeedback = true;
-            });
-          }
-          if (onBoardingState is OnBoardingErrorState) {
-            setState(() {
-              hasError = true;
-            });
-          }
-        },
-        child: BlocBuilder<OnBoardingBloc, OnBoardingState>(
-          builder: (context, state) {
-            return Column(
-              children: [
-                const NetworkNotification(),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      const SizedBox(
-                        height: 80,
-                      ),
-                      Text(
-                        "Enter BattleTag",
-                        style: Theme.of(context).primaryTextTheme.bodyText2,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextField(
-                        controller: accountIdController,
-                        autofocus: true,
-                        obscureText: false,
-                        decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            fillColor: Color(0xfff3f3f4),
-                            filled: true),
-                      ),
-                      Text("Please enter a valid BattleTag (Battletag#1234)",
-                          style: Theme.of(context).primaryTextTheme.bodyText1),
-                      const SizedBox(
-                        height: 40,
-                      ),
-                      Text(
-                        "Select a Platform",
-                        style: Theme.of(context).primaryTextTheme.bodyText2,
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      ToggleButtons(
-                        selectedColor: Colors.white,
-                        borderColor: Colors.white,
-                        fillColor: Colors.white,
-                        borderWidth: 5,
-                        selectedBorderColor: Theme.of(context).primaryColor,
-                        renderBorder: true,
-                        disabledColor: Colors.white,
-                        disabledBorderColor: Colors.white,
-                        focusNodes: focusToggle,
-                        children: const <Widget>[
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: SizedBox(
-                              height: 35,
-                              width: 35,
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/platformIcon/battle_net_icon.png'),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: SizedBox(
-                              height: 35,
-                              width: 35,
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/platformIcon/nintendo_switch_icon.png'),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: SizedBox(
-                              height: 35,
-                              width: 35,
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/platformIcon/playstation_icon.png'),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 20),
-                            child: SizedBox(
-                              height: 35,
-                              width: 35,
-                              child: Image(
-                                image: AssetImage(
-                                    'assets/platformIcon/xbox_icon.png'),
-                              ),
-                            ),
-                          ),
-                        ],
-                        isSelected: isSelected,
-                        onPressed: (int index) {
-                          setState(() {
-                            for (int buttonIndex = 0;
-                                buttonIndex < isSelected.length;
-                                buttonIndex++) {
-                              if (buttonIndex == index) {
-                                //Show Selected
-                                isSelected[buttonIndex] =
-                                    !isSelected[buttonIndex];
-
-                                //Set Value
-                                selectedPlatform = buttonValue[buttonIndex];
-                                print(selectedPlatform);
-                              } else {
-                                isSelected[buttonIndex] = false;
-                              }
-                            }
-                          });
-                        },
-                      ),
-                      _feedbackMessageWidgets(),
-                      const SizedBox(height: 20),
-                      AspectRatio(
-                        aspectRatio: 20 / 3,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (accountIdController.text.isEmpty ||
-                                selectedPlatform == null) {
-                              setState(() {});
-                            } else {
-                              FocusScope.of(context).requestFocus(FocusNode());
-
-                              BlocProvider.of<OnBoardingBloc>(context).add(
-                                AddFirstProfile(
-                                    profileId: accountIdController.text,
-                                    platformId: selectedPlatform),
-                              );
-                            }
-                          },
-                          child: state is ValidatingFirstProfileState
-                              ? const Center(
-                                  child: CircularProgressIndicator(
-                                    valueColor: AlwaysStoppedAnimation<Color>(
-                                        Colors.white),
-                                  ),
-                                )
-                              : const Text(
-                                  "Send",
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                          style: ElevatedButton.styleFrom(
-                            primary: Theme.of(context).accentColor,
-                            onPrimary: Colors.white,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 30),
-                    ],
-                  ),
-                ),
-              ],
-            );
-          },
-        ),
-      ),
-    );
-  }
-
-  _buildAppBar() {
-    return AppBar(
-      leading: InkWell(
+      appBar: AppBar(
+        leading: InkWell(
           onTap: () {
-            FocusScope.of(context).requestFocus(FocusNode());
             Navigator.pop(context);
           },
-          child: const Icon(Icons.close, color: Colors.black)),
-      elevation: 0.0,
+          child: const Icon(
+            Icons.close,
+            color: Colors.black,
+          ),
+        ),
+        elevation: 0.0,
+        backgroundColor: Theme.of(context).backgroundColor,
+      ),
+      resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
+      body: BlocBuilder<OnBoardingBloc, OnBoardingState>(
+        builder: (context, state) {
+          return Column(
+            children: [
+              const NetworkNotification(),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: SpacingConst.paddingM,
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const SizedBox(
+                      height: 80,
+                    ),
+                    Text(
+                      "Enter BattleTag",
+                      style: Theme.of(context).primaryTextTheme.bodyText2,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextField(
+                      controller: accountIdController,
+                      autofocus: true,
+                      obscureText: false,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        fillColor: Color(0xfff3f3f4),
+                        filled: true,
+                      ),
+                    ),
+                    Text(
+                      "Please enter a valid BattleTag (Battletag#1234)",
+                      style: Theme.of(context).primaryTextTheme.bodyText1,
+                    ),
+                    const SizedBox(
+                      height: 40,
+                    ),
+                    Text(
+                      "Select a Platform",
+                      style: Theme.of(context).primaryTextTheme.bodyText2,
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    _feedbackMessageWidgets(),
+                    const SizedBox(height: 20),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: 55,
+                      child: ElevatedButton(
+                        child: state is ValidatingFirstProfileState
+                            ? const Center(
+                                child: CircularProgressIndicator(
+                                  valueColor: AlwaysStoppedAnimation<Color>(
+                                    Colors.white,
+                                  ),
+                                ),
+                              )
+                            : const Text(
+                                'Send',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).highlightColor,
+                        ),
+                        onPressed: () {
+                          if (accountIdController.text.isEmpty ||
+                              selectedPlatform.isEmpty) {
+                            setState(() {});
+                          } else {
+                            BlocProvider.of<OnBoardingBloc>(context).add(
+                              AddFirstProfile(
+                                  profileId: accountIdController.text,
+                                  platformId: selectedPlatform),
+                            );
+                          }
+                        },
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                  ],
+                ),
+              ),
+            ],
+          );
+        },
+      ),
     );
   }
 

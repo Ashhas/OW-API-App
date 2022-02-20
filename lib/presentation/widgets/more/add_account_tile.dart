@@ -13,7 +13,9 @@ class AddAccountTile extends StatelessWidget {
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const AddProfileScreen()),
+            MaterialPageRoute(
+              builder: (context) => const AddProfileScreen(),
+            ),
           );
         },
         child: Row(
@@ -21,8 +23,10 @@ class AddAccountTile extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: const [
             Icon(Icons.add, color: Colors.white),
-            Text(Constants.addAccountLabel,
-                style: TextStyle(color: Colors.white))
+            Text(
+              Constants.addAccountLabel,
+              style: TextStyle(color: Colors.white),
+            )
           ],
         ),
       ),

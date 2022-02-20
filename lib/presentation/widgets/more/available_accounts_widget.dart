@@ -64,7 +64,7 @@ class _AvailableAccountsWidgetState extends State<AvailableAccountsWidget> {
               },
             );
           } else {
-            return Container();
+            return const SizedBox.shrink();
           }
         },
       ),

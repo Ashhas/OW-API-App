@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/utils/exception/api_exception.dart';
@@ -18,7 +19,7 @@ class ProfileRepository {
       Profile profileStats = Profile.fromJson(responseData);
       return profileStats;
     } else if (response.statusCode >= 400 && response.statusCode < 500) {
-      print(response.statusCode.toString());
+      debugPrint(response.statusCode.toString());
       throw ClientErrorException();
     } else if (response.statusCode >= 500 && response.statusCode < 600) {
       throw ServerErrorException();
