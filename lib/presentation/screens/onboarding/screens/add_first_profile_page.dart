@@ -50,7 +50,29 @@ class _AddFirstProfileScreenState extends State<AddFirstProfileScreen> {
       ),
       resizeToAvoidBottomInset: false,
       backgroundColor: Theme.of(context).backgroundColor,
-      body: BlocBuilder<OnBoardingBloc, OnBoardingState>(
+      body: BlocConsumer<OnBoardingBloc, OnBoardingState>(
+        listener: (context, onBoardingState) {
+          if (onBoardingState is FirstProfileValidatedState) {
+            BlocProvider.of<InitializationBloc>(context)
+                .add(FinishOnBoarding());
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (BuildContext context) => const BottomNavigation(),
+              ),
+            );
+          }
+          if (onBoardingState is FirstProfileNotValidatedState) {
+            setState(() {
+              hasFeedback = true;
+            });
+          }
+          if (onBoardingState is OnBoardingErrorState) {
+            setState(() {
+              hasError = true;
+            });
+          }
+        },
         builder: (context, state) {
           return Column(
             children: [
@@ -96,6 +118,9 @@ class _AddFirstProfileScreenState extends State<AddFirstProfileScreen> {
                     ),
                     const SizedBox(
                       height: 10,
+                    ),
+                    ProfileToggleButtons(
+                      chosenPlatform: (value) => selectedPlatform = value,
                     ),
                     _feedbackMessageWidgets(),
                     const SizedBox(height: 20),
