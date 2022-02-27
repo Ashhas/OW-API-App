@@ -37,7 +37,6 @@ class _AvailableAccountsWidgetState extends State<AvailableAccountsWidget> {
                     account.battleNetId,
                     style: Theme.of(context).primaryTextTheme.subtitle1,
                   ),
-                  dense: true,
                   tileColor: Theme.of(context).canvasColor,
                   trailing: account.battleNetId != state.mainAccount
                       ? const SizedBox(width: 10)

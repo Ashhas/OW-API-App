@@ -29,6 +29,7 @@ class AccountVisibilityBadge extends StatelessWidget {
                 ),
                 Icon(
                   Icons.lock,
+                  size: 17,
                   color: Colors.black,
                 ),
               ],
@@ -46,6 +47,7 @@ class AccountVisibilityBadge extends StatelessWidget {
                 ),
                 Icon(
                   Icons.check,
+                  size: 17,
                   color: Colors.black,
                 ),
               ],

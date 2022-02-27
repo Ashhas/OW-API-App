@@ -5,10 +5,11 @@ class PrivateProfileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Icon(
         Icons.lock,
-        color: Theme.of(context).buttonColor,
+        size: 30,
+        color: Colors.black,
       ),
     );
   }

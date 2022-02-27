@@ -4,6 +4,7 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/info_card.dart';
 import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/private_profile_widget.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/sections/most_played_heroes_widget.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/sections/rank_rating_widget.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/sections/role_statistics_widget.dart';
 
@@ -81,6 +82,9 @@ class _ProfileViewState extends State<ProfileView> {
                                         supportGamesWon: widget.supportGamesWon,
                                         supportGamesPlayed:
                                             widget.supportGamesPlayed,
+                                      ),
+                                      MostPlayedHeroesWidget(
+                                        topHeroes: widget.topHeroes,
                                       ),
                                     ],
                                   ),

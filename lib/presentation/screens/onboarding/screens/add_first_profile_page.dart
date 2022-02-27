@@ -83,18 +83,14 @@ class _AddFirstProfileScreenState extends State<AddFirstProfileScreen> {
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(
-                      height: 80,
-                    ),
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.15),
                     Text(
                       "Enter BattleTag",
                       style: Theme.of(context).primaryTextTheme.bodyText2,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: SpacingConst.paddingM),
                     TextField(
                       controller: accountIdController,
                       autofocus: true,
@@ -109,54 +105,53 @@ class _AddFirstProfileScreenState extends State<AddFirstProfileScreen> {
                       "Please enter a valid BattleTag (Battletag#1234)",
                       style: Theme.of(context).primaryTextTheme.bodyText1,
                     ),
-                    const SizedBox(
-                      height: 40,
-                    ),
+                    const SizedBox(height: SpacingConst.paddingXXL),
                     Text(
                       "Select a Platform",
                       style: Theme.of(context).primaryTextTheme.bodyText2,
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
+                    const SizedBox(height: SpacingConst.paddingM),
                     ProfileToggleButtons(
                       chosenPlatform: (value) => selectedPlatform = value,
                     ),
                     _feedbackMessageWidgets(),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      height: 55,
-                      child: ElevatedButton(
-                        child: state is ValidatingFirstProfileState
-                            ? const Center(
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(
-                                    Colors.white,
+                    const SizedBox(height: SpacingConst.paddingL),
+                    Align(
+                      alignment: Alignment.center,
+                      child: SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.5,
+                        height: 55,
+                        child: ElevatedButton(
+                          child: state is ValidatingFirstProfileState
+                              ? const Center(
+                                  child: CircularProgressIndicator(
+                                    valueColor: AlwaysStoppedAnimation<Color>(
+                                      Colors.white,
+                                    ),
+                                  ),
+                                )
+                              : const Text(
+                                  'Send',
+                                  style: TextStyle(
+                                    color: Colors.white,
                                   ),
                                 ),
-                              )
-                            : const Text(
-                                'Send',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
-                              ),
-                        style: ElevatedButton.styleFrom(
-                          primary: Theme.of(context).highlightColor,
+                          style: ElevatedButton.styleFrom(
+                            primary: Theme.of(context).highlightColor,
+                          ),
+                          onPressed: () {
+                            if (accountIdController.text.isEmpty ||
+                                selectedPlatform.isEmpty) {
+                              setState(() {});
+                            } else {
+                              BlocProvider.of<OnBoardingBloc>(context).add(
+                                AddFirstProfile(
+                                    profileId: accountIdController.text,
+                                    platformId: selectedPlatform),
+                              );
+                            }
+                          },
                         ),
-                        onPressed: () {
-                          if (accountIdController.text.isEmpty ||
-                              selectedPlatform.isEmpty) {
-                            setState(() {});
-                          } else {
-                            BlocProvider.of<OnBoardingBloc>(context).add(
-                              AddFirstProfile(
-                                  profileId: accountIdController.text,
-                                  platformId: selectedPlatform),
-                            );
-                          }
-                        },
                       ),
                     ),
                     const SizedBox(height: 30),

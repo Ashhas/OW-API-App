@@ -47,7 +47,7 @@ class InfoCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: SpacingConst.paddingXS,
+                  height: SpacingConst.paddingM,
                 ),
                 FittedBox(
                   fit: BoxFit.scaleDown,

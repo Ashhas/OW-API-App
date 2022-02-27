@@ -12,6 +12,7 @@ class Constants {
   static const privateLabel = 'Private';
   static const addAccountLabel = 'Add Account';
   static const standardConversionDate = '1970-01-01 ';
+  static const standardConversionDateTime = "1970-01-01 00:00:00.000";
   static const networkUnavailableMessage = 'No network Available';
   static const versionLabel = 'Version';
   static const githubLabel = 'Github';

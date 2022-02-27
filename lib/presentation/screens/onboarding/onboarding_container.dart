@@ -23,7 +23,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
           child: Padding(
             padding: EdgeInsets.only(
               left: SpacingConst.paddingM,
-              top: MediaQuery.of(context).size.height * 0.25,
+              top: MediaQuery.of(context).size.height * 0.20,
               right: SpacingConst.paddingM,
               bottom: MediaQuery.of(context).size.height * 0.10,
             ),

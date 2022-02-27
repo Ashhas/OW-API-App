@@ -16,8 +16,8 @@ class MoreScreen extends StatefulWidget {
 class _MoreScreenState extends State<MoreScreen> {
   @override
   void initState() {
-    BlocProvider.of<MoreBloc>(context).add(const LoadSavedProfiles());
     super.initState();
+    BlocProvider.of<MoreBloc>(context).add(const LoadSavedProfiles());
   }
 
   @override
@@ -70,12 +70,6 @@ class _MoreScreenState extends State<MoreScreen> {
                   );
                 },
               ),
-              Divider(
-                height: 1,
-                thickness: 1,
-                indent: 70,
-                color: Theme.of(context).dividerColor,
-              ),
               ListTile(
                 title: Text(
                   'Help/FAQ',
@@ -86,12 +80,6 @@ class _MoreScreenState extends State<MoreScreen> {
                   color: Theme.of(context).primaryColor,
                 ),
                 tileColor: Theme.of(context).cardColor,
-              ),
-              Divider(
-                height: 1,
-                thickness: 1,
-                indent: 70,
-                color: Theme.of(context).dividerColor,
               ),
             ],
           ),
