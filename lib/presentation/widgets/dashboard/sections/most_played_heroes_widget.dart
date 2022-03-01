@@ -30,9 +30,14 @@ class MostPlayedHeroesWidget extends StatelessWidget {
                   shrinkWrap: true,
                   itemCount: topHeroes?.length,
                   itemBuilder: (context, index) {
-                    return _mostPlayedHeroCard(
+                    if (topHeroes?[index] != null) {
+                      return _mostPlayedHeroCard(
                         topHeroes![index].entries.single.key,
-                        topHeroes![index].entries.single.value?.timePlayed);
+                        topHeroes![index].entries.single.value?.timePlayed,
+                      );
+                    } else {
+                      return const SizedBox.shrink();
+                    }
                   },
                   scrollDirection: Axis.horizontal,
                 ),
