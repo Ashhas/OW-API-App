@@ -4,9 +4,10 @@ import 'package:ow_api_app/data/model/profile_model.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/info_card.dart';
 import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/private_profile_widget.dart';
-import 'package:ow_api_app/presentation/widgets/dashboard/sections/most_played_heroes_widget.dart';
+import 'package:ow_api_app/presentation/widgets/dashboard/sections/most_played_heroes/most_played_heroes_widget.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/sections/rank_rating_widget.dart';
 import 'package:ow_api_app/presentation/widgets/dashboard/sections/role_statistics_widget.dart';
+import 'package:ow_api_app/theme/spacing_const.dart';
 
 class ProfileView extends StatefulWidget {
   final Profile currentProfile;
@@ -50,6 +51,7 @@ class _ProfileViewState extends State<ProfileView> {
           child: LayoutBuilder(
             builder: (context, constraint) {
               return SingleChildScrollView(
+                physics: const ClampingScrollPhysics(),
                 child: ConstrainedBox(
                   constraints: BoxConstraints(minHeight: constraint.maxHeight),
                   child: IntrinsicHeight(
@@ -86,6 +88,9 @@ class _ProfileViewState extends State<ProfileView> {
                                       MostPlayedHeroesWidget(
                                         topHeroes: widget.topHeroes,
                                       ),
+                                      const SizedBox(
+                                        height: SpacingConst.sizeUnitXL,
+                                      )
                                     ],
                                   ),
                           ),
