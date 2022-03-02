@@ -1624,8 +1624,10 @@ class TopHero {
       timePlayed = DateTime.parse(
           Constants.standardConversionDate + json['timePlayed'] + ".000");
     } else {
-      timePlayed = DateTime.parse(
-          Constants.standardConversionDate + "00:" + json['timePlayed'] + ".000");
+      timePlayed = DateTime.parse(Constants.standardConversionDate +
+          "00:" +
+          json['timePlayed'] +
+          ".000");
     }
     gamesWon = json['gamesWon'];
     winPercentage = json['winPercentage'];

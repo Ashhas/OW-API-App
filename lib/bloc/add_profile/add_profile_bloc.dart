@@ -26,7 +26,7 @@ class AddProfileBloc extends Bloc<AddProfileEvent, AddProfileState> {
         .toList();
 
     //Check if profileID is already saved
-    if (foundList == null || foundList.isEmpty) {
+    if (foundList.isEmpty) {
       //Verify Account
       // Add profile ID and Platform ID to the request
       bool profileValidated = await repository.validateProfileId(

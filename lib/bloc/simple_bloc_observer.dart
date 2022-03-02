@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SimpleBlocObserver extends BlocObserver {
@@ -25,7 +26,7 @@ class SimpleBlocObserver extends BlocObserver {
   }
 
   void log(String name, Object msg) {
-    print(
+    debugPrint(
         '===== ${DateFormat("HH:mm:ss-dd MMM, yyyy").format(DateTime.now())}: $name\n'
         '$msg');
   }

@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/data/model/account.model.dart';
@@ -24,7 +25,7 @@ class MoreBloc extends Bloc<MoreEvent, MoreState> {
     //Open DB
     Box _profileBox = Hive.box<AccountModel>('accountBox');
     var savedAccounts = _profileBox.values.cast<AccountModel>().toList();
-    print(savedAccounts);
+    debugPrint(savedAccounts.toString());
 
     //Fetch MainAccount
     await SharedPreferencesService().init();

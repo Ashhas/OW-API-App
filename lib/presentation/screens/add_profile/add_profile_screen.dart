@@ -2,7 +2,6 @@ import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ow_api_app/bloc/add_profile/add_profile_bloc.dart';
-import 'package:ow_api_app/bloc/more/more_bloc.dart';
 import 'package:ow_api_app/presentation/widgets/common/network_notification/network_notification.dart';
 
 class AddProfileScreen extends StatefulWidget {
@@ -177,7 +176,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
 
                               //Set Value
                               selectedPlatform = buttonValue[buttonIndex];
-                              print(selectedPlatform);
+                              debugPrint(selectedPlatform);
                             } else {
                               isSelected[buttonIndex] = false;
                             }
@@ -191,8 +190,7 @@ class _AddProfileScreenState extends State<AddProfileScreen> {
                       aspectRatio: 20 / 3,
                       child: ElevatedButton(
                         onPressed: () {
-                          if (accountIdController.text.isEmpty ||
-                              selectedPlatform == null) {
+                          if (accountIdController.text.isEmpty) {
                             setState(() {});
                           } else {
                             FocusScope.of(context).requestFocus(FocusNode());
