@@ -23,6 +23,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         } else if (state is ProfileLoaded) {
           return ProfileView(
             currentProfile: state.profileStats,
+            topHeroes: state.topHeroes,
             tankWinRate: state.tankWinRate,
             tankGamesWon: state.tankGamesWon,
             tankGamesPlayed: state.tankGamesPlayed,
