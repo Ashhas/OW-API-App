@@ -22,6 +22,7 @@ class Constants {
       'With OW-API you can see your Overwatch stats on the go, whenever you want!';
 
   static const accountBoxId = 'accountBox';
+  static const topHeroesListCount = 4;
   static const githubUrl = 'https://github.com/Ashhas/OW-API-App';
   static const noRatingString = '--';
   static const nullImage =

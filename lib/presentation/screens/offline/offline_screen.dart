@@ -25,9 +25,8 @@ class OfflineScreen extends StatelessWidget {
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                FocusScope.of(context).requestFocus(FocusNode());
                 BlocProvider.of<InitializationBloc>(context).add(
-                  StartApp(),
+                  ReloadWithNetwork(),
                 );
               },
               child: Text(

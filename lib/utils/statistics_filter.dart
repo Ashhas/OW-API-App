@@ -1,5 +1,7 @@
 import 'package:ow_api_app/data/model/profile_model.dart';
 
+import 'constants.dart';
+
 class StatisticsFilter {
   /// Sort the TopHeroes list
   static List<Map<String, TopHero?>> sortTopHeroes(Profile profile) {
@@ -122,7 +124,7 @@ class StatisticsFilter {
           .compareTo(h1.entries.single.value!.timePlayed!);
     });
 
-    return allTopHeroes.sublist(0, 3);
+    return allTopHeroes.sublist(0, Constants.topHeroesListCount);
   }
 
   ///Calculate The amount of competitive support games played

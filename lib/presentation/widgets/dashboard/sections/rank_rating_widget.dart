@@ -23,7 +23,10 @@ class RankRatingWidget extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const TitleView(title: Constants.competitiveRatingLabel),
+            const TitleView(
+              title: Constants.competitiveRatingLabel,
+              paddingBottom: 0,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -54,7 +57,7 @@ class RankRatingWidget extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: SpacingConst.sizeUnitXL)
+            const SizedBox(height: SpacingConst.sizeUnitM)
           ],
         ),
       ),

@@ -2,16 +2,20 @@ import 'package:flutter/material.dart';
 
 class TitleView extends StatelessWidget {
   final String title;
+  final double paddingTop;
+  final double paddingBottom;
 
   const TitleView({
     Key? key,
     required this.title,
+    this.paddingTop = 20,
+    this.paddingBottom = 10,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, bottom: 10),
+      padding: EdgeInsets.only(top: paddingTop, bottom: paddingBottom),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

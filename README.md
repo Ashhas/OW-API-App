@@ -44,8 +44,6 @@ Plugin | Usage
 [connectivity](https://pub.dev/packages/connectivity) | Checking Internet Connection
 [http](https://pub.dev/packages/http) | For doing REST Requests
 [flutter_bloc](https://pub.dev/packages/flutter_bloc) | For app architecture & state management
-[flutter_dropdown](https://pub.dev/packages/flutter_dropdown) | For the dropdown menu containing platform
-[persistent_bottom_nav_bar](https://pub.dev/packages/persistent_bottom_nav_bar) | Navigation Bar
 [json_serializable](https://pub.dev/packages/json_serializable) | Formatting JSON
 [build_runner](http://build_runner) | SAA
 

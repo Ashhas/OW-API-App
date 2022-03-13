@@ -29,11 +29,14 @@ class MostPlayedHeroesWidget extends StatelessWidget {
               SizedBox(
                 height: 140.0,
                 child: topHeroes != null
-                    ? ListView.builder(
+                    ? ListView.separated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(width: SpacingConst.sizeUnitXS);
+                        },
                         shrinkWrap: true,
                         physics: const AlwaysScrollableScrollPhysics(),
                         clipBehavior: Clip.none,
-                        itemCount: topHeroes?.length,
+                        itemCount: topHeroes!.length,
                         itemBuilder: (context, index) {
                           if (topHeroes?[index] != null) {
                             return MostPlayedHeroCard(

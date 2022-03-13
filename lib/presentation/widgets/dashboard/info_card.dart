@@ -40,7 +40,7 @@ class InfoCard extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              width: SpacingConst.sizeUnitXL,
+              width: SpacingConst.sizeUnitM,
             ),
             Column(
               mainAxisSize: MainAxisSize.min,

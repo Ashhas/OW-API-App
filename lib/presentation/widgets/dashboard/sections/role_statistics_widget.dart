@@ -41,7 +41,7 @@ class _RoleStatisticsWidgetState extends State<RoleStatisticsWidget> {
       padding: const EdgeInsets.only(
         left: SpacingConst.paddingM,
         right: SpacingConst.paddingM,
-        bottom: 25,
+        bottom: SpacingConst.paddingS,
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

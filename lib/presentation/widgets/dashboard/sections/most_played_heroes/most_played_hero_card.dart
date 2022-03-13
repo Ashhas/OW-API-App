@@ -21,6 +21,7 @@ class MostPlayedHeroCard extends StatelessWidget {
     return Container(
       alignment: Alignment.center,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
         color: Theme.of(context).cardColor,
         border: Border.all(
           color: Theme.of(context).dividerColor,
@@ -28,13 +29,8 @@ class MostPlayedHeroCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Container(
-            width: 115,
-            height: 100,
-            color: Colors.blue,
-            child: HeroImage(
-              heroName: heroName ?? '',
-            ),
+          HeroImage(
+            heroName: heroName ?? '',
           ),
           Text(heroName ?? ''),
           competitiveHoursPlayed == 0

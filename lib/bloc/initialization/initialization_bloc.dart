@@ -14,6 +14,7 @@ class InitializationBloc
   InitializationBloc() : super(InitializationInitial()) {
     on<StartApp>((event, emit) => _initializeApp(event, emit));
     on<FinishOnBoarding>((event, emit) => _finishOnBoarding(event, emit));
+    on<ReloadWithNetwork>((event, emit) => _reloadApp(event, emit));
   }
 
   void _initializeApp(StartApp event, Emitter<InitializationState> emit) async {
@@ -47,6 +48,24 @@ class InitializationBloc
       emit(Initialized());
     } else {
       emit(Uninitialized());
+    }
+  }
+
+  void _reloadApp(
+      ReloadWithNetwork event, Emitter<InitializationState> emit) async {
+    await SharedPreferencesService().init();
+    final isOnBoarded = SharedPreferencesService().isOnboarded;
+
+    //Network
+    var connectivityResult = await (Connectivity().checkConnectivity());
+    if (connectivityResult != ConnectivityResult.none) {
+      if (isOnBoarded) {
+        emit(Initialized());
+      } else {
+        emit(Uninitialized());
+      }
+    } else {
+      emit(NoNetworkOnStartup());
     }
   }
 }

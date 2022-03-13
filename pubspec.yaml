@@ -32,9 +32,6 @@ dependencies:
   #BLoC
   flutter_bloc: ^8.0.1
 
-  # UI
-  flutter_dropdown: ^1.0.0+hotfix.1
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -47,48 +44,8 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - assets/overwatch-logo.png
-    - assets/overwatch-text-logo.png
-    - assets/platformIcon/xbox_icon.png
-    - assets/platformIcon/playstation_icon.png
-    - assets/platformIcon/nintendo_switch_icon.png
-    - assets/platformIcon/battle_net_icon.png
-    - assets/rankIcons/no-rank.png
-    - assets/roleIcons/icon-damage.png
-    - assets/roleIcons/icon-support.png
-    - assets/roleIcons/icon-tank.png
-    - assets/roleIcons/icon-damage-dark.png
-    - assets/roleIcons/icon-support-dark.png
-    - assets/roleIcons/icon-tank-dark.png
-    - assets/heroIcons/ana.png
-    - assets/heroIcons/ashe.png
-    - assets/heroIcons/baptiste.png
-    - assets/heroIcons/bastion.png
-    - assets/heroIcons/brigitte.png
-    - assets/heroIcons/doomfist.png
-    - assets/heroIcons/dva.png
-    - assets/heroIcons/echo.png
-    - assets/heroIcons/genji.png
-    - assets/heroIcons/hanzo.png
-    - assets/heroIcons/junkrat.png
-    - assets/heroIcons/lucio.png
-    - assets/heroIcons/mccree.png
-    - assets/heroIcons/mei.png
-    - assets/heroIcons/mercy.png
-    - assets/heroIcons/moira.png
-    - assets/heroIcons/orisa.png
-    - assets/heroIcons/pharah.png
-    - assets/heroIcons/reaper.png
-    - assets/heroIcons/rein.png
-    - assets/heroIcons/roadhog.png
-    - assets/heroIcons/sigma.png
-    - assets/heroIcons/soldier-76.png
-    - assets/heroIcons/sombra.png
-    - assets/heroIcons/symmetra.png
-    - assets/heroIcons/torbjorn.png
-    - assets/heroIcons/tracer.png
-    - assets/heroIcons/widowmaker.png
-    - assets/heroIcons/winston.png
-    - assets/heroIcons/wrecking-ball.png
-    - assets/heroIcons/zarya.png
-    - assets/heroIcons/zenyatta.png
+    - assets/
+    - assets/heroIcons/
+    - assets/platformIcon/
+    - assets/rankIcons/
+    - assets/roleIcons/

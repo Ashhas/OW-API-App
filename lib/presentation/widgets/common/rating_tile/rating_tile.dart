@@ -19,8 +19,8 @@ class RatingTile extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: 50,
-          height: 50,
+          width: 60,
+          height: 60,
           decoration: BoxDecoration(
             image: ratingImageUrl != null
                 ? DecorationImage(

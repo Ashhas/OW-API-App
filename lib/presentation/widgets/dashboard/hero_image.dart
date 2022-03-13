@@ -8,8 +8,8 @@ class HeroImage extends StatelessWidget {
   const HeroImage({
     Key? key,
     required this.heroName,
-    this.imageWidth = 110,
-    this.imageHeight = 90,
+    this.imageWidth = 112,
+    this.imageHeight = 100,
   }) : super(key: key);
 
   @override
@@ -102,7 +102,7 @@ class HeroImage extends StatelessWidget {
       return _defaultImageBox(
         imageUrl: 'assets/heroIcons/symmetra.png',
       );
-    } else if (heroName == "Torbjörn") {
+    } else if (heroName == "Torbjorn") {
       return _defaultImageBox(
         imageUrl: 'assets/heroIcons/torbjorn.png',
       );
